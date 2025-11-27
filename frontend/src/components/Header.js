@@ -7,8 +7,8 @@ function Header() {
       <Container>
         <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
           <div className="container-fluid">
-            <a className="navbar-brand" href="#">
-              Navbar
+            <a className="navbar-brand" href="/">
+              (include an image here - logo)
             </a>
 
             <button
