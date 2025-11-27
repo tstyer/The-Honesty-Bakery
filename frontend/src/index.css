@@ -1,0 +1,3 @@
+main {
+  min-height: 80vh; /* This will push the footer to the bottom, as footer is beneath main */
+}
