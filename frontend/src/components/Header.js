@@ -30,22 +30,19 @@ function Header() {
                     Home <span className="visually-hidden">(current)</span>
                   </a>
                 </li>
-
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Features
-                  </a>
-                </li>
-
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Pricing
-                  </a>
-                </li>
-
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <a className="nav-link" href="/about">
                     About
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/login">
+                    <i className='fas fa-user'></i>Login
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/cart">
+                    <i className='fas fa-shopping-cart'></i>Cart
                   </a>
                 </li>
               </ul>
