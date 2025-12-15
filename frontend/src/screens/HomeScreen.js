@@ -10,7 +10,7 @@ function HomeScreen() {
       <Row>
         {products.map(product => ( /* This arrow function will loop through each product within products, and deliver the info in Col */
             <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                <Product product={product} /> /* Accessing the individual product inside prod. component */
+                <Product product={product} /> {/* Accessing the individual product inside prod. component */}
             </Col>
         ))}
       </Row>
