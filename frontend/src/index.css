@@ -1,3 +1,11 @@
 main {
   min-height: 80vh; /* This will push the footer to the bottom, as footer is beneath main */
 }
+
+.rating span {
+  margin: 0.1rem;
+}
+
+h3 {
+  padding: 1rem 0;
+}
