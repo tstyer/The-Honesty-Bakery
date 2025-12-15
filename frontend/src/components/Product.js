@@ -15,11 +15,13 @@ function Product({ product }) {
                 </a>
                 <Card.Text as="div">
                     <div className="my-3">
-                        {product.rating} from {product.numReviews} reviews
+                        <Rating value={product.rating} text={`${product.numReviews} reviews`} />
                     </div>
                 </Card.Text>
-                    
 
+                <Card.Text as="h3">
+                    ${product.price} /* Accessing price from product prop */
+                </Card.Text>
             </Card.Body>
         </Card>
     )
