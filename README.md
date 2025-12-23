@@ -44,6 +44,18 @@ So I changed it to as lower-case p, and it worked:
 
 ![Bug Resolved](/resources/images/product_screen_bug_resolved.png)
 
+3. Go Back Button
+
+![Screenshot of bug](/resources/images/goback_bug.png)
+
+This above image shows a blank screen, but there should be a 'Go Back' button listed, as that is what I had coded to be returned on this page. I learned that this was due to the spelling of a className used in the link: 'btn-Light' should be 'btn-light'. 
+
+![Screenshopt of bug](/resources/images/goback_bug_error.png)
+
+Solved:
+
+![Solved screenshot](/resources/images/goback_solved.png)
+
 #### Backend Bugs
 
 --- 
