@@ -28,6 +28,22 @@ This section documents full-scope testing, from beginning to end of production, 
 
 The above image shows a classic bug caused by using Javascript Style comments within a JSX sextion. To remove this problem, I simply put curly braces around the Javascript style comments within thye JSX section, and it was resolved. 
 
+Here it is fixed:
+
+![Screenshot of resolution](/resources/images/product_display_big_fixed.png)
+
+2. Product Screen (First bug)
+
+![Screenshot of bug](/resources/images/product_screen_bug1.png)
+
+The error is clear - 'Product' is not recognised. So, to solve this, I did some searching and found that the error was simple: misspelled 'product' as 'Product'. 
+
+![Screenshot of error](/resources/images/product_screen_bug1_error_found.png)
+
+So I changed it to as lower-case p, and it worked:
+
+![Bug Resolved](/resources/images/product_screen_bug_resolved.png)
+
 #### Backend Bugs
 
 --- 
