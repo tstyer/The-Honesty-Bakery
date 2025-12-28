@@ -54,7 +54,7 @@ function ProductScreen({ match }) {
                 </Row>
               </ListGroup.Item>
 
-              <ListGroup.Item>
+              <ListGroup.Item variant='flush'>
                 <Row>
                   <Col>
                   Status:
@@ -65,6 +65,12 @@ function ProductScreen({ match }) {
                 </Row>
               </ListGroup.Item>
             </ListGroup>
+
+            <ListGroup.Item>
+              <Button className='btn-block' type='button' disabled={product.countInStock === 0}>
+                Add To Order
+              </Button>
+            </ListGroup.Item>
           </Card>
         </Col>
       </Row>

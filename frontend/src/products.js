@@ -15,7 +15,7 @@ const products = [
   {
     '_id': '2',
     'name': 'BlueBerry Cake',
-    'image': '../images/blue_berry_cake.jpg',
+    'image': '../frontend/images/blue_berry_cake.jpg',
     'description':
       'Customer Request Blueberry Cake',
     'brand': 'Apple',
