@@ -36,6 +36,7 @@ function ProductScreen({ match }) {
             <ListGroup.Item>
               Description: {product.description}
             </ListGroup.Item>
+
           </ListGroup>
         </Col>  
 
@@ -44,9 +45,22 @@ function ProductScreen({ match }) {
             <ListGroup variant='flush'>
               <ListGroup.Item>
                 <Row>
-                  <Col>Price:</Col>
                   <Col>
-                    <strong>${product.price}</strong>
+                  Price:
+                  </Col>
+                  <Col>
+                  <strong>${product.price}</strong>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <Row>
+                  <Col>
+                  Status:
+                  </Col>
+                  <Col>
+                  Ready to Bake!
                   </Col>
                 </Row>
               </ListGroup.Item>
