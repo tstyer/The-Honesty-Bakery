@@ -13,10 +13,12 @@ function ProductScreen({ match }) {
     <div>
       <Link to='/' className='btn btn-light my-3'>Go Back</Link>
       <Row>
+        {/* col 6 takes half the width */}
         <Col md={6}>
           <Image src={product.image} alt={product.name} fluid />
         </Col>
 
+        {/* col 3 a quarter of the width */}
         <Col md={3}>
           <ListGroup variant='flush'>
             <ListGroup.Item>
@@ -24,7 +26,7 @@ function ProductScreen({ match }) {
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <Rating value={product.rating} text={`${product.numReviews} reviews`} />
+              <Rating value={product.rating} text={`${product.numReviews} reviews`} color='#f8e825' />
             </ListGroup.Item>
 
             <ListGroup.Item>
@@ -48,6 +50,8 @@ function ProductScreen({ match }) {
                   </Col>
                 </Row>
               </ListGroup.Item>
+            </ListGroup>
+          </Card>
         </Col>
       </Row>
     </div>
