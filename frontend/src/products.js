@@ -21,7 +21,7 @@ const products = [
     'brand': 'Apple',
     'category': 'Cakes',
     'price': 0.00,
-    'countInStock': 0,
+    'countInStock': 1,
     'rating': 5,
     'numReviews': 8,
   },

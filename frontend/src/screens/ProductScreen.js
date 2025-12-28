@@ -60,7 +60,7 @@ function ProductScreen({ match }) {
                   Status:
                   </Col>
                   <Col>
-                  Ready to Bake!
+                  {product.countInStock > 0 ? 'Ready To Bake!' : 'Out of Stock'}
                   </Col>
                 </Row>
               </ListGroup.Item>

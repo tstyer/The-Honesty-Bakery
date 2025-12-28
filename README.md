@@ -10,13 +10,25 @@ This section documents full-scope testing, from beginning to end of production, 
 
 ### Manual Testing
 
-One of the first manual tests carried out was to click on one of the products displayed on the homescreen to see if the productScreen.js renders properly. For this to be successful, it needs to take you to a new page (not open a new one), show the 3 collumns (image, price, and details). 
+1. One of the first manual tests carried out was to click on one of the products displayed on the homescreen to see if the productScreen.js renders properly. For this to be successful, it needs to take you to a new page (not open a new one), show the 3 collumns (image, price, and details). 
 
 I first Clicked on the 'Birthday Cake':
 
 ![Sreenshot of birthday cake on homescreen](./resources/images/manual_tests/testing_product_screen/clicking_on-product.png)
 
 As you can see, it rendered successfully (excluding image fail).
+
+2. The second manual test was to see if the if-statement properly checked if the product items are in stock. You can see the code below:
+
+![Screenshot of code](./resources/images/manual_tests/testing_product_screen/in_stock/screenshot_of_code.png)
+
+After saving and refreshing the live server (npm start - since it's react), the product screen showed 'Ready to Bake!' since I had set the stock to be greater than zero. 
+
+Status:
+![Screenshot of status](./resources/images/manual_tests/testing_product_screen/in_stock/status.png)
+
+Product.js showing stock as 1:
+![Screenshot of code](./resources/images/manual_tests/testing_product_screen/in_stock/stock_level.png)
 
 ### Automated Testing
 
