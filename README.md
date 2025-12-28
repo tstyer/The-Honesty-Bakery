@@ -10,13 +10,21 @@ This section documents full-scope testing, from beginning to end of production, 
 
 ### Manual Testing
 
+One of the first manual tests carried out was to click on one of the products displayed on the homescreen to see if the productScreen.js renders properly. For this to be successful, it needs to take you to a new page (not open a new one), show the 3 collumns (image, price, and details). 
+
+I first Clicked on the 'Birthday Cake':
+
+![Sreenshot of birthday cake on homescreen](./resources/images/manual_tests/testing_product_screen/clicking_on-product.png)
+
+As you can see, it rendered successfully (excluding image fail).
+
 ### Automated Testing
 
 #### Jest
 
 #### Python Tests
 
-#### Django Tests
+
 
 ### Bugs
 
