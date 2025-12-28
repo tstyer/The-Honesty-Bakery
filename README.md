@@ -76,6 +76,8 @@ Solved:
 
 ![Solved screenshot](/resources/images/goback_solved.png)
 
+
+
 #### Backend Bugs
 
 --- 
@@ -92,6 +94,18 @@ The screenshot below shows how this is done in the terminal:
 Then, once activated, you will see ".venv" at the far left of your terminal:
 
 ![Screenshot of .venv](./resources/images/manual_tests/creatingvenv/once_activated.png)
+
+Following that, you'll want to install django with "pip install django", and this will install the latest version:
+
+![Screenshot of install](./resources/images/manual_tests/creatingvenv/install_django.png)
+
+### Creating Django Project
+
+Once installed, you will then want to create the backend project using "django-admin startproject (projectname)"
+
+I called mine 'Backend', so you can see it successfuly created below ".venv" in this screenshot:
+
+![Screenshot of backend](./resources/images/manual_tests/creatingvenv/backend_created.png)
 
 ## Tech. Used
 
