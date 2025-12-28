@@ -80,6 +80,19 @@ Solved:
 
 --- 
 
+
+### Setting Up Virtual Environment
+
+Before you begin any work on the backend, it's best to set up your virutal environment. To do this, type the command "pip install virtualenv" into your terminal. Once installed, you are ready to activate the virtual environment. 
+
+The screenshot below shows how this is done in the terminal:
+
+![Screenshot of command](./resources/images/manual_tests/creatingvenv/how_to_activate.png)
+
+Then, once activated, you will see ".venv" at the far left of your terminal:
+
+![Screenshot of .venv](./resources/images/manual_tests/creatingvenv/once_activated.png)
+
 ## Tech. Used
 
 1. HTML5
