@@ -3,5 +3,5 @@ from django.urls import path
 from .views import getRoutes
 
 urlpatterns = [
-    path('', getRoutes, name='get-routes'),
+    path('api/', getRoutes, name='get-routes'),
 ]

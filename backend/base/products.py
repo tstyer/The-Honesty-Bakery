@@ -1,6 +1,5 @@
 
-
-const products = [
+products = [
   {
     '_id': '1',
     'name': 'Birthday Cake',
@@ -28,6 +27,3 @@ const products = [
     'numReviews': 8,
   },
 ]
-
-
-export default products
