@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from .products import products
 
 # Create your views here.
 
+@{api_view(['GET'])}
 def getRoutes(request):
     Routes = [
         '/api/products/upload/',
@@ -15,8 +18,8 @@ def getRoutes(request):
         'api/products/delete/<id>/',
         'api/products/update/<id>/',
     ]
-    return JsonResponse(Routes, safe=False)
+    return JsonResponse(Routes)
 
 def getProducts(request):
-    return JsonResponse(products, safe=False)   
+    return JsonResponse(products)
 

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Letting backend know 'base' exists
     'base.apps.BaseConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

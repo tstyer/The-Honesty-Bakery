@@ -131,6 +131,23 @@ Then, add a new path to the urlpatterns. This will be as shown in the below scre
 
 ![Screenshot of urls](./resources/images/manual_tests/firstview/urls_backend.png)
 
+
+### Using Django Rest Framework
+
+The reason I decided to do this was because the Django Rest Framework will make my api's more powerfull. 
+
+To install it, type this into your terminal: "pip install djangorestframework".
+
+Once that is successfull, add 'rest_framework' to your installed apps section in settings.py. 
+
+From there, you will need to head over to https://www.django-rest-framework.org/, and click on views, under the 'api' section:
+
+![Screenshot of direction](./resources/images/django_rest/web_nav_views.png)
+
+Then, on the right hand side of the screen, click on 'api_view' and copy the highlighted text below to then paste into the views.py in your app:
+
+![Screenshot of text](./resources/images/django_rest/import.png)
+
 ## Tech. Used
 
 1. HTML5
@@ -139,3 +156,5 @@ Then, add a new path to the urlpatterns. This will be as shown in the below scre
 4. Bootswatch.
 5. React.js
 6. JavaScript
+7. Django
+8. Django Rest Framework
