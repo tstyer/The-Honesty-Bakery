@@ -107,6 +107,30 @@ I called mine 'Backend', so you can see it successfuly created below ".venv" in 
 
 ![Screenshot of backend](./resources/images/manual_tests/creatingvenv/backend_created.png)
 
+### Creating Individual Apps
+
+Once Django is ready, it's time to start creating backend apps. Before you do this, you will need to change into the project directory. For me, this command is "cd backend" from the root directory. 
+
+Then, you will need to type the command "python manage.py startapp (appname)":
+
+![Screenshot of app creation](./resources/images/manual_tests/creatingvenv/creating_apps.png)
+
+### Writing Your First View
+
+When it comes to ensuring the backend project is connected to your backend app, you need to test that using a basic view and url pattern. I did this by first writing a view called getRoutes and returning 'Hello World.' 
+
+Once that view is written, I then created a urls.py folder in the only app I have ('base'), and then importing that view I just created. 
+
+I created the url pattern which states that when hitting the homescreen (''), I render the view getRoutes, and I gave it the name "get-routes". 
+
+However, this wouldn't work just yet; I needed to connect the urls I created in the app to the main urls.py file in the backend project (called 'backend').
+
+To do this, first add 'include' to the list of imports from django.urls. 
+
+Then, add a new path to the urlpatterns. This will be as shown in the below screenshot:
+
+![Screenshot of urls](./resources/images/manual_tests/firstview/urls_backend.png)
+
 ## Tech. Used
 
 1. HTML5
