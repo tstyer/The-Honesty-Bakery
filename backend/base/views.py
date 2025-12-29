@@ -6,7 +6,7 @@ from .products import products
 
 # Create your views here.
 
-@{api_view(['GET'])}
+@api_view(['GET'])
 def getRoutes(request):
     Routes = [
         '/api/products/upload/',
@@ -18,8 +18,18 @@ def getRoutes(request):
         'api/products/delete/<id>/',
         'api/products/update/<id>/',
     ]
-    return JsonResponse(Routes)
+    return Response(Routes)
 
+@api_view(['GET'])
 def getProducts(request):
-    return JsonResponse(products)
+    return Response(products)
 
+@api_view(['GET'])
+def getProduct(request, pk):
+    product = None
+    # This is searching through products to find the one with the matching _id
+    for i in products:
+        if i['_id'] == str(pk):
+            product = i
+            break
+    return Response(products)

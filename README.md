@@ -148,6 +148,8 @@ Then, on the right hand side of the screen, click on 'api_view' and copy the hig
 
 ![Screenshot of text](./resources/images/django_rest/import.png)
 
+Once you've added that, you will also need to import 'Response'.
+
 ## Tech. Used
 
 1. HTML5

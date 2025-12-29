@@ -1,8 +1,9 @@
 from django.urls import path
 # Below sits in same folder, so .views
-from .views import getRoutes, getProducts
+from .views import getRoutes, getProducts, getProduct
 
 urlpatterns = [
     path('api/', getRoutes, name='routes'),
     path('api/products/', getProducts, name='products'),
+    path('api/product/<int:pk>/', getProduct, name='product'),
 ]
