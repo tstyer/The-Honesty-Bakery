@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Letting backend know 'base' exists
+    'base.apps.BaseConfig',
 ]
 
 MIDDLEWARE = [
