@@ -80,6 +80,12 @@ Solved:
 
 #### Backend Bugs
 
+1. Axios Bug
+
+![Screenshot of Axios bug](./resources/images/axios/axios_error.png)
+
+After some research, I learned that this bug means that my request never reached my Django API. 
+
 --- 
 
 
@@ -149,6 +155,18 @@ Then, on the right hand side of the screen, click on 'api_view' and copy the hig
 ![Screenshot of text](./resources/images/django_rest/import.png)
 
 Once you've added that, you will also need to import 'Response'.
+
+
+
+## Amending Backend Data
+
+To amend your backend data, you will first need to be able to log into the Django admin panel. To do this, start by creating a super user. 
+
+1. In your terminal, ensure you are in the directory that holds manage.py. For me, it is the backend directory. 
+2. Create your super user with "python manage.py createsuperuser", and then follow the instructions to set a user name, email and password.
+3. Run the server: "python manage.py runserver".
+4. From here, append the url with "/admin/" and you will be redirected to the Django Admin login dashboard. Enter your super user name and password to log in. 
+
 
 ## Tech. Used
 

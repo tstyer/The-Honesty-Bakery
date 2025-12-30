@@ -1,39 +1,31 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
-import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-
-function ProductScreen({ match }) {
-  
-  const [product, setProduct] = useState([])
+function ProductScreen() {
+  const { id } = useParams()
+  const [product, setProduct] = useState({})
 
   useEffect(() => {
-
     async function fetchProduct() {
-
-    const { data } = await axios.get(`/api/products/${match.params.id}`)
-
-    setProduct(data)
+      const { data } = await axios.get(`http://127.0.0.1:8000/api/products/${id}/`)
+      setProduct(data)
     }
-
     fetchProduct()
-
-  }, [])
-
+  }, [id])
 
   return (
     <div>
       <Link to='/' className='btn btn-light my-3'>Go Back</Link>
       <Row>
-        {/* col 6 takes half the width */}
+        {/* Col 6 takes half width */}
         <Col md={6}>
           <Image src={product.image} alt={product.name} fluid />
         </Col>
 
-        {/* col 3 a quarter of the width */}
+        { /* col 3 is a quarter */}
         <Col md={3}>
           <ListGroup variant='flush'>
             <ListGroup.Item>
@@ -51,41 +43,32 @@ function ProductScreen({ match }) {
             <ListGroup.Item>
               Description: {product.description}
             </ListGroup.Item>
-
           </ListGroup>
-        </Col>  
+        </Col>
 
         <Col md={3}>
           <Card>
             <ListGroup variant='flush'>
               <ListGroup.Item>
                 <Row>
-                  <Col>
-                  Price:
-                  </Col>
-                  <Col>
-                  <strong>${product.price}</strong>
-                  </Col>
+                  <Col>Price:</Col>
+                  <Col><strong>${product.price}</strong></Col>
                 </Row>
               </ListGroup.Item>
 
-              <ListGroup.Item variant='flush'>
+              <ListGroup.Item>
                 <Row>
-                  <Col>
-                  Status:
-                  </Col>
-                  <Col>
-                  {product.countInStock > 0 ? 'Ready To Bake!' : 'Out of Stock'}
-                  </Col>
+                  <Col>Status:</Col>
+                  <Col>{product.countInStock > 0 ? 'Ready To Bake!' : 'Out of Stock'}</Col>
                 </Row>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <Button className='btn-block' type='button' disabled={product.countInStock === 0}>
+                  Add To Order
+                </Button>
               </ListGroup.Item>
             </ListGroup>
-
-            <ListGroup.Item>
-              <Button className='btn-block' type='button' disabled={product.countInStock === 0}>
-                Add To Order
-              </Button>
-            </ListGroup.Item>
           </Card>
         </Col>
       </Row>
