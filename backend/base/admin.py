@@ -1,7 +1,11 @@
 from django.contrib import admin
-from .models import Product
+from .models import *
 
 # Register your models here.
 
-# This will register the Product model created to the django admin
+# This will register all of the models created to the django admin
 admin.site.register(Product)
+admin.site.register(Review)
+admin.site.register(Order)
+admin.site.register(OrderItem)
+admin.site.register(ShippingAddress)
