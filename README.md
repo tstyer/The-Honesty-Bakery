@@ -167,6 +167,31 @@ To amend your backend data, you will first need to be able to log into the Djang
 3. Run the server: "python manage.py runserver".
 4. From here, append the url with "/admin/" and you will be redirected to the Django Admin login dashboard. Enter your super user name and password to log in. 
 
+This was my view onced logged in:
+
+![Screenshot of dashboard](./resources/images/django_admin/dash.png)
+
+### Making New Databases
+
+When you log into the backend, you shouldn't see any databases there yet. The first thing that needs to be done, is to create a data model in models.py, within the app. 
+
+The first one I created was the product model.
+
+Once it was fully coded, I ran migrations, then registered the new model in admin.py, which then sends the model to the django server.
+
+To run migrations, simply: "python manage.py makemigrations"
+
+![Screenshot of makem](./resources/images/migrations/makemigrations.png)
+
+At this point, you have a chance to see if the migrations are correct before fully migrating. If so: "python manage.py migrate"
+
+![Screenshot of migrate](./resources/images/migrations/migrate.png)
+
+Here, you can see the first model created in the Django Admin: Products
+
+![Screenshot of model](./resources/images/django_admin/first_model.png)
+
+
 
 ## Tech. Used
 
@@ -178,3 +203,4 @@ To amend your backend data, you will first need to be able to log into the Djang
 6. JavaScript
 7. Django
 8. Django Rest Framework
+9. LucidChart
