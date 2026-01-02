@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
+import Loader from '../components/loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'  // Importing the action to fetch products
 
@@ -17,7 +18,7 @@ function HomeScreen() {
   return (
     <div>
       <h1>Honestly Delicious</h1>
-      {loading ? <h2>Loading...</h2> 
+      {loading ? <Loader />
       : error ? <h3>{error}</h3> :
         <Row>
           {products.map(product => ( /* This arrow function will loop through each product within products, and deliver the info in Col */
@@ -29,5 +30,5 @@ function HomeScreen() {
       }
     </div>
   )
-  
+
 export default HomeScreen
