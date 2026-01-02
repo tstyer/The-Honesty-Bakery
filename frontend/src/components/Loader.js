@@ -16,3 +16,6 @@ function Loader() {
         </spinner>
     )
 }
+
+
+export default Loader;

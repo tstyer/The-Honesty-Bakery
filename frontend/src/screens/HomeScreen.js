@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
-import Loader from '../components/loader'
+import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { useDispatch, useSelector } from 'react-redux'
-import { listProducts } from '../actions/productActions'  // Importing the action to fetch products
+import { listProductsDetails } from '../actions/productActions'  // Importing the action to fetch products
 
 function HomeScreen() {
   const dispatch = useDispatch()
@@ -12,7 +12,7 @@ function HomeScreen() {
   const { loading, error, products } = productList
 
   useEffect(() => {
-    dispatch(listProducts())  // Dispatching the action to fetch products when component mounts
+    dispatch(listProductsDetails())  // Dispatching the action to fetch products when component mounts
 
   }, [])
 
@@ -31,5 +31,6 @@ function HomeScreen() {
       }
     </div>
   )
+}
 
 export default HomeScreen

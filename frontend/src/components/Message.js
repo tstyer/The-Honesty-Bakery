@@ -6,3 +6,5 @@ function Message({ variant, children }) {
     {children}
     </Alert>;
 }
+
+export default Message;
