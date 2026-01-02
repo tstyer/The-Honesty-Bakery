@@ -204,3 +204,4 @@ Here, you can see the first model created in the Django Admin: Products
 7. Django
 8. Django Rest Framework
 9. LucidChart
+10. Redux
