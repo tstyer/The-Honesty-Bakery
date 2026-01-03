@@ -105,8 +105,7 @@ export default function CartScreen({ match, location, history }) {
                   className='btn-block'
                   {/* If cart is empty, disable button */}
                   disabled={cartItems.length === 0}
-                  onClick={() => history.push('/login?redirect=shipping')}
-                >
+                  onClick={() => history.push('/login?redirect=shipping')}>
                   Proceed To Checkout
                 </Button>
               </ListGroup.Item>
