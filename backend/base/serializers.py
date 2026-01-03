@@ -9,6 +9,16 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
+    
+    name = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = User
-        fields = ['id', 'username', 'email']
+        fields = ['id', 'username', 'email', 'name']
+
+    # self is seriliazer instance, obj is user instance
+    def get_name(self, obj):
+        name = obj.first_name
+        # if no name set, use email
+        if name == '':
+            name = obj.email
+        return name
