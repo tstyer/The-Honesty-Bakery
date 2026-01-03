@@ -22,19 +22,22 @@ export const login = (email, password) => async (dispatch) => {
       headers: { 'Content-Type': 'application/json' },
     }
 
-    // ProShop typically uses /api/users/login/
     const { data } = await axios.post(
       '/api/users/login/',
-      { username: email, password }, // many ProShop backends use username=email
+      { email, password },   // ✅ email-based login
       config
     )
 
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
-    dispatch({ type: USER_LOGIN_FAIL, payload: getErrorMessage(error) })
+    dispatch({
+      type: USER_LOGIN_FAIL,
+      payload: getErrorMessage(error),
+    })
   }
 }
+
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
