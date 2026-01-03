@@ -192,6 +192,12 @@ Here, you can see the first model created in the Django Admin: Products
 ![Screenshot of model](./resources/images/django_admin/first_model.png)
 
 
+## Authentication
+
+### JSON Web Tokens
+
+These are just encoded data about a user. 
+
 
 ## Tech. Used
 

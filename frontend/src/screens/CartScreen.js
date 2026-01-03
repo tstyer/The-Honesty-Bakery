@@ -17,6 +17,11 @@ export default function CartScreen({ match, location, history }) {
   const checkoutHandler = () => {
     history.push('/login?redirect=shipping')
   }
+
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id))
+  }
+  
   console.log('Quantity:', cartItems)
 
   useEffect(() => {
