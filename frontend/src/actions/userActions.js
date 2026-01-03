@@ -6,6 +6,7 @@ import {
   USER_LOGOUT,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_REGISTER_FAIL,
 } from '../constants/userConstants'
 
 const getErrorMessage = (error) =>

@@ -10,7 +10,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 
             if (existItem) {
                 return {
-                    ...state, {/* state returns original version, but everything after is added or amends. */}
+                    ...state, /* state returns original version, but everything after is added or amends. */
                     cartItems: state.cartItems.map(x => x.product === existItem.product ? item : x)
                 }
             } else {
@@ -24,7 +24,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         case CART_REMOVE_ITEM:
             return {
                 ...state,
-                {/* filster will just keep every product that doesn't match the id (action.payload) */}
+                /* filster will just keep every product that doesn't match the id (action.payload) */
                 cartItems: state.cartItems.filter(x => x.product !== action.payload)
             } 
             

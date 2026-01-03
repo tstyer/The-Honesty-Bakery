@@ -101,14 +101,14 @@ export default function CartScreen({ match, location, history }) {
                   {/* reduce calcs to total, acc (accumulator), item.qty adds the total of an item, starts at 0 */}
                   Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items
                 </h2>
-                ${cartItems.reclude((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}{cartItems}
+                ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}{cartItems}
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Button
                   type='button'
                   className='btn-block'
-                  {/* If cart is empty, disable button */}
+                  /* If cart is empty, disable button */
                   disabled={cartItems.length === 0}
                   onClick={() => history.push('/login?redirect=shipping')}>
                   Proceed To Checkout
