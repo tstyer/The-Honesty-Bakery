@@ -36,6 +36,18 @@ Product.js showing stock as 1:
 
 #### Python Tests
 
+## Using Redux
+
+I chose to use Redux in this app, firstly to learn how it's used, but also because I would end up having many pages that would require a global state. This global state is share in the Redux store and passed down to other pages. 
+
+Having learned the importance of Redux in front end when it comes to building larger apps, I am glad I have included it. I will continue to learn more about it in my future project, but here are some examples of how to install and use Redux:
+
+### Installing Redux
+
+...
+
+### Using Redux
+
 
 
 ### Bugs
