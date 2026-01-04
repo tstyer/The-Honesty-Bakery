@@ -1,9 +1,9 @@
 import React from "react";
-import { spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 
 function Loader() {
     return (
-        <spinner
+        <Spinner
         animation="border"
         role="status"
         style={{
@@ -13,7 +13,7 @@ function Loader() {
             display: "block",
         }}>
             <span className="sr-only">Loading...</span>
-        </spinner>
+        </Spinner>
     )
 }
 

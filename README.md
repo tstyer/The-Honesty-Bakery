@@ -88,6 +88,21 @@ Solved:
 
 ![Solved screenshot](/resources/images/goback_solved.png)
 
+4. 500 Error
+
+This bug was the result of my images not displaying on the home screen. 
+
+![Screenshot of error](./resources/images/other_bugs/status_500_homescreen.png)
+
+The solution to this was found by the errors notes in the console:
+
+![Screenshot of console](./resources/images/other_bugs/console_500_bug.png)
+
+This was solved by changing the 's' in 'spinner' to uppercase within my "Loading" component. 
+
+Solved:
+
+![Screenshot of solved](./resources/images/other_bugs/500_solved.png)
 
 
 #### Backend Bugs

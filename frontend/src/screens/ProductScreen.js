@@ -5,7 +5,7 @@ import Rating from '../components/Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { useDispatch, useSelector } from 'react-redux'
-import { listProductsDetails } from '../actions/productActions'
+import { listProductDetails } from '../actions/productActions'
 
 function ProductScreen( history ) {
   const [qty, setQty] = useState(1)
@@ -16,7 +16,7 @@ function ProductScreen( history ) {
   const { loading, error, product } = productDetails
 
   useEffect(() => {
-    dispatch(listProductsDetails(id))
+    dispatch(listProductDetails(id))
   }, [dispatch, id])
 
   const addToCartHandler = () => {
