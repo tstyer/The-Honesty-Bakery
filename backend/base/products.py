@@ -2,7 +2,7 @@
 products = [
   {
     '_id': '1',
-    'name': 'Birthday Cake',
+    'name': 'Birthday Cake (Made to Order)',
     'image': '/static/images/birthday_cake.jpg',
     'description':
       'Example Custom Birthday Cake.',
@@ -12,10 +12,11 @@ products = [
     'countInStock': 10,
     'rating': 5,
     'numReviews': 12,
+    'isPrebaked': False,
   },
   {
     '_id': '2',
-    'name': 'BlueBerry Cake',
+    'name': 'BlueBerry Cake (Pre baked)',
     'image': '/static/images/blue_berry_cake.jpg',
     'description':
       'Customer Request Blueberry Cake',
@@ -25,5 +26,6 @@ products = [
     'countInStock': 1,
     'rating': 5,
     'numReviews': 8,
+    'isPrebaked': True,
   },
 ]
