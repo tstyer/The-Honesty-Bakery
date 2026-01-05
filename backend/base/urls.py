@@ -15,4 +15,9 @@ urlpatterns = [
 
     # ===== ROUTES (DEV ONLY) =====
     path('api/', views.getRoutes, name='routes'),
+
+    # ===== STRIPE PAYMENT =====
+    path('api/config/stripe/', views.getStripeConfig, name='stripe-config'),
+    path('api/payments/create-payment-intent/', views.createPaymentIntent, name='create-payment-intent'),
+
 ]
