@@ -1,13 +1,14 @@
+from django.contrib.auth.models import User
+from rest_framework import serializers, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
-from django.contrib.auth.models import User
-
-from .models import Product
-from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+
+from .models import Product
+from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
 
 
 # ======================
@@ -15,27 +16,37 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 # ======================
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    # ✅ This makes SimpleJWT expect "email" (so it won't demand "username")
     username_field = 'email'
+
+    # Ensure the email field exists and is required
+    email = serializers.EmailField(required=True)
 
     def validate(self, attrs):
         email = attrs.get('email')
         password = attrs.get('password')
 
+        if not password:
+            raise serializers.ValidationError({'password': 'This field is required.'})
+
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
-            raise Exception('Invalid email or password')
+            raise serializers.ValidationError({'detail': 'Invalid email or password'})
 
         if not user.check_password(password):
-            raise Exception('Invalid email or password')
+            raise serializers.ValidationError({'detail': 'Invalid email or password'})
 
+        # ✅ Convert email login -> username auth for Django's default User model
         data = super().validate({
-            'username': user.username,
+            'email': email,               # satisfies SimpleJWT field expectations
             'password': password,
+            'username': user.username,    # for safety (won't hurt)
         })
 
-        serializer = UserSerializerWithToken(user).data
-        for k, v in serializer.items():
+        # Add your extra user fields into the response
+        user_data = UserSerializerWithToken(user).data
+        for k, v in user_data.items():
             data[k] = v
 
         return data
@@ -49,21 +60,31 @@ class MyTokenObtainPairView(TokenObtainPairView):
 def registerUser(request):
     data = request.data
 
-    try:
-        user = User.objects.create_user(
-            username=data['email'],          
-            email=data['email'],
-            password=data['password'],
-            first_name=data['name'],
+    email = data.get('email')
+    password = data.get('password')
+    name = data.get('name')
+
+    if not email or not password or not name:
+        return Response(
+            {'detail': 'Name, email and password are required'},
+            status=status.HTTP_400_BAD_REQUEST
         )
 
-        serializer = UserSerializerWithToken(user, many=False)
-        return Response(serializer.data)
+    if User.objects.filter(email=email).exists():
+        return Response(
+            {'detail': 'User with this email already exists'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
+    user = User.objects.create_user(
+        username=email,     # you’re using email as username (fine)
+        email=email,
+        password=password,
+        first_name=name,
+    )
 
-    except Exception as e:
-        message = {'detail': 'User with this email already exists'}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    serializer = UserSerializerWithToken(user, many=False)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -114,3 +135,4 @@ def getRoutes(request):
         '/api/users/login/',
     ]
     return Response(routes)
+
