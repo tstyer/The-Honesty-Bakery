@@ -78,9 +78,11 @@ Change user_name = 'email' in views.py. After that, it worked:
 
 ![Screenshot of item added](./resources/images/manual_tests/login_to_checkout/added_to_cart.png)
 
-3. I then clicked on checkout;
+3. I then clicked on checkout:
 
+![Screenshot of order placed](./resources/images/manual_tests/login_to_checkout/order_placed.png)
 
+**NOW, ENSURE PAYMENT DETAILS ARE TAKEN BEFORE ORDER PLACED**
 
 
 
