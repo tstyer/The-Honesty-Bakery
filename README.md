@@ -104,6 +104,16 @@ Solved:
 
 ![Screenshot of solved](./resources/images/other_bugs/500_solved.png)
 
+5. Adding To Cart
+
+![Screenshot of bug](./resources/images/other_bugs/add_t0_cart/first_bug.png)
+
+I learned that in V6, there is no 'history.push' function. So I had to rewrite my code. Google AI informed me that 'navigate' is used as a replacement.
+
+Once that was replaced, it worked, and I continued with the manual test of adding to cart. 
+
+![Screenshot of fixed bug](./resources/images/other_bugs/add_t0_cart/fixed.png)
+
 
 #### Backend Bugs
 

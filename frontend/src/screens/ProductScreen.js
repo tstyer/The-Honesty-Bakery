@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Loader from '../components/Loader'
@@ -7,9 +7,10 @@ import Message from '../components/Message'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetails } from '../actions/productActions'
 
-function ProductScreen( history ) {
+function ProductScreen() {
   const [qty, setQty] = useState(1)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { id } = useParams()
 
   const productDetails = useSelector((state) => state.productDetails)
@@ -20,7 +21,7 @@ function ProductScreen( history ) {
   }, [dispatch, id])
 
   const addToCartHandler = () => {
-    history.push(`/cart/${id}?qty=${qty}`)
+    navigate(`/cart/${id}?qty=${qty}`)
   }
 
   return (
@@ -79,7 +80,6 @@ function ProductScreen( history ) {
                     <Row>
                       <Col>Qty:</Col>
                       <Col xs='auto' className='my-1'>
-                        {/* Type of form is select dropdown */}
                         <Form.Control
                           as='select'
                           value={qty}
@@ -87,7 +87,6 @@ function ProductScreen( history ) {
                         >
                           {[...Array(product.countInStock).keys()].map((x) => (
                             <option key={x + 1} value={x + 1}>
-                              {/* +1 because array starts at 0 */}
                               {x + 1}
                             </option>
                           ))}
