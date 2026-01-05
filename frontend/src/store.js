@@ -27,7 +27,10 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   : null
 
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage },
+  cart: {
+    cartItems: cartItemsFromStorage,
+    paymentMethod: paymentMethodFromStorage,
+  },
   userLogin: { userInfo: userInfoFromStorage },
 }
 
@@ -36,5 +39,9 @@ const store = configureStore({
   preloadedState: initialState,
   devTools: process.env.NODE_ENV !== 'production',
 })
+
+const paymentMethodFromStorage = localStorage.getItem('paymentMethod')
+  ? JSON.parse(localStorage.getItem('paymentMethod'))
+  : ''
 
 export default store
