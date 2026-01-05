@@ -16,11 +16,18 @@ from .serializers import ProductSerializer, UserSerializer, UserSerializerWithTo
 # ======================
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    # ✅ This makes SimpleJWT expect "email" (so it won't demand "username")
-    username_field = 'email'
+    # We will authenticate with username internally
+    username_field = 'username'
 
-    # Ensure the email field exists and is required
-    email = serializers.EmailField(required=True)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Remove username field requirement from the request
+        # TokenObtainPairSerializer defines it by default
+        self.fields.pop('username', None)
+
+        # Add email field to the request
+        self.fields['email'] = serializers.EmailField(required=True)
 
     def validate(self, attrs):
         email = attrs.get('email')
@@ -37,14 +44,13 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         if not user.check_password(password):
             raise serializers.ValidationError({'detail': 'Invalid email or password'})
 
-        # ✅ Convert email login -> username auth for Django's default User model
+        # Now authenticate via SimpleJWT using username + password
         data = super().validate({
-            'email': email,               # satisfies SimpleJWT field expectations
+            'username': user.username,
             'password': password,
-            'username': user.username,    # for safety (won't hurt)
         })
 
-        # Add your extra user fields into the response
+        # add extra user info
         user_data = UserSerializerWithToken(user).data
         for k, v in user_data.items():
             data[k] = v

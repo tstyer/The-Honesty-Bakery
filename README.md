@@ -63,6 +63,9 @@ Change user_name = 'email' in views.py. After that, it worked:
 
 ![Fixed](./resources/images/other_bugs/log_in/fixed.png)
 
+![Second fixed screenshot](./resources/images/other_bugs/log_in/fixed_2.png)
+
+**NEED TO CHANGE THE LOG IN DISPLAY - CHANGE FROM DISPLAYING THEIR EMAIL, TO 'LOG OUT'**
 
 
 
