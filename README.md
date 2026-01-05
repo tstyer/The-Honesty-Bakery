@@ -30,6 +30,22 @@ Status:
 Product.js showing stock as 1:
 ![Screenshot of code](./resources/images/manual_tests/testing_product_screen/in_stock/stock_level.png)
 
+#### Checkout Testing
+
+1. 'Add to Cart' button:
+
+Clicking the 'Add to Cart' button took me straight to the cart page, displaying the total in the basket and total amount.
+
+![First screenshot](./resources/images/manual_tests/adding_to_cart/clicking_add_to_cart.png)
+
+Cart page:
+
+![Cart page](./resources/images/manual_tests/adding_to_cart/takes_to_cart_page.png)
+
+This all worked fine, however, I decided this wasn't best for the user experience. My plans moving forward were to create a notification that pops up for 5 seconds, showing that the item is added to the cart, but they stay on the same screen (unless the user clicks on the cart icon to go to the cart screen). 
+
+This would make for a better experience, because the user wouldn't then have to keep clicking out of the cart screen if they wish to purcahse more products.
+
 ### Automated Testing
 
 #### Jest
