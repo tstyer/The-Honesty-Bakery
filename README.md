@@ -46,7 +46,26 @@ This all worked fine, however, I decided this wasn't best for the user experienc
 
 This would make for a better experience, because the user wouldn't then have to keep clicking out of the cart screen if they wish to purcahse more products.
 
-**INCLUDE THAT ADDITIONAL TEST HERE ONCE THAT IS COMPLETE."
+
+#### Login Testing
+
+I attempted to log in after successfully registering a user (**include this above**), and I was met with an error 400 response. 
+
+![Screenshot of log in](./resources/images/other_bugs/log_in/404.png)
+
+I checked the 'Network' tab in dev tools and tried to log in again, and found the error 400 in userActions:
+
+![Screenshot of found error](./resources/images/other_bugs/log_in/error_found.png)
+
+Solution:
+
+Change user_name = 'email' in views.py. After that, it worked:
+
+![Fixed](./resources/images/other_bugs/log_in/fixed.png)
+
+
+
+
 
 ### Automated Testing
 
