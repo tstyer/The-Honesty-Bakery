@@ -46,6 +46,8 @@ This all worked fine, however, I decided this wasn't best for the user experienc
 
 This would make for a better experience, because the user wouldn't then have to keep clicking out of the cart screen if they wish to purcahse more products.
 
+**INCLUDE THAT ADDITIONAL TEST HERE ONCE THAT IS COMPLETE."
+
 ### Automated Testing
 
 #### Jest

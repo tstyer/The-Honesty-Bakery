@@ -90,7 +90,8 @@ export default function CartScreen() {
                 <h2>
                   Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items
                 </h2>
-                ${cartItems
+                $
+                {cartItems
                   .reduce((acc, item) => acc + item.qty * item.price, 0)
                   .toFixed(2)}
               </ListGroup.Item>
