@@ -9,6 +9,9 @@ export default function PlaceOrderScreen() {
   const cart = useSelector((state) => state.cart)
   const { cartItems, paymentMethod } = cart
 
+  const hasMadeToOrder = cartItems.some((item) => item.isPrebaked === false)
+  const paymentIsValid = hasMadeToOrder ? paymentMethod === 'Card' : paymentMethod === 'Cash'
+
   const totals = useMemo(() => {
     const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     const totalPrice = itemsPrice
@@ -102,7 +105,7 @@ export default function PlaceOrderScreen() {
                 <Button
                   type='button'
                   className='btn-block'
-                  disabled={!paymentMethod}
+                  disabled={!paymentMethod || !paymentIsValid}
                   onClick={placeOrderHandler}
                 >
                   Place Order
@@ -111,6 +114,14 @@ export default function PlaceOrderScreen() {
                 {!paymentMethod && (
                   <div className='mt-2'>
                     <small>Please select a payment method first.</small>
+                  </div>
+                )}
+
+                {paymentMethod && !paymentIsValid && (
+                  <div className='mt-2'>
+                    <small>
+                      This cart contains made-to-order items. Card payment is required.
+                    </small>
                   </div>
                 )}
               </ListGroup.Item>

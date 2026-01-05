@@ -12,12 +12,12 @@ export default function PaymentScreen() {
   const cart = useSelector((state) => state.cart)
   const { cartItems, paymentMethod } = cart
 
-  // ✅ Determine what’s in the cart
+  // Determine what’s in the cart
   const hasMadeToOrder = useMemo(() => {
     return cartItems?.some((item) => item.isPrebaked === false)
   }, [cartItems])
 
-  // ✅ Allowed methods based on rule
+  // Allowed methods based on rule
   const allowedMethods = hasMadeToOrder ? ['Card'] : ['Cash']
 
   const [method, setMethod] = useState(
