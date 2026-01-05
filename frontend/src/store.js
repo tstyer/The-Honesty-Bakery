@@ -26,15 +26,19 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
   : null
 
-// If you saved as a plain string, don't JSON.parse
 const paymentMethodFromStorage = localStorage.getItem('paymentMethod')
   ? localStorage.getItem('paymentMethod')
   : ''
+
+const paymentResultFromStorage = localStorage.getItem('paymentResult')
+  ? JSON.parse(localStorage.getItem('paymentResult'))
+  : null
 
 const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
     paymentMethod: paymentMethodFromStorage,
+    paymentResult: paymentResultFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },
 }

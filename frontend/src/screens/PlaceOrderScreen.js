@@ -7,10 +7,14 @@ import Message from '../components/Message'
 export default function PlaceOrderScreen() {
   const navigate = useNavigate()
   const cart = useSelector((state) => state.cart)
-  const { cartItems, paymentMethod } = cart
+  const { cartItems, paymentMethod, paymentResult } = cart
 
+  const cardPaid = paymentResult?.status === 'succeeded'
   const hasMadeToOrder = cartItems.some((item) => item.isPrebaked === false)
-  const paymentIsValid = hasMadeToOrder ? paymentMethod === 'Card' : paymentMethod === 'Cash'
+
+  const paymentIsValid = hasMadeToOrder
+    ? paymentMethod === 'Card' && cardPaid
+    : paymentMethod === 'Cash'
 
   const totals = useMemo(() => {
     const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
@@ -19,7 +23,6 @@ export default function PlaceOrderScreen() {
   }, [cartItems])
 
   const placeOrderHandler = () => {
-    // Later: dispatch(createOrder(...)) and navigate to the real created order id
     const fakeOrderId = Date.now().toString()
     navigate(`/order/${fakeOrderId}`)
   }
@@ -117,11 +120,15 @@ export default function PlaceOrderScreen() {
                   </div>
                 )}
 
-                {paymentMethod && !paymentIsValid && (
+                {hasMadeToOrder && paymentMethod === 'Card' && !cardPaid && (
                   <div className='mt-2'>
-                    <small>
-                      This cart contains made-to-order items. Card payment is required.
-                    </small>
+                    <small>Card payment must be completed before placing the order.</small>
+                  </div>
+                )}
+
+                {!hasMadeToOrder && paymentMethod && paymentMethod !== 'Cash' && (
+                  <div className='mt-2'>
+                    <small>Cash on collection is available for prebaked items only.</small>
                   </div>
                 )}
               </ListGroup.Item>
