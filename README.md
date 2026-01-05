@@ -106,6 +106,24 @@ Having learned the importance of Redux in front end when it comes to building la
 ### Using Redux
 
 
+## Installing + Using Stripe
+
+In your terminal - in the backend - type: pip install stripe (for windows).
+
+And for the frontend: npm i @stripe/stripe-js @stripe/react-stripe-js (assuming you used React, like me)
+
+Then, follow these steps:
+
+1. Add stripe secret key settings:
+
+import os
+# ...existing...
+
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
+STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY", "")
+
+
+
 
 ### Bugs
 

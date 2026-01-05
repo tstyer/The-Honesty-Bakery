@@ -10,6 +10,9 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Product
 from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
 
+import stripe
+from django.conf import settings
+
 
 # ======================
 # AUTH / USERS
@@ -141,4 +144,53 @@ def getRoutes(request):
         '/api/users/login/',
     ]
     return Response(routes)
+
+
+# ======================
+# STRIPE PAYMENT
+# ======================
+
+@api_view(['GET'])
+def getStripeConfig(request):
+    return Response({'publishableKey': settings.STRIPE_PUBLISHABLE_KEY})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def createPaymentIntent(request):
+    """
+    Creates a Stripe PaymentIntent based on server-trusted product prices.
+    Expects: { cartItems: [{ product: <id>, qty: <int> }, ...] }
+    """
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+
+    data = request.data
+    cart_items = data.get('cartItems', [])
+
+    if not cart_items:
+        return Response({'detail': 'Cart is empty'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # Server-side total calculation (prevents price tampering)
+    total = 0
+    for item in cart_items:
+        product_id = item.get('product')
+        qty = int(item.get('qty', 0))
+
+        if not product_id or qty <= 0:
+            return Response({'detail': 'Invalid cart item'}, status=status.HTTP_400_BAD_REQUEST)
+
+        product = Product.objects.get(_id=product_id)
+
+        # Convert Decimal -> cents safely
+        total += int(product.price * 100) * qty
+
+    # Optional: use GBP for UK
+    intent = stripe.PaymentIntent.create(
+        amount=total,
+        currency='gbp',
+        automatic_payment_methods={'enabled': True},
+        metadata={'user_id': request.user.id},
+    )
+
+    return Response({'clientSecret': intent['client_secret']})
 

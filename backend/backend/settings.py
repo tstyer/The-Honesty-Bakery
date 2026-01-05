@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # Letting backend know 'base' exists
     'base.apps.BaseConfig',
+
     'rest_framework',
     'corsheaders',
 ]
@@ -196,3 +197,10 @@ MEDIA_URL = '/images/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+import os
+# ...existing...
+
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
+STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY", "")
+
