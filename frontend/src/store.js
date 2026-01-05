@@ -26,6 +26,11 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
   : null
 
+// If you saved as a plain string, don't JSON.parse
+const paymentMethodFromStorage = localStorage.getItem('paymentMethod')
+  ? localStorage.getItem('paymentMethod')
+  : ''
+
 const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
@@ -39,9 +44,5 @@ const store = configureStore({
   preloadedState: initialState,
   devTools: process.env.NODE_ENV !== 'production',
 })
-
-const paymentMethodFromStorage = localStorage.getItem('paymentMethod')
-  ? JSON.parse(localStorage.getItem('paymentMethod'))
-  : ''
 
 export default store

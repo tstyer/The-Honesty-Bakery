@@ -11,7 +11,7 @@ export default function CartScreen() {
   const { id: productId } = useParams()
   const location = useLocation()
 
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1
+  const qty = Number(new URLSearchParams(location.search).get('qty')) || 1
 
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
@@ -23,7 +23,8 @@ export default function CartScreen() {
   }, [dispatch, productId, qty])
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=shipping')
+    // Pickup-only flow: go straight to payment (after login if needed)
+    navigate('/login?redirect=/payment')
   }
 
   return (

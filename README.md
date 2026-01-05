@@ -68,6 +68,21 @@ Change user_name = 'email' in views.py. After that, it worked:
 **NEED TO CHANGE THE LOG IN DISPLAY - CHANGE FROM DISPLAYING THEIR EMAIL, TO 'LOG OUT'**
 
 
+#### Login to Checkout Testing
+
+1. I first successfully logged in:
+
+![Screenshot of login](./resources/images/manual_tests/login_to_checkout/login_success.png)
+
+2. I then added the single item to my basket:
+
+![Screenshot of item added](./resources/images/manual_tests/login_to_checkout/added_to_cart.png)
+
+3. I then clicked on checkout;
+
+
+
+
 
 
 ### Automated Testing
