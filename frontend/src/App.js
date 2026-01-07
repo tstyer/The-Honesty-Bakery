@@ -17,6 +17,8 @@ import ProfileScreen from './screens/ProfileScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
+import UserListScreen from './screens/UserListScreen'
+
 
 function App() {
   const [publishableKey, setPublishableKey] = useState('')
@@ -58,6 +60,7 @@ function App() {
 
             {/* Profile route */}
             <Route path="/profile" element={<ProfileScreen />} />
+            <Route path="/admin/userlist" element={<UserListScreen />} />
 
             {/* Product routes */}
             <Route path="/product/:id" element={<ProductScreen />} />
