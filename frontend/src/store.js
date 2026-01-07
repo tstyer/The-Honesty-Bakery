@@ -18,21 +18,20 @@ const reducer = {
   userUpdateProfile: userUpdateProfileReducer,
 }
 
-const cartItemsFromStorage = localStorage.getItem('cartItems')
-  ? JSON.parse(localStorage.getItem('cartItems'))
-  : []
+const safeParse = (key, fallback) => {
+  try {
+    const raw = localStorage.getItem(key)
+    return raw ? JSON.parse(raw) : fallback
+  } catch (e) {
+    return fallback
+  }
+}
 
-const userInfoFromStorage = localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo'))
-  : null
+const cartItemsFromStorage = safeParse('cartItems', [])
+const userInfoFromStorage = safeParse('userInfo', null)
+const paymentResultFromStorage = safeParse('paymentResult', null)
 
-const paymentMethodFromStorage = localStorage.getItem('paymentMethod')
-  ? localStorage.getItem('paymentMethod')
-  : ''
-
-const paymentResultFromStorage = localStorage.getItem('paymentResult')
-  ? JSON.parse(localStorage.getItem('paymentResult'))
-  : null
+const paymentMethodFromStorage = localStorage.getItem('paymentMethod') || ''
 
 const initialState = {
   cart: {
