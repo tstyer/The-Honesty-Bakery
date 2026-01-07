@@ -3,6 +3,8 @@ from rest_framework import serializers, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
+
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -172,6 +174,22 @@ def getProduct(request, pk):
     product = Product.objects.get(_id=pk)
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def uploadImage(request):
+    parser_classes = (MultiPartParser, FormParser)
+
+    file = request.FILES.get('image')
+    if not file:
+        return Response({'detail': 'No image provided'}, status=400)
+
+    from django.core.files.storage import default_storage
+    file_name = default_storage.save(f'products/{file.name}', file)
+
+    return Response({'image': default_storage.url(file_name)})
+
 
 
 # ======================
