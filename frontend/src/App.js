@@ -20,6 +20,8 @@ import OrderScreen from './screens/OrderScreen'
 import UserListScreen from './screens/UserListScreen'
 import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
+import OrderListScreen from './screens/OrderListScreen'
+
 
 
 function App() {
@@ -76,7 +78,7 @@ function App() {
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
 
-            {/* Payment route (Stripe only here) */}
+            {/* Payment route */}
             <Route
               path="/payment"
               element={
@@ -92,8 +94,10 @@ function App() {
               }
             />
 
+            {/* Order routes */}
             <Route path="/placeorder" element={<PlaceOrderScreen />} />
             <Route path="/order/:id" element={<OrderScreen />} />
+            <Route path="/admin/orderlist" element={<OrderListScreen />} />
           </Routes>
         </Container>
       </main>
