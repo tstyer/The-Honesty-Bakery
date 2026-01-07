@@ -9,7 +9,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .models import Product
+from .models import Product, Review
 from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
 
 import stripe
@@ -189,6 +189,40 @@ def uploadImage(request):
     file_name = default_storage.save(f'products/{file.name}', file)
 
     return Response({'image': default_storage.url(file_name)})
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def createProductReview(request, pk):
+    user = request.user
+    product = Product.objects.get(_id=pk)
+    data = request.data
+
+    # 1) Prevent duplicate reviews by same user
+    alreadyExists = product.review_set.filter(user=user).exists()
+    if alreadyExists:
+        return Response({'detail': 'Product already reviewed'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # 2) Basic validation
+    rating = data.get('rating', 0)
+    if rating == 0 or rating == '0' or rating is None:
+        return Response({'detail': 'Please select a rating'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # 3) Create review (requires Review model + relation on Product)
+    review = Review.objects.create(
+        user=user,
+        product=product,
+        name=user.first_name or user.username,
+        rating=int(rating),
+        comment=data.get('comment', ''),
+    )
+
+    # 4) Update product rating stats
+    reviews = product.review_set.all()
+    product.numReviews = reviews.count()
+    product.rating = sum([r.rating for r in reviews]) / product.numReviews
+    product.save()
+
+    return Response({'detail': 'Review added'})
 
 
 
