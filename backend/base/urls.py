@@ -13,6 +13,7 @@ urlpatterns = [
     # ===== PRODUCTS =====
     path('api/products/', views.getProducts, name='products'),
     path('api/products/<int:pk>/', views.getProduct, name='product'),
+    path('api/upload/', views.uploadImage, name='image-upload'),
 
     # ===== ROUTES (DEV ONLY) =====
     path('api/', views.getRoutes, name='routes'),
