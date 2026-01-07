@@ -7,6 +7,9 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
   userListReducer,
+  productDeleteReducer,
+  productCreateReducer,
+  productUpdateReducer
 } from './reducers/userReducers'
 
 const reducer = {
@@ -18,6 +21,10 @@ const reducer = {
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
   userList: userListReducer,
+  productDelete: productDeleteReducer,
+  productCreate: productCreateReducer,
+  productUpdate: productUpdateReducer,
+
 }
 
 const safeParse = (key, fallback) => {
