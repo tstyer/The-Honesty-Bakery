@@ -13,7 +13,7 @@ import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
-
+import ProfileScreen from "./screens/ProfileScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
@@ -40,6 +40,11 @@ function App() {
             <Elements stripe={stripePromise}>
               <Routes>
                 <Route path="/" element={<HomeScreen />} />
+
+                {/* Profile route */}
+                <Route path="/profile" element={<ProfileScreen />} />
+
+                {/* Product routes */}
                 <Route path="/product/:id" element={<ProductScreen />} />
 
                 {/* Cart routes */}

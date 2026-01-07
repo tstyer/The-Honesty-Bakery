@@ -17,6 +17,10 @@ export default function PaymentScreen() {
   const cart = useSelector((state) => state.cart)
   const { cartItems, paymentMethod, paymentResult } = cart
 
+  // get user token for authenticated payment intent
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin || {}
+
   const hasMadeToOrder = useMemo(
     () => cartItems?.some((item) => item.isPrebaked === false),
     [cartItems]
@@ -58,6 +62,13 @@ export default function PaymentScreen() {
       return
     }
 
+    // backend requires auth
+    const accessToken = userInfo?.token || userInfo?.access
+    if (!accessToken) {
+      setErrorMsg('You must be logged in to pay by card.')
+      return
+    }
+
     try {
       setPaying(true)
 
@@ -70,6 +81,7 @@ export default function PaymentScreen() {
         {
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       )
@@ -77,10 +89,14 @@ export default function PaymentScreen() {
       const clientSecret = data.clientSecret
 
       const cardElement = elements.getElement(CardElement)
+      if (!cardElement) {
+        setErrorMsg('Card input is not ready yet. Try again in a moment.')
+        setPaying(false)
+        return
+      }
+
       const result = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: cardElement,
-        },
+        payment_method: { card: cardElement },
       })
 
       if (result.error) {
@@ -113,6 +129,7 @@ export default function PaymentScreen() {
   }
 
   const cardPaid = paymentResult?.status === 'succeeded'
+  const stripeReady = !!stripe && !!elements
 
   return (
     <div>
@@ -159,9 +176,14 @@ export default function PaymentScreen() {
         {method === 'Card' && (
           <div className="my-3">
             <Form.Label>Card details</Form.Label>
-            <div style={{ padding: '12px', border: '1px solid #ddd', borderRadius: 6 }}>
-              <CardElement />
-            </div>
+
+            {!stripeReady ? (
+              <Message variant="info">Loading secure payment form…</Message>
+            ) : (
+              <div style={{ padding: '12px', border: '1px solid #ddd', borderRadius: 6 }}>
+                <CardElement />
+              </div>
+            )}
 
             {cardPaid && (
               <div className="mt-2">
@@ -171,7 +193,7 @@ export default function PaymentScreen() {
           </div>
         )}
 
-        <Button type="submit" className="my-3" disabled={paying}>
+        <Button type="submit" className="my-3" disabled={paying || (method === 'Card' && !stripeReady)}>
           {method === 'Card' ? (paying ? 'Processing…' : 'Pay & Continue') : 'Continue'}
         </Button>
       </Form>
