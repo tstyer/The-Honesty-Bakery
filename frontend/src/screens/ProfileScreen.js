@@ -30,7 +30,7 @@ export default function ProfileScreen() {
       return
     }
 
-    if (!user || !user.name || success) {
+    if (!user || !user._id || success) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET })
       dispatch(getUserDetails()) 
     } else {
