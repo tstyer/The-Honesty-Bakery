@@ -7,11 +7,9 @@ import { logout } from "../actions/userActions";
 function Header() {
   const dispatch = useDispatch();
 
-  // This pulls user login state from Redux so the navbar can change based on auth
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  // When user clicks logout, we clear localStorage + Redux state (your logout action does this)
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -39,18 +37,23 @@ function Header() {
             </Nav>
 
             <Nav>
-              {/* 
-                If userInfo exists, user is logged in:
-                show dropdown with username + logout 
-                If not logged in:
-                show Login link
-              */}
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id="username">
-                  {/* Optional: profile page route (you’ll add ProfileScreen later) */}
+                <NavDropdown title={userInfo.name || "User"} id="username">
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
+
+                  {/* Admin links */}
+                  {userInfo.isAdmin && (
+                    <>
+                      <NavDropdown.Divider />
+                      <LinkContainer to="/admin/userlist">
+                        <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+                    </>
+                  )}
+
+                  <NavDropdown.Divider />
 
                   <NavDropdown.Item onClick={logoutHandler}>
                     Logout
