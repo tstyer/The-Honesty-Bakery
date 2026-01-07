@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/products/', views.getProducts, name='products'),
     path('api/products/<int:pk>/', views.getProduct, name='product'),
     path('api/upload/', views.uploadImage, name='image-upload'),
+    path('api/products/<int:pk>/reviews/', views.createProductReview, name='create-product-review'),
 
     # ===== ROUTES (DEV ONLY) =====
     path('api/', views.getRoutes, name='routes'),
