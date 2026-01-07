@@ -18,6 +18,7 @@ import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
 import UserListScreen from './screens/UserListScreen'
+import ProductListScreen from './screens/ProductListScreen'
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
 
             {/* Product routes */}
             <Route path="/product/:id" element={<ProductScreen />} />
+            <Route path="/admin/productlist" element={<ProductListScreen />} />
 
             {/* Cart routes */}
             <Route path="/cart" element={<CartScreen />} />

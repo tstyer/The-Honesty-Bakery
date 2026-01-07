@@ -18,7 +18,7 @@ function Header() {
     <header>
       <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
         <Container>
-          {/* Logo / Brand */}
+          {/* Logo */}
           <LinkContainer to="/">
             <Navbar.Brand>(include an image here - logo)</Navbar.Brand>
           </LinkContainer>
@@ -49,6 +49,9 @@ function Header() {
                       <NavDropdown.Divider />
                       <LinkContainer to="/admin/userlist">
                         <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/productlist">
+                        <NavDropdown.Item>Products</NavDropdown.Item>
                       </LinkContainer>
                     </>
                   )}
