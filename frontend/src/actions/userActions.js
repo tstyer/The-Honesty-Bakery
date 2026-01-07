@@ -82,10 +82,12 @@ export const getUserDetails = () => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState()
 
+    const accessToken = userInfo?.token || userInfo?.access
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     }
 
@@ -97,6 +99,7 @@ export const getUserDetails = () => async (dispatch, getState) => {
   }
 }
 
+
 // UPDATE PROFILE
 export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
@@ -106,10 +109,15 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState()
 
+    const accessToken = userInfo?.token || userInfo?.access
+    if (!accessToken) {
+      throw new Error('Not logged in (missing token). Please log in again.')
+    }
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     }
 
@@ -117,10 +125,10 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data })
 
-    // Keep userInfo in sync (course usually does this)
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({ type: USER_UPDATE_PROFILE_FAIL, payload: getErrorMessage(error) })
   }
 }
+
