@@ -12,6 +12,7 @@ from .serializers import ProductSerializer, UserSerializer, UserSerializerWithTo
 
 import stripe
 from django.conf import settings
+from django.contrib.auth import authenticate
 
 
 # ======================
@@ -91,6 +92,28 @@ def registerUser(request):
         password=password,
         first_name=name,
     )
+
+    serializer = UserSerializerWithToken(user, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def loginUser(request):
+    data = request.data
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return Response({'detail': 'Email and password are required'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        user_obj = User.objects.get(email=email)
+    except User.DoesNotExist:
+        return Response({'detail': 'Invalid email or password'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    user = authenticate(username=user_obj.username, password=password)
+    if user is None:
+        return Response({'detail': 'Invalid email or password'}, status=status.HTTP_401_UNAUTHORIZED)
 
     serializer = UserSerializerWithToken(user, many=False)
     return Response(serializer.data)
