@@ -9,6 +9,7 @@ urlpatterns = [
     path('api/users/', views.registerUser, name='user-register'),
     path('api/users/admin/', views.getUsers, name='users'),
     path('api/users/update/', views.updateUserProfile, name='user-update'),
+    path('api/users/delete/<int:pk>/', views.deleteUser, name='user-delete'),
 
     # ===== PRODUCTS =====
     path('api/products/', views.getProducts, name='products'),
