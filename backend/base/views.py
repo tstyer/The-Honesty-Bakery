@@ -165,6 +165,15 @@ def deleteUser(request, pk):
     user.delete()
     return Response('User deleted', status=status.HTTP_200_OK)
 
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getUserById(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+
 # ======================
 # PRODUCTS
 # ======================
