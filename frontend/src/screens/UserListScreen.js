@@ -3,13 +3,16 @@ import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listUsers } from '../actions/userActions'
+import { listUsers, deleteUser } from '../actions/userActions'
 
 export default function UserListScreen() {
   const dispatch = useDispatch()
 
   const userList = useSelector((state) => state.userList)
   const { loading, error, users } = userList
+
+  const userDelete = useSelector((state) => state.userDelete)
+  const { success: successDelete } = userDelete
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -18,7 +21,13 @@ export default function UserListScreen() {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listUsers())
     }
-  }, [dispatch, userInfo])
+  }, [dispatch, userInfo, successDelete])
+
+  const deleteHandler = (id) => {
+    if (window.confirm('Are you sure you want to delete this user?')) {
+      dispatch(deleteUser(id))
+    }
+  }
 
   return (
     <>
@@ -48,7 +57,15 @@ export default function UserListScreen() {
                   <a href={`mailto:${user.email}`}>{user.email}</a>
                 </td>
                 <td>{user.isAdmin ? 'Yes' : 'No'}</td>
-                <td></td>
+                <td>
+                  <Button
+                    variant="danger"
+                    className="btn-sm"
+                    onClick={() => deleteHandler(user._id)}
+                  >
+                    Delete
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>
