@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/users/admin/', views.getUsers, name='users'),
     path('api/users/update/', views.updateUserProfile, name='user-update'),
     path('api/users/delete/<int:pk>/', views.deleteUser, name='user-delete'),
+    path('api/users/<int:pk>/', views.getUserById, name='user'),
 
     # ===== PRODUCTS =====
     path('api/products/', views.getProducts, name='products'),
