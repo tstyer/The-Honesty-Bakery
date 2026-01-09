@@ -11,6 +11,7 @@ urlpatterns = [
     path('api/users/update/', views.updateUserProfile, name='user-update'),
     path('api/users/delete/<int:pk>/', views.deleteUser, name='user-delete'),
     path('api/users/<int:pk>/', views.getUserById, name='user'),
+    path('api/users/update/<int:pk>/', views.updateUser, name='user-update'),
 
     # ===== PRODUCTS =====
     path('api/products/', views.getProducts, name='products'),
