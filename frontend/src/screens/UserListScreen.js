@@ -40,3 +40,20 @@ export default function UserListScreen() {
             </tr>
           </thead>
           <tbody>
+            {users.map((user) => (
+              <tr key={user._id}>
+                <td>{user._id}</td>
+                <td>{user.name}</td>
+                <td>
+                  <a href={`mailto:${user.email}`}>{user.email}</a>
+                </td>
+                <td>{user.isAdmin ? 'Yes' : 'No'}</td>
+                <td></td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+    </>
+  )
+}
