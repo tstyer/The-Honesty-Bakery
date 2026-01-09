@@ -173,6 +173,22 @@ def getUserById(request, pk):
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
 
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateUser(request, pk):
+    user = User.objects.get(id=pk)
+
+    data = request.data
+    user.first_name = data.get('name', user.first_name)
+    user.username = data.get('email', user.username)
+    user.email = data.get('email', user.email)
+    user.is_staff = data.get('isAdmin', user.is_staff)
+
+    user.save()
+
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
 
 # ======================
 # PRODUCTS
