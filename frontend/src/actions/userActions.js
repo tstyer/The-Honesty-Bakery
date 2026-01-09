@@ -17,6 +17,9 @@ import {
   USER_LIST_REQUEST,
   USER_LIST_SUCCESS,
   USER_LIST_FAIL,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
 } from '../constants/userConstants'
 
 // Helper - error messages
@@ -60,8 +63,6 @@ export const register = (name, email, password) => async (dispatch) => {
 
     const config = { headers: { 'Content-Type': 'application/json' } }
 
-    // NOTE: This endpoint must exist in your backend
-    // Usually POST /api/users/ creates a user
     const { data } = await axios.post(
       '/api/users/',
       { name, email, password },
@@ -165,4 +166,32 @@ export const listUsers = () => async (dispatch, getState) => {
   }
 }
 
+// DELETE USER
+export const deleteUser = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_DELETE_REQUEST })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    await axios.delete(`/api/users/delete/${id}/`, config)
+
+    dispatch({ type: USER_DELETE_SUCCESS })
+  } catch (error) {
+    dispatch({
+      type: USER_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    })
+  }
+}
 
