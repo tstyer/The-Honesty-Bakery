@@ -24,19 +24,25 @@ export default function ProductListScreen() {
   const { userInfo } = userLogin
 
   useEffect(() => {
-  if (!userInfo || !userInfo.isAdmin) {
-    navigate('/login')
-    return
-  }
+    if (!userInfo || !userInfo.isAdmin) {
+      navigate('/login')
+      return
+    }
 
-  if (successCreate) {
-    dispatch({ type: PRODUCT_CREATE_RESET })
-    navigate(`/admin/product/${createdProduct._id}/edit`)
-  } else {
-    dispatch(listProducts())
-  }
-}, [dispatch, userInfo, successDelete, successCreate, createdProduct, navigate])
+    if (successCreate) {
+      dispatch({ type: PRODUCT_CREATE_RESET })
+      navigate(`/admin/product/${createdProduct._id}/edit`)
+    } else {
+      // Force page 1 to avoid /api/products/?page= causing a 500
+      dispatch(listProducts(1))
+    }
+  }, [dispatch, userInfo, successDelete, successCreate, createdProduct, navigate])
 
+  const deleteHandler = (id) => {
+    if (window.confirm('Are you sure?')) {
+      dispatch(deleteProduct(id))
+    }
+  }
 
   return (
     <>
@@ -44,10 +50,13 @@ export default function ProductListScreen() {
         <Col>
           <h1>Products</h1>
         </Col>
+
         <Col className="text-end">
-          <Button className="my-3" onClick={() => dispatch(createProduct())}>
-            <i className="fas fa-plus"></i> Create Product
-          </Button>
+          {userInfo && userInfo.isAdmin && (
+            <Button className="my-3" onClick={() => dispatch(createProduct())}>
+              <i className="fas fa-plus"></i> Create Product
+            </Button>
+          )}
         </Col>
       </Row>
 
@@ -66,6 +75,7 @@ export default function ProductListScreen() {
               <th></th>
             </tr>
           </thead>
+
           <tbody>
             {products.map((product) => (
               <tr key={product._id}>
