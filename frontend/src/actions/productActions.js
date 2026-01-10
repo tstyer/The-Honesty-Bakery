@@ -21,7 +21,7 @@ import {
 } from '../constants/productConstants'
 
 // GET all products (HomeScreen)
-export const listProducts = (pageNumber = '') => async (dispatch) => {
+export const listProducts = (pageNumber = 1) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST })
 
@@ -38,6 +38,7 @@ export const listProducts = (pageNumber = '') => async (dispatch) => {
     })
   }
 }
+
 
 
 // GET single product by id (ProductScreen)
