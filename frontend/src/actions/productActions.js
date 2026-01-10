@@ -21,11 +21,11 @@ import {
 } from '../constants/productConstants'
 
 // GET all products (HomeScreen)
-export const listProducts = () => async (dispatch) => {
+export const listProducts = (pageNumber = '') => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST })
 
-    const { data } = await axios.get('/api/products/') // <- list endpoint
+    const { data } = await axios.get(`/api/products/?page=${pageNumber}`)
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data })
   } catch (error) {
@@ -38,6 +38,7 @@ export const listProducts = () => async (dispatch) => {
     })
   }
 }
+
 
 // GET single product by id (ProductScreen)
 export const listProductDetails = (id) => async (dispatch) => {
