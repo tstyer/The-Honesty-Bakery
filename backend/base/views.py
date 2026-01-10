@@ -10,7 +10,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import Product, Review
-from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
+from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer
 
 import stripe
 from django.conf import settings
@@ -302,6 +302,18 @@ def deleteProduct(request, pk):
     product = Product.objects.get(_id=pk)
     product.delete()
     return Response('Product deleted', status=status.HTTP_200_OK)
+
+
+# ======================
+# Orders
+# ======================
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getOrders(request):
+    orders = Order.objects.all()
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data)
 
 
 
