@@ -20,11 +20,14 @@ function Product({ product }) {
   // If yes → explicitly prefix the Django backend URL.
   // In production, this condition is false, so the image path is used as-is.
 
-  const imageSrc =
-    process.env.NODE_ENV === "development" &&
-    product.image?.startsWith("/static/")
-      ? `http://127.0.0.1:8000${product.image}`
-      : product.image;
+  const needsBackendPrefix =
+  process.env.NODE_ENV === "development" &&
+  (product.image?.startsWith("/static/") || product.image?.startsWith("/media/"))
+
+  const imageSrc = needsBackendPrefix
+  ? `http://127.0.0.1:8000${product.image}`
+  : product.image
+
 
   return (
     <Card className="my-3 p-3 rounded">
