@@ -214,6 +214,25 @@ def createProduct(request):
     return Response(serializer.data)
 
 
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateProduct(request, pk):
+    data = request.data
+    product = Product.objects.get(_id=pk)
+
+    product.name = data.get('name', product.name)
+    product.price = data.get('price', product.price)
+    product.brand = data.get('brand', product.brand)
+    product.countInStock = data.get('countInStock', product.countInStock)
+    product.category = data.get('category', product.category)
+    product.description = data.get('description', product.description)
+    product.image = data.get('image', product.image)
+
+    product.save()
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+
 @api_view(['GET'])
 def getProducts(request):
     products = Product.objects.all()
