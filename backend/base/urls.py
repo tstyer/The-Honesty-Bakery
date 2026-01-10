@@ -20,6 +20,7 @@ urlpatterns = [
     path('api/products/<int:pk>/reviews/', views.createProductReview, name='create-product-review'),
     path('api/products/delete/<int:pk>/', views.deleteProduct, name='product-delete'),
     path('api/products/create/', views.createProduct, name='product-create'),
+    path('api/products/update/<int:pk>/', views.updateProduct, name='product-update'),
 
 
     # ===== ROUTES (DEV ONLY) =====
