@@ -23,6 +23,11 @@ urlpatterns = [
     path('api/products/update/<int:pk>/', views.updateProduct, name='product-update'),
 
 
+    # ===== ORDERS =====
+    path('api/orders/', views.getOrders, name='orders'),
+
+
+
     # ===== ROUTES (DEV ONLY) =====
     path('api/', views.getRoutes, name='routes'),
 

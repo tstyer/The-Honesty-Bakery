@@ -233,11 +233,32 @@ def updateProduct(request, pk):
     return Response(serializer.data)
 
 
+from django.core.paginator import Paginator
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 @api_view(['GET'])
 def getProducts(request):
+    page = request.query_params.get('page')
     products = Product.objects.all()
+
+    paginator = Paginator(products, 12)  # 12 products per page
+
+    if page is None:
+        page = 1
+
+    page = int(page)
+
+    products = paginator.page(page)
+
     serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
+
+    return Response({
+        'products': serializer.data,
+        'page': page,
+        'pages': paginator.num_pages,
+    })
+
 
 
 @api_view(['GET'])
