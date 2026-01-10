@@ -257,6 +257,14 @@ def createProductReview(request, pk):
     return Response({'detail': 'Review added'})
 
 
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def deleteProduct(request, pk):
+    product = Product.objects.get(_id=pk)
+    product.delete()
+    return Response('Product deleted', status=status.HTTP_200_OK)
+
+
 
 # ======================
 # ROUTES (DEV)
