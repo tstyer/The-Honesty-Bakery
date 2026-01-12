@@ -1,7 +1,22 @@
+/* Google Font */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+/* Headers: Playfair Display
+   Text & Buttons: Ubuntu Static
+*/
+
+
 main {
   min-height: 80vh; /* This will push the footer to the bottom, as footer is beneath main */
 }
 
+h1, h2, h3 {
+  font-family: 'Playfair Display';
+}
+
+p {
+  font-family: 'Ubuntu Static';
+}
 
 h1 {
   font-size: 1.8rem;
