@@ -42,6 +42,20 @@ function ProductScreen() {
     dispatch(listProductDetails(id))
   }, [dispatch, id, successProductReview])
 
+  // Convert any old Django-ish paths into React public /images/ paths.
+  const rawImage = product?.image || ''
+
+  const normalisedImage = rawImage
+    ? `/${rawImage}`.replace(/\/+/, '/')
+    : ''
+
+  const imageSrc =
+    normalisedImage
+      .replace(/^\/static\/images\//, '/images/')
+      .replace(/^\/media\/images\//, '/images/')
+      .replace(/^\/media\//, '/images/')
+      .replace(/^\/static\//, '/images/') || '/images/placeholder.jpg'
+
   const addToCartHandler = () => {
     navigate(`/cart/${id}?qty=${qty}`)
   }
@@ -65,7 +79,7 @@ function ProductScreen() {
         <>
           <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid />
+              <Image src={imageSrc} alt={product.name} fluid />
             </Col>
 
             <Col md={3}>
@@ -99,7 +113,9 @@ function ProductScreen() {
                   <ListGroup.Item>
                     <Row>
                       <Col>Status:</Col>
-                      <Col>{product.countInStock > 0 ? 'Ready To Bake!' : 'Out of Stock'}</Col>
+                      <Col>
+                        {product.countInStock > 0 ? 'Ready To Bake!' : 'Out of Stock'}
+                      </Col>
                     </Row>
                   </ListGroup.Item>
 

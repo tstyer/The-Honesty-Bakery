@@ -3,7 +3,7 @@ products = [
   {
     '_id': '1',
     'name': 'Birthday Cake (Made to Order)',
-    'image': 'static/images/birthday_cake.jpg',
+    'image': '/images/birthday_cake.jpg',
     'description':
       'Example Custom Birthday Cake.',
     'brand': 'Apple',
@@ -17,7 +17,7 @@ products = [
   {
     '_id': '2',
     'name': 'BlueBerry Cake (Pre baked)',
-    'image': '/static/images/blue_berry_cake.jpg',
+    'image': '/images/blue_berry_cake.jpg',
     'description':
       'Customer Request Blueberry Cake',
     'brand': 'Apple',
