@@ -22,8 +22,6 @@ import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 
-
-
 function App() {
   const [publishableKey, setPublishableKey] = useState('')
   const [stripeError, setStripeError] = useState('')
@@ -35,7 +33,9 @@ function App() {
         const key = data?.publishableKey || ''
 
         if (!key) {
-          setStripeError('Stripe publishable key is missing. Check your backend env vars.')
+          setStripeError(
+            'Stripe publishable key is missing. Check your backend env vars.'
+          )
           return
         }
 
@@ -57,8 +57,8 @@ function App() {
     <Router>
       <Header />
 
-      <main className="py-3">
-        <Container>
+      <main className="py-4">
+        <Container className="container-lg">
           <Routes>
             <Route path="/" element={<HomeScreen />} />
 
@@ -69,7 +69,10 @@ function App() {
             {/* Product routes */}
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/admin/productlist" element={<ProductListScreen />} />
-            <Route path="/admin/product/:id/edit" element={<ProductEditScreen />} />
+            <Route
+              path="/admin/product/:id/edit"
+              element={<ProductEditScreen />}
+            />
 
             {/* Cart routes */}
             <Route path="/cart" element={<CartScreen />} />
