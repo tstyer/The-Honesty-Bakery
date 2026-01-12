@@ -49,29 +49,14 @@ export default function ProductEditScreen() {
     }
   }, [dispatch, navigate, productId, product, successUpdate])
 
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0]
-    const formData = new FormData()
-    formData.append('image', file)
+  const uploadFileHandler = (e) => {
+  const file = e.target.files?.[0]
+  if (!file) return
 
-    setUploading(true)
-
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-
-      const { data } = await axios.post('/api/upload/', formData, config)
-
-      setImage(data.image)
-      setUploading(false)
-    } catch (error) {
-      setUploading(false)
-    }
-  }
+  // React-served images live in /public/images
+  // manually copy the file into frontend/public/images.
+  setImage(`/images/${file.name}`)
+}
 
   const submitHandler = (e) => {
     e.preventDefault()
