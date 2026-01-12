@@ -47,7 +47,7 @@ function Product({ product }) {
   const imageSrc = reactImage || "/images/placeholder.jpg";
 
   return (
-    <Card className="my-3 p-3 rounded">
+    <Card className="product-card my-3 p-3 rounded">
       <Link to={`/product/${product._id}`}>
         {/*
           I use imageSrc instead of product.image directly.
