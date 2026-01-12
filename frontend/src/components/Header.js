@@ -20,7 +20,14 @@ function Header() {
         <Container>
           {/* Logo */}
           <LinkContainer to="/">
-            <Navbar.Brand>(include an image here - logo)</Navbar.Brand>
+            <Navbar.Brand>
+              <img
+              src="/images/logo_1.png"
+              alt="Business logo"
+              className="logo"
+              >
+              </img>
+            </Navbar.Brand>
           </LinkContainer>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
