@@ -23,7 +23,7 @@ function HomeScreen() {
   return (
     <div>
       <h1 className='text-center'>The Honesty Bakehouse</h1>
-      <h3 className='text-center subheader'>thoughtfully baked, honestly delicious</h3>
+      <h3 className='text-center subheader'>Thoughtfully baked. Honestly delicious.</h3>
 
       {loading ? (
         <Loader />

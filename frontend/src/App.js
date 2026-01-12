@@ -57,7 +57,7 @@ function App() {
     <Router>
       <Header />
 
-      <main className="py-4">
+      <main className="py-4 navbar">
         <Container className="container-lg">
           <Routes>
             <Route path="/" element={<HomeScreen />} />
