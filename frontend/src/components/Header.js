@@ -16,13 +16,13 @@ function Header() {
 
   return (
     <header>
-      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar className="brand-bg" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           {/* Logo */}
-          <LinkContainer to="/">
+          <LinkContainer to="/" className="navBar">
             <Navbar.Brand>
               <img
-              src="/images/logo_1.png"
+              src="/images/logo_2.png"
               alt="Business logo"
               className="logo"
               >

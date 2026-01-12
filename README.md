@@ -123,7 +123,17 @@ STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
 STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY", "")
 
 
+## Installing Font Awesome
 
+When building a site with React, the simplest way to install and use Font Awesome is to install it using the terminal. 
+
+1. From the root, type 'npm install @fontawesome/fontawesome-free'.
+2. Then, to use icons, you simply start by creating an icon (<i></i>) section. 
+3. Within the opening tag, you type in the 'className' of the icon you want to display. Or, you can somply copy the html from the font awesome website.
+
+Example: These 'i' tags were copied from the free icons section in Font Awesome.
+
+![Screenshot of i tags](./resources/images/font_awesome/i_tags.png)
 
 ### Bugs
 

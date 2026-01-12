@@ -2,8 +2,21 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Allura&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 /* Headers: Allura
-   Text & Buttons: Ubuntu Static
+   Text & Buttons: Playfair Display
 */
+
+/* Root Variables */
+
+:root {
+  --brand-bg: #fdf6ef; /* main cream colour for backgrounds */
+}
+
+/* ----- General Styles ----- */
+
+/* Apply cream to the whole page */
+html, body, #root {
+  background-color: var(--brand-bg);
+}
 
 
 main {
@@ -13,6 +26,7 @@ main {
 h1, h2 {
   font-family: 'Allura' !important;
   font-weight: 600 !important;
+  padding-top: 0px !important;
 }
 
 p {
@@ -22,6 +36,9 @@ p {
 .subheader {
   font-family: 'Playfair Display' !important;
   font-weight: 100;
+  font-size: medium;
+  padding-top: 0px;
+  margin-top: 0px;
 } 
 
 h1 {
@@ -49,4 +66,11 @@ h3 {
 .logo {
   height: 2.5rem;
   border-radius: 50%;
+}
+
+/* Header Text */
+
+/* A custom class for header background */
+.brand-bg {
+  background-color: var(--brand-bg) !important;
 }
