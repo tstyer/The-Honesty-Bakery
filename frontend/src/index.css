@@ -1,45 +1,51 @@
 /* Google Fonts */
-
 @import url('https://fonts.googleapis.com/css2?family=Allura&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 /* Headers: Allura
    Text & Buttons: Playfair Display
 */
 
-/* Root Variables */
+/* =========================
+   Root Variables
+========================= */
 
 :root {
-  --brand-bg: #fdf6ef; /* main cream colour for backgrounds */
+  --brand-bg: #fdf6ef;          /* main cream background */
+  --main-text: #6B4F3F;         /* cocoa brown */
+  --accent-underline: #C89B7B;  /* warm biscuit / caramel */
 }
 
-/* ----- General Styles ----- */
+/* =========================
+   General Styles
+========================= */
 
 /* Apply cream to the whole page */
-html, body, #root {
+html,
+body,
+#root {
   background-color: var(--brand-bg);
 }
 
-
 main {
-  min-height: 80vh; /* This will push the footer to the bottom, as footer is beneath main */
+  min-height: 80vh;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: 'Allura' !important;
   font-weight: 600 !important;
-  padding-top: 0px !important;
+  padding-top: 0 !important;
 }
 
 p {
-  font-family: 'Ubuntu Static' !important;
+  font-family: 'Playfair Display', serif !important;
 }
 
 .subheader {
   font-family: 'Playfair Display' !important;
   font-weight: 100;
   font-size: medium;
-  padding-top: 0px;
-  margin-top: 0px;
-} 
+  margin-top: 0;
+}
 
 h1 {
   font-size: 1.8rem;
@@ -51,26 +57,104 @@ h2 {
   padding: 0.5rem 0;
 }
 
-.rating span {
-  margin: 0.1rem;
-}
-
 h3 {
   padding: 1rem 0;
 }
 
-/* ----- Header Styles ----- */
+.rating span {
+  margin: 0.1rem;
+}
+
+/* =========================
+   Header / Navbar Styles
+========================= */
 
 /* Logo */
-
 .logo {
   height: 2.5rem;
   border-radius: 50%;
 }
 
-/* Header Text */
-
-/* A custom class for header background */
+/* Navbar background + typography */
 .brand-bg {
   background-color: var(--brand-bg) !important;
+  font-family: 'Playfair Display' !important;
+  font-weight: 400;
+}
+
+/* Force all navbar text to use brand colour */
+.brand-bg,
+.brand-bg .navbar-brand,
+.brand-bg .nav-link,
+.brand-bg .navbar-text,
+.brand-bg .dropdown-toggle {
+  color: var(--main-text) !important;
+}
+
+/* =========================
+   Active Page Underline
+========================= */
+
+.navbar .nav-link {
+  position: relative;
+  color: var(--main-text) !important;
+}
+
+/* ACTIVE underline (sticks to current page) */
+.navbar .nav-link.nav-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-underline);
+  border-radius: 2px;
+}
+
+/* Lift nav links on hover */
+.navbar .nav-link {
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.navbar .nav-link:hover {
+  transform: translateY(-2px);
+}
+
+/* Hover underline (subtle) */
+.navbar .nav-link.nav-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background-color: #C58C6D; /* warm caramel outline */
+  border-radius: 2px;
+}
+
+/* =========================
+   Dropdown Styling
+========================= */
+
+.brand-bg .dropdown-menu {
+  background-color: var(--brand-bg) !important;
+  font-family: 'Playfair Display' !important;
+}
+
+.brand-bg .dropdown-item {
+  color: var(--main-text) !important;
+}
+
+.brand-bg .dropdown-item:hover,
+.brand-bg .dropdown-item:focus {
+  background-color: rgba(107, 79, 63, 0.08) !important;
+}
+
+/* =========================
+   Navbar Toggler
+========================= */
+
+.brand-bg .navbar-toggler {
+  border-color: rgba(107, 79, 63, 0.35) !important;
 }

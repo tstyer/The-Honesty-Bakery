@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
@@ -16,33 +17,45 @@ function Header() {
 
   return (
     <header>
-      <Navbar className="brand-bg" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar className="brand-bg" expand="lg" collapseOnSelect>
         <Container>
           {/* Logo */}
-          <LinkContainer to="/" className="navBar">
+          <LinkContainer to="/">
             <Navbar.Brand>
               <img
-              src="/images/logo_2.png"
-              alt="Business logo"
-              className="logo"
-              >
-              </img>
+                src="/images/logo_2.png"
+                alt="Business logo"
+                className="logo"
+              />
             </Navbar.Brand>
           </LinkContainer>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
           <Navbar.Collapse id="basic-navbar-nav">
+            {/* LEFT NAV */}
             <Nav className="me-auto">
-              <LinkContainer to="/">
-                <Nav.Link>Home</Nav.Link>
-              </LinkContainer>
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "nav-active" : ""}`
+                }
+              >
+                Home
+              </NavLink>
 
-              <LinkContainer to="/about">
-                <Nav.Link>About</Nav.Link>
-              </LinkContainer>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "nav-active" : ""}`
+                }
+              >
+                About
+              </NavLink>
             </Nav>
 
+            {/* RIGHT NAV */}
             <Nav>
               {userInfo ? (
                 <NavDropdown title={userInfo.name || "User"} id="username">
@@ -50,18 +63,15 @@ function Header() {
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
 
-                  {/* Admin links */}
                   {userInfo.isAdmin && (
                     <>
                       <NavDropdown.Divider />
                       <LinkContainer to="/admin/userlist">
                         <NavDropdown.Item>Users</NavDropdown.Item>
                       </LinkContainer>
-
                       <LinkContainer to="/admin/productlist">
                         <NavDropdown.Item>Products</NavDropdown.Item>
                       </LinkContainer>
-
                       <LinkContainer to="/admin/orderlist">
                         <NavDropdown.Item>Orders</NavDropdown.Item>
                       </LinkContainer>
@@ -69,7 +79,6 @@ function Header() {
                   )}
 
                   <NavDropdown.Divider />
-
                   <NavDropdown.Item onClick={logoutHandler}>
                     Logout
                   </NavDropdown.Item>
