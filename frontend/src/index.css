@@ -42,14 +42,14 @@ p {
 
 .subheader {
   font-family: 'Playfair Display' !important;
-  font-weight: 100;
+  font-weight: 600;
   font-size: medium;
   margin-top: 0;
 }
 
 h1 {
   font-size: 1.8rem;
-  padding: 1rem 0;
+  /*padding: 1rem 0;*/
 }
 
 h2 {
@@ -57,12 +57,13 @@ h2 {
   padding: 0.5rem 0;
 }
 
-h3 {
-  padding: 1rem 0;
-}
-
 .rating span {
   margin: 0.1rem;
+}
+
+.header-p {
+  padding-top: 2rem;
+  color: var(--main-text);
 }
 
 /* =========================
