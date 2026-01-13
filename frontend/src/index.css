@@ -158,3 +158,57 @@ h3 {
 .brand-bg .navbar-toggler {
   border-color: rgba(107, 79, 63, 0.35) !important;
 }
+
+/* =========================
+   Product Cards (uniform)
+========================= */
+
+.product-card {
+  height: 420px;                 /* same height for all cards */
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image area: fixed height, show more image (less crop) */
+.product-card .card-img-top {
+  height: 220px;
+  width: 100%;
+  object-fit: contain;           /* shows whole image */
+  background: #ffffff;           /* so empty space looks clean */
+  border-radius: 0.5rem;
+}
+
+/* Keep text from stretching card weirdly */
+.product-card .card-body {
+  padding: 0.75rem 0.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Title: stop wrapping into weird tall blocks */
+.product-card .card-title {
+  font-size: 1rem;
+  line-height: 1.2;
+  min-height: 2.4em;             /* keeps two-line space consistent */
+  overflow: hidden;
+}
+
+/* Push price to the bottom so layout is consistent */
+.product-card .card-body h3 {
+  margin-top: auto;
+}
+
+
+/* Hero */
+
+/* Centers the hero relative to the FULL page, not the Bootstrap container */
+.home-hero {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+

@@ -4,7 +4,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 
 import { Container } from 'react-bootstrap'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -22,42 +22,27 @@ import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 
-function App() {
-  const [publishableKey, setPublishableKey] = useState('')
-  const [stripeError, setStripeError] = useState('')
-
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const { data } = await axios.get('/api/config/stripe/')
-        const key = data?.publishableKey || ''
-
-        if (!key) {
-          setStripeError(
-            'Stripe publishable key is missing. Check your backend env vars.'
-          )
-          return
-        }
-
-        setPublishableKey(key)
-      } catch (err) {
-        setStripeError('Failed to load Stripe config from backend.')
-      }
-    }
-
-    load()
-  }, [])
-
-  const stripePromise = useMemo(() => {
-    if (!publishableKey) return null
-    return loadStripe(publishableKey)
-  }, [publishableKey])
+function Layout({ stripeError, stripePromise }) {
+  const location = useLocation()
+  const isHome = location.pathname === '/'
 
   return (
-    <Router>
+    <>
       <Header />
 
-      <main className="py-4 navbar">
+      <main className="py-4">
+        {/* FULL-WIDTH HERO OUTSIDE CONTAINER */}
+        {isHome && (
+          <div className="home-hero text-center mb-4">
+            <h1 className="mb-1">The Honesty Bakehouse</h1>
+
+            <h3 className="subheader mb-0">
+              Thoughtfully Baked <i className="fa-solid fa-spoon"></i> Honestly
+              Delicious.
+            </h3>
+          </div>
+        )}
+
         <Container className="container-lg">
           <Routes>
             <Route path="/" element={<HomeScreen />} />
@@ -69,10 +54,7 @@ function App() {
             {/* Product routes */}
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/admin/productlist" element={<ProductListScreen />} />
-            <Route
-              path="/admin/product/:id/edit"
-              element={<ProductEditScreen />}
-            />
+            <Route path="/admin/product/:id/edit" element={<ProductEditScreen />} />
 
             {/* Cart routes */}
             <Route path="/cart" element={<CartScreen />} />
@@ -106,6 +88,42 @@ function App() {
       </main>
 
       <Footer />
+    </>
+  )
+}
+
+function App() {
+  const [publishableKey, setPublishableKey] = useState('')
+  const [stripeError, setStripeError] = useState('')
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const { data } = await axios.get('/api/config/stripe/')
+        const key = data?.publishableKey || ''
+
+        if (!key) {
+          setStripeError('Stripe publishable key is missing. Check your backend env vars.')
+          return
+        }
+
+        setPublishableKey(key)
+      } catch (err) {
+        setStripeError('Failed to load Stripe config from backend.')
+      }
+    }
+
+    load()
+  }, [])
+
+  const stripePromise = useMemo(() => {
+    if (!publishableKey) return null
+    return loadStripe(publishableKey)
+  }, [publishableKey])
+
+  return (
+    <Router>
+      <Layout stripeError={stripeError} stripePromise={stripePromise} />
     </Router>
   )
 }
