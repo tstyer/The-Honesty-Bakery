@@ -1,6 +1,6 @@
 ﻿# Honesty Bakery
 
-The Honesty Bakehouse is a local cake and sweet store which I have built this full-stack website for. Built with React, it caters to all audiences who pass the physical shop. There are limitedf pages, but it is consistent in design and offers an intuitive layout. 
+The Honesty Bakehouse is a local cake store which I have built this full-stack website for. Created with React, it caters to all audiences who pass the physical shop. There are limited pages, but it is consistent in design and offers an intuitive layout. 
 
 --- 
 
@@ -332,4 +332,5 @@ These are just encoded data about a user.
 7. Django
 8. Django Rest Framework
 9. LucidChart
+
 10. Redux
