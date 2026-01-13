@@ -22,8 +22,14 @@ function HomeScreen() {
 
   return (
     <div>
-      <h1 className='text-center'>The Honesty Bakehouse</h1>
-      <h3 className='text-center subheader'>Thoughtfully Baked <i class="fa-solid fa-spoon"></i> Honestly Delicious.</h3>
+      {/* FULL-WIDTH HERO WRAPPER */}
+      <div className="home-hero text-center mb-4">
+        <h1 className="mb-1">The Honesty Bakehouse</h1>
+
+        <h3 className="subheader mb-0">
+          Thoughtfully Baked <i className="fa-solid fa-spoon"></i> Honestly Delicious.
+        </h3>
+      </div>
 
       {loading ? (
         <Loader />
@@ -31,9 +37,9 @@ function HomeScreen() {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <Row>
+          <Row className="g-4 justify-content-center">
             {products.map((product) => (
-              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+              <Col key={product._id} sm={12} md={6} lg={4}>
                 <Product product={product} />
               </Col>
             ))}
