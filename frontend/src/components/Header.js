@@ -53,6 +53,16 @@ function Header() {
               >
                 About
               </NavLink>
+
+              <NavDropdown title="Cakes" id="cakes-dropdown">
+  <LinkContainer to="/prebaked">
+    <NavDropdown.Item>Prebaked Cakes</NavDropdown.Item>
+  </LinkContainer>
+
+  <LinkContainer to="/ready-to-bake">
+    <NavDropdown.Item>Ready-to-Bake Cakes</NavDropdown.Item>
+  </LinkContainer>
+</NavDropdown>
             </Nav>
 
             {/* RIGHT NAV */}
