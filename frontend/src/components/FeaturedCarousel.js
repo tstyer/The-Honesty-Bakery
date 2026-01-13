@@ -1,39 +1,96 @@
-import React from "react";
-import { Carousel } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Rating from './Rating'
 
-export default function featuredCarousel({products = []}) {
-    // I am choosing a small selection of photos/products
-    const featured = products.slice(0, 5);
+export default function FeaturedCarousel({ products = [] }) {
+  const items = products.slice(0, 10) // choose how many you want in the slider
+  const trackRef = useRef(null)
+  const cardRef = useRef(null)
 
-    if (!featured.length)
-        return null;
+  const [step, setStep] = useState(0) // how far to move per click (px)
+  const [index, setIndex] = useState(0)
 
-    // Otherwise, if true... 
+  // measure one card width + gap so we can move by exactly 1 card
+  useEffect(() => {
+    const measure = () => {
+      if (!cardRef.current || !trackRef.current) return
 
-    return (
-        <Carousel className="mb-4" variant="dark">
-      {featured.map((p) => (
-        <Carousel.Item key={p._id}>
-          <Link to={`/product/${p._id}`} className="carousel-link">
-            <div className="carousel-image-wrap">
-              <img
-                src={p.image || '/images/placeholder.jpg'}
-                alt={p.name}
-                className="carousel-image"
-              />
-            </div>
+      const cardWidth = cardRef.current.getBoundingClientRect().width
+      const trackStyles = window.getComputedStyle(trackRef.current)
+      const gap = parseFloat(trackStyles.columnGap || trackStyles.gap || '0')
 
-            <Carousel.Caption className="carousel-caption-custom">
-              <h3 className="mb-2">{p.name}</h3>
-              <div className="d-flex justify-content-center">
-                <Rating value={p.rating} text={`${p.numReviews} reviews`} />
+      setStep(cardWidth + gap)
+    }
+
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
+
+  if (!items.length) return null
+
+  const maxIndex = Math.max(0, items.length - 2) // because 2 are visible
+
+  const prev = () => setIndex((i) => Math.max(0, i - 1))
+  const next = () => setIndex((i) => Math.min(maxIndex, i + 1))
+
+  const translateX = step * index
+
+  const getImageSrc = (img) => img || '/images/placeholder.jpg'
+
+  return (
+    <div className="featured-slider">
+      <button
+        type="button"
+        className="featured-arrow featured-arrow-left"
+        onClick={prev}
+        disabled={index === 0}
+        aria-label="Previous cakes"
+      >
+        ‹
+      </button>
+
+      <div className="featured-viewport">
+        <div
+          className="featured-track"
+          ref={trackRef}
+          style={{ transform: `translateX(-${translateX}px)` }}
+        >
+          {items.map((p, i) => (
+            <Link
+              key={p._id}
+              to={`/product/${p._id}`}
+              className="featured-card"
+              ref={i === 0 ? cardRef : null}
+            >
+              <div className="featured-img-wrap">
+                <img
+                  src={getImageSrc(p.image)}
+                  alt={p.name}
+                  className="featured-img"
+                />
               </div>
-            </Carousel.Caption>
-          </Link>
-        </Carousel.Item>
-      ))}
-    </Carousel>
-    )
+
+              <div className="featured-meta">
+                <div className="featured-title">{p.name}</div>
+                <div className="featured-rating">
+                  <Rating value={p.rating} text={`${p.numReviews} reviews`} />
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <button
+        type="button"
+        className="featured-arrow featured-arrow-right"
+        onClick={next}
+        disabled={index === maxIndex}
+        aria-label="Next cakes"
+      >
+        ›
+      </button>
+    </div>
+  )
 }
