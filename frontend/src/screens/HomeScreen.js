@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
-import { Row, Col, Pagination } from 'react-bootstrap'
+import { Row, Col, Pagination, Button } from 'react-bootstrap'
+import { Link, useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
 import Product from '../components/Product'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { useDispatch, useSelector } from 'react-redux'
-import { listProducts } from '../actions/productActions'
-import { useLocation } from 'react-router-dom'
+import FeaturedCarousel from '../components/FeaturedCarousel'
 
-function HomeScreen({category}) {
+import { listProducts } from '../actions/productActions'
+
+function HomeScreen({ category }) {
   const dispatch = useDispatch()
   const { search } = useLocation()
 
@@ -28,6 +31,22 @@ function HomeScreen({category}) {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
+          <FeaturedCarousel products={products} />
+
+          <div className="d-flex flex-column flex-md-row gap-3 justify-content-center mb-4">
+            <Link to="/prebaked" className="w-100 w-md-auto">
+              <Button className="w-100" size="lg" variant="dark">
+                Shop Prebaked Cakes
+              </Button>
+            </Link>
+
+            <Link to="/ready-to-bake" className="w-100 w-md-auto">
+              <Button className="w-100" size="lg" variant="outline-dark">
+                Shop Ready-to-Bake Cakes
+              </Button>
+            </Link>
+          </div>
+
           <Row className="g-4 justify-content-center">
             {products.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4}>
