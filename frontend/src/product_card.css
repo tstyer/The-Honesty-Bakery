@@ -1,7 +1,13 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+/* Headers: Allura
+   Text & Buttons: Playfair Display
+*/
+
 /* Ensure the card clips its children */
 .product-card {
   border-radius: 20px !important;
-  overflow: hidden; /* THIS is the key */
+  overflow: hidden;
 }
 
 /* Round the actual image */
@@ -13,46 +19,155 @@
 /* Wrapper controls size + rounded corners */
 .product-image-wrap {
   border-radius: 16px;
-  overflow: hidden;           /* clips the image to rounded corners */
-  height: 230px;              /* slightly smaller than your "no height" look */
-  background: transparent;    /* important: no white box */
+  overflow: hidden;          /* clips the image to rounded corners */
+  height: 230px;
+  background: transparent;   /* important: no white box */
 }
 
 /* Image fills wrapper */
 .product-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;          /* removes the letterbox look */
+  object-fit: cover;         /* removes letterbox look */
   display: block;
 }
 
-
 /* --- Home carousel --- */
+/* (left as-is) */
 
-.carousel-link {
-  text-decoration: none;
-  color: inherit;
+/* --- Featured slider --- */
+
+Button {
+  font-family: 'Playfair Display' !important;
 }
 
-.carousel-image-wrap {
-  height: 580px;
-  width: 600px;
+.featured-slider {
+  position: relative;
+  margin-bottom: 1.5rem;
+
+  /* Space on left/right so arrows can sit OUTSIDE the images */
+  padding: 0 56px;
+}
+
+.featured-viewport {
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.featured-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+.featured-card {
+  flex: 0 0 calc((100% - 24px) / 2); /* two visible, account for gap */
+  text-decoration: none;
+  font-family: 'Allura';
+  color: inherit;
+  transform: translateY(0);
+  transition: transform 0.18s ease;
+}
+
+.featured-card:hover {
+  transform: translateY(-6px); /* jump up on hover */
+}
+
+.featured-img-wrap {
+  height: 340px; /* keep current height */
   border-radius: 18px;
   overflow: hidden;
 }
 
-.carousel-image {
+.featured-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* Make caption readable but clean */
-.carousel-caption-custom {
-  position: static;            /* puts caption below image instead of overlay */
+.featured-meta {
   padding-top: 12px;
-  padding-bottom: 0;
+  text-align: center;
 }
 
+.featured-title {
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+}
 
+/* --- arrows: visible + clickable + outside images --- */
+.featured-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5; /* ensures arrow is above the slider and clickable */
+
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.9);
+  color: #212529;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.featured-arrow:hover {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.35);
+}
+
+.featured-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+  box-shadow: none;
+}
+
+.featured-arrow-left {
+  left: 8px;  /* sits in the padding area */
+}
+
+.featured-arrow-right {
+  right: 8px;
+}
+
+/* Responsive: 1 visible on small screens */
+@media (max-width: 768px) {
+  .featured-slider {
+    padding: 0 44px;
+  }
+
+  .featured-card {
+    flex: 0 0 100%;
+  }
+
+  .featured-img-wrap {
+    height: 280px;
+  }
+
+  .featured-arrow-left {
+    left: 6px;
+  }
+
+  .featured-arrow-right {
+    right: 6px;
+  }
+}
+
+/* Make caption readable but clean */
+.carousel-caption-custom {
+  position: static; /* puts caption below image instead of overlay */
+  padding-top: 12px;
+  padding-bottom: 0;
+  font-family: 'Playfair Display';
+}
