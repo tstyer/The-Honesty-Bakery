@@ -35,7 +35,8 @@
 }
 
 .carousel-image-wrap {
-  height: 320px;
+  height: 580px;
+  width: 600px;
   border-radius: 18px;
   overflow: hidden;
 }
