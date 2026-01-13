@@ -19,7 +19,7 @@ export default function featuredCarousel({products = []}) {
           <Link to={`/product/${p._id}`} className="carousel-link">
             <div className="carousel-image-wrap">
               <img
-                src={p.image?.startsWith('/') ? p.image : `/${p.image}`}
+                src={p.image || '/images/placeholder.jpg'}
                 alt={p.name}
                 className="carousel-image"
               />
