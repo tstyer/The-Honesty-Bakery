@@ -22,15 +22,6 @@ function HomeScreen() {
 
   return (
     <div>
-      {/* FULL-WIDTH HERO WRAPPER */}
-      <div className="home-hero text-center mb-4">
-        <h1 className="mb-1">The Honesty Bakehouse</h1>
-
-        <h3 className="subheader mb-0">
-          Thoughtfully Baked <i className="fa-solid fa-spoon"></i> Honestly Delicious.
-        </h3>
-      </div>
-
       {loading ? (
         <Loader />
       ) : error ? (

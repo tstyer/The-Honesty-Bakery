@@ -40,6 +40,10 @@ function Layout({ stripeError, stripePromise }) {
               Thoughtfully Baked <i className="fa-solid fa-spoon"></i> Honestly
               Delicious.
             </h3>
+
+            <p className='header-p'>
+              See our list of prebaked & ready-to-bake cakes below!
+            </p>
           </div>
         )}
 
