@@ -258,20 +258,37 @@ def getProducts(request):
     products = paginator.page(page)
 
     serializer = ProductSerializer(products, many=True)
+    data = serializer.data
+
+    # --- NORMALISE IMAGE PATHS ---
+    # Convert any /media/... paths to /images/<filename>
+    # (because your images live in frontend/public/images)
+    for p in data:
+        img = p.get('image', '')
+        if img and img.startswith('/media/'):
+            filename = img.split('/')[-1]
+            p['image'] = f'/images/{filename}'
 
     return Response({
-        'products': serializer.data,
+        'products': data,
         'page': page,
         'pages': paginator.num_pages,
     })
-
 
 
 @api_view(['GET'])
 def getProduct(request, pk):
     product = Product.objects.get(_id=pk)
     serializer = ProductSerializer(product, many=False)
-    return Response(serializer.data)
+    data = serializer.data
+
+    # --- NORMALISE IMAGE PATH ---
+    img = data.get('image', '')
+    if img and img.startswith('/media/'):
+        filename = img.split('/')[-1]
+        data['image'] = f'/images/{filename}'
+
+    return Response(data)
 
 
 @api_view(['POST'])
