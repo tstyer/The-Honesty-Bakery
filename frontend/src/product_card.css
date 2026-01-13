@@ -26,3 +26,32 @@
   display: block;
 }
 
+
+/* --- Home carousel --- */
+
+.carousel-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.carousel-image-wrap {
+  height: 320px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Make caption readable but clean */
+.carousel-caption-custom {
+  position: static;            /* puts caption below image instead of overlay */
+  padding-top: 12px;
+  padding-bottom: 0;
+}
+
+
