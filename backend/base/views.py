@@ -240,7 +240,13 @@ from rest_framework.response import Response
 @api_view(['GET'])
 def getProducts(request):
     page = request.query_params.get('page')
+    category = request.query_params.get('category')
+
     products = Product.objects.all()
+
+    # Filter by category if provided
+    if category:
+        products = products.filter(category=category)
 
     paginator = Paginator(products, 12)  # 12 products per page
 
