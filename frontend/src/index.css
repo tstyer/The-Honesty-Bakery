@@ -50,6 +50,7 @@ p {
 h1 {
   font-size: 1.8rem;
   /*padding: 1rem 0;*/
+  color: var(--main-text);
 }
 
 h2 {
@@ -172,13 +173,7 @@ h2 {
 }
 
 /* Image area: fixed height, show more image (less crop) */
-.product-card .card-img-top {
-  height: 220px;
-  width: 100%;
-  object-fit: contain;           /* shows whole image */
-  background: #ffffff;           /* so empty space looks clean */
-  border-radius: 0.5rem;
-}
+
 
 /* Keep text from stretching card weirdly */
 .product-card .card-body {

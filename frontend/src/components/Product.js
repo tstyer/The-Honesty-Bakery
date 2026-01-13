@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap";
 import Rating from "./Rating";
 import { Link } from "react-router-dom";
 
+
 function Product({ product }) {
   // ADD TO README:
   // In development, React runs on http://localhost:3000
@@ -19,18 +20,10 @@ function Product({ product }) {
   // If yes → explicitly prefix the Django backend URL.
   // In production, this condition is false, so the image path is used as-is.
 
-  // ✅ SIMPLE MODE (React serves images)
   // We only want paths like: "/images/birthday_cake.jpg"
   // because React serves files from: frontend/public/images/...
 
   const rawImage = product?.image || "";
-
-  // If you accidentally saved Django-ish paths, we "convert" them to React public.
-  // Examples:
-  //   "/static/images/x.jpg"  -> "/images/x.jpg"
-  //   "media/images/x.jpg"    -> "/images/x.jpg"
-  //   "/images/x.jpg"         -> "/images/x.jpg"
-  //   "images/x.jpg"          -> "/images/x.jpg"
   const normalisedImage = rawImage
     ? `/${rawImage}`.replace(/\/+/, "/") // ensure it starts with ONE slash
     : "";
@@ -42,18 +35,20 @@ function Product({ product }) {
     .replace(/^\/static\//, "/images/"); // handles "/static/filename.jpg"
 
   // Final image source:
-  // - React public images (/images/...) → use as-is
-  // - If image is missing → fallback placeholder
+  // - React public images (/images/...)
+  // - If image is missing - fallback placeholder
   const imageSrc = reactImage || "/images/placeholder.jpg";
 
   return (
-    <Card className="product-card my-3 p-3 rounded">
+    <Card className="product-card my-3 rounded">
       <Link to={`/product/${product._id}`}>
+      <div className="product-image-wrap">
         {/*
           I use imageSrc instead of product.image directly.
           This keeps image paths consistent and avoids broken links.
         */}
-        <Card.Img src={imageSrc} variant="top" alt={product.name} />
+        <Card.Img src={imageSrc} variant="top" alt={product.name} className="product-image" />
+      </div>
       </Link>
 
       <Card.Body>
