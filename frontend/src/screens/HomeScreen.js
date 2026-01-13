@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'
 import { useLocation } from 'react-router-dom'
 
-function HomeScreen() {
+function HomeScreen({category}) {
   const dispatch = useDispatch()
   const { search } = useLocation()
 
@@ -17,8 +17,8 @@ function HomeScreen() {
   const { loading, error, products, page, pages } = productList
 
   useEffect(() => {
-    dispatch(listProducts(pageNumber))
-  }, [dispatch, pageNumber])
+    dispatch(listProducts(pageNumber, category))
+  }, [dispatch, pageNumber, category])
 
   return (
     <div>

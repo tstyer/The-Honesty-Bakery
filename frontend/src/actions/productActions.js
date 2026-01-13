@@ -20,24 +20,34 @@ import {
   PRODUCT_CREATE_REVIEW_FAIL,
 } from '../constants/productConstants'
 
-// GET all products (HomeScreen)
-export const listProducts = (pageNumber = 1) => async (dispatch) => {
-  try {
-    dispatch({ type: PRODUCT_LIST_REQUEST })
+// GET all products (HomeScreen, Prebaked, Ready-to-Bake)
+export const listProducts =
+  (pageNumber = 1, category = "") =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: PRODUCT_LIST_REQUEST })
 
-    const { data } = await axios.get(`/api/products/?page=${pageNumber}`)
+      let url = `/api/products/?page=${pageNumber}`
 
-    dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data })
-  } catch (error) {
-    dispatch({
-      type: PRODUCT_LIST_FAIL,
-      payload:
-        error.response && error.response.data.detail
-          ? error.response.data.detail
-          : error.message,
-    })
+      // If a category is provided, add it to the query string
+      if (category) {
+        url += `&category=${category}`
+      }
+
+      const { data } = await axios.get(url)
+
+      dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data })
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      })
+    }
   }
-}
+
 
 
 
