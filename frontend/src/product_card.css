@@ -141,6 +141,21 @@ Button {
   right: 8px;
 }
 
+
+/* CTA buttons */
+
+.cta-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta-link {
+  display: flex;
+  justify-content: center;
+}
+
+
 /* Responsive: 1 visible on small screens */
 @media (max-width: 768px) {
   .featured-slider {
