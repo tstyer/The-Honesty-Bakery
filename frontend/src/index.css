@@ -102,7 +102,7 @@ h2 {
   color: var(--main-text) !important;
 }
 
-/* ACTIVE underline (sticks to current page) */
+/* ACTIVE underline */
 .navbar .nav-link.nav-active::after {
   content: '';
   position: absolute;
@@ -123,7 +123,7 @@ h2 {
   transform: translateY(-2px);
 }
 
-/* Hover underline (subtle) */
+/* Hover underline */
 .navbar .nav-link.nav-active::after {
   content: '';
   position: absolute;
