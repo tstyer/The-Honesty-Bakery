@@ -208,3 +208,23 @@ h2 {
   padding-right: 1rem;
 }
 
+
+/* Sub title and sub text on home screen */
+
+.home-subtext {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.home-subtext .general-p {
+  max-width: 500px;      
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  text-align: justify;
+  text-justify: inter-word; /* better spacing */
+}
