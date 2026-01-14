@@ -46,9 +46,14 @@ function HomeScreen({ category }) {
             </Link>
           </div>
 
-          <div>
+          <div className='home-subtext'>
             <h2>We're a small business in Hythe</h2>
-            <p>
+            <img
+                src="/images/logo_2.png"
+                alt="Business logo"
+                className="logo"
+              />
+            <p className='general-p'>
               If you're strolling through Seabrook, you might bump into our Honesty box. Inside, you'll find all our prebaked cakes. <br></br> 
               They're truly one-of-a-kind. It's open to all and also serves doggy treats. <br></br>
               If you'd like to find out more, simply send me a message, right <a href='/contact'>here.</a>  
