@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FeaturedCarousel from '../components/FeaturedCarousel'
+import Footer from '../components/Footer'
 
 import { listProducts } from '../actions/productActions'
 
@@ -33,31 +34,58 @@ function HomeScreen({ category }) {
           <FeaturedCarousel products={products} />
 
           <div className="d-flex flex-column flex-md-row gap-3 justify-content-center mb-4">
-            <Link to="/prebaked" className="w-100 w-md-auto cta-link text-decoration-none">
-              <Button className="cta-btn" size="md" variant="outline-dark">
+            <Link
+              to="/prebaked"
+              className="w-100 w-md-auto cta-link text-decoration-none"
+            >
+              <Button
+                className="cta-btn"
+                size="md"
+                variant="outline-dark"
+              >
                 Shop Prebaked Cakes
               </Button>
             </Link>
 
-            <Link to="/ready-to-bake" className="w-100 w-md-auto cta-link text-decoration-none">
-              <Button className="cta-btn" size="md" variant="outline-dark">
+            <Link
+              to="/ready-to-bake"
+              className="w-100 w-md-auto cta-link text-decoration-none"
+            >
+              <Button
+                className="cta-btn"
+                size="md"
+                variant="outline-dark"
+              >
                 Shop Ready-to-Bake Cakes
               </Button>
             </Link>
           </div>
 
-          <div className='home-subtext'>
-            <h2>We're a small business in Hythe</h2>
+          <div className="home-subtext">
+            <h2>We're a small business in Seabrook</h2>
+
             <img
-                src="/images/logo_2.png"
-                alt="Business logo"
-                className="logo"
+              src="/images/logo_2.png"
+              alt="Business logo"
+              className="logo"
+            />
+
+            <div className="text-wrap">
+              <img
+                src="/images/honesty_sign.jpg"
+                alt="chalk sign of shop"
+                className="honesty_sign"
               />
-            <p className='general-p'>
-              If you're strolling through Seabrook, you might bump into our Honesty box. Inside, you'll find all our prebaked cakes. <br></br> 
-              They're truly one-of-a-kind. It's open to all and also serves doggy treats. <br></br>
-              If you'd like to find out more, simply send me a message, right <a href='/contact'>here.</a>  
-            </p>
+
+              <p className="general-p">
+                If you're strolling through Seabrook, you might bump into our
+                Honesty box. Inside, you'll find all our prebaked cakes. They're
+                truly one-of-a-kind. It's open to all and also serves doggy
+                treats. If you'd like to find out more, simply send me a
+                message, right{' '}
+                <a href="/contact">here</a>.
+              </p>
+            </div>
           </div>
         </>
       )}

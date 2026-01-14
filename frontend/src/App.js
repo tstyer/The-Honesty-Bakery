@@ -29,7 +29,7 @@ function Layout({ stripeError, stripePromise }) {
   const isHome = location.pathname === '/'
 
   return (
-    <>
+    <div className='app-shell'>
       <Header />
 
       <main className="py-4">
@@ -96,7 +96,7 @@ function Layout({ stripeError, stripePromise }) {
       </main>
 
       <Footer />
-    </>
+    </div>
   )
 }
 
