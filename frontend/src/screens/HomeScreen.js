@@ -71,11 +71,6 @@ function HomeScreen({ category }) {
             />
 
             <div className="text-wrap">
-              <img
-                src="/images/honesty_sign.jpg"
-                alt="chalk sign of shop"
-                className="honesty_sign"
-              />
 
               <p className="general-p">
                 If you're strolling through Seabrook, you might bump into our
