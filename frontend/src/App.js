@@ -23,6 +23,7 @@ import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import ReadyToBakeScreen from './screens/ReadyToBakeScreen'
 import PreBakedScreen from './screens/PreBakedScreen'
+import AboutScreen from './screens/AboutScreen'
 
 function Layout({ stripeError, stripePromise }) {
   const location = useLocation()
@@ -91,6 +92,9 @@ function Layout({ stripeError, stripePromise }) {
             <Route path="/placeorder" element={<PlaceOrderScreen />} />
             <Route path="/order/:id" element={<OrderScreen />} />
             <Route path="/admin/orderlist" element={<OrderListScreen />} />
+          
+            {/* About route */}
+            <Route path="/about" element={<AboutScreen />} />
           </Routes>
         </Container>
       </main>
