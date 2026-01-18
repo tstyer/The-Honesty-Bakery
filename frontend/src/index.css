@@ -234,25 +234,26 @@ body,
 
 /* Sub title and sub text on home screen */
 
+.text-wrap {
+  display: block;
+}
+
 .home-subtext {
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
 }
 
-.text-wrap {
-  text-align: left; /* needed for justification */
-}
-
 .general-p {
-  text-align: justify;
+  text-align: center;
   text-justify: inter-word;
   line-height: 1.7;
 }
 
+
+/* Add to about.css
 .honesty_sign {
-  float: right;
   max-width: 400px;
   margin: 0 0 1rem 2rem;
   border-radius: 16px;
-}
+} */
