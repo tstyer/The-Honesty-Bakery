@@ -6,6 +6,7 @@ import './product_card.css';
 
 import './index.css';
 import './about.css';
+import './products.css'
 import './bootstrap.min.css'
 import App from './App';
 
