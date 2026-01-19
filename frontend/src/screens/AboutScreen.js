@@ -31,6 +31,14 @@ export default function aboutScreen() {
                         Whether you’re picking up a cake for yourself, a friend, or your
                         dog, we hope our bakes bring a moment of comfort to your day.
                     </p>
+
+                    {/* CTA  - back home */}
+                    <Link to="/" className="text-decoration-none">
+                        <Button variant="outline-dark" className="mt-3">
+                            Back Home
+                        </Button>
+                    </Link>
+                    
                 </Col>
 
                 <Col md={6}>
