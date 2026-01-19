@@ -17,6 +17,10 @@ export default function PrebakedScreen() {
 
   return (
     <Container className="py-4">
+      {/* title */}
+      <h1 className='prebaked-title py-4'>Prebaked Cakes</h1>
+
+      {/* Content */}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -27,16 +31,16 @@ export default function PrebakedScreen() {
             key={product._id}
             className="align-items-center mb-4"
           >
-            {/* IMAGE */}
+            {/* product image */}
             <Col xs={12} md={4}>
               <img
                 src={product.image}
                 alt={product.name}
-                className="img-fluid rounded"
+                className="prebaked-image"
               />
             </Col>
 
-            {/* CONTENT */}
+            {/* product content */}
             <Col xs={12} md={8}>
               <h3>{product.name}</h3>
               <p className="text-muted">
