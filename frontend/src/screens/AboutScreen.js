@@ -19,7 +19,7 @@ export default function aboutScreen() {
             <Row>
                 {/* col=md6 so image and text beside each other on large screens */}
                 <Col md={6}>
-                    <p>
+                    <p className='about-text'>
                         The Honesty Bakehouse started as a small, local project in Seabrook.
                         What began with a single honesty box has grown into a way of sharing
                         homemade cakes with the community. <br />
@@ -33,8 +33,8 @@ export default function aboutScreen() {
                     </p>
 
                     {/* CTA  - back home */}
-                    <Link to="/" className="text-decoration-none">
-                        <Button variant="outline-dark" className="mt-3">
+                    <Link to="/" className="text-decoration-none about-cta">
+                        <Button variant="outline-dark" className="my-4">
                             Back Home
                         </Button>
                     </Link>
