@@ -70,9 +70,9 @@ function HomeScreen({ category }) {
               className="logo"
             />
 
-            <div className="text-wrap">
+            <div className="text-wrap align-items-center">
 
-              <p className="general-p">
+              <p className="general-p mt-4 mx-auto">
                 If you're strolling through Seabrook, you might bump into our
                 Honesty box. Inside, you'll find all our prebaked cakes. They're
                 truly one-of-a-kind. It's open to all and also serves doggy
