@@ -1,7 +1,6 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Allura&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-
 @import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
 /* H1's: Allura
    Subheader's. text, & Buttons: Gochi Hand
@@ -32,7 +31,15 @@ body,
 body {
   background-color: #fbf3ea; /* keep your current tone */
   background-image:
-    linear-gradient(90deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0.02) 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.02) 80%, rgba(0,0,0,0) 100%),
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,0.02) 0%,
+      rgba(0,0,0,0) 20%,
+      rgba(0,0,0,0.02) 40%,
+      rgba(0,0,0,0) 60%,
+      rgba(0,0,0,0.02) 80%,
+      rgba(0,0,0,0) 100%
+    ),
     repeating-linear-gradient(
       0deg,
       rgba(255,255,255,0.03) 0px,
@@ -41,7 +48,6 @@ body {
     );
   background-blend-mode: multiply;
 }
-
 
 /* Allow absolute centering */
 .navbar .container {
@@ -70,7 +76,6 @@ body {
   font-style: italic;
 }
 
-
 /* Header / image */
 
 /* Center the sign and give it breathing room */
@@ -81,12 +86,21 @@ body {
   padding: 0 1rem;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+/* Main sign wrapper (stays above accent images) */
+.home-sign__main {
+  position: relative;
+  z-index: 2;
 }
 
 /* The sign image itself */
 .home-sign__image {
   max-width: 400px;
   max-height: 500px;
+  width: 100%;
+  height: auto;
   display: block;
   border-radius: 22px;
 
@@ -99,14 +113,14 @@ body {
     0 4px 10px rgba(0, 0, 0, 0.10);
 }
 
-.home-spoon{
+.home-spoon {
   height: 50px;
   width: 50px;
   padding: 7px;
 }
 
-/*  "string" / hook effect */
-/*.home-sign__hanger::before,
+/* "string" / hook effect */
+.home-sign__hanger::before,
 .home-sign__hanger::after {
   content: "";
   position: absolute;
@@ -119,7 +133,7 @@ body {
   border-right: none;
   border-radius: 0 0 120px 120px;
   pointer-events: none;
-}*/
+}
 
 .home-sign__hanger::before {
   left: 18%;
@@ -129,6 +143,33 @@ body {
 .home-sign__hanger::after {
   right: 18%;
   transform: rotate(8deg);
+}
+
+/* Accent images (side photos) */
+.home-sign__accent {
+  position: absolute;
+  width: 220px;            /* smaller than main sign */
+  max-width: 32vw;
+  opacity: 0.75;           /* dulled */
+  filter: saturate(0.7) brightness(0.9);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  pointer-events: none;    /* decorative only */
+}
+
+/* Left accent image */
+.home-sign__accent--left {
+  left: -40px;
+  top: 60px;
+  transform: rotate(-6deg);
+}
+
+/* Right accent image */
+.home-sign__accent--right {
+  right: -40px;
+  top: 80px;
+  transform: rotate(5deg);
 }
 
 main {
@@ -169,10 +210,10 @@ h2 {
   color: var(--main-text);
 }
 
-h3, p {
+h3,
+p {
   font-family: 'Gochi Hand' !important;
 }
-
 
 /* =========================
    Push footer down
@@ -193,8 +234,6 @@ body,
 .app-main {
   flex: 1; /* pushes footer to bottom when content is short */
 }
-
-
 
 /* =========================
    Header / Navbar Styles
@@ -290,7 +329,6 @@ body,
   border-color: rgba(107, 79, 63, 0.35) !important;
 }
 
-
 /* =========================
   Cart
 ========================== */
@@ -326,43 +364,46 @@ body,
   display: block;
 }
 
-
-
 /* =========================
    Product Cards (uniform)
 ========================= */
 /*
 .product-card {
-  height: 420px;                 
+  height: 420px;
   padding: 0.75rem;
   display: flex;
   flex-direction: column;
-} */
+}
+*/
 
 /* Image area: fixed height, show more image (less crop) */
 
-
 /* Keep text from stretching card weirdly */
-/*.product-card .card-body {
+/*
+.product-card .card-body {
   padding: 0.75rem 0.25rem;
   display: flex;
   flex-direction: column;
   flex: 1;
-}*/
+}
+*/
 
 /* Title: stop wrapping into weird tall blocks */
-/*.product-card .card-title {
+/*
+.product-card .card-title {
   font-size: 1rem;
   line-height: 1.2;
-  min-height: 2.4em;             
+  min-height: 2.4em;
   overflow: hidden;
-}*/
+}
+*/
 
 /* Push price to the bottom so layout is consistent */
-/*.product-card .card-body h3 {
+/*
+.product-card .card-body h3 {
   margin-top: auto;
-} */
-
+}
+*/
 
 /* Hero */
 
@@ -374,7 +415,6 @@ body,
   padding-left: 1rem;
   padding-right: 1rem;
 }
-
 
 /* Sub title and sub text on home screen */
 
@@ -394,7 +434,6 @@ body,
   line-height: 1.7;
   max-width: 775px;
 }
-
 
 /* home CTA's */
 
@@ -420,7 +459,6 @@ body,
   transform: translateY(-1px);
 }
 
-
 /* ==============
   Media Queries
 =============== */
@@ -430,6 +468,13 @@ body,
 /* Hide on smaller screens */
 @media (max-width: 992px) {
   .nav-rating {
+    display: none;
+  }
+}
+
+/* Hide accent images on smaller screens */
+@media (max-width: 768px) {
+  .home-sign__accent {
     display: none;
   }
 }
