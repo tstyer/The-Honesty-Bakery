@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Rating from './Rating'
 
 export default function FeaturedCarousel({ products = [] }) {
-  const items = products.slice(0, 10) // choose how many you want in the slider
+  const items = products.slice(0, 10) // choose how many in slider
   const trackRef = useRef(null)
   const cardRef = useRef(null)
 
