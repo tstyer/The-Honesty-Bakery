@@ -459,11 +459,43 @@ body,
   transform: translateY(-1px);
 }
 
+
+/* =========================
+   Decorative Bee (Home)
+========================= */
+
+.home-bee {
+  position: fixed;          /* stays bottom-left even on scroll */
+  bottom: 100px;
+  left: 100px;
+
+  width: 70px;              /* tweak to taste */
+  height: auto;
+
+  opacity: 0.9;
+  pointer-events: none;     /* never blocks clicks */
+
+  /* gentle, playful motion */
+  animation: bee-float 6s ease-in-out infinite;
+}
+
+/* bee floating animation */
+@keyframes bee-float {
+  0% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+}
+
+
 /* ==============
   Media Queries
 =============== */
-
-/* Rating - home screen */
 
 /* Hide on smaller screens */
 @media (max-width: 992px) {
@@ -478,3 +510,11 @@ body,
     display: none;
   }
 }
+
+/* Hide bee on very small screens */
+@media (max-width: 768px) {
+  .home-bee {
+    display: none;
+  }
+}
+
