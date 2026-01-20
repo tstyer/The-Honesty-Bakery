@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link, useNavigate, useParams, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
+import { Row, Col, ListGroup, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 
@@ -44,35 +44,29 @@ export default function CartScreen() {
                 <ListGroup.Item key={item.product}>
                   <Row className="align-items-center">
                     <Col md={2}>
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fluid
-                        rounded
-                      />
+                      <div className="cart-image-wrap">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="cart-image"
+                        />
+                      </div>
                     </Col>
 
                     <Col md={3}>
-                      <Link to={`/product/${item.product}`}>
-                        {item.name}
-                      </Link>
+                      <Link to={`/product/${item.product}`}>{item.name}</Link>
                     </Col>
 
                     <Col md={2}>£{item.price}</Col>
 
                     <Col md={3}>
                       <Form.Select
-                        value={item.qty}
+                        value={item.qty || 1}
                         onChange={(e) =>
-                          dispatch(
-                            addToCart(
-                              item.product,
-                              Number(e.target.value)
-                            )
-                          )
+                          dispatch(addToCart(item.product, Number(e.target.value)))
                         }
                       >
-                        {[...Array(Math.min(item.countInStock, 3)).keys()].map(
+                        {[...Array(Math.min(item.countInStock ?? 3, 3)).keys()].map(
                           (x) => (
                             <option key={x + 1} value={x + 1}>
                               {x + 1}
@@ -86,9 +80,7 @@ export default function CartScreen() {
                       <Button
                         type="button"
                         variant="light"
-                        onClick={() =>
-                          dispatch(removeFromCart(item.product))
-                        }
+                        onClick={() => dispatch(removeFromCart(item.product))}
                       >
                         <i className="fas fa-trash"></i>
                       </Button>
@@ -106,18 +98,12 @@ export default function CartScreen() {
               <ListGroup.Item>
                 <h2>
                   Subtotal (
-                  {cartItems.reduce(
-                    (acc, item) => acc + item.qty,
-                    0
-                  )}
-                  ) items
+                  {cartItems.reduce((acc, item) => acc + (item.qty || 1), 0)})
+                  items
                 </h2>
                 £
                 {cartItems
-                  .reduce(
-                    (acc, item) => acc + item.qty * item.price,
-                    0
-                  )
+                  .reduce((acc, item) => acc + (item.qty || 1) * item.price, 0)
                   .toFixed(2)}
               </ListGroup.Item>
 

@@ -3,22 +3,24 @@ import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_PAYMENT_METHOD, CART_SET_PAY
 
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
-    const { data } = await axios.get(`/api/products/${id}`)
+  const safeQty = Math.min(Math.max(Number(qty) || 1, 1), 3)
 
-    dispatch({
-        type: CART_ADD_ITEM,
-        payload: {
-            product: data._id,
-            name: data.name,
-            image: data.image,
-            price: data.price,
-            countInStock: data.countInStock,
-            qty,
-            isPrebaked: data.isPrebaked,
-        }
-    })
+  const { data } = await axios.get(`/api/products/${id}`)
 
-    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+  dispatch({
+    type: CART_ADD_ITEM,
+    payload: {
+      product: data._id,
+      name: data.name,
+      image: data.image,
+      price: data.price,
+      countInStock: data.countInStock,
+      qty: safeQty,
+      isPrebaked: data.isPrebaked,
+    },
+  })
+
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 
 export const removeFromCart = (id) => (dispatch, getState) => {

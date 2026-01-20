@@ -6,8 +6,9 @@ import './product_card.css';
 
 import './index.css';
 import './about.css';
-import './products.css'
-import './bootstrap.min.css'
+import './products.css';
+import './cart.css';
+import './bootstrap.min.css';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

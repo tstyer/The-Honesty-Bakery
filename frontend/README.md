@@ -70,6 +70,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
+## Mergin React & Django
+
+This is a common if you want your website to display on Heroku, otherwise, you will need to deploy the react elsewhere, and Heroku will only serve the backend. 
+
+
 ## CREDITS
 
 Bee Icons found at ![flaticons](https://www.flaticon.com/free-icons/bee), by 'Freepic'
