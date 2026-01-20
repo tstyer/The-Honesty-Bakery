@@ -1,7 +1,10 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Allura&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-/* Headers: Allura
-   Text & Buttons: Playfair Display
+
+
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
+/* H1's: Allura
+   Subheader's. text, & Buttons: Gochi Hand
 */
 
 /* =========================
@@ -36,12 +39,8 @@ h2 {
   padding-top: 0 !important;
 }
 
-p {
-  font-family: 'Playfair Display', serif !important;
-}
-
 .subheader {
-  font-family: 'Playfair Display' !important;
+  font-family: 'Gochi Hand' !important;
   font-weight: 600;
   font-size: medium;
   margin-top: 0;
@@ -65,6 +64,10 @@ h2 {
 .header-p {
   padding-top: 2rem;
   color: var(--main-text);
+}
+
+h3, p {
+  font-family: 'Gochi Hand' !important;
 }
 
 
@@ -103,7 +106,7 @@ body,
 /* Navbar background + typography */
 .brand-bg {
   background-color: var(--brand-bg) !important;
-  font-family: 'Playfair Display' !important;
+  font-family: 'Gochi Hand' !important;
   font-weight: 400;
 }
 
@@ -164,7 +167,7 @@ body,
 
 .brand-bg .dropdown-menu {
   background-color: var(--brand-bg) !important;
-  font-family: 'Playfair Display' !important;
+  font-family: 'Gochi Hand' !important;
 }
 
 .brand-bg .dropdown-item {
