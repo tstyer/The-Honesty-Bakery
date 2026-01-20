@@ -43,6 +43,34 @@ body {
 }
 
 
+/* Allow absolute centering */
+.navbar .container {
+  position: relative;
+}
+
+/* Centre message in navbar */
+.nav-rating {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  pointer-events: none; /* purely informational */
+}
+
+.nav-rating__stars {
+  color: #f5b301; /* warm gold */
+  letter-spacing: 1px;
+}
+
+.nav-rating__text {
+  font-style: italic;
+}
+
+
 /* Header / image */
 
 /* Center the sign and give it breathing room */
@@ -315,25 +343,25 @@ body,
 
 
 /* Keep text from stretching card weirdly */
-.product-card .card-body {
+/*.product-card .card-body {
   padding: 0.75rem 0.25rem;
   display: flex;
   flex-direction: column;
   flex: 1;
-}
+}*/
 
 /* Title: stop wrapping into weird tall blocks */
-.product-card .card-title {
+/*.product-card .card-title {
   font-size: 1rem;
   line-height: 1.2;
-  min-height: 2.4em;             /* keeps two-line space consistent */
+  min-height: 2.4em;             
   overflow: hidden;
-}
+}*/
 
 /* Push price to the bottom so layout is consistent */
-.product-card .card-body h3 {
+/*.product-card .card-body h3 {
   margin-top: auto;
-}
+} */
 
 
 /* Hero */
@@ -368,3 +396,22 @@ body,
 }
 
 
+/* home CTA's */
+
+.cta-btn {
+  font-family: 'Gochi Hand' !important;
+}
+
+
+/* ==============
+  Media Queries
+=============== */
+
+/* Rating - home screen */
+
+/* Hide on smaller screens */
+@media (max-width: 992px) {
+  .nav-rating {
+    display: none;
+  }
+}
