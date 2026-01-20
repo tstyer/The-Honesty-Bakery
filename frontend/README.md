@@ -74,3 +74,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 Bee Icons found at ![flaticons](https://www.flaticon.com/free-icons/bee), by 'Freepic'
 
+Honey Pot Icon found at ![flaticons](https://www.flaticon.com/free-icons/bee), by 'mikan933'
