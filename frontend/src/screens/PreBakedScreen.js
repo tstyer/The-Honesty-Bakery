@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { listProducts } from '../actions/productActions'
+import { addToCart } from '../actions/cartActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
@@ -17,13 +18,26 @@ export default function PrebakedScreen() {
   const productList = useSelector((state) => state.productList)
   const { loading, error, products } = productList
 
+  // Pull cart items so we can enforce max 3 per product
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
+
   useEffect(() => {
     dispatch(listProducts())
   }, [dispatch])
 
   const addToCartHandler = (id) => {
-    const qty = qtyById[id] || 1
-    navigate(`/cart/${id}?qty=${qty}`)
+    const selectedQty = qtyById[id] || 1
+
+    // Find existing qty in cart for this product
+    const existingItem = cartItems.find((item) => item.product === id)
+    const existingQty = existingItem ? existingItem.qty : 0
+
+    // Clamp final qty to max 3
+    const newQty = Math.min(existingQty + selectedQty, 3)
+
+    // Add to cart without navigating away
+    dispatch(addToCart(id, newQty))
   }
 
   return (
@@ -37,53 +51,61 @@ export default function PrebakedScreen() {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        products.map((product) => (
-          <Row key={product._id} className="align-items-center mb-4">
-            {/* Product image */}
-            <Col xs={12} md={4}>
-              <img
-                src={product.image}
-                alt={product.name}
-                className="prebaked-image img-fluid"
-              />
-            </Col>
+        products.map((product) => {
+          // Check how many of this product is already in the cart
+          const cartItem = cartItems.find((item) => item.product === product._id)
+          const qtyInCart = cartItem ? cartItem.qty : 0
 
-            {/* Product content */}
-            <Col xs={12} md={8}>
-              <h3>{product.name}</h3>
-              <p className="text-muted">{product.description}</p>
+          return (
+            <Row key={product._id} className="align-items-center mb-4">
+              {/* Product image */}
+              <Col xs={12} md={4}>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="prebaked-image img-fluid"
+                />
+              </Col>
 
-              <div className="d-flex align-items-center gap-3">
-                <span className="fw-bold">£{product.price}</span>
+              {/* Product content */}
+              <Col xs={12} md={8}>
+                <h3>{product.name}</h3>
+                <p className="text-muted">{product.description}</p>
 
-                {/* Use Form.Select for dropdown box */}
-                <Form.Select
-                  value={qtyById[product._id] || 1} /* Original value in dropdown is set to new value OR 1 */
-                  onChange={(e) =>
-                    setQtyById((prev) => ({
-                      ...prev,
-                      [product._id]: Number(e.target.value), /* e.target.value is usually a string, so convert to num. */
-                    }))
-                  }
-                  className="w-auto"
-                >
-                  {[1, 2, 3].map((x) => (
-                    <option key={x} value={x}>
-                      Qty: {x}
-                    </option>
-                  ))}
-                </Form.Select>
+                <div className="d-flex align-items-center gap-3">
+                  <span className="fw-bold">£{product.price}</span>
 
-                <Button
-                  variant="outline-dark"
-                  onClick={() => addToCartHandler(product._id)}
-                >
-                  Add to Cart
-                </Button>
-              </div>
-            </Col>
-          </Row>
-        ))
+                  {/* Use Form.Select for dropdown box */}
+                  <Form.Select
+                    value={qtyById[product._id] || 1} /* Original value in dropdown is set to new value OR 1 */
+                    onChange={(e) =>
+                      setQtyById((prev) => ({
+                        ...prev,
+                        [product._id]: Number(e.target.value), /* e.target.value is usually a string, so convert to num. */
+                      }))
+                    }
+                    className="w-auto"
+                    disabled={qtyInCart >= 3}
+                  >
+                    {[1, 2, 3].map((x) => (
+                      <option key={x} value={x}>
+                        Qty: {x}
+                      </option>
+                    ))}
+                  </Form.Select>
+
+                  <Button
+                    variant="outline-dark"
+                    disabled={qtyInCart >= 3}
+                    onClick={() => addToCartHandler(product._id)}
+                  >
+                    {qtyInCart >= 3 ? 'Max Reached' : 'Add to Cart'}
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          )
+        })
       )}
     </Container>
   )
