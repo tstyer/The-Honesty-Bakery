@@ -72,6 +72,18 @@ function Header() {
               </NavDropdown>
             </Nav>
 
+
+                {/* CENTER REVIEW MESSAGE */}
+<div className="nav-rating">
+  <span className="nav-rating__stars">
+    ★★★★★
+  </span>
+  <span className="nav-rating__text">
+    rated on Google & Facebook
+  </span>
+</div>
+
+
             {/* RIGHT NAV */}
             <Nav>
               {userInfo ? (
