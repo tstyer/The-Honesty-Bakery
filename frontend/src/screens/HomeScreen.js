@@ -117,6 +117,16 @@ function HomeScreen({ category }) {
           </div>
         </>
       )}
+
+{/* bee */}
+<img
+  src="/images/bee_2.png"
+  alt=""
+  className="home-bee"
+  aria-hidden="true"
+/>
+
+
     </div>
   )
 }
