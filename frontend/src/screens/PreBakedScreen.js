@@ -15,13 +15,13 @@ export default function PrebakedScreen() {
   // Stores selected qty per product id
   const [qtyById, setQtyById] = useState({})
 
-  // Tracks which product was just added (for quick UI feedback)
+  // Tracks which product was just added 
   const [justAddedId, setJustAddedId] = useState(null)
 
   const productList = useSelector((state) => state.productList)
   const { loading, error, products } = productList
 
-  // Pull cart items so we can enforce max 3 per product
+  // Pull cart items to enforce max 3 per product
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
 
@@ -51,17 +51,19 @@ export default function PrebakedScreen() {
     <Container className="py-4">
       {/* Title */}
       <h1 className="prebaked-title py-4">Prebaked Cakes</h1>
-      <h3 className='prebaked-sub pb-4'>Choose from our selection of Cakes on shelf, ready to buy. We're constantly updating this, so be sure to keep checking!</h3>
-      
+      <h3 className="prebaked-sub pb-4">
+        Choose from our selection of Cakes on shelf, ready to buy. We're
+        constantly updating this, so be sure to keep checking!
+      </h3>
+
       {/* Honey pot img */}
-      <div className='honey-div'>
+      <div className="honey-div">
         <img
-      src='/images/honey-prebaked.png'
-      alt='Picture of cartoon honey pot'
-      className='honey-pot-prebaked'
+          src="/images/honey-prebaked.png"
+          alt="Picture of cartoon honey pot"
+          className="honey-pot-prebaked"
         />
       </div>
-      
 
       {/* Content */}
       {loading ? (
@@ -71,18 +73,22 @@ export default function PrebakedScreen() {
       ) : (
         products.map((product) => {
           // Check how many of this product is already in the cart
-          const cartItem = cartItems.find((item) => item.product === product._id)
+          const cartItem = cartItems.find(
+            (item) => item.product === product._id
+          )
           const qtyInCart = cartItem ? cartItem.qty : 0
 
           return (
             <Row key={product._id} className="align-items-center mb-4">
               {/* Product image */}
               <Col xs={12} md={4}>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="prebaked-image img-fluid"
-                />
+                <div className="prebaked-image-wrap">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="prebaked-image"
+                  />
+                </div>
               </Col>
 
               {/* Product content */}
