@@ -28,6 +28,8 @@ export default function CartScreen() {
     navigate('/login?redirect=/payment')
   }
 
+  console.log('cartItems:', cartItems)
+
   return (
     <div>
       <Row>
