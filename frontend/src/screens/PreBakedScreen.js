@@ -56,12 +56,13 @@ export default function PrebakedScreen() {
               <div className="d-flex align-items-center gap-3">
                 <span className="fw-bold">£{product.price}</span>
 
+                {/* Use Form.Select for dropdown box */}
                 <Form.Select
-                  value={qtyById[product._id] || 1}
+                  value={qtyById[product._id] || 1} /* Original value in dropdown is set to new value OR 1 */
                   onChange={(e) =>
                     setQtyById((prev) => ({
                       ...prev,
-                      [product._id]: Number(e.target.value),
+                      [product._id]: Number(e.target.value), /* e.target.value is usually a string, so convert to num. */
                     }))
                   }
                   className="w-auto"

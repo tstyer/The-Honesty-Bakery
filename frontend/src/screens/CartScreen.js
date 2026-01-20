@@ -11,7 +11,9 @@ export default function CartScreen() {
   const { id: productId } = useParams()
   const location = useLocation()
 
-  const qty = Number(new URLSearchParams(location.search).get('qty')) || 1
+  // Read qty from URL and clamp between 1 and 3
+  const rawQty = Number(new URLSearchParams(location.search).get('qty')) || 1
+  const qty = Math.min(Math.max(rawQty, 1), 3)
 
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
@@ -23,7 +25,6 @@ export default function CartScreen() {
   }, [dispatch, productId, qty])
 
   const checkoutHandler = () => {
-    // Pickup-only flow: go straight to payment (after login if needed)
     navigate('/login?redirect=/payment')
   }
 
@@ -35,46 +36,61 @@ export default function CartScreen() {
 
           {cartItems.length === 0 ? (
             <Message>
-              Your cart is empty <Link to='/'>Go Back</Link>
+              Your cart is empty <Link to="/">Go Back</Link>
             </Message>
           ) : (
-            <ListGroup variant='flush'>
+            <ListGroup variant="flush">
               {cartItems.map((item) => (
                 <ListGroup.Item key={item.product}>
-                  <Row>
+                  <Row className="align-items-center">
                     <Col md={2}>
-                      <Image src={item.image} alt={item.name} fluid rounded />
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fluid
+                        rounded
+                      />
                     </Col>
 
                     <Col md={3}>
-                      <Link to={`/product/${item.product}`}>{item.name}</Link>
+                      <Link to={`/product/${item.product}`}>
+                        {item.name}
+                      </Link>
                     </Col>
 
-                    <Col md={2}>${item.price}</Col>
+                    <Col md={2}>£{item.price}</Col>
 
                     <Col md={3}>
-                      <Form.Control
-                        as='select'
+                      <Form.Select
                         value={item.qty}
                         onChange={(e) =>
-                          dispatch(addToCart(item.product, Number(e.target.value)))
+                          dispatch(
+                            addToCart(
+                              item.product,
+                              Number(e.target.value)
+                            )
+                          )
                         }
                       >
-                        {[...Array(item.countInStock).keys()].map((x) => (
-                          <option key={x + 1} value={x + 1}>
-                            {x + 1}
-                          </option>
-                        ))}
-                      </Form.Control>
+                        {[...Array(Math.min(item.countInStock, 3)).keys()].map(
+                          (x) => (
+                            <option key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </option>
+                          )
+                        )}
+                      </Form.Select>
                     </Col>
 
                     <Col md={1}>
                       <Button
-                        type='button'
-                        variant='light'
-                        onClick={() => dispatch(removeFromCart(item.product))}
+                        type="button"
+                        variant="light"
+                        onClick={() =>
+                          dispatch(removeFromCart(item.product))
+                        }
                       >
-                        <i className='fas fa-trash'></i>
+                        <i className="fas fa-trash"></i>
                       </Button>
                     </Col>
                   </Row>
@@ -86,21 +102,29 @@ export default function CartScreen() {
 
         <Col md={4}>
           <Card>
-            <ListGroup variant='flush'>
+            <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2>
-                  Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items
+                  Subtotal (
+                  {cartItems.reduce(
+                    (acc, item) => acc + item.qty,
+                    0
+                  )}
+                  ) items
                 </h2>
-                $
+                £
                 {cartItems
-                  .reduce((acc, item) => acc + item.qty * item.price, 0)
+                  .reduce(
+                    (acc, item) => acc + item.qty * item.price,
+                    0
+                  )
                   .toFixed(2)}
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Button
-                  type='button'
-                  className='btn-block'
+                  type="button"
+                  className="btn-block"
                   disabled={cartItems.length === 0}
                   onClick={checkoutHandler}
                 >
