@@ -15,6 +15,9 @@ export default function PrebakedScreen() {
   // Stores selected qty per product id
   const [qtyById, setQtyById] = useState({})
 
+  // Tracks which product was just added (for quick UI feedback)
+  const [justAddedId, setJustAddedId] = useState(null)
+
   const productList = useSelector((state) => state.productList)
   const { loading, error, products } = productList
 
@@ -38,6 +41,10 @@ export default function PrebakedScreen() {
 
     // Add to cart without navigating away
     dispatch(addToCart(id, newQty))
+
+    // Quick UI feedback
+    setJustAddedId(id)
+    setTimeout(() => setJustAddedId(null), 1500)
   }
 
   return (
@@ -101,6 +108,10 @@ export default function PrebakedScreen() {
                   >
                     {qtyInCart >= 3 ? 'Max Reached' : 'Add to Cart'}
                   </Button>
+
+                  {justAddedId === product._id && qtyInCart < 3 && (
+                    <small className="text-success">Added!</small>
+                  )}
                 </div>
               </Col>
             </Row>
