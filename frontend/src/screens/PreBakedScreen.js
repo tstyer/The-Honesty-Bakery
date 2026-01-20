@@ -119,6 +119,7 @@ export default function PrebakedScreen() {
                   </Form.Select>
 
                   <Button
+                    className='add-to-cart'
                     variant="outline-dark"
                     disabled={qtyInCart >= 3}
                     onClick={() => addToCartHandler(product._id)}

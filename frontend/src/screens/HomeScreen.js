@@ -31,18 +31,34 @@ function HomeScreen({ category }) {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-
-        {/* Image as header / title */}
+          {/* Image as header / title */}
           <div className="home-sign">
-  <div className="home-sign__hanger" aria-hidden="true" />
   <img
-    src="/images/honesty_sign.jpg"
-    alt="Welcome to The Honesty Bakehouse – restoring faith one bite at a time"
-    className="home-sign__image"
+    src="/images/toffee_swirl.jpg"
+    alt=""
+    aria-hidden="true"
+    className="home-sign__accent home-sign__accent--left"
+  />
+
+  <div className="home-sign__main">
+    <div className="home-sign__hanger" aria-hidden="true" />
+    <img
+      src="/images/honesty_sign.jpg"
+      alt="Welcome to The Honesty Bakehouse – restoring faith one bite at a time"
+      className="home-sign__image"
+    />
+  </div>
+
+  <img
+    src="/images/coffee_cookie.jpg"
+    alt=""
+    aria-hidden="true"
+    className="home-sign__accent home-sign__accent--right"
   />
 </div>
 
 
+          {/* CTA buttons */}
           <div className="d-flex flex-column flex-md-row gap-3 justify-content-center mb-4">
             <Link
               to="/prebaked"
@@ -71,8 +87,17 @@ function HomeScreen({ category }) {
             </Link>
           </div>
 
+          {/* Supporting copy */}
           <div className="home-subtext">
-            <h2>Thoughtfully Baked <img src='/images/spoon.png' className='home-spoon' /> Honestly Delicious</h2>
+            <h2>
+              Thoughtfully Baked{' '}
+              <img
+                src="/images/spoon.png"
+                alt=""
+                className="home-spoon"
+              />{' '}
+              Honestly Delicious
+            </h2>
 
             <img
               src="/images/logo_2.png"
@@ -81,14 +106,12 @@ function HomeScreen({ category }) {
             />
 
             <div className="text-wrap align-items-center">
-
               <p className="general-p mt-4 mx-auto">
-                <strong>If you're strolling through Seabrook,</strong> you might bump into our
-                Honesty box. Inside, you'll find all our prebaked cakes. They're
-                truly one-of-a-kind. It's open to all and also serves doggy
-                treats. If you'd like to find out more, simply send me a
-                message, right{' '}
-                <a href="/contact">here</a>.
+                <strong>If you're strolling through Seabrook,</strong> you might
+                bump into our honesty box. Inside, you'll find all our prebaked
+                cakes. They're truly one-of-a-kind. It's open to all and also
+                serves doggy treats. If you'd like to find out more, simply send
+                me a message, right <a href="/contact">here</a>.
               </p>
             </div>
           </div>
