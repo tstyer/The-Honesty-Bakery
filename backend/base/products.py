@@ -9,11 +9,12 @@ products = [
     'brand': 'Apple',
     'category': 'Cakes',
     'price': 0.00,
-    'countInStock': 10,
+    'countInStock': 3,
     'rating': 5,
     'numReviews': 12,
     'isPrebaked': False,
   },
+  
   {
     '_id': '2',
     'name': 'BlueBerry Cake (Pre baked)',
@@ -23,7 +24,7 @@ products = [
     'brand': 'Apple',
     'category': 'Cakes',
     'price': 0.00,
-    'countInStock': 1,
+    'countInStock': 3,
     'rating': 5,
     'numReviews': 8,
     'isPrebaked': True,
