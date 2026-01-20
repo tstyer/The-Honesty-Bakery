@@ -51,6 +51,17 @@ export default function PrebakedScreen() {
     <Container className="py-4">
       {/* Title */}
       <h1 className="prebaked-title py-4">Prebaked Cakes</h1>
+      <h3 className='prebaked-sub pb-4'>Choose from our selection of Cakes on shelf, ready to buy. We're constantly updating this, so be sure to keep checking!</h3>
+      
+      {/* Honey pot img */}
+      <div className='honey-div'>
+        <img
+      src='/images/honey-prebaked.png'
+      alt='Picture of cartoon honey pot'
+      className='honey-pot-prebaked'
+        />
+      </div>
+      
 
       {/* Content */}
       {loading ? (
