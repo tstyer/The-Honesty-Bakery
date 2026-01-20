@@ -31,7 +31,17 @@ function HomeScreen({ category }) {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <FeaturedCarousel products={products} />
+
+        {/* Image as header / title */}
+          <div className="home-sign">
+  <div className="home-sign__hanger" aria-hidden="true" />
+  <img
+    src="/images/honesty_sign.jpg"
+    alt="Welcome to The Honesty Bakehouse – restoring faith one bite at a time"
+    className="home-sign__image"
+  />
+</div>
+
 
           <div className="d-flex flex-column flex-md-row gap-3 justify-content-center mb-4">
             <Link
@@ -62,7 +72,7 @@ function HomeScreen({ category }) {
           </div>
 
           <div className="home-subtext">
-            <h2>We're a small business in Seabrook</h2>
+            <h2>Thoughtfully Baked <img src='/images/spoon.png' className='home-spoon' /> Honestly Delicious</h2>
 
             <img
               src="/images/logo_2.png"

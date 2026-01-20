@@ -28,6 +28,81 @@ body,
   background-color: var(--brand-bg);
 }
 
+/* Subtle wood texture on the whole page */
+body {
+  background-color: #fbf3ea; /* keep your current tone */
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0.02) 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.02) 80%, rgba(0,0,0,0) 100%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 6px,
+      rgba(0,0,0,0.015) 12px
+    );
+  background-blend-mode: multiply;
+}
+
+
+/* Header / image */
+
+/* Center the sign and give it breathing room */
+.home-sign {
+  position: relative;
+  max-width: 980px;
+  margin: 2.2rem auto 2.5rem;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* The sign image itself */
+.home-sign__image {
+  max-width: 400px;
+  max-height: 500px;
+  display: block;
+  border-radius: 22px;
+
+  /* Hanging sign vibe */
+  transform: rotate(-2deg);
+  transform-origin: top center;
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.18),
+    0 4px 10px rgba(0, 0, 0, 0.10);
+}
+
+.home-spoon{
+  height: 50px;
+  width: 50px;
+  padding: 7px;
+}
+
+/*  "string" / hook effect */
+/*.home-sign__hanger::before,
+.home-sign__hanger::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  width: 160px;
+  height: 120px;
+  border: 3px solid rgba(90, 70, 50, 0.35);
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0 0 120px 120px;
+  pointer-events: none;
+}*/
+
+.home-sign__hanger::before {
+  left: 18%;
+  transform: rotate(-8deg);
+}
+
+.home-sign__hanger::after {
+  right: 18%;
+  transform: rotate(8deg);
+}
+
 main {
   min-height: 80vh;
 }
@@ -207,18 +282,34 @@ body,
   height: 20px;
 }
 
+/* =========================
+   Image hero
+========================= */
+.home-hero {
+  max-width: 1100px;
+  margin: 2.5rem auto 3rem;
+  padding: 0 1rem;
+}
+
+.home-hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+}
+
 
 
 /* =========================
    Product Cards (uniform)
 ========================= */
-
+/*
 .product-card {
-  height: 420px;                 /* same height for all cards */
+  height: 420px;                 
   padding: 0.75rem;
   display: flex;
   flex-direction: column;
-}
+} */
 
 /* Image area: fixed height, show more image (less crop) */
 
