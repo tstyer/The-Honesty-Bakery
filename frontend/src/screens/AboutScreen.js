@@ -54,7 +54,7 @@ export default function AboutScreen() {
         <Col md={6} className="about-right">
           <img
             className="about-image"
-            src="/images/honesty_sign.jpg"
+            src="/images/mum_shmee.jpg"
             alt="The Honesty Bakehouse sign"
           />
         </Col>

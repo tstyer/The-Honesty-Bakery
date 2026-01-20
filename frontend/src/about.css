@@ -42,10 +42,25 @@
 
 /* CTA centered */
 .about-cta {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
+  font-family: 'Gochi Hand' !important;
+
+  background: transparent;
+  color: #3a2e2a;
+
+  border: 2px solid #3a2e2a;
+  border-radius: 14px;
+
+  /* soften the border so it feels drawn */
+  box-shadow:
+    1px 1px 0 #3a2e2a,
+    -1px -1px 0 rgba(255,255,255,0.4);
+
+  transition: all 0.25s ease;
+}
+
+.about-cta:hover {
+  background: rgba(58, 46, 42, 0.04);
+  transform: translateY(-1px);
 }
 
 /* Right column image centered + responsive */
@@ -60,4 +75,6 @@
   height: auto;
   border-radius: 16px;
   display: block;
+  opacity: 75%;
+  filter: saturate(0.7), brightness(0.9);
 }
