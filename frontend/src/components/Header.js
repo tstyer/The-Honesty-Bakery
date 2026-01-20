@@ -11,6 +11,13 @@ function Header() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // Pull cart items to show a live cart badge
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
+  // Total items in cart 
+  const cartItemCount = cartItems.reduce((acc, item) => acc + item.qty, 0);
+
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -106,8 +113,11 @@ function Header() {
               )}
 
               <LinkContainer to="/cart">
-                <Nav.Link>
+                <Nav.Link className="d-flex align-items-center">
                   <i className="fas fa-shopping-cart"></i> Cart
+                  {cartItemCount > 0 && (
+                    <span className="cart-badge">{cartItemCount}</span>
+                  )}
                 </Nav.Link>
               </LinkContainer>
             </Nav>
