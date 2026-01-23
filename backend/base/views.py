@@ -227,6 +227,8 @@ def updateProduct(request, pk):
     product.category = data.get('category', product.category)
     product.description = data.get('description', product.description)
     product.image = data.get('image', product.image)
+    product.productType = data.get('productType', product.productType)
+
 
     product.save()
     serializer = ProductSerializer(product, many=False)

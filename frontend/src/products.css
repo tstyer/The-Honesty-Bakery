@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.prebaked-image {         /* pick a height that matches design */
+.prebaked-image {         /* height that matches design */
   object-fit: cover;      /* crops to fill the frame */
   border-radius: 16px;
   display: block;
