@@ -15,7 +15,7 @@ export default function PrebakedScreen() {
   // Stores selected qty per product id
   const [qtyById, setQtyById] = useState({})
 
-  // Tracks which product was just added 
+  // Tracks which product was just added
   const [justAddedId, setJustAddedId] = useState(null)
 
   const productList = useSelector((state) => state.productList)
@@ -26,7 +26,8 @@ export default function PrebakedScreen() {
   const { cartItems } = cart
 
   useEffect(() => {
-    dispatch(listProducts())
+    // Only fetch Pre-baked products
+    dispatch(listProducts('', '', 'PREBAKED'))
   }, [dispatch])
 
   const addToCartHandler = (id) => {
@@ -73,9 +74,7 @@ export default function PrebakedScreen() {
       ) : (
         products.map((product) => {
           // Check how many of this product is already in the cart
-          const cartItem = cartItems.find(
-            (item) => item.product === product._id
-          )
+          const cartItem = cartItems.find((item) => item.product === product._id)
           const qtyInCart = cartItem ? cartItem.qty : 0
 
           return (
@@ -119,7 +118,7 @@ export default function PrebakedScreen() {
                   </Form.Select>
 
                   <Button
-                    className='add-to-cart'
+                    className="add-to-cart"
                     variant="outline-dark"
                     disabled={qtyInCart >= 3}
                     onClick={() => addToCartHandler(product._id)}

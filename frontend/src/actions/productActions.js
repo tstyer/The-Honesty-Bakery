@@ -22,21 +22,19 @@ import {
 
 // GET all products (HomeScreen, Prebaked, Ready-to-Bake)
 export const listProducts =
-  (pageNumber = 1, category = "") =>
+  (pageNumber = '', category = '', type = '') =>
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST })
 
-      let url = `/api/products/?page=${pageNumber}`
+      const { data } = await axios.get(
+        `/api/products/?page=${pageNumber}&category=${category}&type=${type}`
+      )
 
-      // If a category is provided, add it to the query string
-      if (category) {
-        url += `&category=${category}`
-      }
-
-      const { data } = await axios.get(url)
-
-      dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data })
+      dispatch({
+        type: PRODUCT_LIST_SUCCESS,
+        payload: data,
+      })
     } catch (error) {
       dispatch({
         type: PRODUCT_LIST_FAIL,
@@ -47,6 +45,7 @@ export const listProducts =
       })
     }
   }
+
 
 
 
