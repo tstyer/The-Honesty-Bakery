@@ -21,6 +21,9 @@ export default function ProductEditScreen() {
   const [description, setDescription] = useState('')
   const [uploading, setUploading] = useState(false)
 
+  // ✅ NEW: productType state
+  const [productType, setProductType] = useState('PREBAKED')
+
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, error, product } = productDetails
 
@@ -45,18 +48,21 @@ export default function ProductEditScreen() {
         setCategory(product.category)
         setCountInStock(product.countInStock)
         setDescription(product.description)
+
+        // ✅ NEW: load productType from backend (fallback to PREBAKED)
+        setProductType(product.productType || 'PREBAKED')
       }
     }
   }, [dispatch, navigate, productId, product, successUpdate])
 
   const uploadFileHandler = (e) => {
-  const file = e.target.files?.[0]
-  if (!file) return
+    const file = e.target.files?.[0]
+    if (!file) return
 
-  // React-served images live in /public/images
-  // manually copy the file into frontend/public/images.
-  setImage(`/images/${file.name}`)
-}
+    // React-served images live in /public/images
+    // manually copy the file into frontend/public/images.
+    setImage(`/images/${file.name}`)
+  }
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -69,6 +75,9 @@ export default function ProductEditScreen() {
         category,
         countInStock,
         description,
+
+        // ✅ NEW: send productType to backend
+        productType,
       })
     )
   }
@@ -130,6 +139,18 @@ export default function ProductEditScreen() {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             />
+          </Form.Group>
+
+          {/* ✅ NEW: Product Type dropdown */}
+          <Form.Group controlId="productType" className="my-2">
+            <Form.Label>Product Type</Form.Label>
+            <Form.Select
+              value={productType}
+              onChange={(e) => setProductType(e.target.value)}
+            >
+              <option value="PREBAKED">Pre-baked</option>
+              <option value="READY_TO_BAKE">Ready-to-bake</option>
+            </Form.Select>
           </Form.Group>
 
           <Form.Group controlId="countInStock" className="my-2">
