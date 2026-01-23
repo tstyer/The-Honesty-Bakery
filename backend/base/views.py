@@ -242,11 +242,19 @@ def getProducts(request):
     page = request.query_params.get('page')
     category = request.query_params.get('category')
 
+    # read product type from query string
+    product_type = request.query_params.get('type')
+
     products = Product.objects.all()
 
     # Filter by category if provided
     if category:
         products = products.filter(category=category)
+
+    # filter by productType if provided
+    # Example: ?type=PREBAKED or ?type=READY_TO_BAKE
+    if product_type:
+        products = products.filter(productType=product_type)
 
     paginator = Paginator(products, 12)  # 12 products per page
 
@@ -262,7 +270,7 @@ def getProducts(request):
 
     # --- NORMALISE IMAGE PATHS ---
     # Convert any /media/... paths to /images/<filename>
-    # (because your images live in frontend/public/images)
+    # (because images live in frontend/public/images)
     for p in data:
         img = p.get('image', '')
         if img and img.startswith('/media/'):
@@ -274,6 +282,7 @@ def getProducts(request):
         'page': page,
         'pages': paginator.num_pages,
     })
+
 
 
 @api_view(['GET'])
