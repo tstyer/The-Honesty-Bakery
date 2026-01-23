@@ -241,8 +241,6 @@ from rest_framework.response import Response
 def getProducts(request):
     page = request.query_params.get('page')
     category = request.query_params.get('category')
-
-    # read product type from query string
     product_type = request.query_params.get('type')
 
     products = Product.objects.all()
@@ -251,14 +249,13 @@ def getProducts(request):
     if category:
         products = products.filter(category=category)
 
-    # filter by productType if provided
-    # Example: ?type=PREBAKED or ?type=READY_TO_BAKE
+    # Filter by productType if provided
     if product_type:
         products = products.filter(productType=product_type)
 
     paginator = Paginator(products, 12)  # 12 products per page
 
-    if page is None:
+    if not page:
         page = 1
 
     page = int(page)
@@ -269,8 +266,6 @@ def getProducts(request):
     data = serializer.data
 
     # --- NORMALISE IMAGE PATHS ---
-    # Convert any /media/... paths to /images/<filename>
-    # (because images live in frontend/public/images)
     for p in data:
         img = p.get('image', '')
         if img and img.startswith('/media/'):
@@ -282,6 +277,7 @@ def getProducts(request):
         'page': page,
         'pages': paginator.num_pages,
     })
+
 
 
 
