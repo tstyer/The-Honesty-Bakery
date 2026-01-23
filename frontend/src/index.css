@@ -475,12 +475,36 @@ body,
   opacity: 0.9;
   pointer-events: none;     /* never blocks clicks */
 
-  /* gentle, playful motion */
+  /* register it to recieve an animation effect - floating */
   animation: bee-float 6s ease-in-out infinite;
 }
 
 /* bee floating animation */
 @keyframes bee-float {
+  0% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+}
+
+/* Bee 3 */
+
+.bee-3 {
+  position: fixed;
+  right: 100px;
+  top: 500px;
+  width: 70px;
+  height: auto;
+  opacity: 70%;
+  animation: bee-3 6s ease-in-out infinite;
+}
+
+@keyframes bee-3 {
   0% {
     transform: translateY(0) rotate(-2deg);
   }
@@ -511,9 +535,9 @@ body,
   }
 }
 
-/* Hide bee on very small screens */
-@media (max-width: 768px) {
-  .home-bee {
+/* Hide bees on very small screens */
+@media (max-width: 1100px) {
+  .home-bee, .bee-3 {
     display: none;
   }
 }
