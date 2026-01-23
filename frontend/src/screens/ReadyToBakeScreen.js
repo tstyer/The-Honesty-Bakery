@@ -24,8 +24,18 @@ export default function ReadyToBakeScreen() {
     <Container className="py-4">
       <h1 className="prebaked-title py-4">Personlised cakes</h1>
       <h3 className="prebaked-sub pb-4">
-        Choose a cake kit and I’ll help you get the perfect setup. Once you've got an idea, hit any of the 'contact me' buttons to get started!
+        Choose a cake kit and I’ll help you get the perfect setup. Once you've
+        got an idea, hit any of the 'contact me' buttons to get started!
       </h3>
+
+      {/* Honey pot img */}
+      <div className="honey-div">
+        <img
+          src="/images/honey-prebaked.png"
+          alt="Picture of cartoon honey pot"
+          className="honey-pot-prebaked"
+        />
+      </div>
 
       {loading ? (
         <Loader />
@@ -35,20 +45,30 @@ export default function ReadyToBakeScreen() {
         <Row>
           {products.map((product) => (
             <Col key={product._id} xs={12} md={4} className="mb-4">
-              <div className="prebaked-image-wrap">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="prebaked-image"
-                />
+              {/* this wrapper becomes a flex column "card" */}
+              <div className="ready-card">
+                {/* content area grows, button gets pushed down */}
+                <div className="ready-content">
+                  <div className="prebaked-image-wrap">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="prebaked-image"
+                    />
+                  </div>
+
+                  <h3 className="mt-3">{product.name}</h3>
+                  <p className="text-muted">{product.description}</p>
+                </div>
+
+                <Button
+                  className="contact-me"
+                  variant="outline-dark"
+                  href={contactLink}
+                >
+                  Contact me
+                </Button>
               </div>
-
-              <h3 className="mt-3">{product.name}</h3>
-              <p className="text-muted">{product.description}</p>
-
-              <Button className="add-to-cart" variant="outline-dark" href={contactLink}>
-                Contact me
-              </Button>
             </Col>
           ))}
         </Row>
