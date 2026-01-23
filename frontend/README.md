@@ -79,4 +79,6 @@ This is a common if you want your website to display on Heroku, otherwise, you w
 
 Bee Icons found at ![flaticons](https://www.flaticon.com/free-icons/bee), by 'Freepic'
 
+bee_3 by 'Freepic'.
+
 Honey Pot Icon found at ![flaticons](https://www.flaticon.com/free-icons/bee), by 'mikan933'

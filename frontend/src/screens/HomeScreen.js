@@ -57,6 +57,12 @@ function HomeScreen({ category }) {
   />
 </div>
 
+<img
+  src='/images/bee_3.png'
+  alt='Image of flying bee'
+  className='bee-3'
+/>
+
 
           {/* CTA buttons */}
           <div className="d-flex flex-column flex-md-row gap-3 justify-content-center mb-4">
