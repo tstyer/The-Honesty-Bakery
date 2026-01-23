@@ -15,16 +15,29 @@ class Product(models.Model):
     category = models.CharField(max_length=200, null=True, blank=True)
     rating = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     numReviews = models.IntegerField(null=True, blank=True, default=0)
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)    
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     countInStock = models.IntegerField(null=True, blank=True, default=0)
+
+    # ProductType lets you decide which screen it appears on.
+    PRODUCT_TYPES = (
+        ("PREBAKED", "Pre-baked"),
+        ("READY_TO_BAKE", "Ready-to-bake"),
+    )
+    productType = models.CharField(
+        max_length=20,
+        choices=PRODUCT_TYPES,
+        default="PREBAKED",   
+    )
+
     isPrebaked = models.BooleanField(default=False)
+
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     # This will return the name of the product in django, instead of "Product object (1)"
     def __str__(self):
         return self.name
-    
+
 
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
