@@ -21,7 +21,7 @@ export default function ProductEditScreen() {
   const [description, setDescription] = useState('')
   const [uploading, setUploading] = useState(false)
 
-  // ✅ NEW: productType state
+  // productType state
   const [productType, setProductType] = useState('PREBAKED')
 
   const productDetails = useSelector((state) => state.productDetails)
@@ -49,7 +49,7 @@ export default function ProductEditScreen() {
         setCountInStock(product.countInStock)
         setDescription(product.description)
 
-        // ✅ NEW: load productType from backend (fallback to PREBAKED)
+        // load productType from backend (fallback to PREBAKED)
         setProductType(product.productType || 'PREBAKED')
       }
     }
@@ -76,7 +76,7 @@ export default function ProductEditScreen() {
         countInStock,
         description,
 
-        // ✅ NEW: send productType to backend
+        // send productType to backend
         productType,
       })
     )
@@ -141,7 +141,7 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
 
-          {/* ✅ NEW: Product Type dropdown */}
+          {/* Product Type dropdown */}
           <Form.Group controlId="productType" className="my-2">
             <Form.Label>Product Type</Form.Label>
             <Form.Select
