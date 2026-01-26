@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import os
 import dj_database_url
-if os.path.isfile('env.py'):
+if os.path.exists("env.py"):
     import env
+
 
 from pathlib import Path
 
@@ -39,7 +40,6 @@ ALLOWED_HOSTS = [
     'localhost',
     'the-honesty-bakery-29256f22a3f7.herokuapp.com',
 ]
-
 
 # Application definition
 

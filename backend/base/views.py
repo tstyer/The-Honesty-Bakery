@@ -5,16 +5,30 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 
-
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .models import Product, Review
+from .models import Product, Review, Order
 from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer
 
 import stripe
 from django.conf import settings
 from django.contrib.auth import authenticate
+
+from decimal import Decimal, ROUND_HALF_UP
+from django.shortcuts import get_object_or_404
+
+
+# ======================
+# HELPERS
+# ======================
+
+def to_pence(amount):
+    """
+    Convert Decimal pounds -> integer pence safely.
+    e.g. Decimal('10.00') -> 1000
+    """
+    return int((Decimal(amount) * 100).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
 
 
 # ======================
@@ -173,6 +187,7 @@ def getUserById(request, pk):
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
 
+
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
 def updateUser(request, pk):
@@ -229,15 +244,12 @@ def updateProduct(request, pk):
     product.image = data.get('image', product.image)
     product.productType = data.get('productType', product.productType)
 
-
     product.save()
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
 
 from django.core.paginator import Paginator
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 
 @api_view(['GET'])
 def getProducts(request):
@@ -281,8 +293,6 @@ def getProducts(request):
     })
 
 
-
-
 @api_view(['GET'])
 def getProduct(request, pk):
     product = Product.objects.get(_id=pk)
@@ -312,6 +322,7 @@ def uploadImage(request):
 
     return Response({'image': default_storage.url(file_name)})
 
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def createProductReview(request, pk):
@@ -329,8 +340,8 @@ def createProductReview(request, pk):
     if rating == 0 or rating == '0' or rating is None:
         return Response({'detail': 'Please select a rating'}, status=status.HTTP_400_BAD_REQUEST)
 
-    # 3) Create review (requires Review model + relation on Product)
-    review = Review.objects.create(
+    # 3) Create review
+    Review.objects.create(
         user=user,
         product=product,
         name=user.first_name or user.username,
@@ -367,7 +378,6 @@ def getOrders(request):
     return Response(serializer.data)
 
 
-
 # ======================
 # ROUTES (DEV)
 # ======================
@@ -400,16 +410,20 @@ def createPaymentIntent(request):
     Creates a Stripe PaymentIntent based on server-trusted product prices.
     Expects: { cartItems: [{ product: <id>, qty: <int> }, ...] }
     """
+    if not settings.STRIPE_SECRET_KEY:
+        return Response(
+            {'detail': 'Stripe secret key not set'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
-    data = request.data
-    cart_items = data.get('cartItems', [])
-
+    cart_items = request.data.get('cartItems', [])
     if not cart_items:
         return Response({'detail': 'Cart is empty'}, status=status.HTTP_400_BAD_REQUEST)
 
-    # Server-side total calculation (prevents price tampering)
     total = 0
+
     for item in cart_items:
         product_id = item.get('product')
         qty = int(item.get('qty', 0))
@@ -417,18 +431,17 @@ def createPaymentIntent(request):
         if not product_id or qty <= 0:
             return Response({'detail': 'Invalid cart item'}, status=status.HTTP_400_BAD_REQUEST)
 
-        product = Product.objects.get(_id=product_id)
+        product = get_object_or_404(Product, _id=product_id)
+        total += to_pence(product.price) * qty
 
-        # Convert Decimal -> cents safely
-        total += int(product.price * 100) * qty
-
-    # Optional: use GBP for UK
-    intent = stripe.PaymentIntent.create(
-        amount=total,
-        currency='gbp',
-        automatic_payment_methods={'enabled': True},
-        metadata={'user_id': request.user.id},
-    )
+    try:
+        intent = stripe.PaymentIntent.create(
+            amount=total,
+            currency='gbp',
+            automatic_payment_methods={'enabled': True},
+            metadata={'user_id': request.user.id},
+        )
+    except stripe.error.StripeError as e:
+        return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({'clientSecret': intent['client_secret']})
-
