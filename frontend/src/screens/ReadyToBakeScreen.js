@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import ContactScreen from './ContactScreen'
 
 export default function ReadyToBakeScreen() {
   const dispatch = useDispatch()
@@ -64,7 +65,7 @@ export default function ReadyToBakeScreen() {
                 <Button
                   className="contact-me"
                   variant="outline-dark"
-                  href={contactLink}
+                  href={'</ContactScreen />'}
                 >
                   Contact me
                 </Button>
