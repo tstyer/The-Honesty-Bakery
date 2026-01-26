@@ -4,6 +4,18 @@ The Honesty Bakehouse is a local cake store which I have built this full-stack w
 
 --- 
 
+
+## Setting Up Stripe Payments
+
+To obtain the stripe API keys in order to communicate with the eCommerce store, you need to log into stripe, or create an account. From there, ensure to check the 'Test Mode' icon, to turn it on. 
+
+Then, you should clearly see a section on that current screen titled 'For developers' which will have the PK_test key and the SK_test key, ready to copy. 
+
+NOTE: Never paste these keys into your settings, views, or anywhere that - when pushing - exposes them to github. 
+
+Your keys must be in your env.py file, and that env.py file must be properly stated in the .gitignore file. 
+
+
 ## Testing 
 
 This section documents full-scope testing, from beginning to end of production, using manual and automated tests. 
