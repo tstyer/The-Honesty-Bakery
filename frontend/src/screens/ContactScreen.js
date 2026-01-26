@@ -34,7 +34,7 @@ ${message}`;
   return (
     <Container className="py-4">
       <h1 className="prebaked-title py-4">Contact Me</h1>
-      <p className="text-muted mb-4">
+      <p className="text-muted text-center mb-4 lead">
         Got a question, or would like to place a custom / personlised order? Let
         me know and I’ll get back to you as soon as possible.
       </p>
@@ -84,7 +84,7 @@ ${message}`;
           <Form.Label>Subject</Form.Label>
           <Form.Control
             type="text"
-            placeholder="e.g. Ready-to-bake kit enquiry"
+            placeholder="e.g. Custom Order Enquiry"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
           />
@@ -95,7 +95,7 @@ ${message}`;
           <Form.Control
             as="textarea"
             rows={5}
-            placeholder="Tell me what cake you want, date needed, servings, and any flavours/allergies…"
+            placeholder="Ask me about my services, what cake you want, date needed, servings, and any flavours/allergies…"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             required
