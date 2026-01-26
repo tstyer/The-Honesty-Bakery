@@ -133,13 +133,13 @@ export default function PaymentScreen() {
 
   return (
     <div>
-      <h1>Payment</h1>
+      <h1 className='text-center'>Payment</h1>
 
-      {hasMadeToOrder && (
+      {/*} {hasMadeToOrder && (
         <Message variant="info">
           Your cart includes made-to-order items. Card payment is required before we start baking.
         </Message>
-      )}
+      )} */ }
 
       {errorMsg && <Message variant="danger">{errorMsg}</Message>}
 
