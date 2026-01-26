@@ -24,6 +24,7 @@ import OrderListScreen from './screens/OrderListScreen'
 import ReadyToBakeScreen from './screens/ReadyToBakeScreen'
 import PreBakedScreen from './screens/PreBakedScreen'
 import AboutScreen from './screens/AboutScreen'
+import ContactScreen from './screens/ContactScreen'
 
 function Layout({ stripeError, stripePromise }) {
   const location = useLocation()
@@ -56,6 +57,9 @@ function Layout({ stripeError, stripePromise }) {
 
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
+
+            {/* Contact */}
+            <Route path='/contact' element={<ContactScreen />} />
 
             {/* Payment route */}
             <Route

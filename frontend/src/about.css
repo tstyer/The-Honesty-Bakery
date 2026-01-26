@@ -24,6 +24,7 @@
   width: 90px;
   height: auto;
   display: block;
+  opacity: 70%;
   animation: bee-float 6s ease-in-out infinite;
 }
 
