@@ -6,25 +6,37 @@ export default function ContactScreen() {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [enquiryType, setEnquiryType] = useState("general");
 
   const submitHandler = (e) => {
     e.preventDefault();
 
+    const subjectToUse =
+      subject ||
+      (enquiryType === "general"
+        ? "General enquiry"
+        : "Personalised cake order");
+
+    const bodyToUse = `Name: ${name}
+Email: ${email}
+Enquiry type: ${enquiryType === "general" ? "General enquiry" : "Personalised order"}
+
+${message}`;
+
     // For now: open the user's email app with the details pre-filled
     const mailto = `mailto:hello@honestybakery.com?subject=${encodeURIComponent(
-      subject || "Contact enquiry"
-    )}&body=${encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\n${message}`
-    )}`;
+      subjectToUse
+    )}&body=${encodeURIComponent(bodyToUse)}`;
 
     window.location.href = mailto;
   };
 
   return (
     <Container className="py-4">
-      <h1 className="prebaked-title py-4">Contact</h1>
+      <h1 className="prebaked-title py-4">Contact Me</h1>
       <p className="text-muted mb-4">
-        Tell me what you’re looking for and I’ll get back to you as soon as possible.
+        Got a question, or would like to place a custom / personlised order? Let
+        me know and I’ll get back to you as soon as possible.
       </p>
 
       <Form onSubmit={submitHandler}>
@@ -55,6 +67,18 @@ export default function ContactScreen() {
             </Form.Group>
           </Col>
         </Row>
+
+        {/* dropdown */}
+        <Form.Group controlId="enquiryType" className="mb-3">
+          <Form.Label>Enquiry type</Form.Label>
+          <Form.Select
+            value={enquiryType}
+            onChange={(e) => setEnquiryType(e.target.value)}
+          >
+            <option value="general">General enquiry</option>
+            <option value="personalised">Personalised order</option>
+          </Form.Select>
+        </Form.Group>
 
         <Form.Group controlId="subject" className="mb-3">
           <Form.Label>Subject</Form.Label>
