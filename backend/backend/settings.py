@@ -15,11 +15,11 @@ import dj_database_url
 if os.path.exists("env.py"):
     import env
 
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = BASE_DIR.parent
 
 STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY", "")
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 SECRET_KEY = 'django-insecure-!f6627=08+3*e!ww59+9hv5s&=l1u(=!&zpsq=b7+60$=!w@na'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -134,7 +134,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join('BASE_DIR', 'frontend/build')
+            os.path.join(PROJECT_ROOT, 'frontend', 'build')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -203,7 +203,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static'
+    BASE_DIR / 'static',
     BASE_DIR / 'frontend/build/static'
 ]
 
