@@ -59,7 +59,7 @@ function Layout({ stripeError, stripePromise }) {
             <Route path="/register" element={<RegisterScreen />} />
 
             {/* Contact */}
-            <Route path='/contact' element={<ContactScreen />} />
+            <Route path="/contact" element={<ContactScreen />} />
 
             {/* Payment route */}
             <Route
