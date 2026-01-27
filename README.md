@@ -16,6 +16,19 @@ NOTE: Never paste these keys into your settings, views, or anywhere that - when 
 Your keys must be in your env.py file, and that env.py file must be properly stated in the .gitignore file. 
 
 
+## Merging Django & React
+
+To do this, ensure everything is saved, pushed, and all servers are closed, and terminals are shut. 
+
+Then, open your folders, and move the frontend (react) into the backend (Django).
+
+Then, open a terminal and change directory to the frontend: "cd backend" + "cd frontend" - takes you to the new location of your frontend folder. 
+
+In here, type "npm run build"
+
+"Run build" is something you would need to continue to run everytime you make changes to the website. 
+
+
 ## Testing 
 
 This section documents full-scope testing, from beginning to end of production, using manual and automated tests. 
