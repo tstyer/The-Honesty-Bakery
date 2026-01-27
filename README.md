@@ -15,6 +15,23 @@ NOTE: Never paste these keys into your settings, views, or anywhere that - when 
 
 Your keys must be in your env.py file, and that env.py file must be properly stated in the .gitignore file. 
 
+Then, in your urls.py, you need import TemplateView: 
+
+from django.views.generic import TemplateView
+
+From there, you need to add a route which points to the index.html file in the build folder you created when you run 'npm run build'. 
+
+The route is: path('', TemplateView.as_view(template_name='index.html')) - put this in the url patterns.
+
+This index.html file is now where the react app lives, and it will update everytime you run 'npm run build' after every new change you make. 
+
+Finally, in your STATICFILES_DIRS, within settings, you need to let it know that you also have static files in your frontend/build that you created. 
+
+So, add this line:
+
+ BASE_DIR / 'frontend/build/static'
+
+
 
 ## Merging Django & React
 
@@ -27,6 +44,10 @@ Then, open a terminal and change directory to the frontend: "cd backend" + "cd f
 In here, type "npm run build"
 
 "Run build" is something you would need to continue to run everytime you make changes to the website. 
+
+From there, you will need to add the following "os.path..." to your 'DIRS' in the Templates section of settings:
+
+![Screenshot of above](./backend/frontend/public/images/merging_front_back/settings_path.png)
 
 
 ## Testing 
