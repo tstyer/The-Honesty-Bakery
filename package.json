@@ -1,0 +1,7 @@
+{
+  "name": "honesty-bakery-root",
+  "private": true,
+  "scripts": {
+    "heroku-postbuild": "cd backend/frontend && npm ci && npm run build"
+  }
+}
