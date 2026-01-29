@@ -4,35 +4,35 @@ from .views import MyTokenObtainPairView
 
 urlpatterns = [
     # ===== AUTH / USERS =====
-    path('api/users/login/', views.loginUser, name='user-login'),
-    path('api/users/profile/', views.getUserProfile, name='user-profile'),
-    path('api/users/', views.registerUser, name='user-register'),
-    path('api/users/admin/', views.getUsers, name='users'),
-    path('api/users/update/', views.updateUserProfile, name='user-update'),
-    path('api/users/delete/<int:pk>/', views.deleteUser, name='user-delete'),
-    path('api/users/<int:pk>/', views.getUserById, name='user'),
-    path('api/users/update/<int:pk>/', views.updateUser, name='user-update'),
+    path('users/login/', views.loginUser, name='user-login'),
+    path('users/profile/', views.getUserProfile, name='user-profile'),
+    path('users/', views.registerUser, name='user-register'),
+    path('users/admin/', views.getUsers, name='users'),
+    path('users/update/', views.updateUserProfile, name='user-update'),
+    path('users/delete/<int:pk>/', views.deleteUser, name='user-delete'),
+    path('users/<int:pk>/', views.getUserById, name='user'),
+    path('users/update/<int:pk>/', views.updateUser, name='user-update'),
 
     # ===== PRODUCTS =====
-    path('api/products/', views.getProducts, name='products'),
-    path('api/products/<int:pk>/', views.getProduct, name='product'),
-    path('api/upload/', views.uploadImage, name='image-upload'),
-    path('api/products/<int:pk>/reviews/', views.createProductReview, name='create-product-review'),
-    path('api/products/delete/<int:pk>/', views.deleteProduct, name='product-delete'),
-    path('api/products/create/', views.createProduct, name='product-create'),
-    path('api/products/update/<int:pk>/', views.updateProduct, name='product-update'),
+    path('products/', views.getProducts, name='products'),
+    path('products/<int:pk>/', views.getProduct, name='product'),
+    path('upload/', views.uploadImage, name='image-upload'),
+    path('products/<int:pk>/reviews/', views.createProductReview, name='create-product-review'),
+    path('products/delete/<int:pk>/', views.deleteProduct, name='product-delete'),
+    path('products/create/', views.createProduct, name='product-create'),
+    path('products/update/<int:pk>/', views.updateProduct, name='product-update'),
 
 
     # ===== ORDERS =====
-    path('api/orders/', views.getOrders, name='orders'),
+    path('orders/', views.getOrders, name='orders'),
 
 
 
     # ===== ROUTES (DEV ONLY) =====
-    path('api/', views.getRoutes, name='routes'),
+    path('', views.getRoutes, name='routes'),
 
     # ===== STRIPE PAYMENT =====
-    path('api/config/stripe/', views.getStripeConfig, name='stripe-config'),
-    path('api/payments/create-payment-intent/', views.createPaymentIntent, name='create-payment-intent'),
+    path('config/stripe/', views.getStripeConfig, name='stripe-config'),
+    path('payments/create-payment-intent/', views.createPaymentIntent, name='create-payment-intent'),
 
 ]
