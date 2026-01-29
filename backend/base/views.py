@@ -253,7 +253,8 @@ from django.core.paginator import Paginator
 
 @api_view(['GET'])
 def getProducts(request):
-    page = request.query_params.get('page')
+    page = request.query_params.get('page') or 1
+    page = int(page)
     category = request.query_params.get('category')
     product_type = request.query_params.get('type')
 
