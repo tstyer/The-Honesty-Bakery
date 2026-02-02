@@ -123,7 +123,7 @@ export default function PrebakedScreen() {
                     disabled={qtyInCart >= 3}
                     onClick={() => addToCartHandler(product._id)}
                   >
-                    {qtyInCart >= 3 ? 'Max Reached' : 'Add to Cart'}
+                    {qtyInCart >= 5 ? 'Max Reached' : 'Add to Cart'}
                   </Button>
 
                   {justAddedId === product._id && qtyInCart < 3 && (
