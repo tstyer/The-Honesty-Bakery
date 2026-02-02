@@ -111,3 +111,29 @@ Ready to bake cards
   background: rgba(58, 46, 42, 0.04);
   transform: translateY(-1px);
 }
+
+
+/* Hover reveal: show more of the cake on hover */
+.prebaked-image-wrap {
+  height: 220px;               /* default cropped height */
+  overflow: hidden;
+  border-radius: 16px;
+  transition: height 0.3s ease;
+}
+
+/* Image transition for subtle polish */
+.prebaked-image {
+  transition: transform 0.3s ease;
+}
+
+/* When hovering the whole card, expand image area */
+.ready-card:hover .prebaked-image-wrap,
+.cake-card:hover .prebaked-image-wrap {
+  height: 360px;               /* expanded height – tweak to taste */
+}
+
+/* Optional gentle zoom so it feels intentional */
+.ready-card:hover .prebaked-image,
+.cake-card:hover .prebaked-image {
+  transform: scale(1.02);
+}
