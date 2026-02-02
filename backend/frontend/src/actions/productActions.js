@@ -22,7 +22,7 @@ import {
 
 // GET all products (HomeScreen, Prebaked, Ready-to-Bake)
 export const listProducts =
-  (pageNumber = '', category = '', type = '') =>
+  (pageNumber = '1', category = '', type = '') =>
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST })
