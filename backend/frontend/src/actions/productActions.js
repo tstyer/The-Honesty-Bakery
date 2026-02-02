@@ -22,14 +22,17 @@ import {
 
 // GET all products (HomeScreen, Prebaked, Ready-to-Bake)
 export const listProducts =
-  (pageNumber = '1', category = '', type = '') =>
+  (pageNumber = 1, category = '', type = '') =>
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST })
 
+      const page = pageNumber || 1
+
       const { data } = await axios.get(
-        `/api/products/?page=${pageNumber}&category=${category}&type=${type}`
-      )
+  `/api/products/?page=${page}&category=${category}&type=${type}`
+)
+
 
       dispatch({
         type: PRODUCT_LIST_SUCCESS,
