@@ -78,7 +78,7 @@ export default function PrebakedScreen() {
           const qtyInCart = cartItem ? cartItem.qty : 0
 
           return (
-            <Row key={product._id} className="align-items-center mb-4">
+            <Row key={product._id} className="align-items-center mb-4 cake-card">
               {/* Product image */}
               <Col xs={12} md={4}>
                 <div className="prebaked-image-wrap">
