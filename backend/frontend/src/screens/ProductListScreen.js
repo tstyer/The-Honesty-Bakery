@@ -53,7 +53,7 @@ export default function ProductListScreen() {
 
         <Col className="text-end">
           {userInfo && userInfo.isAdmin && (
-            <Button className="my-3 create-product cta-btn" onClick={() => dispatch(createProduct())}>
+            <Button variant="outline-dark" className="my-3 create-product cta-btn" onClick={() => dispatch(createProduct())}>
               <i className="fas fa-plus"></i> Create Product
             </Button>
           )}
