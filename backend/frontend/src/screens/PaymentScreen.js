@@ -193,7 +193,7 @@ export default function PaymentScreen() {
           </div>
         )}
 
-        <Button type="submit" className="my-3" disabled={paying || (method === 'Card' && !stripeReady)}>
+        <Button type="submit" className="my-3 cta-btn" variant='outline-dark' disabled={paying || (method === 'Card' && !stripeReady)}>
           {method === 'Card' ? (paying ? 'Processing…' : 'Pay & Continue') : 'Continue'}
         </Button>
       </Form>
