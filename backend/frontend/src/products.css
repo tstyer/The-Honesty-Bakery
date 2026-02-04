@@ -129,8 +129,9 @@ Ready to bake cards
 /* When hovering the whole card, expand image area */
 .ready-card:hover .prebaked-image-wrap,
 .cake-card:hover .prebaked-image-wrap {
-  height: 390px;               /* expanded height – tweak to taste */
+  height: 390px;               /* expanded height */
 }
+
 
 /* Optional gentle zoom so it feels intentional */
 .ready-card:hover .prebaked-image,
