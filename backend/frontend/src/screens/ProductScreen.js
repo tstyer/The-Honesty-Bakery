@@ -67,9 +67,15 @@ function ProductScreen() {
 
   return (
     <div>
-      <Link to="/" className="btn btn-light my-3 cat-btn" variant='outline-dark'>
-        Go Back
-      </Link>
+      <Button
+      className="btn my-3 cat-btn" 
+      variant='outline-dark'
+      >
+        <Link to="/">
+        Back Home
+        </Link>
+      </Button>
+      
 
       {loading ? (
         <Loader />
@@ -143,7 +149,8 @@ function ProductScreen() {
                   <ListGroup.Item>
                     <Button
                       onClick={addToCartHandler}
-                      className="btn-block"
+                      className="btn-block cta-btn"
+                      variant='outline-dark'
                       type="button"
                       disabled={product.countInStock === 0}
                     >
