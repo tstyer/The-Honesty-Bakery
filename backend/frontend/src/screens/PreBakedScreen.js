@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 import { listProducts } from '../actions/productActions'
 import { addToCart } from '../actions/cartActions'
@@ -82,11 +82,13 @@ export default function PrebakedScreen() {
               {/* Product image */}
               <Col xs={12} md={4}>
                 <div className="prebaked-image-wrap">
+                  <Link to={`/product/${product._id}`}>
                   <img
                     src={product.image}
                     alt={product.name}
                     className="prebaked-image"
                   />
+                  </Link>
                 </div>
               </Col>
 
