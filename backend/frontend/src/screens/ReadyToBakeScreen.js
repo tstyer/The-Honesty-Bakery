@@ -51,11 +51,14 @@ export default function ReadyToBakeScreen() {
                 {/* content area grows, button gets pushed down */}
                 <div className="ready-content">
                   <div className="prebaked-image-wrap">
+                    <Link to={`/product/${product._id}`}>
                     <img
                       src={product.image}
                       alt={product.name}
                       className="prebaked-image"
                     />
+                    </Link>
+                    
                   </div>
 
                   <h3 className="mt-3">{product.name}</h3>
