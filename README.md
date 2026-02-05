@@ -152,6 +152,8 @@ The website was designed on Fignma.
 
 ## Wireframes
 
+**You've downloaded image for desktop homepage**
+
 Provide links or embedded images of your wireframes:
 - Home page (Mobile / Tablet / Desktop)
 - Other pages...
