@@ -162,3 +162,10 @@ Ready to bake cards
   background: rgba(58, 46, 42, 0.04);
   transform: translateY(-1px);
 }
+
+ /* Single Product Screen */
+
+ .product-image {
+  border-radius: 16px;
+  opacity: 70%;
+ }

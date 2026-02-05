@@ -67,7 +67,7 @@ function ProductScreen() {
 
   return (
     <div>
-      <Link to="/" className="btn btn-light my-3">
+      <Link to="/" className="btn btn-light my-3 cat-btn" variant='outline-dark'>
         Go Back
       </Link>
 
@@ -79,7 +79,7 @@ function ProductScreen() {
         <>
           <Row>
             <Col md={6}>
-              <Image src={imageSrc} alt={product.name} fluid />
+              <Image src={imageSrc} alt={product.name} fluid className='product-image' />
             </Col>
 
             <Col md={3}>
