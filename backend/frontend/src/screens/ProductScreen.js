@@ -219,7 +219,7 @@ function ProductScreen() {
                     />
                   </Form.Group>
 
-                  <Button type="submit" variant="primary" className="my-2">
+                  <Button type="submit" className="my-3 cta-btn btn-block" variant="outline-dark">
                     Submit
                   </Button>
                 </Form>
