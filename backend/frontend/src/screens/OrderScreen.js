@@ -79,7 +79,7 @@ export default function OrderScreen() {
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <Button as={Link} to="/" className="btn-block">
+                <Button as={Link} to="/" className="btn-block cta-btn" variant='outline-dark'>
                   Back to Home
                 </Button>
               </ListGroup.Item>

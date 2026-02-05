@@ -107,7 +107,8 @@ export default function PlaceOrderScreen() {
               <ListGroup.Item>
                 <Button
                   type='button'
-                  className='btn-block'
+                  className='btn-block cta-btn'
+                  variant='outline-dark'
                   disabled={!paymentMethod || !paymentIsValid}
                   onClick={placeOrderHandler}
                 >
