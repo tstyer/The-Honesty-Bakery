@@ -133,6 +133,15 @@ The navigation model prioritises ease of movement and minimal friction. A persis
 - Button-based calls to action (Add to Order, Checkout)
 
 ### Skeleton Plane
+
+**Wireframes**
+
+The website was designed on Fignma. 
+
+1. Home Page:
+
+
+
 - Wireframes for mobile, tablet, desktop
 - Priority/content layout decisions
 
@@ -165,6 +174,7 @@ List and explain key features implemented in the project.
 - Tailwind
 - Django
 - PostresSQL
+- LucidChart (ERD's + Wireframes)
 - [Any frameworks/libraries]
 - [Design/UX tools used like Balsamiq]
 
