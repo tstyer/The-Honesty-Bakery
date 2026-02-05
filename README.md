@@ -1,9 +1,174 @@
-﻿# Honesty Bakery
+﻿# The Honesty Bakery
 
-The Honesty Bakehouse is a local cake store which I have built this full-stack website for. Created with React, it caters to all audiences who pass the physical shop. There are limited pages, but it is consistent in design and offers an intuitive layout. 
+![Screenshot of Website Home](./backend/frontend/public/images/readme_cover.png)
+
+The Honesty Bakery is a local cake store in my town. I built this full-stack website for them, using React, Redux, Tailwind, Django, PostgresSQL, and some Vanilla JS. The branding and tone is consistent, and it caters to all audiences who pass the physical shop or website. There are limited pages, but it offers an intuitive layout. 
 
 --- 
 
+## Table of Contents
+
+- [User Experience (UX)](#user-experience-ux)
+  - [Strategy Plane](#strategy-plane)
+  - [Scope Plane](#scope-plane)
+  - [Structure Plane](#structure-plane)
+  - [Skeleton Plane](#skeleton-plane)
+  - [Surface Plane](#surface-plane)
+- [Wireframes](#wireframes)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Setting Up Stripe Payments](#setting-up-stripe-payments)
+- [Merging Django With React](#merging-django--react)
+- [Deployment](#deployment)
+- [Testing](#testing)
+  - [User Stories Testing](#user-stories-testing)
+  - [Manual Testing](#manual-testing)
+  - [Validators and Tools](#validators-and-tools)
+  - [Bugs](#bugs)
+- [Credits](#credits)
+- [Acknowledgements](#acknowledgements)
+
+---
+
+## User Experience (UX)
+
+### Strategy Plane
+
+1. Developer Goals
+
+My overall goal was to develop an intuitive website for a local business that adhered to brand tone. To acheive this, I created these suer stories for myself:
+
+- As the developer, I want to use React.JS to create components and screens for the website. 
+- As a developer, I want to use PostgresSQL to manage the business database. 
+- As a developer, I want to demonstrate my ability to write clean code to showcase my skills. 
+
+2. Business Goals
+
+The small business I created this for had general and specific goals:
+
+- As the business owner, I want to easily navigate my website as a customer would.
+- As the business owner, I want to easily create new products for display.
+- As the business owner, I want to easily sign in and out. 
+- As the business owner, I want a secure and efficient checkout process. 
+- As the business owner, I want the branding and messaging to be consistent. 
+
+3. Customer Goals
+
+- As a customer, I want to know what the business offers on page 1. 
+- As a customer, I want clear call-to-actions on relevant pages. 
+- As a customers, I want to easily contact the owner. 
+- As a customer, I want intuitive navigation and checkout. 
+- As a customer, I want to easily find the social media links.
+- As a customer, I want to be able to leave feedback.  
+
+
+### Scope Plane
+
+**Core Features**
+
+- CTA's on home page. 
+- Product screens for types of product. 
+- Individual product screens. 
+- Add to cart.
+- Adjust the quantity.
+- Contact business. 
+- Register + Login
+- Stripe Payments.
+
+**Enhancements**
+
+- Product Reviews. 
+- Visual Hover Effects.
+- Order History.
+- 
+
+**Possible Extra's**
+
+- Search Feature
+- **INCLUDE MORE HERE**
+
+**Features not Included & Why?**
+
+- Wishlist - User's can already purchase without saving.
+- Extra Floating Graphics (Bee's) - Too cluttered and not worth the extra coding. 
+- Order Tracking - There won't be future delivery.
+- Advanced product filtering - There is only a small product catalogue. 
+
+
+### Structure Plane
+
+**Information architecture**
+
+The information architecture of the site is designed to be simple and intuitive. Products are organised into clear categories based on their type, allowing users to quickly locate items. Each product follows a consistent layout, presenting essential information such as pricing, availability, and description in a predictable order. User account features and administrative tools are separated from the main browsing experience to reduce cognitive load and maintain clarity.
+
+Products are grouped by type:
+- Ready-to-Bake Cakes
+- Pre-baked Cakes
+
+Each product follows a consistent structure:
+- Image
+- Name
+- Price
+- Description
+- Stock status
+
+User-related content is separated:
+- Login / Register
+- Cart
+- Checkout
+- Order history
+- Admin functionality is isolated:
+- Product management
+- Order management
+
+**Navigation model**
+
+The navigation model prioritises ease of movement and minimal friction. A persistent navigation bar allows users to access core pages from anywhere on the site. Product images and titles link directly to individual product pages, supporting intuitive exploration. Contextual navigation, such as the “Go Back” button on product pages, enables users to return to previous listings without disrupting their browsing flow. Clear call-to-action buttons guide users through the purchasing journey from browsing to checkout.
+
+- Top navigation bar (Home, About, Contact, Cakes)
+- Dropdown for cake categories
+- Clickable product cards
+- “Go Back” navigation on product pages
+- Cart icon visible at all times
+- Button-based calls to action (Add to Order, Checkout)
+
+### Skeleton Plane
+- Wireframes for mobile, tablet, desktop
+- Priority/content layout decisions
+
+### Surface Plane
+- Final design decisions (color palette, fonts, visual elements)
+
+---
+
+## Wireframes
+
+Provide links or embedded images of your wireframes:
+- Home page (Mobile / Tablet / Desktop)
+- Other pages...
+
+---
+
+## Features
+
+List and explain key features implemented in the project.
+
+---
+
+## Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript
+- Stripe
+- React.js
+- Tailwind
+- Django
+- PostresSQL
+- [Any frameworks/libraries]
+- [Design/UX tools used like Balsamiq]
+
+---
 
 ## Setting Up Stripe Payments
 
@@ -29,9 +194,9 @@ Finally, in your STATICFILES_DIRS, within settings, you need to let it know that
 
 So, add this line:
 
- BASE_DIR / 'frontend/build/static'
+BASE_DIR / 'frontend/build/static'
 
-
+---
 
 ## Merging Django & React
 
@@ -49,12 +214,32 @@ From there, you will need to add the following "os.path..." to your 'DIRS' in th
 
 ![Screenshot of above](./backend/frontend/public/images/merging_front_back/settings_path.png)
 
+---
 
-## Testing 
+## Deployment
 
-This section documents full-scope testing, from beginning to end of production, using manual and automated tests. 
+Explain how your project is deployed and how someone can clone and run it locally. Expand on this:
+1. Clone this repository
+2. Open in VS Code
+3. Install dependencies
+4. Run application
+
+Link to live site: [Deployed Site](#)
+
+---
+
+## Testing
+
+### User Stories Testing
+
+List your user stories and describe how each was met in the final project.
 
 ### Manual Testing
+
+- Navigation
+- Responsiveness
+- Browser compatibility
+- Forms and interactivity
 
 1. One of the first manual tests carried out was to click on one of the products displayed on the homescreen to see if the productScreen.js renders properly. For this to be successful, it needs to take you to a new page (not open a new one), show the 3 collumns (image, price, and details). 
 
@@ -129,6 +314,50 @@ Change user_name = 'email' in views.py. After that, it worked:
 ![Screenshot of order placed](./resources/images/manual_tests/login_to_checkout/order_placed.png)
 
 **NOW, ENSURE PAYMENT DETAILS ARE TAKEN BEFORE ORDER PLACED**
+
+
+### Validators and Tools
+
+- HTML Validator
+- CSS Validator
+- Lighthouse Report (Accessibility, SEO, etc.)
+
+### Bugs
+
+- Describe bugs encountered
+- How you fixed them
+
+---
+
+## Credits
+
+- [Links to any external code, images, or media]
+- Clearly cite all third-party assets
+
+---
+
+## Acknowledgements
+
+Mention any tutorials, mentors, or support resources used.
+
+---
+
+
+
+*********
+
+
+
+
+
+
+
+
+
+## Testing 
+
+This section documents full-scope testing, from beginning to end of production, using manual and automated tests. 
+
 
 
 
