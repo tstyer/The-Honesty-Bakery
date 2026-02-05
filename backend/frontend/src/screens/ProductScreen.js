@@ -67,13 +67,13 @@ function ProductScreen() {
 
   return (
     <div>
+  
       <Button
-      className="btn my-3 cat-btn" 
-      variant='outline-dark'
+        className="my-3 cat-btn"
+        variant="outline-dark"
+        onClick={() => navigate(-1)}
       >
-        <Link to="/">
-        Back Home
-        </Link>
+        Go Back
       </Button>
       
 
