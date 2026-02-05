@@ -69,7 +69,7 @@ function ProductScreen() {
     <div>
   
       <Button
-        className="my-3 cat-btn"
+        className="my-3 cat-btn btn-block"
         variant="outline-dark"
         onClick={() => navigate(-1)}
       >
