@@ -31,38 +31,42 @@ function HomeScreen({ category }) {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          {/* Image as header / title */}
+          {/* Header signage */}
           <div className="home-sign">
-  <img
-    src="/images/toffee_swirl.jpg"
-    alt=""
-    aria-hidden="true"
-    className="home-sign__accent home-sign__accent--left"
-  />
+            <img
+              src="/images/toffee_swirl.jpg"
+              alt=""
+              aria-hidden="true"
+              className="home-sign__accent home-sign__accent--left"
+            />
 
-  <div className="home-sign__main">
-    <div className="home-sign__hanger" aria-hidden="true" />
-    <img
-      src="/images/honesty_sign.jpg"
-      alt="Welcome to The Honesty Bakehouse – restoring faith one bite at a time"
-      className="home-sign__image"
-    />
-  </div>
+            <div className="home-sign__main">
+              <div
+                className="home-sign__hanger"
+                aria-hidden="true"
+              />
 
-  <img
-    src="/images/coffee_cookie.jpg"
-    alt=""
-    aria-hidden="true"
-    className="home-sign__accent home-sign__accent--right"
-  />
-</div>
+              <img
+                src="/images/honesty_sign.jpg"
+                alt="Welcome to The Honesty Bakehouse – restoring faith one bite at a time"
+                className="home-sign__image"
+              />
+            </div>
 
-<img
-  src='/images/bee_3.png'
-  alt='Image of flying bee'
-  className='bee-3'
-/>
+            <img
+              src="/images/coffee_cookie.jpg"
+              alt=""
+              aria-hidden="true"
+              className="home-sign__accent home-sign__accent--right"
+            />
+          </div>
 
+          {/* Decorative bee */}
+          <img
+            src="/images/bee_3.png"
+            alt="Flying bee illustration"
+            className="bee-3"
+          />
 
           {/* CTA buttons */}
           <div className="d-flex flex-column flex-md-row gap-3 justify-content-center mb-4">
@@ -100,6 +104,7 @@ function HomeScreen({ category }) {
               <img
                 src="/images/spoon.png"
                 alt=""
+                aria-hidden="true"
                 className="home-spoon"
               />{' '}
               Honestly Delicious
@@ -107,32 +112,31 @@ function HomeScreen({ category }) {
 
             <img
               src="/images/logo_2.png"
-              alt="Business logo"
+              alt="The Honesty Bakehouse logo"
               className="logo"
             />
 
             <div className="text-wrap align-items-center">
               <p className="general-p mt-4 mx-auto">
-                <strong>If you're strolling through Seabrook,</strong> you might
-                bump into our honesty box. Inside, you'll find all our prebaked
-                cakes. They're truly one-of-a-kind. It's open to all and also
-                serves doggy treats. If you'd like to find out more, simply send
-                me a message, right <a href="/contact">here</a>.
+                <strong>If you're strolling through Seabrook,</strong>{' '}
+                you might bump into our honesty box. Inside, you'll find all our
+                prebaked cakes. They're truly one-of-a-kind. It's open to all and
+                also serves doggy treats. If you'd like to find out more, simply
+                send me a message right{' '}
+                <a href="/contact">here</a>.
               </p>
             </div>
           </div>
         </>
       )}
 
-{/* bee */}
-<img
-  src="/images/bee_2.png"
-  alt=""
-  className="home-bee"
-  aria-hidden="true"
-/>
-
-
+      {/* Bottom bee */}
+      <img
+        src="/images/bee_2.png"
+        alt=""
+        aria-hidden="true"
+        className="home-bee"
+      />
     </div>
   )
 }
