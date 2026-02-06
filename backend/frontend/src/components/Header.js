@@ -76,7 +76,7 @@ function Header() {
                 </LinkContainer>
 
                 <LinkContainer to="/ready-to-bake">
-                  <NavDropdown.Item>Personlised Cakes</NavDropdown.Item>
+                  <NavDropdown.Item>Personalised Cakes</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
             </Nav>

@@ -88,7 +88,7 @@ function HomeScreen({ category }) {
                 size="md"
                 variant="outline-dark"
               >
-                Shop Ready-to-Bake Cakes
+                Shop Personalised Cakes
               </Button>
             </Link>
           </div>
