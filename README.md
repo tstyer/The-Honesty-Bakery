@@ -152,11 +152,26 @@ The website was designed on Fignma.
 
 ## Wireframes
 
-**You've downloaded image for desktop homepage**
+1. Home Page - Desktop:
 
-Provide links or embedded images of your wireframes:
-- Home page (Mobile / Tablet / Desktop)
-- Other pages...
+![Screenshot of Wireframe](./backend/frontend/public/images/desktop_wireframe_basic.png)
+
+2. About Page - Desktop:
+
+![About Screenshot](./backend/frontend/public/images/about_desktop_wireframe.png)
+
+3. Contact Page - Desktop:
+
+![Screenshot of contact](./backend/frontend/public/images/contact_wireframe_desktop.png)
+
+
+**PROVIDE MOBILE/TABLET**
+
+
+### ERD
+
+![Screenshot of ERD](./backend/frontend/public/images/erd's_first_draft.png)
+
 
 ---
 
