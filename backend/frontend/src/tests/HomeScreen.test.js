@@ -2,7 +2,6 @@ import test from "node:test";
 import HomeScreen from "../screens/HomeScreen";
 /* Render puts query into a fake DOM for testing */
 import { render, screen } from '@testing-library/react'
-import { hasUncaughtExceptionCaptureCallback } from "process";
 
 
 /* First need to mock the Redux environment, as tests don't use it 
