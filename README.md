@@ -400,10 +400,9 @@ This was the result on the first test:
 
 ![Screenshot of result](./backend/frontend/public/images/django_tests/urls_test_pass.png)
 
-2. 
+2. Testing Product List endpoint Returns 200
 
-
-
+![Screenshot of test](./backend/frontend/public/images/django_tests/products_api_test.png)
 
 
 ### Validators and Tools
