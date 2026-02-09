@@ -386,6 +386,22 @@ To ge this to pass, I had to create two separate returns for the 'useSelector'.
 
 ### Django Tests
 
+The first thing you should do when writing multiple tests is create a test file.
+
+Since my app name is called 'base', I put the folder in there. 
+
+1. URL Test
+
+For the first test, it was to see if my 'routes' url exists and confirms it loads correctly. 
+
+Then, where my manage.py lives, I ran: python manage.py test.
+
+This was the result on the first test:
+
+![Screenshot of result](./backend/frontend/public/images/django_tests/urls_test_pass.png)
+
+2. 
+
 
 
 
