@@ -342,6 +342,33 @@ Change user_name = 'email' in views.py. After that, it worked:
 
 **NOW, ENSURE PAYMENT DETAILS ARE TAKEN BEFORE ORDER PLACED**
 
+### Jest Tests
+
+1. Hompage Headers
+
+First, I ran simple Jest tests to seeif ym React and Javascript was written well, even though the code already renders the result I want. 
+
+I used mock.jest in a separate test file to mock the DOM and react-redux environment. 
+
+Here, you can see the reason for failure of the first test:
+
+![Screenshot of failed test](./backend/frontend/public/images/jest_tests/home_heading_fail_1.png)
+
+It says react-router-dom is not found, even though it is installed correctly. 
+
+One of the reasons this test didn't run properly, was because I realised I needed to define my mocks before I import the homescreen. 
+
+Secondly, I had to remove the "import test from "node:test";" from the top as it it not Jest. I deleted it and relid on Jests built-in function (test...).
+
+After that, I had to ensure the Mocks were created first before the imports. This is because if HomeScreen loads before my imports, it will have tried to load Axios and crashed. 
+
+After making those changes, the first test passed:
+
+![Screenshot of home heading](./backend/frontend/public/images/jest_tests/home_heading_pass.png)
+
+2. 
+
+
 
 ### Validators and Tools
 

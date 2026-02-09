@@ -1,15 +1,26 @@
-import test from "node:test";
-import HomeScreen from "../screens/HomeScreen";
-/* Render puts query into a fake DOM for testing */
+/* Adds extra DOM matchers like toBeInTheDocument() */
+import '@testing-library/jest-dom'
+
+/* Render puts components into a fake DOM so I can test what appears on screen */
 import { render, screen } from '@testing-library/react'
 
+/* 
+  First we need to mock the Redux environment, because tests do not use
+  the real Redux store or <Provider>.
 
-/* First need to mock the Redux environment, as tests don't use it 
-   Here, I am telling jest to use the mock version of react-redux.
-   And in that react redux env, I want useDispath, useSelector Hooks. 
+  Here, I tell Jest to use a mock version of react-redux.
+  In that mock environment, I provide fake versions of:
+  - useDispatch
+  - useSelector
 */
 jest.mock('react-redux', () => ({
-  useDispatch: () => jest.fn(), /* jest.fn is a fake function. does nothing, but jest tracks if it was called */
+  /* useDispatch normally returns a dispatch function.
+     Here we return a fake function that does nothing,
+     but Jest can track if it was called. */
+  useDispatch: () => jest.fn(),
+
+  /* useSelector normally receives Redux state.
+     For tests, we return the shape HomeScreen expects. */
   useSelector: () => ({
     loading: false,
     error: null,
@@ -17,17 +28,43 @@ jest.mock('react-redux', () => ({
   }),
 }))
 
-/* mosck react router dom, but requires actual one, except what's listed below */
+/*
+  Mock productActions so Jest never imports axios.
+  Only need HomeScreen to render, not to really fetch products.
+*/
+jest.mock('../actions/productActions', () => ({
+  listProducts: () => ({ type: 'PRODUCT_LIST_REQUEST' }),
+}))
+
+/* 
+  Mock react-router-dom.
+  Only mock the parts HomeScreen actually uses.
+
+  - useLocation is mocked so the component can read `search`
+  - Link is replaced with a simple wrapper so JSX does not crash
+*/
 jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
   useLocation: () => ({
     search: '',
   }),
+
+  /* Replace <Link> with a simple component that just renders children */
+  Link: ({ children }) => <div>{children}</div>,
 }))
 
-test('Tests headings in homepage', () => {
-    render(<HomeScreen />)
-    expect(
-        screen.getByRole('heading', { name: /thoughtfully baked/i})
-    ).toBeInTheDocument()
+/* 
+  HomeScreen must be imported AFTER the mocks,
+  so it uses the mocked Redux and Router hooks.
+*/
+import HomeScreen from '../screens/HomeScreen'
+
+/* 
+  Test: check that the main heading text renders on the homepage
+*/
+test('renders the homepage heading', () => {
+  render(<HomeScreen />)
+
+  expect(
+    screen.getByRole('heading', { name: /thoughtfully baked/i })
+  ).toBeInTheDocument()
 })
