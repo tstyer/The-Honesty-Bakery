@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 
 /* 
-  First we need to mock the Redux environment, because tests do not use
+  First, I need to mock the Redux environment, because tests do not use
   the real Redux store or <Provider>.
 
   Here, I tell Jest to use a mock version of react-redux.
@@ -13,19 +13,18 @@ import { render, screen } from '@testing-library/react'
   - useDispatch
   - useSelector
 */
+const mockUseSelector = jest.fn()
+const mockDispatch = jest.fn()
+
 jest.mock('react-redux', () => ({
   /* useDispatch normally returns a dispatch function.
-     Here we return a fake function that does nothing,
+     Here it returns a fake function that does nothing,
      but Jest can track if it was called. */
-  useDispatch: () => jest.fn(),
+  useDispatch: () => mockDispatch,
 
   /* useSelector normally receives Redux state.
-     For tests, we return the shape HomeScreen expects. */
-  useSelector: () => ({
-    loading: false,
-    error: null,
-    products: [],
-  }),
+     Here it uses a mock function so each test can return different state. */
+  useSelector: (selectorFn) => mockUseSelector(selectorFn),
 }))
 
 /*
@@ -58,13 +57,39 @@ jest.mock('react-router-dom', () => ({
 */
 import HomeScreen from '../screens/HomeScreen'
 
+beforeEach(() => {
+  mockUseSelector.mockReset()
+  mockDispatch.mockClear()
+})
+
 /* 
   Test: check that the main heading text renders on the homepage
 */
 test('renders the homepage heading', () => {
+  mockUseSelector.mockReturnValue({
+    loading: false,
+    error: null,
+    products: [],
+  })
+
   render(<HomeScreen />)
 
   expect(
     screen.getByRole('heading', { name: /thoughtfully baked/i })
   ).toBeInTheDocument()
+})
+
+/*
+  See if the loading component works
+*/
+test('shows loader when page is loading', () => {
+  mockUseSelector.mockReturnValue({
+    loading: true,
+    error: null,
+    products: [],
+  })
+
+  render(<HomeScreen />)
+
+  expect(screen.getByRole('status')).toBeInTheDocument()
 })

@@ -366,7 +366,27 @@ After making those changes, the first test passed:
 
 ![Screenshot of home heading](./backend/frontend/public/images/jest_tests/home_heading_pass.png)
 
-2. 
+
+2. <Loading > component renders
+
+This test is built to see if my Loading component renders when Redux says "Loading: true".
+
+For this, I simply changed the initial mock section in homeScreen.test.js from 'loading: false' to true.
+
+Then, I added a new test below the first one. 
+
+First fail:
+
+![Screenshot of fail](./backend/frontend/public/images/jest_tests/load_component_fail.png)
+
+To ge this to pass, I had to create two separate returns for the 'useSelector'.
+
+![Screenshot of pass](./backend/frontend/public/images/jest_tests/load_component_pass.png)
+
+
+### Django Tests
+
+
 
 
 
