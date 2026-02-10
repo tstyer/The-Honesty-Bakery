@@ -342,6 +342,40 @@ Change user_name = 'email' in views.py. After that, it worked:
 
 **NOW, ENSURE PAYMENT DETAILS ARE TAKEN BEFORE ORDER PLACED**
 
+
+### Python Testing
+
+All Python code in this project follows the PEP 8 style guide. The use of PEP8 allowed me to keep my Python code consistent and readable. To add PEP8, you need ensure you are operating within your virtual environment:
+
+To add PEP8 to your project, it's essential you are operating within a virtual environment. 
+
+1. Navigate to the Command Palette (Ctrl+Shift+P / Cmd+shift+p)
+
+2. In the top navigation bar, you will now be able to find 'Venv'. Select it. 
+
+![Screenshot of venv](./backend/frontend/public/images/python_images/)
+
+3. From there, you will need to select your desired interpreter. I chose to use 3.12.8, which is needed for this project. 
+
+4. After selecting the desired interpreter or Python version, a notification will show the progress of the environment creation and the environment folder will appear in your workspace.
+
+![Screenshot of venv in folders](./backend/frontend/public/images/python_images/folder_w_venv.png)
+
+5. When operating within your virtual environment, you will see this at the far left of your terminal:
+
+![Screenshot of active venv](./backend/frontend/public/images/python_images/virtual_active.png)
+
+If you do not see that, you will need to be within the project root/or where your .venv folder lies, and type this into the terminal:
+
+- ".venv/Scripts/Activate"
+
+You should then see the green (.venv) appear at the beginning of the commond prompt line. 
+
+6. Once you are within your virtual environment, then you can add PEP8 by searching for it in the extensions or via the terminal:
+
+
+
+
 ### Jest Tests
 
 1. Hompage Headers
