@@ -397,23 +397,35 @@ pycodestyle base/views.py
 
 The following files were tested and passed without errors:
 
-- views.py
+- base/views.py
 
 ![Screenshot of views.py](./backend/frontend/public/images/python_images/views.py.png)
 
 This result shows that my lines of code were simply longer than recommended, but no errors were present.
 
-- models.py
+- base/models.py
 
 ![Screenshot of models.py](./backend/frontend/public/images/python_images/models.py.png)
 
-- urls.py
+- base/urls.py
 
 ![Screenshot of urls.py](./backend/frontend/public/images/python_images/urls.py.png)
 
-- serializers.py
+- base/serializers.py
 
 ![Screenshot of serializers.py](./backend/frontend/public/images/python_images/serializers.py.png)
+
+- base/products.py
+
+![Screenshot of products.py](./backend/frontend/public/images/python_images/products.py.png)
+
+- base/apps.py
+
+![Screenshot of apps.py](./backend/frontend/public/images/python_images/apps.py.png)
+
+- backend/backend/urls.py
+
+![Screenshot of backend urls](./backend/frontend/public/images/python_images/backend_urls.png)
 
 
 ### Jest Tests
