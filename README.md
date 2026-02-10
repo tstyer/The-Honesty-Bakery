@@ -54,6 +54,8 @@ The small business I created this for had general and specific goals:
 
 3. Customer Goals
 
+- As a customer, I want to be able to easily order 1 or more items. 
+- As a customer, I want easily read product descriptions. 
 - As a customer, I want to know what the business offers on page 1. 
 - As a customer, I want clear call-to-actions on relevant pages. 
 - As a customers, I want to easily contact the owner. 
@@ -497,25 +499,7 @@ This was the result on the first test:
 - CSS Validator
 - Lighthouse Report (Accessibility, SEO, etc.)
 
-### Bugs
 
-- Describe bugs encountered
-- How you fixed them
-
----
-
-## Credits
-
-- [Links to any external code, images, or media]
-- Clearly cite all third-party assets
-
----
-
-## Acknowledgements
-
-Mention any tutorials, mentors, or support resources used.
-
----
 
 
 
@@ -776,11 +760,25 @@ These are just encoded data about a user.
 1. HTML5
 2. CSS3
 3. ReactBoostrap, found (https://react-bootstrap.netlify.app/)[here].
-4. Bootswatch.
 5. React.js
 6. JavaScript
 7. Django
 8. Django Rest Framework
 9. LucidChart
-
 10. Redux
+11. PostgresSQL
+
+
+## Credits
+
+- [Links to any external code, images, or media]
+- Clearly cite all third-party assets
+
+---
+
+## Acknowledgements
+
+Mention any tutorials, mentors, or support resources used.
+
+---
+
