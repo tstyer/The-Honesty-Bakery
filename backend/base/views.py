@@ -1,27 +1,32 @@
-from django.contrib.auth.models import User
-from rest_framework import serializers, status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser, FormParser
-
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
-
-from .models import Product, Review, Order
-from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer
+from decimal import Decimal, ROUND_HALF_UP
 
 import stripe
 from django.conf import settings
 from django.contrib.auth import authenticate
-
-from decimal import Decimal, ROUND_HALF_UP
+from django.contrib.auth.models import User
+from django.core.files.storage import default_storage
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
+from rest_framework import serializers, status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
+from .models import Order, Product, Review
+from .serializers import (
+    OrderSerializer,
+    ProductSerializer,
+    UserSerializer,
+    UserSerializerWithToken,
+)
 
 # ======================
 # HELPERS
 # ======================
+
 
 def to_pence(amount):
     """
@@ -34,6 +39,7 @@ def to_pence(amount):
 # ======================
 # AUTH / USERS
 # ======================
+
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     # We will authenticate with username internally
@@ -120,16 +126,25 @@ def loginUser(request):
     password = data.get('password')
 
     if not email or not password:
-        return Response({'detail': 'Email and password are required'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {'detail': 'Email and password are required'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
     try:
         user_obj = User.objects.get(email=email)
     except User.DoesNotExist:
-        return Response({'detail': 'Invalid email or password'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(
+            {'detail': 'Invalid email or password'},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
 
     user = authenticate(username=user_obj.username, password=password)
     if user is None:
-        return Response({'detail': 'Invalid email or password'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(
+            {'detail': 'Invalid email or password'},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
 
     serializer = UserSerializerWithToken(user, many=False)
     return Response(serializer.data)
@@ -209,6 +224,7 @@ def updateUser(request, pk):
 # PRODUCTS
 # ======================
 
+
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def createProduct(request):
@@ -248,8 +264,6 @@ def updateProduct(request, pk):
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
-
-from django.core.paginator import Paginator
 
 @api_view(['GET'])
 def getProducts(request):
@@ -318,7 +332,6 @@ def uploadImage(request):
     if not file:
         return Response({'detail': 'No image provided'}, status=400)
 
-    from django.core.files.storage import default_storage
     file_name = default_storage.save(f'products/{file.name}', file)
 
     return Response({'image': default_storage.url(file_name)})
@@ -371,6 +384,7 @@ def deleteProduct(request, pk):
 # Orders
 # ======================
 
+
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getOrders(request):
@@ -382,6 +396,7 @@ def getOrders(request):
 # ======================
 # ROUTES (DEV)
 # ======================
+
 
 @api_view(['GET'])
 def getRoutes(request):
@@ -398,6 +413,7 @@ def getRoutes(request):
 # ======================
 # STRIPE PAYMENT
 # ======================
+
 
 @api_view(['GET'])
 def getStripeConfig(request):

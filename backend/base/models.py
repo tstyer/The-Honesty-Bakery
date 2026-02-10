@@ -26,7 +26,7 @@ class Product(models.Model):
     productType = models.CharField(
         max_length=20,
         choices=PRODUCT_TYPES,
-        default="PREBAKED",   
+        default="PREBAKED",
     )
 
     isPrebaked = models.BooleanField(default=False)
@@ -49,7 +49,7 @@ class Review(models.Model):
 
     def __str__(self):
         return str(self.rating)
-    
+
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -66,8 +66,8 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.createdAt)
-    
-    
+
+
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
@@ -79,7 +79,7 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return str(self.name)
-    
+
 
 class ShippingAddress(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, null=True, blank=True)

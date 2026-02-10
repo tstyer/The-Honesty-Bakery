@@ -373,7 +373,47 @@ You should then see the green (.venv) appear at the beginning of the commond pro
 
 6. Once you are within your virtual environment, then you can add PEP8 by searching for it in the extensions or via the terminal:
 
+![Screenshot of installation](./backend/frontend/public/images/python_images/pip_install_pep8.png)
 
+#### Testing with PEP8
+
+PEP8 is the official Python style guide. To test that the project follows PEP8 standards, the `pycodestyle` tool was used.
+
+##### Installing pycodestyle
+
+In the terminal, install pycodestyle:
+
+pip install pycodestyle
+
+##### Running PEP8 tests
+
+Individual files can be tested using:
+
+pycodestyle path/to/file.py
+
+For example:
+
+pycodestyle base/views.py
+
+The following files were tested and passed without errors:
+
+- views.py
+
+![Screenshot of views.py](./backend/frontend/public/images/python_images/views.py.png)
+
+This result shows that my lines of code were simply longer than recommended, but no errors were present.
+
+- models.py
+
+![Screenshot of models.py](./backend/frontend/public/images/python_images/models.py.png)
+
+- urls.py
+
+![Screenshot of urls.py](./backend/frontend/public/images/python_images/urls.py.png)
+
+- serializers.py
+
+![Screenshot of serializers.py](./backend/frontend/public/images/python_images/serializers.py.png)
 
 
 ### Jest Tests
