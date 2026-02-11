@@ -23,7 +23,7 @@ export default function ReadyToBakeScreen() {
 
   return (
     <Container className="py-4">
-      <h1 className="prebaked-title py-4">Personlised cakes</h1>
+      <h1 className="prebaked-title py-4">Personalised cakes</h1>
       <h3 className="prebaked-sub pb-4">
         Choose a cake kit and I’ll help you get the perfect setup. Once you've
         got an idea, hit any of the 'contact me' buttons to get started!

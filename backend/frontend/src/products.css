@@ -1,5 +1,5 @@
 .prebaked-title {
-    text-align: center;
+  text-align: center;
 }
 
 .prebaked-image {         /* height that matches design */
@@ -8,15 +8,14 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;    /* keeps aspect ratio, crops excess */
   opacity: 75%;
   filter: saturate(0.7), brightness(0.9);
+  transition: transform 0.3s ease;   /* keep: smooth zoom */
 }
 
 .prebaked-sub {
   text-align: center;
 }
-
 
 .honey-div {
   display: flex;
@@ -34,15 +33,12 @@
 
 /* Wrapper controls image height */
 .prebaked-image-wrap {
-  height: 220px;        /* adjust: try 200–240px */
-  overflow: hidden;
+  height: 220px;
+  overflow: hidden;       /* keep crop */
   border-radius: 16px;
 }
 
-/* Image fills wrapper cleanly */
-
 /* Add to cart btns */
-
 .add-to-cart {
   font-family: 'Gochi Hand' !important;
 
@@ -52,7 +48,6 @@
   border: 2px solid #3a2e2a;
   border-radius: 14px;
 
-  /* soften the border so it feels drawn */
   box-shadow:
     1px 1px 0 #3a2e2a,
     -1px -1px 0 rgba(255,255,255,0.4);
@@ -69,7 +64,6 @@
   border: 2px solid #3a2e2a;
   border-radius: 14px;
 
-  /* soften the border so it feels drawn */
   box-shadow:
     1px 1px 0 #3a2e2a,
     -1px -1px 0 rgba(255,255,255,0.4);
@@ -91,6 +85,20 @@ Ready to bake cards
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  /* card pop transition */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* give it the same hover behaviour */
+.cake-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Card pops up slightly */
+.ready-card:hover,
+.cake-card:hover {
+  transform: translateY(-6px);
 }
 
 /* This section expands to fill space, so the button can sit at the bottom */
@@ -103,7 +111,6 @@ Ready to bake cards
   margin-top: auto;
 }
 
-
 .contact-me {
   font-family: 'Gochi Hand' !important;
 
@@ -113,54 +120,23 @@ Ready to bake cards
   border: 2px solid #3a2e2a;
   border-radius: 14px;
 
-  /* soften the border so it feels drawn */
   box-shadow:
     1px 1px 0 #3a2e2a,
     -1px -1px 0 rgba(255,255,255,0.4);
-  
+
   width: 50%;
   margin: 0 auto;
 
   transition: all 0.25s ease;
 }
 
-.cta-btn:hover {
-  background: rgba(58, 46, 42, 0.04);
-  transform: translateY(-1px);
-}
-
-
-/* Hover reveal: show more of the cake on hover */
-.prebaked-image-wrap {
-  height: 220px;               /* default cropped height */
-  overflow: hidden;
-  border-radius: 16px;
-  transition: height 0.3s ease;
-}
-
-/* Image transition for subtle polish */
-.prebaked-image {
-  transition: transform 0.3s ease;
-}
-
-
-/* When hovering the whole card, expand image area 
-.ready-card:hover .prebaked-image-wrap,
-.cake-card:hover .prebaked-image-wrap {
-  height: 390px;            
-}*/
-
-/* comment-out above to change hover effect. */
-
-
-/* Optional gentle zoom so it feels intentional */
+/* Optional gentle zoom so it feels intentional (image only) */
 .ready-card:hover .prebaked-image,
 .cake-card:hover .prebaked-image {
   transform: scale(1.02);
 }
 
 /* Create product button */
-
 .create-product {
   font-family: 'Gochi Hand' !important;
 
@@ -170,7 +146,6 @@ Ready to bake cards
   border: 2px solid #3a2e2a;
   border-radius: 14px;
 
-  /* soften the border so it feels drawn */
   box-shadow:
     1px 1px 0 #3a2e2a,
     -1px -1px 0 rgba(255,255,255,0.4);
@@ -178,14 +153,8 @@ Ready to bake cards
   transition: all 0.25s ease;
 }
 
-.cta-btn:hover {
-  background: rgba(58, 46, 42, 0.04);
-  transform: translateY(-1px);
-}
-
- /* Single Product Screen */
-
- .product-image {
+/* Single Product Screen */
+.product-image {
   border-radius: 16px;
   opacity: 70%;
- }
+}
