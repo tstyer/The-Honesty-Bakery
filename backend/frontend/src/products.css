@@ -143,11 +143,14 @@ Ready to bake cards
   transition: transform 0.3s ease;
 }
 
-/* When hovering the whole card, expand image area */
+
+/* When hovering the whole card, expand image area 
 .ready-card:hover .prebaked-image-wrap,
 .cake-card:hover .prebaked-image-wrap {
-  height: 390px;               /* expanded height */
-}
+  height: 390px;            
+}*/
+
+/* comment-out above to change hover effect. */
 
 
 /* Optional gentle zoom so it feels intentional */
