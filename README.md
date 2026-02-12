@@ -20,6 +20,7 @@ The Honesty Bakery is a local cake store in my town. I built this full-stack web
 - [Setting Up Stripe Payments](#setting-up-stripe-payments)
 - [Merging Django With React](#merging-django--react)
 - [Deployment](#deployment)
+- [AWS - Adding Images](#adding-images-to-aws)
 - [Testing](#testing)
   - [User Stories Testing](#user-stories-testing)
   - [Manual Testing](#manual-testing)
@@ -194,6 +195,7 @@ List and explain key features implemented in the project.
 - Django
 - PostresSQL
 - LucidChart (ERD's + Wireframes)
+- AWS (Image storage)
 - [Any frameworks/libraries]
 - [Design/UX tools used like Balsamiq]
 
@@ -254,6 +256,31 @@ Explain how your project is deployed and how someone can clone and run it locall
 4. Run application
 
 Link to live site: [Deployed Site](#)
+
+---
+
+## Adding Images to AWS
+
+For this project, I decided to store images in the scalable S3 service by AWS. I did this because this service is designed for durability. 
+In the even that the website catches a lot of traffic, then AWS can handle the influx, whereas self-hosting images could cause the website to freeze
+or crash.
+
+Storing images in AWS also separates static resources from the application server. This stops the backend from needing to use up resources to host them.
+
+The process to set this up:
+
+1. Head over to aws.amazon.com.
+2. Create a new, free account - you will need a card. 
+3. Select the 'S3' service, which is on the front dashboard. 
+4. On the next page, choose 'Create a bucket'. 
+5. Name your bucket something relevant. 
+
+6. Afterwhich, you will need to untick the box which says 'turn off all public access'. The reason for this, is because you need the public to 
+   see your images. Just ensure you never store any private information in the bucket.
+
+![Screenshot of example](./backend/frontend/public/images/aws/turn_off_allpublicaccess.png)
+
+7. After that, scroll to bottom and click 'create bucket'. 
 
 ---
 
