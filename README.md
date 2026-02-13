@@ -298,6 +298,18 @@ This is the policy I created:
 
 "pip install django-storages[s3]"
 
+Once that is installed, you then need to add this to your settings: "DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage""
+
+Which can be found here: https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
+
+Then, add 'storages' to your list of installed apps.
+
+11. Type 'IAM' into the AWS search bas, and click on it.
+
+Click 'users' on the left panel. then 'create user' on the right.
+
+Clcik on 'attach policies directly'. Type s3, then click 'Amazons3FullAccess'.
+
 
 
 ## Testing
