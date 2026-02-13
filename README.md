@@ -282,7 +282,23 @@ The process to set this up:
 
 7. After that, scroll to bottom and click 'create bucket'. 
 
----
+8. Next, navigate back to your bucket by clicking on its name, click 'upload' and you should be taken to another screen. In that screen, click 
+'add files'. Here, you will be able to upload a folder or the images - I selected all the images for upload. 
+
+9. After that, I created a bucket policy that allowed me to view the images. To do this:
+- Go to your bucket. 
+- Click on 'permissions'. 
+- Under bucket policy, click 'edit'.
+
+This is the policy I created:
+
+![Screenshot of policy](./backend/frontend/public/images/aws/policy.png)
+
+10. I then went to the Django stores to get the command I needed to install s3:
+
+"pip install django-storages[s3]"
+
+
 
 ## Testing
 
