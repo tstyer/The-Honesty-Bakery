@@ -201,8 +201,6 @@ USE_TZ = True
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
-
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -263,5 +261,11 @@ LOGGING = {
 }
 
 
-AWS_ACCESS_KEY_ID =
-AWS_SECRET_ACCESS_KEY =
+import os
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
+
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", "eu-west-2")  # adjust if needed
