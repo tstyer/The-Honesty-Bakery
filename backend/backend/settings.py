@@ -57,6 +57,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
+    'storages'
 ]
 
 REST_FRAMEWORK = {
@@ -200,6 +201,8 @@ USE_TZ = True
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
+DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -258,3 +261,7 @@ LOGGING = {
         },
     },
 }
+
+
+AWS_ACCESS_KEY_ID =
+AWS_SECRET_ACCESS_KEY =
