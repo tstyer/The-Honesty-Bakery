@@ -310,6 +310,14 @@ Click 'users' on the left panel. then 'create user' on the right.
 
 Clcik on 'attach policies directly'. Type s3, then click 'Amazons3FullAccess'.
 
+12. Once that is setup, go back to your new user you created by clicking their name. 
+
+- On this dashboard, you should see an option to 'create access key'. So click that, and when I did, I was taken to this page:
+
+![Screenshot of aws section](./backend/frontend/public/images/aws/aws_access_key_create.png)
+
+The reason I choose "Running outside AWS" is because the website is hosted on Heroku. 
+
 
 
 ## Testing
