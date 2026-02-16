@@ -260,10 +260,12 @@ LOGGING = {
 
 DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
 
+AWS_QUERYSTRING_AUTH = False  # makes url's cleaner and removes the AWS access key in url
+
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", "eu-west-2")  
 
-AWS_QUERYSTRING_AUTH = False  # makes public URLs cleaner for public media
+
 AWS_DEFAULT_ACL = None

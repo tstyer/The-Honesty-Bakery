@@ -137,16 +137,6 @@ The navigation model prioritises ease of movement and minimal friction. A persis
 
 ### Skeleton Plane
 
-**Wireframes**
-
-The website was designed on Fignma. 
-
-1. Home Page:
-
-
-
-- Wireframes for mobile, tablet, desktop
-- Priority/content layout decisions
 
 ### Surface Plane
 - Final design decisions (color palette, fonts, visual elements)
@@ -166,6 +156,9 @@ The website was designed on Fignma.
 3. Contact Page - Desktop:
 
 ![Screenshot of contact](./backend/frontend/public/images/contact_wireframe_desktop.png)
+
+4. Home Page - Tablet & Mobile
+
 
 
 **PROVIDE MOBILE/TABLET**
@@ -318,7 +311,15 @@ Clcik on 'attach policies directly'. Type s3, then click 'Amazons3FullAccess'.
 
 The reason I choose "Running outside AWS" is because the website is hosted on Heroku. 
 
+Ensure all of your keys are placed in the env.py file, and that this specific file is listed in 'gitignore'. 
 
+After that, place your user access key and secret key in the 'config vars' section of Heroku. 
+
+Now, when you upload images on the honesty bakehouse website, they should be hosted directly on AWS. 
+
+**INCLUDE MANUAL TEST HERE**
+
+---
 
 ## Testing
 
@@ -570,26 +571,6 @@ This was the result on the first test:
 
 
 
-
-
-
-
-
-
-## Testing 
-
-This section documents full-scope testing, from beginning to end of production, using manual and automated tests. 
-
-
-
-
-
-### Automated Testing
-
-#### Jest
-
-#### Python Tests
-
 ## Using Redux
 
 I chose to use Redux in this app, firstly to learn how it's used, but also because I would end up having many pages that would require a global state. This global state is share in the Redux store and passed down to other pages. 
@@ -815,7 +796,7 @@ Here, you can see the first model created in the Django Admin: Products
 
 ### JSON Web Tokens
 
-These are just encoded data about a user. 
+These are just encoded data about a user. **EXPLAIN MORE**
 
 
 ## Tech. Used
