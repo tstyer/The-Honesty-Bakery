@@ -159,9 +159,15 @@ The navigation model prioritises ease of movement and minimal friction. A persis
 
 4. Home Page - Tablet & Mobile
 
+![Screenshot of homepage](./backend/frontend/public/images/home_mobile_wireframe.png)
 
+5. Contact Page - Tablet & Mobile
 
-**PROVIDE MOBILE/TABLET**
+![Screenshot of Contact page](./backend/frontend/public/images/contact_wireframe_mobile.png)
+
+6. About Page - Tablet & Mobile
+
+![Screenshot of About page](./backend/frontend/public/images/about_wireframe_mobile.png)
 
 
 ### ERD
@@ -171,26 +177,7 @@ The navigation model prioritises ease of movement and minimal friction. A persis
 
 ---
 
-## Features
 
-List and explain key features implemented in the project.
-
----
-
-## Technologies Used
-
-- HTML5
-- CSS3
-- JavaScript
-- Stripe
-- React.js
-- Tailwind
-- Django
-- PostresSQL
-- LucidChart (ERD's + Wireframes)
-- AWS (Image storage)
-- [Any frameworks/libraries]
-- [Design/UX tools used like Balsamiq]
 
 ---
 
@@ -811,6 +798,7 @@ These are just encoded data about a user. **EXPLAIN MORE**
 9. LucidChart
 10. Redux
 11. PostgresSQL
+12. AWS (Image storage)
 
 
 ## Credits
