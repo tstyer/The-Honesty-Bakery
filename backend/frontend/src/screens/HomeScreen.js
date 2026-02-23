@@ -65,7 +65,7 @@ function HomeScreen({ category }) {
           <img
             src="/images/bee_2.png"
             alt="Flying bee illustration"
-            className="bee-3 flipped"
+            className="bee-2"
           />
 
           {/* CTA buttons */}

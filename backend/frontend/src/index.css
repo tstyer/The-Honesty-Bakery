@@ -494,7 +494,8 @@ body,
 
 /* Bee 3 */
 
-.bee-3 {
+.bee-2 {
+  transform: scaleX(-1);
   position: fixed;
   right: 100px;
   top: 500px;
@@ -502,10 +503,6 @@ body,
   height: auto;
   opacity: 70%;
   animation: bee-3 6s ease-in-out infinite;
-}
- /* Flip the bee */
-.flipped {
-  transform: scaleX(-1);
 }
 
 @keyframes bee-3 {
