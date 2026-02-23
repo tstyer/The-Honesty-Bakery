@@ -228,7 +228,7 @@ print(
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
 MEDIA_ROOT = BASE_DIR / 'media'
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -267,5 +267,7 @@ AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", "eu-west-2")  
 
-
 AWS_DEFAULT_ACL = None
+
+AWS_S3_CUSTOM_DOMAIN = "honesty-bakehouse-images.s3.eu-north-1.amazonaws.com"
+AWS_LOCATION = ""
