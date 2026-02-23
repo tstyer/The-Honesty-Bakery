@@ -63,9 +63,9 @@ function HomeScreen({ category }) {
 
           {/* Decorative bee */}
           <img
-            src="/images/bee_3.png"
+            src="/images/bee_2.png"
             alt="Flying bee illustration"
-            className="bee-3"
+            className="bee-3 flipped"
           />
 
           {/* CTA buttons */}
@@ -133,7 +133,7 @@ function HomeScreen({ category }) {
       {/* Bottom bee */}
       <img
         src="/images/bee_2.png"
-        alt=""
+        alt="Flying bee illustration"
         aria-hidden="true"
         className="home-bee"
       />

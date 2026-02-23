@@ -475,7 +475,7 @@ body,
   opacity: 0.9;
   pointer-events: none;     /* never blocks clicks */
 
-  /* register it to recieve an animation effect - floating */
+  /* animation effect - floating */
   animation: bee-float 6s ease-in-out infinite;
 }
 
@@ -502,6 +502,10 @@ body,
   height: auto;
   opacity: 70%;
   animation: bee-3 6s ease-in-out infinite;
+}
+ /* Flip the bee */
+.flipped {
+  transform: scaleX(-1);
 }
 
 @keyframes bee-3 {
