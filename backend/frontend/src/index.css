@@ -492,10 +492,9 @@ body,
   }
 }
 
-/* Bee 3 */
+/* Bee 2 */
 
 .bee-2 {
-  transform: scaleX(-1) !important;
   position: fixed;
   right: 100px;
   top: 500px;
@@ -507,13 +506,13 @@ body,
 
 @keyframes bee-2 {
   0% {
-    transform: translateY(0) rotate(-2deg);
+    transform: scaleX(-1) translateY(0) rotate(-2deg);
   }
   50% {
-    transform: translateY(-8px) rotate(2deg);
+    transform: scaleX(-1) translateY(-8px) rotate(2deg);
   }
   100% {
-    transform: translateY(0) rotate(-2deg);
+    transform: scaleX(-1) translateY(0) rotate(-2deg);
   }
 }
 
