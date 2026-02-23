@@ -228,6 +228,8 @@ print(
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+AWS_S3_CUSTOM_DOMAIN = "honesty-bakehouse-images.s3.eu-north-1.amazonaws.com"
+
 MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -269,5 +271,4 @@ AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", "eu-west-2")
 
 AWS_DEFAULT_ACL = None
 
-AWS_S3_CUSTOM_DOMAIN = "honesty-bakehouse-images.s3.eu-north-1.amazonaws.com"
 AWS_LOCATION = ""
