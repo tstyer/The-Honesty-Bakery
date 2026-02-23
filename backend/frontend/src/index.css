@@ -502,10 +502,10 @@ body,
   width: 70px;
   height: auto;
   opacity: 70%;
-  animation: bee-3 6s ease-in-out infinite;
+  animation: bee-2 6s ease-in-out infinite;
 }
 
-@keyframes bee-3 {
+@keyframes bee-2 {
   0% {
     transform: translateY(0) rotate(-2deg);
   }
