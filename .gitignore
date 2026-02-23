@@ -3,3 +3,7 @@ db.sqlite3
 env.py
 creds.json
 run.py
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
