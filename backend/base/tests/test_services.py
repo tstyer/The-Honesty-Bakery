@@ -1,3 +1,4 @@
+import pytest
 from services import validate_contact_form
 
 # -- Learning note: assert just asks if something is true or false - if true = passes

@@ -499,6 +499,16 @@ I used PyTest to rest the functions in the services file.
 
 This will help you mock functions in the test.
 
+3. Then, I created a test_services.py file. 
+
+This file would contain multiple tests for the services.py file functions. 
+
+The first thing I did was "import pytest".
+
+Before writing any of the tests, I first learned that it's important to structure each test by "Assigning", then "Acting", and finally "Asserting".
+
+Assigning will be assigning data. Acting will be using it. Asserting will then test if the output is true or false.
+
 
 
 ### Jest Tests
