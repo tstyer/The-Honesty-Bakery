@@ -481,6 +481,26 @@ This result shows that my lines of code were simply longer than recommended, but
 ![Screenshot of backend urls](./backend/frontend/public/images/python_images/backend_urls.png)
 
 
+### PyTest
+
+PyTests is a TDD tool I used to test my pure python, so I wouldn't need to import unittest in the test file that I would do when testing views or models. 
+
+I used PyTest to rest the functions in the services file. 
+
+1. First, I installed PyTest with this command:
+
+![Screenshot of installation](./backend/frontend/public/images/pytest/install.png)
+
+(Type pip3 install pytest for mac or Linux)
+
+2. I then installed PyTest Mock:
+
+![Screenshot of installation](./backend/frontend/public/images/pytest/install_pytestmock.png)
+
+This will help you mock functions in the test.
+
+
+
 ### Jest Tests
 
 1. Hompage Headers
