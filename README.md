@@ -552,6 +552,15 @@ To do this, you can check for all falsey values with the code "If not email: rai
 
 "If not email" basically checks if email is falsey. Falsey is an empty string, empty brackets, "None", empty braces, etc.
 
+This screenshot shows the commits made when building this simple test. I've included it as I realised I should've stated either "Red State" or "Green State" in them. 
+
+![Screenshot of commits](./backend/frontend/public/images/pytest/first_test/commits.png)
+
+The commit "Add first pytest pass" should include "Green State: ..."
+
+The commit "Add first pytest run to readme" should say "Red State: first pytest fail added to readme."
+
+
 ### Jest Tests
 
 1. Hompage Headers
