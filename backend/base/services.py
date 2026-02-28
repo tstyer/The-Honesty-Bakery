@@ -2,10 +2,7 @@
 
 #Learning note: with python imports, you don't import file name, just module
 
-import unittest
-from base.services import validate_contact_form
 
-# --- Tests
 
 
 
