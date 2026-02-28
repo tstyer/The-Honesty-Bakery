@@ -511,6 +511,12 @@ Assigning will be assigning data. Acting will be using it. Asserting will then t
 
 
 
+#### Running The Pytests
+
+First, I created a pytest.ini file located in the same directory as my manage.py file (backend).
+
+
+
 ### Jest Tests
 
 1. Hompage Headers
