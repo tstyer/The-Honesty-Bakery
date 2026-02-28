@@ -515,7 +515,32 @@ Assigning will be assigning data. Acting will be using it. Asserting will then t
 
 First, I created a pytest.ini file located in the same directory as my manage.py file (backend).
 
+Add the below inside the file:
 
+"""
+[pytest]
+DJANGO_SETTINGS_MODULE = backend.settings
+python_files = test_*.py
+
+"""
+
+From there, simply type "pytest" in the terminal. 
+
+In your terminal, ensure you are in the directory that holds manage.py. From there, type 'pytest' and everything will run. 
+
+For me, I received an error (not a fail or pass). It says that my syntax was incorrect, so the test couldn't even run:
+
+![Screenshot of error](./backend/frontend/public/images/pytest/first_test/couldn_run.png)
+
+To amend this, I corrected the import on my test_services.py file: 
+
+"from services import validate_contact_form"
+
+changed to:
+
+"from base.services import validate_contact_form"
+
+The services file was in a directory above the test file (base).
 
 ### Jest Tests
 

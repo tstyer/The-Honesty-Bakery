@@ -2,8 +2,6 @@
 
 #Learning note: with python imports, you don't import file name, just module
 
-from tests import test_submission_no_email
-
 # While setting this up, I learned not to try and inject the fictional data into the real contact form in django, 
 # as that would be integration testing. 
 # For TDD, I will just be testing the logic.

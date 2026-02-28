@@ -1,5 +1,5 @@
 import pytest
-from services import error_no_email, validate_contact_form
+from base.services import validate_contact_form
 
 # -- Learning note: assert just asks if something is true or false - if true = passes
 
@@ -10,7 +10,7 @@ def test_submission_no_email():
         "name": "Travis",
         "email": "",
         "subject": "Cakes",
-        "text": "Hello"
+        "text": "Hello",
     }
 
     # now send the fictional data to the real function to test - must raise error
