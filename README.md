@@ -524,9 +524,7 @@ python_files = test_*.py
 
 """
 
-From there, simply type "pytest" in the terminal. 
-
-In your terminal, ensure you are in the directory that holds manage.py. From there, type 'pytest' and everything will run. 
+In your terminal, ensure you are in the directory that holds manage.py. Simply type "pytest (location of your single test)". For me, that was "pytest base/tests/test_services.py" in the terminal. 
 
 For me, I received an error (not a fail or pass). It says that my syntax was incorrect, so the test couldn't even run:
 
@@ -541,6 +539,18 @@ changed to:
 "from base.services import validate_contact_form"
 
 The services file was in a directory above the test file (base).
+
+I then ran pytest base/tests/test_services.py and recieved the following fail:
+
+![Screenshot of red state](./backend/frontend/public/images/pytest/first_test/red_state.png)
+
+It entered the red state because the ValueError did not raise. This is correct, as this test is specifically looking to see if the ValueErorr raises when the user does not enter their email. 
+
+To fix this, I adjusted the function so it would account for the missing email by raising and error when it finds that the email field is blank. 
+
+To do this, you can check for all falsey values with the code "If not email: raise ValueError("Please provide an email")" - that is what I specifically used.
+
+"If not email" basically checks if email is falsey. Falsey is an empty string, empty brackets, "None", empty braces, etc.
 
 ### Jest Tests
 
