@@ -32,7 +32,7 @@ def test_submission_no_subject():
         validate_contact_form(data)
 
 
-# -- third test ensures all data is included
+# -- third test ensures all data is included - This passed instantly, so doesn't count as TDD!
 
 def test_all_fields_required():
     data = {
@@ -40,6 +40,21 @@ def test_all_fields_required():
         "email": "travisstyer.ts@gmail.com",
         "subject": "Subject",
         "text": "test content",
+    }
+
+    result = validate_contact_form(data)
+
+    assert result == data
+
+
+# -- fourth test: raises error when text box is empty
+
+def test_submission_no_text():
+    data = {
+        "name": "Travis",
+        "email": "travisstyer.ts@gmail.com",
+        "subject": "Subject",
+        "text": "",
     }
 
     with pytest.raises(ValueError):

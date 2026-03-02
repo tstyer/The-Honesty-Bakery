@@ -15,6 +15,7 @@ def validate_contact_form(data):
     
     if not subject:
         raise ValueError("Please enter a subject line.")
+    
 
     return data
 
