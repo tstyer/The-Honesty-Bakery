@@ -540,6 +540,8 @@ changed to:
 
 The services file was in a directory above the test file (base).
 
+#### First pytest
+
 I then ran pytest base/tests/test_services.py and recieved the following fail:
 
 ![Screenshot of red state](./backend/frontend/public/images/pytest/first_test/red_state.png)
@@ -559,6 +561,14 @@ This screenshot shows the commits made when building this simple test. I've incl
 The commit "Add first pytest pass" should include "Green State: ..."
 
 The commit "Add first pytest run to readme" should say "Red State: first pytest fail added to readme."
+
+#### Second pytest
+
+My second test was based on raising an error if the subject line was left empty. I wrote the test, but it was in the redstate as I had not yet updated the function:
+
+![Screenshot fo red state](./backend/frontend/public/images/pytest/second_test/red_state.png)
+
+
 
 
 ### Jest Tests
