@@ -170,7 +170,25 @@ The navigation model prioritises ease of movement and minimal friction. A persis
 ![Screenshot of About page](./backend/frontend/public/images/about_wireframe_mobile.png)
 
 
-### ERD
+### Database Schema
+
+I used a relational database structur around products, users, orders and reviews. The schema is implemented using Django ORM models and relationships.
+
+The system follows standard e-commerce architecture:
+
+Users can create and manage products (admin role).
+
+Users can leave reviews on products.
+
+Users can place orders.
+
+Orders contain multiple order items.
+
+Each order has a single shipping address.
+
+An ERD diagram is included below.
+
+The project uses Django’s built-in User model from django.contrib.auth - User (Django Auth Model)
 
 Here is the link to my ERD, created using Lucid Chart: https://lucid.app/lucidchart/c6989dad-7bf8-4550-bf20-189bb77cfb91/edit?viewport_loc=-2010%2C-578%2C3940%2C1903%2C0_0&invitationId=inv_564427e2-7f17-413e-b4b8-1f3b7da38529
 
