@@ -414,6 +414,15 @@ So, add this line:
 
 BASE_DIR / 'frontend/build/static'
 
+
+**Successful Payment**
+
+Once you have successfuly made a payment on your site (only in test mode), you will see this update on your home dashboard which shows a new payment made today:
+
+![Screenshot of payment](./backend/frontend/public/images/stripe/payment_success.png)
+
+
+
 ---
 
 ## Merging Django & React
