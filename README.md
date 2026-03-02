@@ -1120,6 +1120,11 @@ These are just encoded data about a user. **EXPLAIN MORE**
 12. AWS (Image storage)
 
 
+## Future Considerations
+
+1. Create an emailn notification for the newly registered user. 
+
+
 ## Credits
 
 - [Links to any external code, images, or media]
