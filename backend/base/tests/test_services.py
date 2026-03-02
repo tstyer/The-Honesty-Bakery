@@ -30,3 +30,17 @@ def test_submission_no_subject():
 
     with pytest.raises(ValueError):
         validate_contact_form(data)
+
+
+# -- third test ensures all data is included
+
+def test_all_fields_required():
+    data = {
+        "name": "Travis",
+        "email": "travisstyer.ts@gmail.com",
+        "subject": "Subject",
+        "text": "test content",
+    }
+
+    with pytest.raises(ValueError):
+        validate_contact_form(data)
