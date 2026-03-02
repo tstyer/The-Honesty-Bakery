@@ -579,18 +579,19 @@ This then passed, as the subject line was empty - false.
 ![Screenshot of green state](./backend/frontend/public/images/pytest/second_test/green_state.png)
 
 
-#### Third pytest
+#### Third pytest (fourth test down in test_services)
 
 **Red State**
 
-Lastly, I created a test to see if the function would raise an error if some fields are incorrect (non-specific).
+Lastly, I created a test to see if the function would raise an error if the text field was blank.
 
-This failed as I had not yet modified the function. 
-
-![Screenshot of red state](./backend/frontend/public/images/pytest/third_test/red_state.png)
+![Screenshot of red state](./backend/frontend/public/images/pytest/fourth_test/red_state.png)
 
 **Green State**
 
+After modifying the function, it passed:
+
+![Screenshot of green state](./backend/frontend/public/images/pytest/fourth_test/green_state.png)
 
 
 
