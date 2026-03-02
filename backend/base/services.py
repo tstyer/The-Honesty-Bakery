@@ -8,9 +8,13 @@
 
 def validate_contact_form(data):
     email = data.get("email")
+    subject = data.get("subject")
 
     if not email:
         raise ValueError("Please provide an email.")
+    
+    if not subject:
+        raise ValueError("Please enter a subject line.")
 
     return data
 

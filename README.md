@@ -564,9 +564,19 @@ The commit "Add first pytest run to readme" should say "Red State: first pytest 
 
 #### Second pytest
 
+**Red State**
+
 My second test was based on raising an error if the subject line was left empty. I wrote the test, but it was in the redstate as I had not yet updated the function:
 
 ![Screenshot fo red state](./backend/frontend/public/images/pytest/second_test/red_state.png)
+
+**Green State**
+
+From there, I modified the function to take the subject line from the fiction data in the test, and then specify "if not subject:..." (if 'subject' is false), then raise an error. 
+
+This then passed, as the subject line was empty - false. 
+
+![Screenshot of green state](./backend/frontend/public/images/pytest/second_test/green_state.png)
 
 
 
