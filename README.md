@@ -188,7 +188,7 @@ Each order has a single shipping address.
 
 An ERD diagram is included below.
 
-The project uses Django’s built-in User model from django.contrib.auth - User (Django Auth Model)
+The project uses Django’s built-in User model from django.contrib.auth
 
 Here is the link to my ERD, created using Lucid Chart: https://lucid.app/lucidchart/c6989dad-7bf8-4550-bf20-189bb77cfb91/edit?viewport_loc=-2010%2C-578%2C3940%2C1903%2C0_0&invitationId=inv_564427e2-7f17-413e-b4b8-1f3b7da38529
 
@@ -199,7 +199,192 @@ There is also a screenshot of it below:
 
 ---
 
+**User (Django Auth Model)**
 
+Key fields:
+
+id – AutoField (Primary Key)
+
+username – CharField(150)
+
+email – EmailField(254)
+
+first_name – CharField(150)
+
+last_name – CharField(150)
+
+password – CharField(128)
+
+is_staff – BooleanField
+
+is_active – BooleanField
+
+date_joined – DateTimeField
+
+last_login – DateTimeField
+
+Relationships:
+
+One User can create many Products.
+
+One User can write many Reviews.
+
+One User can have many Orders.
+
+
+**Product**
+
+Represents items available for purchase.
+
+Fields:
+
+_id – AutoField (Primary Key)
+
+user – ForeignKey → User (SET_NULL)
+
+name – CharField(200)
+
+description – TextField
+
+image – ImageField
+
+brand – CharField(200)
+
+category – CharField(200)
+
+rating – DecimalField(7,2)
+
+numReviews – IntegerField (default=0)
+
+price – DecimalField(10,2)
+
+countInStock – IntegerField (default=0)
+
+productType – CharField (choices: PREBAKED / READY_TO_BAKE)
+
+isPrebaked – BooleanField
+
+createdAt – DateTimeField (auto_now_add=True)
+
+Relationships:
+
+One Product can have many Reviews.
+
+One Product can appear in many OrderItems.
+
+
+**Review**
+
+Represents user feedback on a product.
+
+Fields:
+
+_id – AutoField (Primary Key)
+
+product – ForeignKey → Product
+
+user – ForeignKey → User
+
+name – CharField(200)
+
+rating – IntegerField (default=0)
+
+comment – TextField
+
+Relationships:
+
+Many Reviews belong to one Product.
+
+Many Reviews belong to one User.
+
+
+**Order**
+
+Represents a customer purchase.
+
+Fields:
+
+_id – AutoField (Primary Key)
+
+user – ForeignKey → User
+
+paymentMethod – CharField(200)
+
+taxPrice – DecimalField(10,2)
+
+shippingPrice – DecimalField(10,2)
+
+totalPrice – DecimalField(10,2)
+
+isPaid – BooleanField
+
+paidAt – DateTimeField
+
+isDelivered – BooleanField
+
+deliveredAt – DateTimeField
+
+createdAt – DateTimeField (auto_now_add=True)
+
+Relationships:
+
+One User can have many Orders.
+
+One Order contains many OrderItems.
+
+One Order has one ShippingAddress.
+
+
+**OrderItem**
+
+Represents individual products within an order.
+
+Fields:
+
+_id – AutoField (Primary Key)
+
+order – ForeignKey → Order
+
+product – ForeignKey → Product
+
+name – CharField(200)
+
+qty – IntegerField
+
+price – DecimalField(10,2)
+
+image – CharField(200)
+
+Relationships:
+
+Many OrderItems belong to one Order.
+
+Many OrderItems reference one Product.
+
+
+**ShippingAddress**
+
+Represents delivery information for an order.
+
+Fields:
+
+_id – AutoField (Primary Key)
+
+order – OneToOneField → Order
+
+address – CharField(200)
+
+city – CharField(200)
+
+postalCode – CharField(200)
+
+country – CharField(200)
+
+shippingPrice – DecimalField(10,2)
+
+Relationship:
+
+One ShippingAddress is associated with exactly one Order.
 
 ---
 
