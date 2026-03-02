@@ -172,7 +172,11 @@ The navigation model prioritises ease of movement and minimal friction. A persis
 
 ### ERD
 
-![Screenshot of ERD](./backend/frontend/public/images/erd's_first_draft.png)
+Here is the link to my ERD, created using Lucid Chart: https://lucid.app/lucidchart/c6989dad-7bf8-4550-bf20-189bb77cfb91/edit?viewport_loc=-2010%2C-578%2C3940%2C1903%2C0_0&invitationId=inv_564427e2-7f17-413e-b4b8-1f3b7da38529
+
+There is also a screenshot of it below:
+
+![Screenshot of ERD](./backend/frontend/public/images/erd_update/erd.png)
 
 
 ---
@@ -510,7 +514,6 @@ Before writing any of the tests, I first learned that it's important to structur
 Assigning will be assigning data. Acting will be using it. Asserting will then test if the output is true or false.
 
 
-
 #### Running The Pytests
 
 First, I created a pytest.ini file located in the same directory as my manage.py file (backend).
@@ -592,7 +595,6 @@ Lastly, I created a test to see if the function would raise an error if the text
 After modifying the function, it passed:
 
 ![Screenshot of green state](./backend/frontend/public/images/pytest/fourth_test/green_state.png)
-
 
 
 ### Jest Tests
