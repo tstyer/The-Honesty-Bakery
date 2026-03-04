@@ -364,47 +364,6 @@ body,
   display: block;
 }
 
-/* =========================
-   Product Cards (uniform)
-========================= */
-/*
-.product-card {
-  height: 420px;
-  padding: 0.75rem;
-  display: flex;
-  flex-direction: column;
-}
-*/
-
-/* Image area: fixed height, show more image (less crop) */
-
-/* Keep text from stretching card weirdly */
-/*
-.product-card .card-body {
-  padding: 0.75rem 0.25rem;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-*/
-
-/* Title: stop wrapping into weird tall blocks */
-/*
-.product-card .card-title {
-  font-size: 1rem;
-  line-height: 1.2;
-  min-height: 2.4em;
-  overflow: hidden;
-}
-*/
-
-/* Push price to the bottom so layout is consistent */
-/*
-.product-card .card-body h3 {
-  margin-top: auto;
-}
-*/
-
 /* Hero */
 
 /* Centers the hero relative to the FULL page, not the Bootstrap container */
@@ -446,7 +405,7 @@ body,
   border: 2px solid #3a2e2a;
   border-radius: 14px;
 
-  /* soften the border so it feels drawn */
+  /* softening the border */
   box-shadow:
     1px 1px 0 #3a2e2a,
     -1px -1px 0 rgba(255,255,255,0.4);
@@ -516,6 +475,12 @@ body,
   }
 }
 
+
+/* Footer */
+
+.footer-text {
+  font-family: 'Gochi Hand', Cursive;
+}
 
 /* ==============
   Media Queries

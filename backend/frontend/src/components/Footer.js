@@ -6,8 +6,8 @@ function Footer() {
     <footer>
       <Container>
         <Row>
-            <Col className='text-center py-3'>Copyright &copy; Honesty Bakery</Col>
-            <Col className='text-center py-3'>Socials: <a href='https://www.facebook.com' rel='noopener noreferrer' target='_blank'><i class="fa-brands fa-facebook-f"></i></a> | <a href='https://www.instagram.com' rel='noopener noreferrer' target='_blank'><i class="fa-brands fa-instagram"></i></a></Col>
+            <Col className='text-center py-3 footer-text'>Copyright &copy; Honesty Bakery</Col>
+            <Col className='text-center py-3 footer-text'>Socials: <a href='https://www.facebook.com' rel='noopener noreferrer' target='_blank'><i class="fa-brands fa-facebook-f"></i></a> | <a href='https://www.instagram.com' rel='noopener noreferrer' target='_blank'><i class="fa-brands fa-instagram"></i></a></Col>
         </Row>
       </Container>
     </footer>
