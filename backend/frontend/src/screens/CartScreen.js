@@ -56,7 +56,7 @@ export default function CartScreen() {
                     </Col>
 
                     <Col md={3}>
-                      <Link to={`/product/${item.product}`}>{item.name}</Link>
+                      <Link to={`/product/${item.product}`} className='product-link'>{item.name}</Link>
                     </Col>
 
                     <Col md={2}>£{item.price}</Col>
