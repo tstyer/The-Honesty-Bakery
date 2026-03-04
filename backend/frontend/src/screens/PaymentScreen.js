@@ -35,6 +35,11 @@ export default function PaymentScreen() {
   const [paying, setPaying] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
 
+  // Clear any previous payment success when entering this screen
+  useEffect(() => {
+    dispatch(setPaymentResult(null))
+  }, [dispatch])
+
   useEffect(() => {
     if (!cartItems || cartItems.length === 0) navigate('/cart')
   }, [cartItems, navigate])
@@ -193,7 +198,12 @@ export default function PaymentScreen() {
           </div>
         )}
 
-        <Button type="submit" className="my-3 cta-btn" variant='outline-dark' disabled={paying || (method === 'Card' && !stripeReady)}>
+        <Button
+          type="submit"
+          className="my-3 cta-btn"
+          variant='outline-dark'
+          disabled={paying || (method === 'Card' && !stripeReady)}
+        >
           {method === 'Card' ? (paying ? 'Processing…' : 'Pay & Continue') : 'Continue'}
         </Button>
       </Form>
