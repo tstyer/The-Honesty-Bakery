@@ -34,6 +34,7 @@ export default function PaymentScreen() {
 
   const [paying, setPaying] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
+  const [cardComplete, setCardComplete] = useState(false)
 
   // Clear any previous payment success when entering this screen
   useEffect(() => {
@@ -94,6 +95,7 @@ export default function PaymentScreen() {
       const clientSecret = data.clientSecret
 
       const cardElement = elements.getElement(CardElement)
+
       if (!cardElement) {
         setErrorMsg('Card input is not ready yet. Try again in a moment.')
         setPaying(false)
@@ -138,19 +140,24 @@ export default function PaymentScreen() {
 
   return (
     <div>
-      <h1 className='text-center'>Payment</h1>
+      <h1 className="text-center">Payment</h1>
 
-      {/*} {hasMadeToOrder && (
+      {/*} 
+      {hasMadeToOrder && (
         <Message variant="info">
           Your cart includes made-to-order items. Card payment is required before we start baking.
         </Message>
-      )} */ }
+      )} 
+      */}
 
       {errorMsg && <Message variant="danger">{errorMsg}</Message>}
 
       <Form onSubmit={submitHandler}>
         <Form.Group>
-          <Form.Label as="legend" className='payment-text'>Select Method</Form.Label>
+          <Form.Label as="legend" className="payment-text">
+            Select Method
+          </Form.Label>
+
           <Col>
             {allowedMethods.includes('Cash') && (
               <Form.Check
@@ -180,19 +187,35 @@ export default function PaymentScreen() {
 
         {method === 'Card' && (
           <div className="my-3">
-            <Form.Label className='payment-text'>Card details</Form.Label>
+            <Form.Label className="payment-text">Card details</Form.Label>
 
             {!stripeReady ? (
               <Message variant="info">Loading secure payment form…</Message>
             ) : (
-              <div style={{ padding: '12px', border: '1px solid #ddd', borderRadius: 6 }}>
-                <CardElement />
+              <div
+                style={{
+                  padding: '12px',
+                  border: '1px solid #ddd',
+                  borderRadius: 6,
+                }}
+              >
+                <CardElement
+                  onChange={(e) => {
+                    setCardComplete(e.complete)
+
+                    if (e.error) {
+                      setErrorMsg(e.error.message)
+                    } else {
+                      setErrorMsg('')
+                    }
+                  }}
+                />
               </div>
             )}
 
             {cardPaid && (
               <div className="mt-2">
-                <small className='payment-text'>Payment completed ✔</small>
+                <small className="payment-text">Payment completed ✔</small>
               </div>
             )}
           </div>
@@ -201,10 +224,17 @@ export default function PaymentScreen() {
         <Button
           type="submit"
           className="my-3 cta-btn"
-          variant='outline-dark'
-          disabled={paying || (method === 'Card' && !stripeReady)}
+          variant="outline-dark"
+          disabled={
+            paying ||
+            (method === 'Card' && (!stripeReady || !cardComplete))
+          }
         >
-          {method === 'Card' ? (paying ? 'Processing…' : 'Pay & Continue') : 'Continue'}
+          {method === 'Card'
+            ? paying
+              ? 'Processing…'
+              : 'Pay & Continue'
+            : 'Continue'}
         </Button>
       </Form>
     </div>
