@@ -155,7 +155,7 @@ export default function PaymentScreen() {
       <Form onSubmit={submitHandler}>
         <Form.Group>
           <Form.Label as="legend" className="payment-text">
-            Select Method
+            Add Payment Details
           </Form.Label>
 
           <Col>
@@ -233,7 +233,7 @@ export default function PaymentScreen() {
           {method === 'Card'
             ? paying
               ? 'Processing…'
-              : 'Pay & Continue'
+              : 'Order Summary'
             : 'Continue'}
         </Button>
       </Form>
