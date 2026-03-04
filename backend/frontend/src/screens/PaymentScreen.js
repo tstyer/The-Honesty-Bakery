@@ -145,7 +145,7 @@ export default function PaymentScreen() {
 
       <Form onSubmit={submitHandler}>
         <Form.Group>
-          <Form.Label as="legend">Select Method</Form.Label>
+          <Form.Label as="legend" className='payment-text'>Select Method</Form.Label>
           <Col>
             {allowedMethods.includes('Cash') && (
               <Form.Check
@@ -175,7 +175,7 @@ export default function PaymentScreen() {
 
         {method === 'Card' && (
           <div className="my-3">
-            <Form.Label>Card details</Form.Label>
+            <Form.Label className='payment-text'>Card details</Form.Label>
 
             {!stripeReady ? (
               <Message variant="info">Loading secure payment form…</Message>
@@ -187,7 +187,7 @@ export default function PaymentScreen() {
 
             {cardPaid && (
               <div className="mt-2">
-                <small>Payment completed ✔</small>
+                <small className='payment-text'>Payment completed ✔</small>
               </div>
             )}
           </div>
