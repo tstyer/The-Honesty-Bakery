@@ -8,6 +8,6 @@
 
 .light_border {
     border-radius: 8px !important;
-    border: 2px solid lightgrey;
+    border: 2px solid lightgrey !important;
 }
 

@@ -169,7 +169,7 @@ main {
 }
 
 h1 {
-  font-family: 'Allura' !important;
+  font-family: 'Lobster' !important;
   font-weight: 600 !important;
   padding-top: 0 !important;
   font-size: 1.8rem;
@@ -184,7 +184,7 @@ h1 {
 }
 
 h2 {
-  font-family: 'Gochi Hand', Cursive;
+  font-family: 'Lobster', Cursive !important;
   font-size: 1.4rem;
   padding: 0.5rem 0;
 }
