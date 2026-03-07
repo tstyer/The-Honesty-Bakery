@@ -41,7 +41,7 @@ export default function CartScreen() {
               Your cart is empty <Link to="/">Go Back</Link>
             </Message>
           ) : (
-            <ListGroup variant="flush">
+            <ListGroup variant="flush" className='light_border'>
               {cartItems.map((item) => (
                 <ListGroup.Item key={item.product}>
                   <Row className="align-items-center">
@@ -96,7 +96,7 @@ export default function CartScreen() {
 
         <Col md={4}>
           <Card>
-            <ListGroup variant="flush">
+            <ListGroup variant="flush" className='light_border'>
               <ListGroup.Item>
                 <h2>
                   Subtotal (

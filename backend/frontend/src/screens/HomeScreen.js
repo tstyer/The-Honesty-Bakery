@@ -100,14 +100,14 @@ function HomeScreen({ category }) {
           {/* Sub copy */}
           <div className="home-subtext">
             <h2>
-              Thoughtfully Baked{' '}
+              Fresh Cakes{' '}
               <img
                 src="/images/spoon.png"
                 alt=""
                 aria-hidden="true"
                 className="home-spoon"
               />{' '}
-              Honestly Delicious
+              Sweet Treats
             </h2>
 
             <img

@@ -17,3 +17,8 @@
   font-family: 'Gochi Hand', cursive;
 }
 
+.light_border {
+    border-radius: 8px !important;
+    border: 2px solid lightgrey !important;
+}
+
