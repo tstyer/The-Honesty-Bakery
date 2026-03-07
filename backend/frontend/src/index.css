@@ -378,6 +378,14 @@ body,
   color: #4a4a4a;
 }
 
+.home-subtext img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 16px;
+  width: 16px;
+}
+
 .home-p {
   text-align: center;
   text-justify: inter-word;
