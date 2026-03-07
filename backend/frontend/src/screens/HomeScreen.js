@@ -103,7 +103,7 @@ function HomeScreen({ category }) {
               Fresh Cakes{' '}
               <img
                 src="/images/spoon.png"
-                alt=""
+                alt="black baking spoon"
                 aria-hidden="true"
                 className="home-spoon"
               />{' '}

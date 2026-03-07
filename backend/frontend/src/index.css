@@ -378,12 +378,11 @@ body,
   color: #4a4a4a;
 }
 
-.home-subtext img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 16px;
-  width: 16px;
+.home-subtext .logo {
+  display: block;
+  margin: 1rem auto 0;
+  height: 32px;
+  width: 32px;
 }
 
 .home-p {
