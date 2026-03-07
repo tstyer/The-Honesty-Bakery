@@ -168,11 +168,12 @@ main {
   min-height: 80vh;
 }
 
-h1,
-h2 {
+h1 {
   font-family: 'Allura' !important;
   font-weight: 600 !important;
   padding-top: 0 !important;
+  font-size: 1.8rem;
+  color: var(--main-text);
 }
 
 .subheader {
@@ -182,13 +183,8 @@ h2 {
   margin-top: 0;
 }
 
-h1 {
-  font-size: 1.8rem;
-  /*padding: 1rem 0;*/
-  color: var(--main-text);
-}
-
 h2 {
+  font-family: 'Gochi Hand', Cursive;
   font-size: 1.4rem;
   padding: 0.5rem 0;
 }
