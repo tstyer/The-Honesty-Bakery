@@ -117,7 +117,7 @@ function HomeScreen({ category }) {
             />
 
             <div className="text-wrap align-items-center">
-              <p className="general-p mt-4 mx-auto">
+              <p className="home-p mt-4 mx-auto">
                 <strong>If you're strolling through Seabrook,</strong>{' '}
                 you might bump into our honesty box. Inside, you'll find all our
                 prebaked cakes. They're truly one-of-a-kind. It's open to all and

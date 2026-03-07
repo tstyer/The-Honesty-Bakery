@@ -66,14 +66,14 @@ export default function OrderScreen() {
 
               <ListGroup.Item>
                 <Row>
-                  <Col>Payment</Col>
+                  <Col className='order_confirmed_text'>Payment</Col>
                   <Col className="text-end">{paymentMethod || 'Not selected'}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
-                  <Col>Total</Col>
+                  <Col className='order_confirmed_text'>Total</Col>
                   <Col className="text-end">${itemsPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>

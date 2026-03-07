@@ -172,7 +172,7 @@ h1 {
   font-family: 'Lobster' !important;
   font-weight: 600 !important;
   padding-top: 0 !important;
-  font-size: 1.8rem;
+  font-size: 1.8rem !important;
   color: var(--main-text);
 }
 
@@ -369,7 +369,7 @@ body,
   display: block;
 }
 
-.home-subtext {
+.home-subtext h2 {
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
@@ -383,6 +383,7 @@ body,
   text-justify: inter-word;
   line-height: 1.7;
   max-width: 775px;
+  color: var(--main-text);
 }
 
 /* home CTA's */

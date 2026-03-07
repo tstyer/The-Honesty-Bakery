@@ -5,6 +5,10 @@
   border-radius: 12px;
 }
 
+.title_cart {
+  margin-bottom: 1.5rem;
+}
+
 .cart-image {
   width: 100%;
   height: 100%;
@@ -20,5 +24,14 @@
 .light_border {
     border-radius: 8px !important;
     border: 2px solid lightgrey !important;
+}
+
+.cart-row {
+  display: flex;
+  align-items: stretch;
+}
+
+.cart-row .card {
+  height: 100%;
 }
 
