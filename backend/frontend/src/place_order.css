@@ -1,0 +1,12 @@
+.place_order_text {
+    font-family: 'Gochi Hand', Cursive;
+}
+
+.place_order_text img {
+    opacity: 70%;
+}
+
+.summary_box {
+    border-radius: 8px;
+    border: 2px solid black;
+}

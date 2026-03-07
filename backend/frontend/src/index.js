@@ -8,6 +8,7 @@ import './index.css';
 import './about.css';
 import './products.css';
 import './cart.css';
+import './place_order.css';
 import './bootstrap.min.css';
 import App from './App';
 

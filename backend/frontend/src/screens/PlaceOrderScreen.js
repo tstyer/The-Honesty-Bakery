@@ -41,8 +41,8 @@ export default function PlaceOrderScreen() {
 
       <Row>
         <Col md={8}>
-          <ListGroup variant='flush'>
-            <ListGroup.Item>
+          <ListGroup variant='flush' className='summary_box'>
+            <ListGroup.Item className='place_order_text'>
               <h2>Collection</h2>
               <p>
                 <strong>Pickup only.</strong> You’ll collect your cakes from our location.
@@ -58,7 +58,7 @@ export default function PlaceOrderScreen() {
               {paymentMethod || 'Not selected'}
             </ListGroup.Item>
 
-            <ListGroup.Item>
+            <ListGroup.Item className='place_order_text'>
               <h2>Order Items</h2>
               <ListGroup variant='flush'>
                 {cartItems.map((item) => (
@@ -84,7 +84,7 @@ export default function PlaceOrderScreen() {
         </Col>
 
         <Col md={4}>
-          <Card>
+          <Card className='place_order_text'>
             <ListGroup variant='flush'>
               <ListGroup.Item>
                 <h2>Order Summary</h2>
@@ -104,7 +104,7 @@ export default function PlaceOrderScreen() {
                 </Row>
               </ListGroup.Item>
 
-              <ListGroup.Item>
+              <ListGroup.Item className='place_order_text'>
                 <Button
                   type='button'
                   className='btn-block cta-btn'
