@@ -41,7 +41,7 @@ export default function PlaceOrderScreen() {
 
       <Row>
         <Col md={8}>
-          <ListGroup variant='flush' className='summary_box'>
+          <ListGroup variant='flush' className='light_border'>
             <ListGroup.Item className='place_order_text'>
               <h2>Collection</h2>
               <p>
@@ -84,7 +84,7 @@ export default function PlaceOrderScreen() {
         </Col>
 
         <Col md={4}>
-          <Card className='place_order_text'>
+          <Card className='place_order_text light_border'>
             <ListGroup variant='flush'>
               <ListGroup.Item>
                 <h2>Order Summary</h2>
