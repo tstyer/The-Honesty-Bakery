@@ -7,6 +7,6 @@
 }
 
 .summary_box {
-    border-radius: 8px;
-    border: 2px solid black;
+    border-radius: 8px !important;
+    border: 2px solid lightgrey;
 }
