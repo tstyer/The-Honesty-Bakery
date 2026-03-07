@@ -32,10 +32,9 @@ export default function CartScreen() {
 
   return (
     <div>
+      <h1 className='title_cart'>Shopping Cart</h1>
       <Row>
         <Col md={8}>
-          <h1 className='title_cart'>Shopping Cart</h1>
-
           {cartItems.length === 0 ? (
             <Message>
               Your cart is empty <Link to="/">Go Back</Link>
@@ -94,7 +93,7 @@ export default function CartScreen() {
           )}
         </Col>
 
-        <Col md={4}>
+        <Col md={4} className="subtotal-col">
           <Card className="flex-fill border-0 bg-transparent">
             <ListGroup variant="flush" className='light_border'>
               <ListGroup.Item>
