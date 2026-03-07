@@ -21,11 +21,6 @@
   font-family: 'Gochi Hand', cursive;
 }
 
-.light_border {
-    border-radius: 8px !important;
-    border: 2px solid lightgrey !important;
-}
-
 .cart-row {
   display: flex;
   align-items: stretch;
@@ -33,5 +28,12 @@
 
 .cart-row .card {
   height: 100%;
+}
+
+.subtotal_box {
+  border: 2px solid lightgrey !important;
+  border-radius: 8px !important;
+  background: #f8f8f8;
+  align-self: flex-start;
 }
 

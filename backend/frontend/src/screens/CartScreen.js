@@ -94,9 +94,9 @@ export default function CartScreen() {
           )}
         </Col>
 
-        <Col md={4}>
-          <Card>
-            <ListGroup variant="flush" className='light_border'>
+        <Col md={4} className="d-flex">
+          <Card className="flex-fill border-0 bg-transparent">
+            <ListGroup variant="flush" className='light_border subtotal_box'>
               <ListGroup.Item>
                 <h2>
                   Subtotal (
