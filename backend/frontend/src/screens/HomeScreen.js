@@ -61,7 +61,7 @@ function HomeScreen({ category }) {
             />
           </div>
 
-          {/* Decorative bee */}
+          {/* bee */}
           <img
             src="/images/bee_2.png"
             alt="Flying bee illustration"
@@ -97,7 +97,7 @@ function HomeScreen({ category }) {
             </Link>
           </div>
 
-          {/* Supporting copy */}
+          {/* Sub copy */}
           <div className="home-subtext">
             <h2>
               Thoughtfully Baked{' '}
