@@ -32,7 +32,7 @@ export default function CartScreen() {
 
   return (
     <div>
-      <Row className="cart-row">
+      <Row>
         <Col md={8}>
           <h1 className='title_cart'>Shopping Cart</h1>
 
@@ -94,9 +94,9 @@ export default function CartScreen() {
           )}
         </Col>
 
-        <Col md={4} className="d-flex">
+        <Col md={4}>
           <Card className="flex-fill border-0 bg-transparent">
-            <ListGroup variant="flush" className='light_border subtotal_box'>
+            <ListGroup variant="flush" className='light_border'>
               <ListGroup.Item>
                 <h2>
                   Subtotal (

@@ -21,15 +21,6 @@
   font-family: 'Gochi Hand', cursive;
 }
 
-.cart-row {
-  display: flex;
-  align-items: stretch;
-}
-
-.cart-row .card {
-  height: 100%;
-}
-
 .subtotal_box {
   border: 2px solid lightgrey !important;
   border-radius: 8px !important;
