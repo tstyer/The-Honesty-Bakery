@@ -5,8 +5,15 @@ import Rating from '../components/Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { useDispatch, useSelector } from 'react-redux'
-import { listProductDetails, createProductReview } from '../actions/productActions'
-import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
+import {
+  listProductDetails,
+  createProductReview,
+  deleteProductReview,
+} from '../actions/productActions'
+import {
+  PRODUCT_CREATE_REVIEW_RESET,
+  PRODUCT_DELETE_REVIEW_RESET,
+} from '../constants/productConstants'
 
 function ProductScreen() {
   const [qty, setQty] = useState(1)
@@ -32,6 +39,13 @@ function ProductScreen() {
     loading: loadingProductReview,
   } = productReviewCreate
 
+  const productReviewDelete = useSelector((state) => state.productReviewDelete)
+  const {
+    success: successDeleteReview,
+    error: errorDeleteReview,
+    loading: loadingDeleteReview,
+  } = productReviewDelete
+
   useEffect(() => {
     if (successProductReview) {
       setRating(0)
@@ -39,8 +53,12 @@ function ProductScreen() {
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
     }
 
+    if (successDeleteReview) {
+      dispatch({ type: PRODUCT_DELETE_REVIEW_RESET })
+    }
+
     dispatch(listProductDetails(id))
-  }, [dispatch, id, successProductReview])
+  }, [dispatch, id, successProductReview, successDeleteReview])
 
   // Convert any old Django-ish paths into React public /images/ paths.
   const rawImage = product?.image || ''
@@ -65,9 +83,14 @@ function ProductScreen() {
     dispatch(createProductReview(product._id, { rating, comment }))
   }
 
+  const deleteReviewHandler = (reviewId) => {
+    if (window.confirm('Are you sure you want to delete this review?')) {
+      dispatch(deleteProductReview(product._id, reviewId))
+    }
+  }
+
   return (
     <div>
-  
       <Button
         className="my-3 cta-btn btn-block"
         variant="outline-dark"
@@ -75,7 +98,6 @@ function ProductScreen() {
       >
         Go Back
       </Button>
-      
 
       {loading ? (
         <Loader />
@@ -85,10 +107,10 @@ function ProductScreen() {
         <>
           <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid className='product-image' />
+              <Image src={product.image} alt={product.name} fluid className="product-image" />
             </Col>
 
-            <Col md={3} className='border'>
+            <Col md={3} className="border">
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
@@ -98,16 +120,18 @@ function ProductScreen() {
                   <Rating value={product.rating} text={`${product.numReviews} reviews`} />
                 </ListGroup.Item>
 
-                <ListGroup.Item className='product_text'>Price: £{product.price}</ListGroup.Item>
+                <ListGroup.Item className="product_text">Price: £{product.price}</ListGroup.Item>
 
-                <ListGroup.Item className='product_text'>Description: {product.description}</ListGroup.Item>
+                <ListGroup.Item className="product_text">
+                  Description: {product.description}
+                </ListGroup.Item>
               </ListGroup>
             </Col>
 
-            <Col md={3} className='border'>
+            <Col md={3} className="border">
               <Card>
                 <ListGroup variant="flush">
-                  <ListGroup.Item className='product_text'>
+                  <ListGroup.Item className="product_text">
                     <Row>
                       <Col>Price:</Col>
                       <Col>
@@ -116,7 +140,7 @@ function ProductScreen() {
                     </Row>
                   </ListGroup.Item>
 
-                  <ListGroup.Item className='product_text'>
+                  <ListGroup.Item className="product_text">
                     <Row>
                       <Col>Status:</Col>
                       <Col>
@@ -126,7 +150,7 @@ function ProductScreen() {
                   </ListGroup.Item>
 
                   {product.countInStock > 0 && (
-                    <ListGroup.Item className='product_text'>
+                    <ListGroup.Item className="product_text">
                       <Row>
                         <Col>Qty:</Col>
                         <Col xs="auto" className="my-1">
@@ -149,8 +173,8 @@ function ProductScreen() {
                   <ListGroup.Item>
                     <Button
                       onClick={addToCartHandler}
-                      className="btn-block cta-btn className='product_text'"
-                      variant='outline-dark'
+                      className="btn-block cta-btn product_text"
+                      variant="outline-dark"
                       type="button"
                       disabled={product.countInStock === 0}
                     >
@@ -168,14 +192,34 @@ function ProductScreen() {
               <h2>Reviews</h2>
 
               {product.reviews && product.reviews.length === 0 && (
-                <Message variant="info" className='product_text'>No reviews yet</Message>
+                <Message variant="info" className="product_text">
+                  No reviews yet
+                </Message>
               )}
+
+              {loadingDeleteReview && <Loader />}
+              {errorDeleteReview && <Message variant="danger">{errorDeleteReview}</Message>}
 
               {product.reviews &&
                 product.reviews.map((review) => (
                   <ListGroup variant="flush" key={review._id} className="mb-3">
                     <ListGroup.Item>
-                      <strong>{review.name}</strong>
+                      <div className="d-flex justify-content-between align-items-center">
+                        <strong>{review.name}</strong>
+
+                        {userInfo &&
+                          (userInfo.isAdmin ||
+                            userInfo._id === review.user ||
+                            userInfo.id === review.user) && (
+                            <Button
+                              variant="outline-danger"
+                              size="sm"
+                              onClick={() => deleteReviewHandler(review._id)}
+                            >
+                              Delete
+                            </Button>
+                          )}
+                      </div>
                     </ListGroup.Item>
                     <ListGroup.Item>
                       <Rating value={review.rating} text="" />
@@ -199,7 +243,7 @@ function ProductScreen() {
                       as="select"
                       value={rating}
                       onChange={(e) => setRating(Number(e.target.value))}
-                      className='product_text'
+                      className="product_text"
                     >
                       <option value="0">Select...</option>
                       <option value="1">1 - Poor</option>
@@ -211,7 +255,7 @@ function ProductScreen() {
                   </Form.Group>
 
                   <Form.Group controlId="comment" className="my-2">
-                    <Form.Label className='product_text'>Comment</Form.Label>
+                    <Form.Label className="product_text">Comment</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows="3"
@@ -220,12 +264,18 @@ function ProductScreen() {
                     />
                   </Form.Group>
 
-                  <Button type="submit" className="my-3 cta-btn btn-block className='product_text'" variant="outline-dark">
+                  <Button
+                    type="submit"
+                    className="my-3 cta-btn btn-block product_text"
+                    variant="outline-dark"
+                  >
                     Submit
                   </Button>
                 </Form>
               ) : (
-                <Message variant="info" className='product_text'>Please log in to write a review</Message>
+                <Message variant="info" className="product_text">
+                  Please log in to write a review
+                </Message>
               )}
             </Col>
           </Row>
