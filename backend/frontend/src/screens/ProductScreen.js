@@ -88,7 +88,7 @@ function ProductScreen() {
               <Image src={product.image} alt={product.name} fluid className='product-image' />
             </Col>
 
-            <Col md={3}>
+            <Col md={3} className='border'>
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
@@ -98,16 +98,16 @@ function ProductScreen() {
                   <Rating value={product.rating} text={`${product.numReviews} reviews`} />
                 </ListGroup.Item>
 
-                <ListGroup.Item>Price: £{product.price}</ListGroup.Item>
+                <ListGroup.Item className='product_text'>Price: £{product.price}</ListGroup.Item>
 
-                <ListGroup.Item>Description: {product.description}</ListGroup.Item>
+                <ListGroup.Item className='product_text'>Description: {product.description}</ListGroup.Item>
               </ListGroup>
             </Col>
 
-            <Col md={3}>
+            <Col md={3} className='border'>
               <Card>
                 <ListGroup variant="flush">
-                  <ListGroup.Item>
+                  <ListGroup.Item className='product_text'>
                     <Row>
                       <Col>Price:</Col>
                       <Col>
@@ -116,7 +116,7 @@ function ProductScreen() {
                     </Row>
                   </ListGroup.Item>
 
-                  <ListGroup.Item>
+                  <ListGroup.Item className='product_text'>
                     <Row>
                       <Col>Status:</Col>
                       <Col>
@@ -126,7 +126,7 @@ function ProductScreen() {
                   </ListGroup.Item>
 
                   {product.countInStock > 0 && (
-                    <ListGroup.Item>
+                    <ListGroup.Item className='product_text'>
                       <Row>
                         <Col>Qty:</Col>
                         <Col xs="auto" className="my-1">
@@ -149,7 +149,7 @@ function ProductScreen() {
                   <ListGroup.Item>
                     <Button
                       onClick={addToCartHandler}
-                      className="btn-block cta-btn"
+                      className="btn-block cta-btn className='product_text'"
                       variant='outline-dark'
                       type="button"
                       disabled={product.countInStock === 0}
@@ -168,7 +168,7 @@ function ProductScreen() {
               <h2>Reviews</h2>
 
               {product.reviews && product.reviews.length === 0 && (
-                <Message variant="info">No reviews yet</Message>
+                <Message variant="info" className='product_text'>No reviews yet</Message>
               )}
 
               {product.reviews &&
@@ -199,6 +199,7 @@ function ProductScreen() {
                       as="select"
                       value={rating}
                       onChange={(e) => setRating(Number(e.target.value))}
+                      className='product_text'
                     >
                       <option value="0">Select...</option>
                       <option value="1">1 - Poor</option>
@@ -210,7 +211,7 @@ function ProductScreen() {
                   </Form.Group>
 
                   <Form.Group controlId="comment" className="my-2">
-                    <Form.Label>Comment</Form.Label>
+                    <Form.Label className='product_text'>Comment</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows="3"
@@ -219,12 +220,12 @@ function ProductScreen() {
                     />
                   </Form.Group>
 
-                  <Button type="submit" className="my-3 cta-btn btn-block" variant="outline-dark">
+                  <Button type="submit" className="my-3 cta-btn btn-block className='product_text'" variant="outline-dark">
                     Submit
                   </Button>
                 </Form>
               ) : (
-                <Message variant="info">Please log in to write a review</Message>
+                <Message variant="info" className='product_text'>Please log in to write a review</Message>
               )}
             </Col>
           </Row>

@@ -162,3 +162,13 @@ Single Product Screen
   opacity: 70%;
 }
 
+.border {
+  border: 2px solid lightgrey !important;
+  border-radius: 8px !important;
+  background: #f8f8f8;
+  align-self: flex-start;
+}
+
+.product_text {
+  font-family: 'Gochi Hand', cursive;
+}
