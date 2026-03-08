@@ -22,11 +22,11 @@ urlpatterns = [
     path('products/create/', views.createProduct, name='product-create'),
     path('products/update/<int:pk>/', views.updateProduct, name='product-update'),
 
+    # ===== REVIEWS ====
+    path('products/<str:pk>/reviews/<str:review_id>/delete/', views.deleteProductReview, name="delete-review"),
 
     # ===== ORDERS =====
     path('orders/', views.getOrders, name='orders'),
-
-
 
     # ===== ROUTES (DEV ONLY) =====
     path('', views.getRoutes, name='routes'),

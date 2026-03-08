@@ -381,6 +381,31 @@ def deleteProduct(request, pk):
 
 
 # ======================
+# Reviews
+# ======================
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def deleteProductReview(request, pk, review_id):
+
+    user = request.user
+    product = Product.objects.get(_id=pk)
+
+    try:
+        review = Review.objects.get(_id=review_id, product=product)
+    except Review.DoesNotExist:
+        return Response({'detail': 'Review not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    # allow admin OR owner
+    if review.user != user and not user.is_staff:
+        return Response({'detail': 'Not authorised'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    review.delete()
+
+    return Response({'detail': 'Review deleted'})
+
+
+# ======================
 # Orders
 # ======================
 
