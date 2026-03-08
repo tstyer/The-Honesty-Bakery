@@ -21,6 +21,10 @@ import {
     PRODUCT_CREATE_REVIEW_SUCCESS,
     PRODUCT_CREATE_REVIEW_FAIL,
     PRODUCT_CREATE_REVIEW_RESET,
+    PRODUCT_DELETE_REVIEW_REQUEST,
+    PRODUCT_DELETE_REVIEW_SUCCESS,
+    PRODUCT_DELETE_REVIEW_FAIL,
+    PRODUCT_DELETE_REVIEW_RESET,
  } from '../constants/productConstants'
 
 export const productListReducer = (state = { products: [] }, action) => {
