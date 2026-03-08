@@ -1,12 +1,12 @@
 import React from 'react'
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../actions/userActions'
-import { toast } from 'react-toastify'
 
 function Header() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const { userInfo } = useSelector((state) => state.userLogin)
 
