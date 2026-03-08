@@ -85,7 +85,7 @@ function ProductScreen() {
         <>
           <Row>
             <Col md={6}>
-              <Image src={imageSrc} alt={product.name} fluid className='product-image' />
+              <Image src={product.image} alt={product.name} fluid className='product-image' />
             </Col>
 
             <Col md={3}>
@@ -185,7 +185,7 @@ function ProductScreen() {
                   </ListGroup>
                 ))}
 
-              <h2 className="mt-4">Write a Customer Review</h2>
+              <h2 className="mt-4">Write a Review</h2>
 
               {successProductReview && <Message variant="success">Review submitted</Message>}
               {loadingProductReview && <Loader />}
