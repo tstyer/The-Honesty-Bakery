@@ -27,10 +27,19 @@ export default function PlaceOrderScreen() {
   const placeOrderHandler = () => {
   const fakeOrderId = Date.now().toString()
 
+  const orderData = {
+    _id: fakeOrderId,
+    orderItems: cartItems,
+    paymentMethod,
+    paymentResult,
+    itemsPrice: totals.itemsPrice,
+    totalPrice: totals.totalPrice,
+  }
+
   dispatch({ type: CART_CLEAR_ITEMS })
   localStorage.removeItem('cartItems')
 
-  navigate(`/order/${fakeOrderId}`)
+  navigate(`/order/${fakeOrderId}`, { state: orderData })
 }
 
   if (!cartItems || cartItems.length === 0) {
