@@ -506,7 +506,16 @@ body,
   }
 }
 
-/* navbar burger */
+/* Desktop: keep nav on the left */
+.header-collapse {
+  justify-content: flex-start;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
 /* navbar burger */
 @media (max-width: 991px) {
@@ -517,12 +526,15 @@ body,
   .header-nav {
     width: 100%;
     align-items: flex-end;
+    text-align: right;
+    margin-top: 0.75rem;
   }
 
   .header-nav .nav-link,
   .header-nav .dropdown-toggle,
   .header-nav .dropdown-item {
     text-align: right;
+    justify-content: flex-end;
   }
 
   .header-nav .dropdown-menu {

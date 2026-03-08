@@ -38,7 +38,7 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
           <Navbar.Collapse id="basic-navbar-nav" className="header-collapse">
-            <Nav className="header-nav ms-auto">
+            <Nav className="header-nav">
               <Nav.Link
                 as={NavLink}
                 to="/"
