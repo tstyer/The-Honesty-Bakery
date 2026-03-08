@@ -110,7 +110,7 @@ function ProductScreen() {
               <Image src={product.image} alt={product.name} fluid className="product-image" />
             </Col>
 
-            <Col md={3} className="border">
+            <Col md={3} className="border light_border">
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
@@ -128,7 +128,7 @@ function ProductScreen() {
               </ListGroup>
             </Col>
 
-            <Col md={3} className="border">
+            <Col md={3} className="border light_border">
               <Card>
                 <ListGroup variant="flush">
                   <ListGroup.Item className="product_text">
@@ -215,6 +215,7 @@ function ProductScreen() {
                               variant="outline-danger"
                               size="sm"
                               onClick={() => deleteReviewHandler(review._id)}
+                              className='cta-btn'
                             >
                               Delete
                             </Button>
