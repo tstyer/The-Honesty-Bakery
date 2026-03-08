@@ -1,11 +1,13 @@
 import React, { useMemo } from 'react'
 import { Button, Card, Col, ListGroup, Row, Image } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import Message from '../components/Message'
+import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
 
 export default function PlaceOrderScreen() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
   const { cartItems, paymentMethod, paymentResult } = cart
 
@@ -23,9 +25,13 @@ export default function PlaceOrderScreen() {
   }, [cartItems])
 
   const placeOrderHandler = () => {
-    const fakeOrderId = Date.now().toString()
-    navigate(`/order/${fakeOrderId}`)
-  }
+  const fakeOrderId = Date.now().toString()
+
+  dispatch({ type: CART_CLEAR_ITEMS })
+  localStorage.removeItem('cartItems')
+
+  navigate(`/order/${fakeOrderId}`)
+}
 
   if (!cartItems || cartItems.length === 0) {
     return (

@@ -76,9 +76,9 @@
   transform: translateY(-1px);
 }
 
-/* ================
-Ready to bake cards
-=============== */
+/* ===============================
+Ready to bake cards / personalised caked
+================================= */
 
 /* Makes each product block the same height and stacks content vertically */
 .ready-card {
@@ -109,6 +109,12 @@ Ready to bake cards
 /* "Magic line": pushes the button to the bottom of the card */
 .ready-card .add-to-cart {
   margin-top: auto;
+}
+
+/* Image */
+
+.prebaked-image-wrap img {
+  opacity: 70%;
 }
 
 .contact-me {
@@ -152,6 +158,7 @@ Ready to bake cards
 
   transition: all 0.25s ease;
 }
+
 
 /* ================
 Single Product Screen
