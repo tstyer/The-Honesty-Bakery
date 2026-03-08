@@ -501,7 +501,7 @@ body,
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 500px) {
   .nav-rating {
     display: none;
   }

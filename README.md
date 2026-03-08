@@ -14,7 +14,6 @@ The Honesty Bakery is a local cake store in my town. I built this full-stack web
   - [Structure Plane](#structure-plane)
   - [Skeleton Plane](#skeleton-plane)
   - [Surface Plane](#surface-plane)
-- [Wireframes](#wireframes)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Setting Up Stripe Payments](#setting-up-stripe-payments)
@@ -85,17 +84,24 @@ The small business I created this for had general and specific goals:
 - Order History.
 - 
 
-**Possible Extra's**
+**Future Work On This Project: ESSENTIAL**
 
-- Search Feature
-- **INCLUDE MORE HERE**
+- Search box in the navigation bar - UX.
+- Clean/cut down CSS code and use fewer classes (readability and cleanliness).
+- Styling of the review box isn't ideal - lines look messy. - UI fix.
+- Include 'Go Back' buttons at any point in the payment process - UX fix.
+- Clean folder/structure layout - readbility.
+- Styled Toasters to notify users when they log in and out - UX/UI.
+- More products and a clearer explanation as to what cakes users can buy - UX.
+- Clearer explanation of how to purchase cakes (pick-up only) - UX.
 
 **Features not Included & Why?**
 
 - Wishlist - User's can already purchase without saving.
-- Extra Floating Graphics (Bee's) - Too cluttered and not worth the extra coding. 
+- Extra Floating Graphics - Too cluttered and not worth the extra coding. 
 - Order Tracking - There won't be future delivery.
 - Advanced product filtering - There is only a small product catalogue. 
+- Blog - not nessecery for this project.
 
 
 ### Structure Plane
@@ -137,13 +143,7 @@ The navigation model prioritises ease of movement and minimal friction. A persis
 
 ### Skeleton Plane
 
-
-### Surface Plane
-- Final design decisions (color palette, fonts, visual elements)
-
----
-
-## Wireframes
+**Wireframes**
 
 1. Home Page - Desktop:
 
@@ -223,6 +223,7 @@ date_joined – DateTimeField
 
 last_login – DateTimeField
 
+
 Relationships:
 
 One User can create many Products.
@@ -266,6 +267,7 @@ isPrebaked – BooleanField
 
 createdAt – DateTimeField (auto_now_add=True)
 
+
 Relationships:
 
 One Product can have many Reviews.
@@ -290,6 +292,7 @@ name – CharField(200)
 rating – IntegerField (default=0)
 
 comment – TextField
+
 
 Relationships:
 
@@ -326,6 +329,7 @@ deliveredAt – DateTimeField
 
 createdAt – DateTimeField (auto_now_add=True)
 
+
 Relationships:
 
 One User can have many Orders.
@@ -355,6 +359,7 @@ price – DecimalField(10,2)
 
 image – CharField(200)
 
+
 Relationships:
 
 Many OrderItems belong to one Order.
@@ -382,9 +387,32 @@ country – CharField(200)
 
 shippingPrice – DecimalField(10,2)
 
+
 Relationship:
 
 One ShippingAddress is associated with exactly one Order.
+
+
+### Surface Plane
+
+The surface plane includes colour choices, typography, imagery, layout styling, and interface components. I ensured the interface communicates the brand identity of the bakery while maintaining clarity and usability.
+
+**Typography**
+
+Two primary fonts were used to balance personality with readability:
+
+- Lobster is used for headings and prominent titles to convey warmth and handcrafted branding.
+- Gochi Hand is used for body text and navigation to create a friendly, informal tone consistent with a small independent bakery.
+
+**Colour Palette**
+
+The colour palette was designed to reflect the warmth and familiarity associated with a small independent bakery while maintaining clarity and readability across the interface.
+
+A soft cream background (#fdf6ef) is used throughout the application to create a welcoming and comfortable atmosphere. This colour evokes the feeling of a traditional bakery interior and helps avoid the harshness.
+
+The primary text colour is a cocoa brown (#6B4F3F), which provides strong contrast against the cream background while reinforcing the bakery theme.
+
+Accent elements use a caramel-toned highlight (#C89B7B), which appears in navigation underlines and subtle interface details. This colour was chosen to introduce a gentle visual hierarchy without overwhelming the user interface.
 
 ---
 
@@ -420,8 +448,6 @@ BASE_DIR / 'frontend/build/static'
 Once you have successfuly made a payment on your site (only in test mode), you will see this update on your home dashboard which shows a new payment made today:
 
 ![Screenshot of payment](./backend/frontend/public/images/stripe/payment_success.png)
-
-
 
 ---
 
@@ -520,8 +546,6 @@ After that, place your user access key and secret key in the 'config vars' secti
 
 Now, when you upload images on the honesty bakehouse website, they should be hosted directly on AWS. 
 
-**INCLUDE MANUAL TEST HERE**
-
 ---
 
 ## Testing
@@ -592,8 +616,6 @@ Change user_name = 'email' in views.py. After that, it worked:
 
 ![Second fixed screenshot](./resources/images/other_bugs/log_in/fixed_2.png)
 
-**NEED TO CHANGE THE LOG IN DISPLAY - CHANGE FROM DISPLAYING THEIR EMAIL, TO 'LOG OUT'**
-
 
 #### Login to Checkout Testing
 
@@ -608,8 +630,6 @@ Change user_name = 'email' in views.py. After that, it worked:
 3. I then clicked on checkout:
 
 ![Screenshot of order placed](./resources/images/manual_tests/login_to_checkout/order_placed.png)
-
-**NOW, ENSURE PAYMENT DETAILS ARE TAKEN BEFORE ORDER PLACED**
 
 
 ### Python Testing
@@ -874,15 +894,14 @@ This was the result on the first test:
 
 ### Validators and Tools
 
+(**INCOMPLETE SECTION - CODE VALIDATION**)
+
+
 - HTML Validator
 - CSS Validator
 - Lighthouse Report (Accessibility, SEO, etc.)
 
-
-
-
-
-*********
+(**INCOMPLETE SECTION - CODE VALIDATION**)
 
 
 
@@ -908,9 +927,6 @@ And for the frontend: npm i @stripe/stripe-js @stripe/react-stripe-js (assuming 
 Then, follow these steps:
 
 1. Add stripe secret key settings:
-
-import os
-# ...existing...
 
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
 STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY", "")
@@ -1111,8 +1127,11 @@ Here, you can see the first model created in the Django Admin: Products
 
 ### JSON Web Tokens
 
+(**INCOMPLETE SECTION**)
+
 These are just encoded data about a user. **EXPLAIN MORE**
 
+(**INCOMPLETE SECTION**)
 
 ## Tech. Used
 
@@ -1129,21 +1148,22 @@ These are just encoded data about a user. **EXPLAIN MORE**
 12. AWS (Image storage)
 
 
-## Future Considerations
-
-1. Create an emailn notification for the newly registered user. 
-
-
 ## Credits
 
-- [Links to any external code, images, or media]
-- Clearly cite all third-party assets
+- Images: Sarah Howell
+- Icons: FreeIcons
+- Font Awesome icons
+- React Documentation
+- React-Bootstrap Documentation
+- w3schools 
+- Len Johnson
+- Google Fonts
 
 ---
 
 ## Acknowledgements
 
-Mention any tutorials, mentors, or support resources used.
+I would like to thank my tutor, Len Johnson, for his guidance throughout the development of this project. His feedback helped shape both the technical implementation and the overall structure of the application. I would also like to acknowledge the Code Institute community for help which provided valuable learning resources during development.
 
 ---
 
