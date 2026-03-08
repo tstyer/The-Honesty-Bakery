@@ -30,9 +30,9 @@ function Header() {
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
             {/* LEFT NAV */}
-            <Nav className="me-auto">
+            <Nav className="ms-auto text-end">
               <Nav.Link
                 as={NavLink}
                 to="/"
