@@ -110,8 +110,8 @@ function ProductScreen() {
               <Image src={product.image} alt={product.name} fluid className="product-image" />
             </Col>
 
-            <Col md={3} className="border light_border">
-              <ListGroup variant="flush">
+            <Col md={3} className='box_div'>
+              <ListGroup variant="flush" className='light_border'>
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
@@ -128,9 +128,9 @@ function ProductScreen() {
               </ListGroup>
             </Col>
 
-            <Col md={3} className="border light_border">
+            <Col md={3} className='box_div'>
               <Card>
-                <ListGroup variant="flush">
+                <ListGroup variant="flush" className='light_border'>
                   <ListGroup.Item className="product_text">
                     <Row>
                       <Col>Price:</Col>

@@ -179,3 +179,7 @@ Single Product Screen
 .product_text {
   font-family: 'Gochi Hand', cursive;
 }
+
+.box_div {
+  padding: 3px 0px;
+}
