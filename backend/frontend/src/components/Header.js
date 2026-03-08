@@ -18,8 +18,12 @@ function Header() {
 
   const logoutHandler = () => {
   dispatch(logout())
-  toast.success('Logged out')
-  }
+  alert('Logged out successfully')
+
+  setTimeout(() => {
+    navigate('/login')
+  }, 500)
+}
 
   return (
     <header>

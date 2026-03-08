@@ -22,11 +22,12 @@ export default function LoginScreen() {
 
   useEffect(() => {
   if (userInfo) {
-    toast.success('Logged in successfully')
-    setTimeout(() => navigate(redirect), 500)
-    navigate(redirect)
+    alert('Logged in successfully')
+    setTimeout(() => {
+      navigate(redirect)
+    }, 500)
   }
-  }, [userInfo, navigate, redirect])
+}, [userInfo, navigate, redirect])
 
   const submitHandler = (e) => {
     e.preventDefault()

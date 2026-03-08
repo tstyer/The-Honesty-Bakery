@@ -12,14 +12,10 @@ import './place_order.css';
 import './bootstrap.min.css';
 import App from './App';
 
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <App />
-    <ToastContainer position="top-center" autoClose={2000} />
   </Provider>
 );
 
