@@ -3,6 +3,7 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { NavLink, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../actions/userActions'
+import { toast } from 'react-toastify'
 
 function Header() {
   const dispatch = useDispatch()
@@ -16,7 +17,8 @@ function Header() {
   const cartItemCount = cartItems.reduce((acc, item) => acc + item.qty, 0)
 
   const logoutHandler = () => {
-    dispatch(logout())
+  dispatch(logout())
+  toast.success('Logged out')
   }
 
   return (
@@ -111,7 +113,7 @@ function Header() {
                 </Nav.Link>
               )}
 
-              <Nav.Link as={Link} to="/cart" className="d-flex align-items-center">
+              <Nav.Link as={Link} to="/cart" className="d-flex align-items-center navbar-collapse">
                 <i className="fas fa-shopping-cart" /> Cart
                 {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
               </Nav.Link>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { login } from '../actions/userActions'
+import { toast } from 'react-toastify'
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('')
@@ -20,7 +21,11 @@ export default function LoginScreen() {
   const { loading, error, userInfo } = userLogin
 
   useEffect(() => {
-    if (userInfo) navigate(redirect)
+  if (userInfo) {
+    toast.success('Logged in successfully')
+    setTimeout(() => navigate(redirect), 500)
+    navigate(redirect)
+  }
   }, [userInfo, navigate, redirect])
 
   const submitHandler = (e) => {

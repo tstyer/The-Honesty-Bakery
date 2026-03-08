@@ -3,5 +3,8 @@
   "private": true,
   "scripts": {
     "heroku-postbuild": "cd backend/frontend && npm ci && npm run build"
+  },
+  "dependencies": {
+    "react-toastify": "^11.0.5"
   }
 }
