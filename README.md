@@ -477,7 +477,7 @@ Explain how your project is deployed and how someone can clone and run it locall
 3. Install dependencies
 4. Run application
 
-Link to live site: [Deployed Site](#)
+Link to live site: [Deployed Site](https://the-honesty-bakery-29256f22a3f7.herokuapp.com/)
 
 ---
 
@@ -642,7 +642,7 @@ To add PEP8 to your project, it's essential you are operating within a virtual e
 
 2. In the top navigation bar, you will now be able to find 'Venv'. Select it. 
 
-![Screenshot of venv](./backend/frontend/public/images/python_images/)
+![Screenshot of venv](./backend/frontend/public/images/python_images/venv.png)
 
 3. From there, you will need to select your desired interpreter. I chose to use 3.12.8, which is needed for this project. 
 
