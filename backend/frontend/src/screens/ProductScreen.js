@@ -39,12 +39,12 @@ function ProductScreen() {
     loading: loadingProductReview,
   } = productReviewCreate
 
-  const productReviewDelete = useSelector((state) => state.productReviewDelete)
+  const productReviewDelete = useSelector((state) => state.productReviewDelete || {})
   const {
     success: successDeleteReview,
     error: errorDeleteReview,
     loading: loadingDeleteReview,
-  } = productReviewDelete
+    } = productReviewDelete
 
   useEffect(() => {
     if (successProductReview) {
