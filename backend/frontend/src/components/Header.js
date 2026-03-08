@@ -38,7 +38,8 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
           <Navbar.Collapse id="basic-navbar-nav" className="header-collapse">
-            <Nav className="header-nav">
+            {/* LEFT SIDE LINKS */}
+            <Nav className="header-left-nav">
               <Nav.Link
                 as={NavLink}
                 to="/"
@@ -68,11 +69,15 @@ function Header() {
                 <NavDropdown.Item as={Link} to="/prebaked">
                   Prebaked Cakes
                 </NavDropdown.Item>
+
                 <NavDropdown.Item as={Link} to="/ready-to-bake">
                   Personalised Cakes
                 </NavDropdown.Item>
               </NavDropdown>
+            </Nav>
 
+            {/* RIGHT SIDE LINKS */}
+            <Nav className="header-right-nav ms-lg-auto">
               {userInfo ? (
                 <NavDropdown title={userInfo.name || 'User'} id="username" align="end">
                   <NavDropdown.Item as={Link} to="/profile">
@@ -82,12 +87,15 @@ function Header() {
                   {userInfo.isAdmin && (
                     <>
                       <NavDropdown.Divider />
+
                       <NavDropdown.Item as={Link} to="/admin/userlist">
                         Users
                       </NavDropdown.Item>
+
                       <NavDropdown.Item as={Link} to="/admin/productlist">
                         Products
                       </NavDropdown.Item>
+
                       <NavDropdown.Item as={Link} to="/admin/orderlist">
                         Orders
                       </NavDropdown.Item>
