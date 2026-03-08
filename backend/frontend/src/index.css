@@ -508,21 +508,24 @@ body,
 
 /* navbar burger */
 
+/* navbar burger */
 @media (max-width: 991px) {
-  .mobile-menu-right {
+  .header-collapse {
     text-align: right;
-    align-items: flex-end;
   }
 
-  .mobile-nav-links {
+  .header-nav {
     width: 100%;
     align-items: flex-end;
+  }
+
+  .header-nav .nav-link,
+  .header-nav .dropdown-toggle,
+  .header-nav .dropdown-item {
     text-align: right;
   }
 
-  .mobile-nav-links .nav-link,
-  .mobile-nav-links .dropdown-toggle,
-  .mobile-nav-links .dropdown-item {
+  .header-nav .dropdown-menu {
     text-align: right;
   }
 }

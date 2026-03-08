@@ -9,36 +9,36 @@ function Header() {
   const navigate = useNavigate()
 
   const { userInfo } = useSelector((state) => state.userLogin)
-
-  // Pull cart items to show a live cart badge
   const { cartItems } = useSelector((state) => state.cart)
 
-  // Total items in cart
   const cartItemCount = cartItems.reduce((acc, item) => acc + item.qty, 0)
 
   const logoutHandler = () => {
-  dispatch(logout())
-  alert('Logged out successfully')
+    dispatch(logout())
+    alert('Logged out successfully')
 
-  setTimeout(() => {
-    navigate('/login')
-  }, 500)
-}
+    setTimeout(() => {
+      navigate('/login')
+    }, 500)
+  }
 
   return (
     <header>
       <Navbar className="brand-bg" expand="lg" collapseOnSelect>
-        <Container>
-          {/* Logo / Brand */}
+        <Container className="header-container">
           <Navbar.Brand as={Link} to="/">
             <img src="/images/logo_2.png" alt="The Honesty Bakehouse logo" className="logo" />
           </Navbar.Brand>
 
+          <div className="nav-rating">
+            <span className="nav-rating__stars">★★★★★</span>
+            <span className="nav-rating__text">rated on Google & Facebook</span>
+          </div>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-          <Navbar.Collapse id="basic-navbar-nav" className="mobile-menu-right">
-            {/* LEFT NAV */}
-            <Nav className="ms-auto mobile-nav-links">
+          <Navbar.Collapse id="basic-navbar-nav" className="header-collapse">
+            <Nav className="header-nav ms-auto">
               <Nav.Link
                 as={NavLink}
                 to="/"
@@ -68,21 +68,11 @@ function Header() {
                 <NavDropdown.Item as={Link} to="/prebaked">
                   Prebaked Cakes
                 </NavDropdown.Item>
-
                 <NavDropdown.Item as={Link} to="/ready-to-bake">
                   Personalised Cakes
                 </NavDropdown.Item>
               </NavDropdown>
-            </Nav>
 
-            {/* CENTER REVIEW MESSAGE */}
-            <div className="nav-rating">
-              <span className="nav-rating__stars">★★★★★</span>
-              <span className="nav-rating__text">rated on Google & Facebook</span>
-            </div>
-
-            {/* RIGHT NAV */}
-            <Nav>
               {userInfo ? (
                 <NavDropdown title={userInfo.name || 'User'} id="username" align="end">
                   <NavDropdown.Item as={Link} to="/profile">
@@ -92,15 +82,12 @@ function Header() {
                   {userInfo.isAdmin && (
                     <>
                       <NavDropdown.Divider />
-
                       <NavDropdown.Item as={Link} to="/admin/userlist">
                         Users
                       </NavDropdown.Item>
-
                       <NavDropdown.Item as={Link} to="/admin/productlist">
                         Products
                       </NavDropdown.Item>
-
                       <NavDropdown.Item as={Link} to="/admin/orderlist">
                         Orders
                       </NavDropdown.Item>
@@ -108,7 +95,6 @@ function Header() {
                   )}
 
                   <NavDropdown.Divider />
-
                   <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                 </NavDropdown>
               ) : (
@@ -117,7 +103,7 @@ function Header() {
                 </Nav.Link>
               )}
 
-              <Nav.Link as={Link} to="/cart" className="d-flex align-items-center navbar-collapse">
+              <Nav.Link as={Link} to="/cart" className="d-flex align-items-center">
                 <i className="fas fa-shopping-cart" /> Cart
                 {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
               </Nav.Link>
