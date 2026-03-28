@@ -833,7 +833,9 @@ After modifying the function, it passed:
 
 **IMPORTANT:** mistakenly, I hadn't written unit tests during the beginning of production and thus I have not benefited from fully building a project in a TDD. However, This is something I have now learned from and I have been writing new unit tests for React for most of the components in this project. They begin in the red state and follow through to green state with amendments. **This is to show that, although I should have done this from the beginning, it is an aspect of development I have still learned, practiced and will endevour to produce a TDD properly in my future projects.**
 
-1. **Hompage Headers**
+1. **Hompage Tests**
+
+#### Hompage Headers
 
 First, I ran simple Jest tests to seeif ym React and Javascript was written well, even though the code already renders the result I want. 
 
@@ -856,7 +858,7 @@ After making those changes, the first test passed:
 ![Screenshot of home heading](./backend/frontend/public/images/jest_tests/home_heading_pass.png)
 
 
-2. **<Loading > component renders**
+#### "<Loading >" Component Renders
 
 This test is built to see if my Loading component renders when Redux says "Loading: true".
 
@@ -874,7 +876,8 @@ To ge this to pass, I had to create two separate returns for the 'useSelector'.
 
 NEW TESTS: Following resubmission failure to create a full TDD environment. I hope this new tests show my ability to create a TDD env. 
 
-3. **CartScreen.js Tests**
+
+2. **CartScreen.js Tests**
 
 #### First Test: Heading Text Renders
 
@@ -886,15 +889,24 @@ Then, after adding mocks of the react actions, redux and hooks, and also changin
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/cart_screeen/h1_pass.png)
 
-#### Second Test: Img & Alt Text
+#### Second Test: Img & Alt Text Renders Correctly
 
 This second text was to see if the image and alt text renders correctly. After writing the test, it failed because the alt text (for testing) was not present in the Redux Mock. 
 
 ![Screenshot of fail](./backend/frontend/public/images/jest_tests/cart_screeen/img_alt_fail.png)
 
-After adding the alt text to the Redux mock environment, it worked:
+After adding the alt text to the Redux mock environment by including an object in the array of "cart: { cartItems: [ ... ]":
+
+![Screenshot of test pass](./backend/frontend/public/images/jest_tests/cart_screeen/img_alt_pass.png)
+
+**NOTE:** To only run a single test in this file, I appended ".only" after "test" for this test. I then removed it and appended "only" to the following tests. 
+
+(Include more CartScreen Tests?)
 
 
+3. **AboutScreen.js Tests**
+
+**CONT. HERE**
 
 
 ### Django Tests

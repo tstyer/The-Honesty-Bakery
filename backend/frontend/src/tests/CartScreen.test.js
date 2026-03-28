@@ -8,14 +8,18 @@ import '@testing-library/jest-dom'
 import { MemoryRouter } from "react-router";
 import CartScreen from "../screens/CartScreen"
 
-//============================================//
+//== Mock env ==//
 
 // Mock Redux
 jest.mock('react-redux', () => ({
   useDispatch: () => jest.fn(),
   useSelector: (fn) =>
     fn({
-      cart: { cartItems: [] },
+        // An array of fake items as objects
+      cart: { cartItems: [{
+        product: "1",
+        name: "Test Cake" 
+      }] },
     }),
 }))
 
@@ -33,7 +37,9 @@ jest.mock('../actions/cartActions', () => ({
   removeFromCart: jest.fn(),
 }))
 
-// == The first test == //
+// == Tests == //
+
+// First test //
 test("H1 displays", () => {
     render(
     <MemoryRouter>
@@ -47,7 +53,7 @@ test("H1 displays", () => {
     expect(h1Text).toBeInTheDocument();
 });
 
-// == Second test == //
+// Second test //
 test.only("Image and alt txt renders", () => {
     render(
         <MemoryRouter>
@@ -58,4 +64,4 @@ test.only("Image and alt txt renders", () => {
     const image = screen.getByAltText(/test cake/i);
 
     expect(image).toBeInTheDocument();
-})
+});
