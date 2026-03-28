@@ -831,7 +831,9 @@ After modifying the function, it passed:
 
 ### Jest Tests
 
-1. Hompage Headers
+**IMPORTANT:** mistakenly, I hadn't written unit tests during the beginning of production and thus I have not benefited from fully building a project in a TDD. However, This is something I have now learned from and I have been writing new unit tests for React for most of the components in this project. They begin in the red state and follow through to green state with amendments. **This is to show that, although I should have done this from the beginning, it is an aspect of development I have still learned, practiced and will endevour to produce a TDD properly in my future projects.**
+
+1. **Hompage Headers**
 
 First, I ran simple Jest tests to seeif ym React and Javascript was written well, even though the code already renders the result I want. 
 
@@ -854,7 +856,7 @@ After making those changes, the first test passed:
 ![Screenshot of home heading](./backend/frontend/public/images/jest_tests/home_heading_pass.png)
 
 
-2. <Loading > component renders
+2. **<Loading > component renders**
 
 This test is built to see if my Loading component renders when Redux says "Loading: true".
 
@@ -869,6 +871,22 @@ First fail:
 To ge this to pass, I had to create two separate returns for the 'useSelector'.
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/load_component_pass.png)
+
+NEW TESTS: Following resubmission failure to create a full TDD environment. I hope this new tests show my ability to create a TDD env. 
+
+3. **CartScreen.js Tests**
+
+#### First Test: Heading Text Renders
+
+- Red State: after writing the first test and running it with 'npm test CartScreen' in the frontend folder, it failed. This is because the test was not isolated enough from other imports on the CartScreen.js page. You can see this below, where it also tried to use axios for the test:
+
+![Screenshot of fail](./backend/frontend/public/images/jest_tests/cart_screeen/h1_failed.png)
+
+Then, after adding mocks of the react actions, redux and hooks, and also changing 'getAllByText' to 'getByText', so it doesn't return an array, it passed:
+
+![Screenshot of pass](./backend/frontend/public/images/jest_tests/cart_screeen/h1_pass.png)
+
+#### 
 
 
 ### Django Tests
@@ -1156,8 +1174,9 @@ These are just encoded data about a user. **EXPLAIN MORE**
 - React Documentation
 - React-Bootstrap Documentation
 - w3schools 
-- Len Johnson
+- Len Johnson (constant support and feedback)
 - Google Fonts
+- freeCodeCamp: Unit testing for React (https://www.freecodecamp.org/news/how-to-write-unit-tests-in-react/)
 
 ---
 

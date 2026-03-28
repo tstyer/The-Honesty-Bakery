@@ -1,14 +1,48 @@
 // What is used to test to see it renders is 'render' and 'screen'.
 // Testing to see a component renders is usually the first test you do.
-import { render, screen } from "@testing-library/react"
 
+import { render, screen } from "@testing-library/react"
+import '@testing-library/jest-dom'
+
+// Memory router is a fake router needed for some unit tests
+import { MemoryRouter } from "react-router";
 import CartScreen from "../screens/CartScreen"
 
+//============================================//
+
+// Mock Redux
+jest.mock('react-redux', () => ({
+  useDispatch: () => jest.fn(),
+  useSelector: (fn) =>
+    fn({
+      cart: { cartItems: [] },
+    }),
+}))
+
+// Mock React Router hooks
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => jest.fn(),
+  useParams: () => ({}),
+  useLocation: () => ({ search: '' }),
+}))
+
+// Mock actions
+jest.mock('../actions/cartActions', () => ({
+  addToCart: jest.fn(),
+  removeFromCart: jest.fn(),
+}))
+
+// == The first test == //
 test("H1 displays", () => {
-    render(CartScreen);
+    render(
+    <MemoryRouter>
+      <CartScreen />
+    </MemoryRouter>
+  );
 
     // 'i' means to ignore case
-    const h1Text = screen.getAllByText(/Shopping Cart/i)
+    const h1Text = screen.getByText(/Shopping Cart/i)
 
     expect(h1Text).toBeInTheDocument();
 })
