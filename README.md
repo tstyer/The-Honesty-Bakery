@@ -886,7 +886,15 @@ Then, after adding mocks of the react actions, redux and hooks, and also changin
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/cart_screeen/h1_pass.png)
 
-#### 
+#### Second Test: Img & Alt Text
+
+This second text was to see if the image and alt text renders correctly. After writing the test, it failed because the alt text (for testing) was not present in the Redux Mock. 
+
+![Screenshot of fail](./backend/frontend/public/images/jest_tests/cart_screeen/img_alt_fail.png)
+
+After adding the alt text to the Redux mock environment, it worked:
+
+
 
 
 ### Django Tests

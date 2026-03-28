@@ -45,4 +45,17 @@ test("H1 displays", () => {
     const h1Text = screen.getByText(/Shopping Cart/i)
 
     expect(h1Text).toBeInTheDocument();
+});
+
+// == Second test == //
+test.only("Image and alt txt renders", () => {
+    render(
+        <MemoryRouter>
+            <CartScreen />
+        </MemoryRouter>
+    );
+
+    const image = screen.getByAltText(/test cake/i);
+
+    expect(image).toBeInTheDocument();
 })
