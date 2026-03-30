@@ -82,7 +82,6 @@ The small business I created this for had general and specific goals:
 - Product Reviews. 
 - Visual Hover Effects.
 - Order History.
-- 
 
 **Future Work On This Project: ESSENTIAL**
 
@@ -746,7 +745,7 @@ Before writing any of the tests, I first learned that it's important to structur
 Assigning will be assigning data. Acting will be using it. Asserting will then test if the output is true or false.
 
 
-#### Running The Pytests
+#### Running The Pytests (TDD)
 
 First, I created a pytest.ini file located in the same directory as my manage.py file (backend).
 
@@ -829,9 +828,47 @@ After modifying the function, it passed:
 ![Screenshot of green state](./backend/frontend/public/images/pytest/fourth_test/green_state.png)
 
 
-### Jest Tests
+### Jest Tests: TDD (before code was written) and Unit Tests After 
 
-**IMPORTANT:** mistakenly, I hadn't written unit tests during the beginning of production to create a true TDD. Thus, I have not benefited from fully building a project in a TDD environment. However, This is something I have now learned from and I have been writing new unit tests for React for a lot of the components in this project. They begin in the red state and follow through to green state with amendments on the code and tests, knowing that the code needs to satisfy the test in order to be used. **This is to show that, although I should have done this from the beginning, it is an aspect of development I have still learned, practiced and will endevour to produce a TDD properly in my future projects.**
+**Testing Strategy**
+
+I intend to demonstrate a TDD environment with the main JavaScript screens and components. 
+
+**INCLUDE 'NOTE' MESSAGE BELOW, HERE**
+
+#### JavaScript / React TDD
+
+I began by writing tests before any code for each of the following screens, funcions, and components. 
+
+To begin, you can see my Test code in ErrorScreen.test.js before ErrorScreen.js existed.
+
+1. **Error Page**
+
+I first created the test file and added imports:
+
+![Screenshot of imports](./backend/frontend/public/images/jest_tests/tdd/error_screen/imports.png)
+
+
+
+
+------------------------
+(AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
+
+Add a section like:
+
+Test strategy
+TDD examples
+Unit tests
+
+**You need to show:**
+**what was tested**
+**why it was tested**
+**what type of testing was used**
+**which behaviours were developed test-first**
+--------------------------
+
+
+**IMPORTANT:** I have only done a proper TDD environment for the error page. This is because, mistakenly, I hadn't written unit tests during the beginning of production for the rest fo the app to create a true TDD. Thus, I have not benefited from fully building a project in a TDD environment. However, This is something I have now learned from and I have been writing new unit tests for React for a lot of the components in this project. They begin in the red state and follow through to green state with amendments on the code and tests, knowing that the code needs to satisfy the test in order to be used. **The only page where true TDD is carried out is the error page, where tests were written before any code. This is to show that, although I should have done this from the beginning, it is an aspect of development I have still learned, practiced and will endevour to produce a TDD properly in my future projects.**
 
 1. **Hompage Tests**
 
@@ -900,17 +937,6 @@ After adding the alt text to the Redux mock environment by including an object i
 ![Screenshot of test pass](./backend/frontend/public/images/jest_tests/cart_screeen/img_alt_pass.png)
 
 **NOTE:** To only run a single test in this file, I appended ".only" after "test" for this test. I then removed it and appended "only" to the following tests. 
-
-#### Third: Empty Cart Msg When Cart is Empty
-
-
-
-shows empty cart message when cartItems is empty
-shows Go Back link when cart is empty
-renders cart item name when item exists
-renders subtotal text when item exists
-renders Proceed To Checkout button
-checkout button is disabled when cart is empty
 
 
 3. **AboutScreen.js Tests**
