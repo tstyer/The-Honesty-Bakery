@@ -11,4 +11,17 @@ import Footer from "../components/Footer.js";
 // 4. A logic test on a simple function
 // 5. A footer render and action test
 
+// First Tes
+test("Page Title Loads", () => {
+    render(
+        <MemoryRouter>
+            <ErrorScreen />
+        </MemoryRouter>
+    );
+
+    const titleDisplays = screen.findByText(/Page Not found/i);
+
+    expectExport(titleDisplays).toBeInDocument;
+});
+
 
