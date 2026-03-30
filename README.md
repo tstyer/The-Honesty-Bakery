@@ -914,6 +914,13 @@ You can see the initial failure of the test, which was to successfully see the h
 
 ![Screenshot of failure](./backend/frontend/public/images/jest_tests/about_screen/display_title_fail.png)
 
+Fix: Adding 'MemoryRouter' to wrap the rederred screen:
+
+![Screenshot of test pass](./backend/frontend/public/images/jest_tests/about_screen/about_title_pass.png)
+
+
+4. **Login Screen Tests**
+
 
 
 

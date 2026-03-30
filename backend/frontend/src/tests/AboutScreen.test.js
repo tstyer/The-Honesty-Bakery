@@ -11,9 +11,9 @@ import { MemoryRouter } from "react-router";
 
 test.only("screen displays title", () => {
     
-    render(<AboutScreen />);
+    render(<MemoryRouter><AboutScreen /></MemoryRouter>);
 
     const title = screen.getByText(/about the bakehouse/i);
 
-    expectExport(title).toBeTruthy;
+    expect(title).toBeInDocument;
 })
