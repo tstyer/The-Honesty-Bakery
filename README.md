@@ -906,7 +906,15 @@ After adding the alt text to the Redux mock environment by including an object i
 
 3. **AboutScreen.js Tests**
 
-**CONT. HERE**
+#### Testing Title Loads
+
+This is the same as the test I did on the CartScreen, however, I do not need to mock Redux or Actions here as they aren't included on this page. 
+
+You can see the initial failure of the test, which was to successfully see the heading is in the document:
+
+![Screenshot of failure](./backend/frontend/public/images/jest_tests/about_screen/display_title_fail.png)
+
+
 
 
 ### Django Tests
@@ -1197,6 +1205,7 @@ These are just encoded data about a user. **EXPLAIN MORE**
 - Len Johnson (constant support and feedback)
 - Google Fonts
 - freeCodeCamp: Unit testing for React (https://www.freecodecamp.org/news/how-to-write-unit-tests-in-react/)
+- Jest Library in Github: https://github.com/jestjs/jest/blob/main/website/versioned_docs/version-30.0/ExpectAPI.md
 
 ---
 

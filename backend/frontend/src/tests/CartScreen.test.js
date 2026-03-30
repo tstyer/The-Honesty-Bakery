@@ -54,7 +54,7 @@ test("H1 displays", () => {
 });
 
 // Second test //
-test.only("Image and alt txt renders", () => {
+test("Image and alt txt renders", () => {
     render(
         <MemoryRouter>
             <CartScreen />
