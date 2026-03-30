@@ -9,7 +9,7 @@ import { MemoryRouter } from "react-router";
 
 // First test
 
-test.only("screen displays title", () => {
+test("screen displays title", () => {
     
     render(<MemoryRouter><AboutScreen /></MemoryRouter>);
 

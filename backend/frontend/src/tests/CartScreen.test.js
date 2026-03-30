@@ -7,6 +7,7 @@ import '@testing-library/jest-dom'
 // Memory router is a fake router needed for some unit tests
 import { MemoryRouter } from "react-router";
 import CartScreen from "../screens/CartScreen"
+import Message from "../components/Message";
 
 //== Mock env ==//
 
@@ -16,10 +17,7 @@ jest.mock('react-redux', () => ({
   useSelector: (fn) =>
     fn({
         // An array of fake items as objects
-      cart: { cartItems: [{
-        product: "1",
-        name: "Test Cake" 
-      }] },
+      cart: { cartItems: []},
     }),
 }))
 
@@ -64,4 +62,17 @@ test("Image and alt txt renders", () => {
     const image = screen.getByAltText(/test cake/i);
 
     expect(image).toBeInTheDocument();
+});
+
+// Third //
+test.only("Empty cart message shows when empty", () => {
+  render(
+    <MemoryRouter>
+      <CartScreen />
+    </MemoryRouter>
+  );
+
+  const emptyCartMessage = screen.getByText(/your cart is empty/i);
+
+  expect(emptyCartMessage).toBeInTheDocument();
 });

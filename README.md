@@ -831,7 +831,7 @@ After modifying the function, it passed:
 
 ### Jest Tests
 
-**IMPORTANT:** mistakenly, I hadn't written unit tests during the beginning of production and thus I have not benefited from fully building a project in a TDD. However, This is something I have now learned from and I have been writing new unit tests for React for most of the components in this project. They begin in the red state and follow through to green state with amendments. **This is to show that, although I should have done this from the beginning, it is an aspect of development I have still learned, practiced and will endevour to produce a TDD properly in my future projects.**
+**IMPORTANT:** mistakenly, I hadn't written unit tests during the beginning of production to create a true TDD. Thus, I have not benefited from fully building a project in a TDD environment. However, This is something I have now learned from and I have been writing new unit tests for React for a lot of the components in this project. They begin in the red state and follow through to green state with amendments on the code and tests, knowing that the code needs to satisfy the test in order to be used. **This is to show that, although I should have done this from the beginning, it is an aspect of development I have still learned, practiced and will endevour to produce a TDD properly in my future projects.**
 
 1. **Hompage Tests**
 
@@ -901,7 +901,16 @@ After adding the alt text to the Redux mock environment by including an object i
 
 **NOTE:** To only run a single test in this file, I appended ".only" after "test" for this test. I then removed it and appended "only" to the following tests. 
 
-(Include more CartScreen Tests?)
+#### Third: Empty Cart Msg When Cart is Empty
+
+
+
+shows empty cart message when cartItems is empty
+shows Go Back link when cart is empty
+renders cart item name when item exists
+renders subtotal text when item exists
+renders Proceed To Checkout button
+checkout button is disabled when cart is empty
 
 
 3. **AboutScreen.js Tests**
@@ -917,9 +926,6 @@ You can see the initial failure of the test, which was to successfully see the h
 Fix: Adding 'MemoryRouter' to wrap the rederred screen:
 
 ![Screenshot of test pass](./backend/frontend/public/images/jest_tests/about_screen/about_title_pass.png)
-
-
-4. **Login Screen Tests**
 
 
 
