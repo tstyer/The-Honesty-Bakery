@@ -827,12 +827,15 @@ After modifying the function, it passed:
 
 ![Screenshot of green state](./backend/frontend/public/images/pytest/fourth_test/green_state.png)
 
+----
 
 ### Jest Tests: TDD (before code was written) and Unit Tests After 
 
 **Testing Strategy**
 
 I intend to demonstrate a TDD environment with the main JavaScript screens and components. 
+
+Throughout running the tests, I always only test one or a few at a time using "test.only" or typing the test names. This is to ensure I focus solely on building single parts of code cleanly. 
 
 **INCLUDE 'NOTE' MESSAGE BELOW, HERE**
 
@@ -848,6 +851,31 @@ I first created the test file and added imports:
 
 ![Screenshot of imports](./backend/frontend/public/images/jest_tests/tdd/error_screen/imports.png)
 
+**Page Title: Red State**
+
+I then wrote the first test and ran 'npm test ErrorPage'. I was in Red State due to failure because the ErrorPage.js did not exist yet:
+
+![Screenshot of failure](./backend/frontend/public/images/jest_tests/tdd/error_screen/title_fail_first_test.png)
+
+This was also true for the other tests I created before ErrorPage.js existed.
+
+(**ADD GREEN STATE AND AMENDMENTS HERE**)
+
+
+**Go Back Button Display: Red State**
+
+Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. I also used 'test.only' on this second test so it ignored the first one in red state. 
+
+![Screenshot of failed test](./backend/frontend/public/images/jest_tests/tdd/error_screen/go_back_button_display_fail.png)
+
+(**ADD GREEN STATE AND AMENDMENTS HERE**)
+
+
+**Go Back Button Functionality: Red State**
+
+Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. However, This test included multiple parts:
+- Checking the attribute of the URL.
+- Checking the URL changes upon clicking the button. 
 
 
 
