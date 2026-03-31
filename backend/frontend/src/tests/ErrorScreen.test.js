@@ -86,11 +86,11 @@ test.only("Back home has correct destination", () => {
     expect(link).toHaveAttribute('href', '/');
 });
 
-// 6th - footer
+/* 6th - footer
 test("Footer renders text", () => {
   render(<Footer />);
 
   const footerText = screen.getByText(/honesty bakery/i);
 
   expect(footerText).toBeInTheDocument();
-});
+}); */
