@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 function ErrorScreen() {
     return (
-        <div>
+        <div className="error_container">
             <header className="error_title">
                 <h1>(404) Page Not Found</h1>
             </header>
 
             <div className="back_home_btn">
-                <Link to="/">Go Back Home</Link>
+                <Link to="/">go back home</Link>
             </div>
 
             <div className="error_message_div">
