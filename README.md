@@ -862,7 +862,7 @@ This was also true for the other tests I created before ErrorPage.js existed.
 (**ADD GREEN STATE AND AMENDMENTS HERE**)
 
 
-**Go Back Button Display: Red State**
+**Back Home Button Display: Red State**
 
 Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. I also used 'test.only' on this second test so it ignored the first one in red state. 
 
@@ -875,16 +875,31 @@ Since the ErrorPage was non-existent, the test failed because of the imported fi
 
 Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. 
 
-This test was written to prove that the URL changes when you click the 'Go Back' button. 
+This test was written to prove that the URL changes when you click the 'Back Home' button. 
 
-It is also a test with an async function in it  because I need to use 'await'. This it because I need to wait for the 'go back' to be clicked to render the expected result. 
+It is also a test with an async function in it  because I need to use 'await'. This it because I need to wait for the 'back home' to be clicked to render the expected result. 
 
 ![Screenshot of fail](./backend/frontend/public/images/jest_tests/tdd/error_screen/go_back_url_test.png)
+
+This is just an image of the test which shows the use os async, await and my comments:
+
+![Screenshot of test](./backend/frontend/public/images/jest_tests/tdd/error_screen/image_of_back_home_button_test.png)
 
 (**ADD GREEN STATE AND AMENDMENTS HERE**)
 
 
-**
+**Simple Message Displays: Red State**
+
+Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. 
+
+**(Include further reasons for red state)**
+
+
+**HREF link in Back Home button shows as '/': Red State**
+
+Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. 
+**(Include further reasons for red state)**
+
 
 
 ------------------------
