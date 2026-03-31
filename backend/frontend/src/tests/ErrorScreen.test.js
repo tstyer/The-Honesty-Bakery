@@ -60,7 +60,7 @@ test("Clicking 'back home' renders home screen", async () => {
 });
 
 // Fourth - simple message renders
-test.only("Simple message renders", () => {
+test("Simple message renders", () => {
     render(
         <MemoryRouter>
             <ErrorScreen />
@@ -74,7 +74,7 @@ test.only("Simple message renders", () => {
 });
 
 //5th - Checking Back Home has the href attribute set to '/' (home)
-test("Back home has correct destination", () => {
+test.only("Back home has correct destination", () => {
     render(
         <MemoryRouter>
             <ErrorScreen />

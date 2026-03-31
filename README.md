@@ -922,12 +922,14 @@ After adding a simple message, this test passed:
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/simple_message_green_state.png)
 
 
-
-
-**HREF link in Back Home button shows as '/': Red State**
+**HREF/TO link in Back Home button shows as '/': Red State**
 
 Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. 
 **(Include further reasons for red state)**
+
+Following creation of the 'Back Home' button, this test passed, given I used the React-Router 'Link' with an attribute of 'To="/"':
+
+![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/back_home_destination_pass.png)
 
 
 **Footer Renders: Red State**
