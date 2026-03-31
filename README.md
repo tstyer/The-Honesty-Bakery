@@ -859,6 +859,18 @@ I then wrote the first test and ran 'npm test ErrorPage'. I was in Red State due
 
 This was also true for the other tests I created before ErrorPage.js existed.
 
+**Page Title: Amendment**
+
+This was a minimul test, so they only thing I needed to do to satisfy it was to add a H1 and content in it:
+
+![Screenshot of code](./backend/frontend/public/images/jest_tests/tdd/error_screen/title_for_error_screen.png)
+
+Then, when I ran this test (only), it entered the green state. 
+
+**Page Title: Green State**
+
+
+
 (**ADD GREEN STATE AND AMENDMENTS HERE**)
 
 

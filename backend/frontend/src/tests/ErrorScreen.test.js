@@ -9,7 +9,7 @@ import userEvent from '@testing-library/user-event';
 import Footer from "../components/Footer.js";
 
 // First Test
-test("Page Title Loads", () => {
+test.only("Page Title Loads", () => {
     // I first render the screen I want to use in the test
     render(
         <MemoryRouter>
@@ -87,10 +87,10 @@ test("Back home has correct destination", () => {
 });
 
 // 6th - footer
-test.only("Footer renders text", () => {
+test("Footer renders text", () => {
   render(<Footer />);
 
-  const footerText = screen.getByText(/honesty bakehry/i);
+  const footerText = screen.getByText(/honesty bakery/i);
 
   expect(footerText).toBeInTheDocument();
 });
