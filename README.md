@@ -871,10 +871,10 @@ Then, when I ran this test (only), it entered the green state.
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/page_title_loads_pass.png)
 
+I then added "oops!" to the beginning of the H1 to see it it still passed, and it did:
 
+![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/page_title_loads_pass_second.png)
 
-
-(**ADD GREEN STATE AND AMENDMENTS HERE**)
 
 
 **Back Home Button Display: Red State**

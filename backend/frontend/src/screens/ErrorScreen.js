@@ -3,7 +3,7 @@ import React from "react";
 function ErrorScreen() {
     return (
         <div>
-            <h1>Page Not Found</h1>
+            <h1>Oops! Page Not Found</h1>
         </div>
     );
 };
