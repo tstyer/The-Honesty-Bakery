@@ -901,6 +901,10 @@ Since the ErrorPage was non-existent, the test failed because of the imported fi
 **(Include further reasons for red state)**
 
 
+**Footer Renders: Red State**
+
+Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. 
+**(Include further reasons for red state)**
 
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)

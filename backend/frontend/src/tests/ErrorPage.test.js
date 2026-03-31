@@ -74,7 +74,7 @@ test("Simple message renders", () => {
 });
 
 //5th - Checking Back Home has the href attribute set to '/' (home)
-test.only("Back home has correct destination", () => {
+test("Back home has correct destination", () => {
     render(
         <MemoryRouter>
             <ErrorScreen />
@@ -86,3 +86,11 @@ test.only("Back home has correct destination", () => {
     expect(link).toHaveAttribute('href', '/');
 });
 
+// 6th - footer
+test.only("Footer renders text", () => {
+  render(<Footer />);
+
+  const footerText = screen.getByText(/honesty bakehry/i);
+
+  expect(footerText).toBeInTheDocument();
+});
