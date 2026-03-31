@@ -869,6 +869,9 @@ Then, when I ran this test (only), it entered the green state.
 
 **Page Title: Green State**
 
+![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/page_title_loads_pass.png)
+
+
 
 
 (**ADD GREEN STATE AND AMENDMENTS HERE**)

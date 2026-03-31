@@ -7,3 +7,5 @@ function ErrorScreen() {
         </div>
     );
 };
+
+export default ErrorScreen;
