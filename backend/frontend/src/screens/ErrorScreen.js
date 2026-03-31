@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function ErrorScreen() {
     return (
         <div>
-            <header>
+            <header className="error_title">
                 <h1>(404) Page Not Found</h1>
             </header>
 
@@ -12,9 +12,10 @@ function ErrorScreen() {
                 <Link to="/">Go Back Home</Link>
             </div>
 
-            <div>
+            <div className="error_message">
                 <p>
-                    Oops! Looks Like You're Lost! Click the <strong>Back Home</strong> button to head back. 
+                    Oops! Looks Like You're Lost! <br /> 
+                    Click the <strong>Back Home</strong> button to head back. 
                 </p>
             </div>
         </div>
