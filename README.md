@@ -917,6 +917,12 @@ Since the ErrorPage was non-existent, the test failed because of the imported fi
 
 **(Include further reasons for red state)**
 
+After adding a simple message, this test passed:
+
+![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/simple_message_green_state.png)
+
+
+
 
 **HREF link in Back Home button shows as '/': Red State**
 

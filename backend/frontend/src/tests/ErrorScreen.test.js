@@ -39,7 +39,7 @@ test("Back Home Button Renders", () => {
 })
 
 // Third - behaviour test to see if when button clicked, used is  navigated to correct page
-test.only("Clicking 'back home' renders home screen", async () => {
+test("Clicking 'back home' renders home screen", async () => {
     render(
         // the initial entries sets the starting url - I am starting at the error page, testing to see it goes to home
         <MemoryRouter initialEntries={['/error']}>
@@ -60,7 +60,7 @@ test.only("Clicking 'back home' renders home screen", async () => {
 });
 
 // Fourth - simple message renders
-test("Simple message renders", () => {
+test.only("Simple message renders", () => {
     render(
         <MemoryRouter>
             <ErrorScreen />
