@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 function ErrorScreen() {
     return (
         <div>
-            <h1>(404) Page Not Found</h1>
+            <header>
+                <h1>(404) Page Not Found</h1>
+            </header>
 
             <div className="back_home_btn">
                 <Link to="/">Go Back Home</Link>
@@ -15,7 +17,6 @@ function ErrorScreen() {
                     Oops! Looks Like You're Lost! Click the <bold>Back Home</bold> button to head back. 
                 </p>
             </div>
-            
         </div>
     );
 };
