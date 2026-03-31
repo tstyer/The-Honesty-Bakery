@@ -1,10 +1,10 @@
-.error_title, .back_home_btn, .error_text {
+.error_title, .back_home_btn, .error_message {
     display: flex;
     align-items: center;
     justify-content: center;
-};
+}
 
-.back_home_btn Link {
+.back_home_btn a {
   font-family: 'Gochi Hand' !important;
 
   background: transparent;
@@ -20,9 +20,9 @@
 
   /* transition gives instructions on how to transform on hover */  
   transition: all 0.25s ease;
-};
+}
 
-.back_home_btn Link:hover {
+.back_home_btn a:hover {
   background: rgba(58, 46, 42, 0.04);
   transform: translateY(-1px);
-};
+}
