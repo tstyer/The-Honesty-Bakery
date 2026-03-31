@@ -15,7 +15,7 @@ test("socials render in footer", () => {
 });
 
 // Test 2: Facebook link
-test.only("footer has a facebook link", () => {
+test("footer has a facebook link", () => {
   render(<Footer />);
 
   const facebookLink = screen.getByRole("link", { name: /facebook/i });
@@ -23,12 +23,12 @@ test.only("footer has a facebook link", () => {
 });
 
 // Test 3: Instagram Link
-test("footer has instagram link", () => {
+test.only("footer has instagram link", () => {
     render(
         <Footer />
     );
 
-    const instaLink = screen.getByText(/instagram/i);
+    const instaLink = screen.getByRole("link", {name: /instagram/i});
 
-    expect(instaLink).toHaveAttribute("href", "https://instagram.com");
+    expect(instaLink).toHaveAttribute("href", "https://www.instagram.com");
 });
