@@ -873,10 +873,18 @@ Since the ErrorPage was non-existent, the test failed because of the imported fi
 
 **Go Back Button Functionality: Red State**
 
-Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. However, This test included multiple parts:
-- Checking the attribute of the URL.
-- Checking the URL changes upon clicking the button. 
+Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. 
 
+This test was written to prove that the URL changes when you click the 'Go Back' button. 
+
+It is also a test with an async function in it  because I need to use 'await'. This it because I need to wait for the 'go back' to be clicked to render the expected result. 
+
+![Screenshot of fail](./backend/frontend/public/images/jest_tests/tdd/error_screen/go_back_url_test.png)
+
+(**ADD GREEN STATE AND AMENDMENTS HERE**)
+
+
+**
 
 
 ------------------------
