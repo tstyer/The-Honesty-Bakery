@@ -34,10 +34,17 @@
 }
 
 .error_message_text {
-    display: inline;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 4px;
+    font-size: larger;
 }
 
-.back_home_btn, .error_message_div {
+.back_home_btn {
     margin: 8px 0px;
+}
+
+.error_message_div {
+    margin-top: 20px;
 }
