@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 
 
 // Test 1 - socials render
-test.only("socials render in footer", () => {
+test("socials render in footer", () => {
     render(
         <Footer />
     );
@@ -13,4 +13,14 @@ test.only("socials render in footer", () => {
 
     expect(socialText).toBeInTheDocument(); 
 });
+
+// Test 2: Facebook link
+test.only("footer has a facebook link", () => {
+  render(<Footer />);
+
+  const facebookLink = screen.getByRole("link", { name: /facebook/i });
+  expect(facebookLink).toHaveAttribute("href", "https://www.facebook.com");
+});
+
+
 
