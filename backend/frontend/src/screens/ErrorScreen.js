@@ -14,7 +14,7 @@ function ErrorScreen() {
 
             <div>
                 <p>
-                    Oops! Looks Like You're Lost! Click the <bold>Back Home</bold> button to head back. 
+                    Oops! Looks Like You're Lost! Click the <strong>Back Home</strong> button to head back. 
                 </p>
             </div>
         </div>

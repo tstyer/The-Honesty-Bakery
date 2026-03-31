@@ -25,6 +25,7 @@ import ReadyToBakeScreen from './screens/ReadyToBakeScreen'
 import PreBakedScreen from './screens/PreBakedScreen'
 import AboutScreen from './screens/AboutScreen'
 import ContactScreen from './screens/ContactScreen'
+import ErrorScreen from './screens/ErrorScreen'
 
 function Layout({ stripeError, stripePromise }) {
   const location = useLocation()
@@ -84,6 +85,10 @@ function Layout({ stripeError, stripePromise }) {
           
             {/* About route */}
             <Route path="/about" element={<AboutScreen />} />
+
+            {/* Error Screen: /error is used to directly access, and * is used when entered by accident */}
+            <Route path="/error" element={<ErrorScreen />} />
+            <Route path="*" element={<ErrorScreen />} />
           </Routes>
         </Container>
       </main>
