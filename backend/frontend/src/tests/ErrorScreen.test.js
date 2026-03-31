@@ -9,7 +9,7 @@ import userEvent from '@testing-library/user-event';
 import Footer from "../components/Footer.js";
 
 // First Test
-test.only("Page Title Loads", () => {
+test("Page Title Loads", () => {
     // I first render the screen I want to use in the test
     render(
         <MemoryRouter>
@@ -39,7 +39,7 @@ test("Back Home Button Renders", () => {
 })
 
 // Third - behaviour test to see if when button clicked, used is  navigated to correct page
-test("Clicking 'back home' renders home screen", async () => {
+test.only("Clicking 'back home' renders home screen", async () => {
     render(
         // the initial entries sets the starting url - I am starting at the error page, testing to see it goes to home
         <MemoryRouter initialEntries={['/error']}>

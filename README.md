@@ -883,7 +883,11 @@ Since the ErrorPage was non-existent, the test failed because of the imported fi
 
 ![Screenshot of failed test](./backend/frontend/public/images/jest_tests/tdd/error_screen/go_back_button_display_fail.png)
 
-(**ADD GREEN STATE AND AMENDMENTS HERE**)
+I then entered the basic syntax for the 'Go Back Home' button, and the test passed:
+
+![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/back_home_btn_pass.png)
+
+
 
 
 **Go Back Button Functionality: Red State**
@@ -900,7 +904,11 @@ This is just an image of the test which shows the use os async, await and my com
 
 ![Screenshot of test](./backend/frontend/public/images/jest_tests/tdd/error_screen/image_of_back_home_button_test.png)
 
-(**ADD GREEN STATE AND AMENDMENTS HERE**)
+Note: After adding the basic syntax for the button, I needed to change 'href=' to 'To="/"', then test passed:
+
+![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/test_rendering_home_pass.png)
+
+You can see it states "... back home renders home screen" in the image above. 
 
 
 **Simple Message Displays: Red State**
