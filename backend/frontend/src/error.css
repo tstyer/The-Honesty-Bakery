@@ -1,4 +1,4 @@
-.error_title, .back_home_btn, .error_message {
+.error_title, .back_home_btn, .error_message_div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,6 +6,12 @@
 
 .back_home_btn a {
   font-family: 'Gochi Hand' !important;
+
+  padding: 8px;
+
+  text-decoration: none;
+
+  font-weight: 600;
 
   background: transparent;
   color: #3a2e2a;
@@ -25,4 +31,13 @@
 .back_home_btn a:hover {
   background: rgba(58, 46, 42, 0.04);
   transform: translateY(-1px);
+}
+
+.error_message_text {
+    display: inline;
+    margin: 4px;
+}
+
+.back_home_btn, .error_message_div {
+    margin: 8px 0px;
 }

@@ -12,8 +12,8 @@ function ErrorScreen() {
                 <Link to="/">Go Back Home</Link>
             </div>
 
-            <div className="error_message">
-                <p>
+            <div className="error_message_div">
+                <p className="error_message_text">
                     Oops! Looks Like You're Lost! <br /> 
                     Click the <strong>Back Home</strong> button to head back. 
                 </p>
