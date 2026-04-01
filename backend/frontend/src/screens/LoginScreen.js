@@ -37,8 +37,7 @@ export default function LoginScreen() {
   return (
     <Row className="justify-content-md-center">
       <Col xs={12} md={6}>
-        {/* ❌ Changed heading */}
-        <h1>Login Page</h1>
+        <h1>Sign In</h1>
 
         {error && <Message variant="danger">{error}</Message>}
         {loading && <Loader />}
