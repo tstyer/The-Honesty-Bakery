@@ -2,6 +2,11 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Header from '../components/Header'
+import { useSelector } from 'react-redux'
+
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn(),
+}))
 
 // 
 test('logo renders with correct alt text', () => {
@@ -47,7 +52,7 @@ test('login link renders when no user is logged in', () => {
   expect(screen.getByRole('link', { name: /login/i })).toBeInTheDocument()
 })
 
-test('shows user name when logged in', () => {
+test.only('shows user name when logged in', () => {
   useSelector.mockImplementation((callback) =>
     callback({
       userLogin: { userInfo: { name: 'Travis' } },
