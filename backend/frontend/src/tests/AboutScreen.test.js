@@ -43,7 +43,7 @@ test('bee image renders', () => {
   ).toBeInTheDocument()
 })
 
-test.only('home button renders', () => {
+test('home button renders', () => {
   render(
     <MemoryRouter>
       <AboutScreen />
@@ -55,7 +55,7 @@ test.only('home button renders', () => {
   ).toBeInTheDocument()
 })
 
-test('home button links to homepage', () => {
+test.only('home button links to homepage', () => {
   render(
     <MemoryRouter>
       <AboutScreen />

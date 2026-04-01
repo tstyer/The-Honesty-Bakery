@@ -1070,6 +1070,13 @@ For the AboutScreen.js, I completely removed entire sections, wrote tests (ran i
 **About Us Home Button: Green**
 - Changed from "return" to "Back Home".
 
+--
+
+**About Us Home Link Test: Red**
+-- Incorrect URL path present. 
+
+**About Us Home Link Test: Green**
+
 
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
