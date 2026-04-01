@@ -995,7 +995,16 @@ Test passes after adding new alt text.
 **Header Rating Section: Red State**
 This is the second test that fails due to missing rating section in the header. Noted in the commit. 
 
-**Hea
+**Header Rating Section: Green State**
+This second test now passes after adding the new, **amended**, rating section to the header. 
+
+--
+
+**Header Home Nav Link: Red State**
+Fails due to a missing nav component - home. 
+
+**Header Home Nav Link: Green State**
+
 
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)

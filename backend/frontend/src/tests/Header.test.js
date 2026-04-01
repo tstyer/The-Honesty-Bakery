@@ -15,7 +15,7 @@ test('logo renders with correct alt text', () => {
   expect(logo).toBeInTheDocument()
 })
 
-test.only('rating message renders', () => {
+test('rating message renders', () => {
   render(
     <MemoryRouter>
       <Header />
@@ -25,7 +25,7 @@ test.only('rating message renders', () => {
   expect(screen.getByText(/rated on google & facebook/i)).toBeInTheDocument()
 })
 
-test('main navigation links render', () => {
+test.only('main navigation links render', () => {
   render(
     <MemoryRouter>
       <Header />

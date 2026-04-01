@@ -15,20 +15,16 @@ function Header() {
             />
           </Navbar.Brand>
 
-          
+          <div className="nav-rating">
+  <span className="nav-rating__stars">★★★★★</span>
+  <span className="nav-rating__text">rated on Google & Facebook</span>
+</div>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
           <Navbar.Collapse id="basic-navbar-nav" className="header-collapse">
             <Nav className="header-left-nav">
-              <Nav.Link
-                as={NavLink}
-                to="/"
-                end
-                className={({ isActive }) => `nav-link ${isActive ? 'nav-active' : ''}`}
-              >
-                Home
-              </Nav.Link>
+              
 
               <Nav.Link
                 as={NavLink}
