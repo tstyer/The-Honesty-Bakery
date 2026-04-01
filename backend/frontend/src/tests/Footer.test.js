@@ -32,3 +32,4 @@ test.only("footer has instagram link", () => {
 
     expect(instaLink).toHaveAttribute("href", "https://www.instagram.com");
 });
+

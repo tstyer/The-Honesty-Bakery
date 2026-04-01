@@ -845,6 +845,7 @@ I began by writing tests before any code for each of the following screens, func
 
 To begin, you can see my Test code in ErrorScreen.test.js before ErrorScreen.js existed.
 
+
 1. **Error Page**
 
 I first created the test file and added imports:
@@ -886,7 +887,6 @@ Since the ErrorPage was non-existent, the test failed because of the imported fi
 I then entered the basic syntax for the 'Go Back Home' button, and the test passed:
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/back_home_btn_pass.png)
-
 
 
 
@@ -932,10 +932,52 @@ Following creation of the 'Back Home' button, this test passed, given I used the
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/back_home_destination_pass.png)
 
 
-**Footer Renders: Red State**
+**The following tests are done by initially removing code from the pade that is being tested. Then, I will write the test, run it (Red), re-enter the code (modified - unlike original), run the test again (Green), and proceed to the next.** This method is done to try and attain a complete TDD for React which, as mentioned before, should have been implemented at the start. 
 
-Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. 
-**(Include further reasons for red state)**
+
+2. **Footer Component Tests**
+
+**Footer Socials Text: Red State**
+
+For this component, I removed the entire social block. You can see it failed because there was no socials within it - completely removed for TDD:
+
+![Screenshot of fail](./backend/frontend/public/images/jest_tests/tdd/footer/failed_socials_removed.png)
+
+After re-adding the footer, this time with aria-labels and using 'ClassName' instead of 'Class', the first test passed, showing the socials display:
+
+**Footer Socials Text: Green State**
+
+![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/footer/footer_socials_pass.png)
+
+
+**Footer Facebook Link: Red State**
+
+This failed due to the socials component missing in the file. 
+
+1[Screenshot of fail](./backend/frontend/public/images/jest_tests/tdd/footer/facebook_link_fail.png)
+
+After adding the new footer, the facebook link test passed:
+
+**Footer Facebook Link: Green State**
+
+![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/footer/facebook_link_pass.png)
+
+
+**Instagram Link: Red State**
+
+This failed due to the socials component missing in the file. 
+
+![Screenshot of fail](./backend/frontend/public/images/jest_tests/tdd/footer/instagram_link_fail.png)
+
+The same is true for the Instagram link: once the modifed footer was added, the test passed, as seen in the commits. 
+
+
+3. **Header Component Test**
+
+As I did with the footer, I removed a large section of the header. This was the Redux/Router behaviour. 
+
+
+
 
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)

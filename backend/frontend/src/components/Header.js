@@ -1,33 +1,18 @@
 import React from 'react'
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
-import { NavLink, Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../actions/userActions'
+import { NavLink, Link } from 'react-router-dom'
 
 function Header() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  const { userInfo } = useSelector((state) => state.userLogin)
-  const { cartItems } = useSelector((state) => state.cart)
-
-  const cartItemCount = cartItems.reduce((acc, item) => acc + item.qty, 0)
-
-  const logoutHandler = () => {
-    dispatch(logout())
-    alert('Logged out successfully')
-
-    setTimeout(() => {
-      navigate('/login')
-    }, 500)
-  }
-
   return (
     <header>
       <Navbar className="brand-bg" expand="lg" collapseOnSelect>
         <Container className="header-container">
           <Navbar.Brand as={Link} to="/">
-            <img src="/images/logo_2.png" alt="The Honesty Bakehouse logo" className="logo" />
+            <img
+              src="/images/logo_2.png"
+              alt="The Honesty Bakehouse logo"
+              className="logo"
+            />
           </Navbar.Brand>
 
           <div className="nav-rating">
@@ -38,7 +23,6 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
           <Navbar.Collapse id="basic-navbar-nav" className="header-collapse">
-            {/* LEFT SIDE LINKS */}
             <Nav className="header-left-nav">
               <Nav.Link
                 as={NavLink}
@@ -76,44 +60,13 @@ function Header() {
               </NavDropdown>
             </Nav>
 
-            {/* RIGHT SIDE LINKS */}
             <Nav className="header-right-nav ms-lg-auto">
-              {userInfo ? (
-                <NavDropdown title={userInfo.name || 'User'} id="username" align="end">
-                  <NavDropdown.Item as={Link} to="/profile">
-                    Profile
-                  </NavDropdown.Item>
-
-                  {userInfo.isAdmin && (
-                    <>
-                      <NavDropdown.Divider />
-
-                      <NavDropdown.Item as={Link} to="/admin/userlist">
-                        Users
-                      </NavDropdown.Item>
-
-                      <NavDropdown.Item as={Link} to="/admin/productlist">
-                        Products
-                      </NavDropdown.Item>
-
-                      <NavDropdown.Item as={Link} to="/admin/orderlist">
-                        Orders
-                      </NavDropdown.Item>
-                    </>
-                  )}
-
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-                </NavDropdown>
-              ) : (
-                <Nav.Link as={Link} to="/login">
-                  <i className="fas fa-user" /> Login
-                </Nav.Link>
-              )}
+              <Nav.Link as={Link} to="/login">
+                <i className="fas fa-user" /> Login
+              </Nav.Link>
 
               <Nav.Link as={Link} to="/cart" className="d-flex align-items-center">
                 <i className="fas fa-shopping-cart" /> Cart
-                {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
