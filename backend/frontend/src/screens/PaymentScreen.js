@@ -131,7 +131,7 @@ export default function PaymentScreen() {
 
   return (
     <div>
-      <h2 className="text-center">Checkout Payment</h2>
+      <h1 className="text-center">{'Payment'}</h1>
 
       {errorMsg && <Message variant="danger">{errorMsg}</Message>}
 
@@ -145,7 +145,7 @@ export default function PaymentScreen() {
             {allowedMethods.includes('Cash') && (
               <Form.Check
                 type="radio"
-                label="Pay with cash later"
+                label={'Cash on collection (prebaked items only)'}
                 id="Cash"
                 name="paymentMethod"
                 value="Cash"

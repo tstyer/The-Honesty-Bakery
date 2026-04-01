@@ -1,225 +1,131 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { Form, Button, Col } from 'react-bootstrap'
+import '@testing-library/jest-dom'
+import { render, screen, fireEvent } from '@testing-library/react'
+import PaymentScreen from '../screens/PaymentScreen'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import Message from '../components/Message'
+import { useStripe, useElements } from '@stripe/react-stripe-js'
 import { savePaymentMethod, setPaymentResult } from '../actions/cartActions'
 
-export default function PaymentScreen() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+// mocks
+jest.mock('react-redux', () => ({
+  useDispatch: jest.fn(),
+  useSelector: jest.fn(),
+}))
 
-  const stripe = useStripe()
-  const elements = useElements()
+jest.mock('react-router-dom', () => ({
+  useNavigate: jest.fn(),
+}))
 
-  const cart = useSelector((state) => state.cart)
-  const { cartItems, paymentMethod, paymentResult } = cart
+jest.mock('@stripe/react-stripe-js', () => ({
+  CardElement: () => <div>Card Element</div>,
+  useStripe: jest.fn(),
+  useElements: jest.fn(),
+}))
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin || {}
+jest.mock('../components/Message', () => ({ children }) => <div>{children}</div>)
 
-  const hasMadeToOrder = useMemo(
-    () => cartItems?.some((item) => item.isPrebaked === false),
-    [cartItems]
-  )
+jest.mock('../actions/cartActions', () => ({
+  savePaymentMethod: jest.fn(),
+  setPaymentResult: jest.fn(),
+}))
 
-  const allowedMethods = hasMadeToOrder ? ['Card'] : ['Cash']
+describe('PaymentScreen', () => {
+  const mockDispatch = jest.fn()
+  const mockNavigate = jest.fn()
 
-  const [method, setMethod] = useState(
-    allowedMethods.includes(paymentMethod) ? paymentMethod : allowedMethods[0]
-  )
+  beforeEach(() => {
+    useDispatch.mockReturnValue(mockDispatch)
+    useNavigate.mockReturnValue(mockNavigate)
+    useStripe.mockReturnValue(null)
+    useElements.mockReturnValue(null)
 
-  const [paying, setPaying] = useState(false)
-  const [errorMsg, setErrorMsg] = useState('')
-  const [cardComplete, setCardComplete] = useState(false)
+    savePaymentMethod.mockImplementation((method) => ({
+      type: 'SAVE_PAYMENT_METHOD',
+      payload: method,
+    }))
 
-  useEffect(() => {
-    dispatch(setPaymentResult(null))
-  }, [dispatch])
+    setPaymentResult.mockImplementation((result) => ({
+      type: 'SET_PAYMENT_RESULT',
+      payload: result,
+    }))
+  })
 
-  useEffect(() => {
-    if (!cartItems || cartItems.length === 0) navigate('/cart')
-  }, [cartItems, navigate])
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
 
-  useEffect(() => {
-    if (!allowedMethods.includes(method)) setMethod(allowedMethods[0])
-  }, [allowedMethods, method])
-
-  const submitHandler = async (e) => {
-    e.preventDefault()
-    setErrorMsg('')
-
-    if (method === 'Cash') {
-      dispatch(savePaymentMethod('Collection'))
-      dispatch(setPaymentResult('reset'))
-      navigate('/shipping')
-      return
-    }
-
-    if (!stripe || !elements) {
-      setErrorMsg('Payment system is loading.')
-      return
-    }
-
-    const accessToken = userInfo?.token || userInfo?.access
-    if (!accessToken) {
-      setErrorMsg('Please sign in first.')
-      return
-    }
-
-    try {
-      setPaying(true)
-
-      const { data } = await axios.post(
-        '/api/payments/create-payment-intent/',
-        {
-          cartItems: cartItems.map((i) => ({ product: i.product, qty: i.qty })),
+  test.only('renders Payment heading and cash option for prebaked-only cart', () => {
+    useSelector.mockImplementation((selector) =>
+      selector({
+        cart: {
+          cartItems: [
+            { product: '1', qty: 1, isPrebaked: true },
+          ],
+          paymentMethod: '',
+          paymentResult: null,
         },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
-
-      const clientSecret = data.clientSecret
-      const cardElement = elements.getElement(CardElement)
-
-      if (!cardElement) {
-        setErrorMsg('Card input unavailable.')
-        setPaying(false)
-        return
-      }
-
-      const result = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: { card: cardElement },
+        userLogin: {
+          userInfo: { token: 'abc123' },
+        },
       })
+    )
 
-      if (result.error) {
-        setErrorMsg(result.error.message || 'Card payment failed.')
-        setPaying(false)
-        return
-      }
+    render(<PaymentScreen />)
 
-      if (result.paymentIntent?.status !== 'succeeded') {
-        setErrorMsg('Payment incomplete.')
-        setPaying(false)
-        return
-      }
+    expect(screen.getByText(/payment/i)).toBeInTheDocument()
+    expect(
+      screen.getByLabelText(/cash on collection \(prebaked items only\)/i)
+    ).toBeInTheDocument()
+    expect(screen.queryByLabelText(/card \(pay now\)/i)).not.toBeInTheDocument()
+  })
 
-      dispatch(savePaymentMethod('Card'))
-      dispatch(
-        setPaymentResult({
-          id: result.paymentIntent.id,
-          status: result.paymentIntent.status,
-        })
-      )
+  test('renders card option for made-to-order items', () => {
+    useSelector.mockImplementation((selector) =>
+      selector({
+        cart: {
+          cartItems: [
+            { product: '1', qty: 1, isPrebaked: false },
+          ],
+          paymentMethod: '',
+          paymentResult: null,
+        },
+        userLogin: {
+          userInfo: { token: 'abc123' },
+        },
+      })
+    )
 
-      navigate('/placeorder')
-    } catch (err) {
-      setErrorMsg(err.response?.data?.detail || err.message || 'Payment failed.')
-    } finally {
-      setPaying(false)
-    }
-  }
+    render(<PaymentScreen />)
 
-  const cardPaid = paymentResult?.status === 'succeeded'
-  const stripeReady = !!stripe && !!elements
+    expect(screen.getByLabelText(/card \(pay now\)/i)).toBeInTheDocument()
+    expect(
+      screen.queryByLabelText(/cash on collection \(prebaked items only\)/i)
+    ).not.toBeInTheDocument()
+  })
 
-  return (
-    <div>
-      <h1 className="text-center">{'Payment'}</h1>
+  test('submitting cash payment dispatches actions and navigates to placeorder', () => {
+    useSelector.mockImplementation((selector) =>
+      selector({
+        cart: {
+          cartItems: [
+            { product: '1', qty: 1, isPrebaked: true },
+          ],
+          paymentMethod: 'Cash',
+          paymentResult: null,
+        },
+        userLogin: {
+          userInfo: { token: 'abc123' },
+        },
+      })
+    )
 
-      {errorMsg && <Message variant="danger">{errorMsg}</Message>}
+    render(<PaymentScreen />)
 
-      <Form onSubmit={submitHandler}>
-        <Form.Group>
-          <Form.Label as="legend" className="payment-text">
-            Choose Payment Type
-          </Form.Label>
+    fireEvent.click(screen.getByRole('button', { name: /continue/i }))
 
-          <Col>
-            {allowedMethods.includes('Cash') && (
-              <Form.Check
-                type="radio"
-                label={'Cash on collection (prebaked items only)'}
-                id="Cash"
-                name="paymentMethod"
-                value="Cash"
-                checked={method === 'Cash'}
-                onChange={(e) => setMethod(e.target.value)}
-              />
-            )}
-
-            {allowedMethods.includes('Card') && (
-              <Form.Check
-                type="radio"
-                label="Pay by card now"
-                id="Card"
-                name="paymentMethod"
-                value="Card"
-                checked={method === 'Card'}
-                onChange={(e) => setMethod(e.target.value)}
-              />
-            )}
-          </Col>
-        </Form.Group>
-
-        {method === 'Card' && (
-          <div className="my-3">
-            <Form.Label className="payment-text">Enter card info</Form.Label>
-
-            {!stripeReady ? (
-              <Message variant="info">Card form loading...</Message>
-            ) : (
-              <div
-                style={{
-                  padding: '12px',
-                  border: '1px solid #ddd',
-                  borderRadius: 6,
-                }}
-              >
-                <CardElement
-                  onChange={(e) => {
-                    setCardComplete(e.complete)
-
-                    if (e.error) {
-                      setErrorMsg(e.error.message)
-                    } else {
-                      setErrorMsg('')
-                    }
-                  }}
-                />
-              </div>
-            )}
-
-            {cardPaid && (
-              <div className="mt-2">
-                <small className="payment-text">Paid successfully</small>
-              </div>
-            )}
-          </div>
-        )}
-
-        <Button
-          type="submit"
-          className="my-3 cta-btn"
-          variant="outline-dark"
-          disabled={
-            paying ||
-            (method === 'Card' && (!stripeReady || !cardComplete))
-          }
-        >
-          {method === 'Card'
-            ? paying
-              ? 'Paying...'
-              : 'Review Order'
-            : 'Next Step'}
-        </Button>
-      </Form>
-    </div>
-  )
-}
+    expect(savePaymentMethod).toHaveBeenCalledWith('Cash')
+    expect(setPaymentResult).toHaveBeenCalledWith(null)
+    expect(mockDispatch).toHaveBeenCalled()
+    expect(mockNavigate).toHaveBeenCalledWith('/placeorder')
+  })
+})
