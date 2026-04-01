@@ -5,7 +5,7 @@ import ContactScreen from '../screens/ContactScreen'
 describe('ContactScreen', () => {
 
   // 1. Renders heading + button
-  test('renders contact form heading and send button', () => {
+  test.only('renders contact form heading and send button', () => {
     render(<ContactScreen />)
 
     expect(screen.getByText(/contact me/i)).toBeInTheDocument()

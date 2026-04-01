@@ -1,11 +1,12 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 
 export default function ContactScreen() {
   return (
     <Container className="py-4">
-      <h2>Get in Touch</h2>
-      <p>Send me a message about orders or general questions.</p>
+      <h1>Contact Me</h1>
+
+      <Button>Send</Button>
     </Container>
   );
 }
