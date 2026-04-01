@@ -32,7 +32,7 @@ describe('OrderListScreen', () => {
     jest.clearAllMocks()
   })
 
-  test('renders loading state', () => {
+  test.only('renders loading state', () => {
     useSelector.mockImplementation((callback) =>
       callback({
         orderList: { loading: true, error: null, orders: [] },

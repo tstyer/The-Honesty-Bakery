@@ -23,10 +23,10 @@ export default function OrderListScreen() {
 
   return (
     <>
-      <h2>Customer Orders</h2>
+      <h1>{'Orders'}</h1>
 
       {loading ? (
-        <div>Please wait...</div>
+        <div>{'Loading...'}</div>
       ) : error ? (
         <Message variant="warning">Order request failed</Message>
       ) : (
