@@ -1036,11 +1036,21 @@ Passes by simly re-adding the login section with a no Redux present - just minim
 
 For the AboutScreen.js, I completely removed entire sections, wrote tests (ran in red), and then added modifie sections to the about screen that passes the tests.
 
+*NOTE: I added all the tests at once, then tested them individually with 'only'. 
+
+--
+
 **About Us Heading: Red**
 - Re writing the page means heading was not present. 
 
 **About Us Heading: Green**
 - I added the heading in, but slightly different ('About The Bakehouse' became 'About Our Bakehouse'), and the test passed. 
+
+--
+
+**About Us Intro Test: Red**
+-- Intro completely removed. 
+
 
 
 ------------------------

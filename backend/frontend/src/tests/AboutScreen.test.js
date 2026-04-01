@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import AboutScreen from '../screens/AboutScreen'
 
-test.only('about page heading renders', () => {
+test('about page heading renders', () => {
   render(
     <MemoryRouter>
       <AboutScreen />
@@ -15,7 +15,7 @@ test.only('about page heading renders', () => {
   ).toBeInTheDocument()
 })
 
-test('intro text about honest small-batch cakes renders', () => {
+test.only('intro text about honest small-batch cakes renders', () => {
   render(
     <MemoryRouter>
       <AboutScreen />
