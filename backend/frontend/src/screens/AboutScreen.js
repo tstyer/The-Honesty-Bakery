@@ -7,7 +7,9 @@ export default function AboutScreen() {
     <Container className="py-5">
       <h1>About Our Bakehouse</h1>
       <Row className="mb-4 text-center">
-        <Col></Col>
+        <Col><p className="mt-2 lead">
+  Honestly baked small-batch cakes, shared locally.
+</p></Col>
       </Row>
 
       <Row className="align-items-center justify-content-center g-4">

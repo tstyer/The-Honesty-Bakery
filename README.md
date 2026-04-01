@@ -1051,7 +1051,8 @@ For the AboutScreen.js, I completely removed entire sections, wrote tests (ran i
 **About Us Intro Test: Red**
 -- Intro completely removed. 
 
-
+**About Us Intro: Green**
+- Intro added, but modified: "Honestly baked small-batch cakes, shared locally."
 
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
