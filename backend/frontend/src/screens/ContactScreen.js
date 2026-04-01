@@ -15,6 +15,7 @@ export default function ContactScreen() {
           <Form.Control
             type="text"
             value={name}
+            placeholder="Your name"
             onChange={(e) => setName(e.target.value)}
           />
         </Form.Group>
