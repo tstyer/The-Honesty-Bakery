@@ -32,7 +32,7 @@ describe('OrderListScreen', () => {
     jest.clearAllMocks()
   })
 
-  test.only('renders loading state', () => {
+  test('renders loading state', () => {
     useSelector.mockImplementation((callback) =>
       callback({
         orderList: { loading: true, error: null, orders: [] },
@@ -50,7 +50,7 @@ describe('OrderListScreen', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument()
   })
 
-  test('renders error message', () => {
+  test.only('renders error message', () => {
     useSelector.mockImplementation((callback) =>
       callback({
         orderList: { loading: false, error: 'Something went wrong', orders: [] },
