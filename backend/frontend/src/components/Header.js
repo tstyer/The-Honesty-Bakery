@@ -24,7 +24,9 @@ function Header() {
 
           <Navbar.Collapse id="basic-navbar-nav" className="header-collapse">
             <Nav className="header-left-nav">
-              
+              <Nav.Link as={NavLink} to="/" className={({ isActive }) => `nav-link ${isActive ? 'nav-active' : ''}`}>
+                Home
+              </Nav.Link>
 
               <Nav.Link
                 as={NavLink}

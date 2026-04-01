@@ -1004,6 +1004,11 @@ This second test now passes after adding the new, **amended**, rating section to
 Fails due to a missing nav component - home. 
 
 **Header Home Nav Link: Green State**
+After adding the new head 'Home' nav button, it passed:
+![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/header/alt_txt_pass.png)
+
+--
+
 
 
 ------------------------
