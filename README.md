@@ -1054,6 +1054,13 @@ For the AboutScreen.js, I completely removed entire sections, wrote tests (ran i
 **About Us Intro: Green**
 - Intro added, but modified: "Honestly baked small-batch cakes, shared locally."
 
+--
+
+**About Us Bee: Red**
+- Test cannot identify bee icon as no alt text present. 
+
+
+
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
 

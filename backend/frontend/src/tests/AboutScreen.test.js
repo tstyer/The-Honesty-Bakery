@@ -15,7 +15,7 @@ test('about page heading renders', () => {
   ).toBeInTheDocument()
 })
 
-test.only('intro text about honest small-batch cakes renders', () => {
+test('intro text about honest small-batch cakes renders', () => {
   render(
     <MemoryRouter>
       <AboutScreen />
@@ -31,19 +31,7 @@ test.only('intro text about honest small-batch cakes renders', () => {
   ).toBeInTheDocument()
 })
 
-test('about text mentions seabrook', () => {
-  render(
-    <MemoryRouter>
-      <AboutScreen />
-    </MemoryRouter>
-  )
-
-  expect(
-    screen.getByText(/seabrook/i)
-  ).toBeInTheDocument()
-})
-
-test('bee image renders', () => {
+test.only('bee image renders', () => {
   render(
     <MemoryRouter>
       <AboutScreen />

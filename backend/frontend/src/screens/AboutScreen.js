@@ -14,14 +14,16 @@ export default function AboutScreen() {
 
       <Row className="align-items-center justify-content-center g-4">
         <Col md={6} className="about-left">
-          {/* first paragraph removed */}
+          <p className="about-text">
+  The Honesty Bakehouse began as a small local project in Seabrook,
+  growing from one honesty box into something shared with the community.
+</p>
           {/* second paragraph removed */}
 
           <div className="about-bee-wrap">
             <img
               className="about-bee"
               src="/images/bee-about.png"
-              alt="bee"
             />
           </div>
 
