@@ -53,7 +53,6 @@ export default function LoginScreen() {
             />
           </Form.Group>
 
-          {/* Changed label text */}
           <Form.Group controlId="password" className="my-2">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -64,9 +63,8 @@ export default function LoginScreen() {
             />
           </Form.Group>
 
-          {/* Changed button text */}
           <Button type="submit" variant="primary" className="my-3">
-            Log Me In
+            Sign In
           </Button>
         </Form>
 
