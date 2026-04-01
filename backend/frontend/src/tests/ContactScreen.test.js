@@ -5,7 +5,7 @@ import ContactScreen from '../screens/ContactScreen'
 describe('ContactScreen', () => {
 
   // 1. Renders heading + button
-  test.only('renders contact form heading and send button', () => {
+  test('renders contact form heading and send button', () => {
     render(<ContactScreen />)
 
     expect(screen.getByText(/contact me/i)).toBeInTheDocument()
@@ -13,7 +13,7 @@ describe('ContactScreen', () => {
   })
 
   // 2. User can type into inputs
-  test('allows user to type into form fields', () => {
+  test.only('allows user to type into form fields', () => {
     render(<ContactScreen />)
 
     const nameInput = screen.getByPlaceholderText(/your name/i)
