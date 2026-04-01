@@ -837,7 +837,15 @@ I intend to demonstrate a TDD environment with the main JavaScript screens and c
 
 Throughout running the tests, I always only test one or a few at a time using "test.only" or typing the test names. This is to ensure I focus solely on building single parts of code cleanly. 
 
-**INCLUDE 'NOTE' MESSAGE BELOW, HERE**
+The components that were tested focused on key user-facing screens such as login, navigation, and error handling. This included checking that important UI elements (such as headings, messages, and buttons) render correctly, and that basic user interactions behave as expected. These tests ensure that each screen displays the correct content and responds properly, which is essential for maintaining a consistent and functional user experience across the application.
+
+These areas were tested because they represent the core flows of the application. If something like login, navigation, or error handling breaks, the entire user experience is affected. By testing these parts, I can catch issues early and ensure stability as the project develops. This also provides confidence when making changes, as I can verify that existing functionality has not been unintentionally broken.
+
+The testing carried out used a combination of unit and integration testing through React Testing Library and Jest. Unit testing was used to check individual components in isolation, such as verifying that specific text renders on the screen. Integration-style testing was used to simulate how components behave together, such as navigating between routes or triggering actions through user interaction.
+
+In terms of development approach, some behaviours were written using a test-first method. This included things like rendering headings, displaying messages, and handling simple user interactions. The tests were written first, intentionally failing (red state), and then the code was developed or adjusted until the tests passed (green state). This ensured that the code was always written to satisfy clear, defined behaviour, rather than adding functionality without validation.
+
+**IMPORTANT:** I have only done a proper TDD environment for the error page. This is because, mistakenly, I hadn't written unit tests during the beginning of production for the rest fo the app to create a true TDD. Thus, I have not benefited from fully building a project in a TDD environment. However, This is something I have now learned from and I have been writing new unit tests for React for a lot of the components in this project. They begin in the red state and follow through to green state with amendments on the code and tests, knowing that the code needs to satisfy the test in order to be used. **The only page where true TDD is carried out is the error page, where tests were written before any code. This is to show that, although I should have done this from the beginning, it is an aspect of development I have still learned, practiced and will endevour to produce a TDD properly in my future projects.**
 
 #### JavaScript / React TDD
 
@@ -1091,30 +1099,24 @@ I began by removing these sections of the page:
 I then added 4 tests the LoginScreen.test.js.
 
 - Failed when they all ran (together or individually).
+- Each section of the LoginScreen.js was updated individually, with new components to satisfy TDD and pass tests.
+
+This style of testing was then carried out on the following screens:
+
+- ContactScreen
+- OrderListScreen
+- OrderScreen
+- PaymentScreen
+- PlaceOrderScreen
+- PreBakedScreen
+- ProductEditScreen
+- ProductListScreen
+- ProductScreen
+- ProfileScreen
+- ReadyToBakeScreen
 
 
 
-
-
-
-------------------------
-(AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
-
-Add a section like:
-
-Test strategy
-TDD examples
-Unit tests
-
-**You need to show:**
-**what was tested**
-**why it was tested**
-**what type of testing was used**
-**which behaviours were developed test-first**
---------------------------
-
-
-**IMPORTANT:** I have only done a proper TDD environment for the error page. This is because, mistakenly, I hadn't written unit tests during the beginning of production for the rest fo the app to create a true TDD. Thus, I have not benefited from fully building a project in a TDD environment. However, This is something I have now learned from and I have been writing new unit tests for React for a lot of the components in this project. They begin in the red state and follow through to green state with amendments on the code and tests, knowing that the code needs to satisfy the test in order to be used. **The only page where true TDD is carried out is the error page, where tests were written before any code. This is to show that, although I should have done this from the beginning, it is an aspect of development I have still learned, practiced and will endevour to produce a TDD properly in my future projects.**
 
 1. **Hompage Tests**
 
