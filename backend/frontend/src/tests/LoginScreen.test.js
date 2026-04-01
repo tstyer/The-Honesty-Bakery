@@ -22,7 +22,7 @@ const renderWithStore = (state) => {
   )
 }
 
-test.only('renders Sign In heading', () => {
+test('renders Sign In heading', () => {
   renderWithStore({
     userLogin: {},
   })
@@ -30,7 +30,7 @@ test.only('renders Sign In heading', () => {
   expect(screen.getByText(/sign in/i)).toBeInTheDocument()
 })
 
-test('renders email and password inputs', () => {
+test.only('renders email and password inputs', () => {
   renderWithStore({
     userLogin: {},
   })
