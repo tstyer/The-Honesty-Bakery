@@ -976,7 +976,14 @@ The same is true for the Instagram link: once the modifed footer was added, the 
 
 As I did with the footer, I removed a large section of the header. This was the Redux/Router behaviour. 
 
+I ran 5 tests with the header, each test was run on it's own using '.only' and they began in the red state, until I slightly amended the heading, ensuring that it is different to the original, and then each test passed. 
 
+The Red and Green states of the tests are evident in the commits, and the header component is also different to the original, capturing a TDD phase. 
+
+**Alt Text: Red State**
+- Test dails due to only having "logo" in the Alt text. 
+
+**Alt Text: Green State**
 
 
 ------------------------
