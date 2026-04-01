@@ -1,8 +1,9 @@
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Header from '../components/Header'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../actions/userActions'
 
 jest.mock('react-redux', () => ({
   useSelector: jest.fn(),
@@ -52,7 +53,7 @@ test('login link renders when no user is logged in', () => {
   expect(screen.getByRole('link', { name: /login/i })).toBeInTheDocument()
 })
 
-test.only('shows user name when logged in', () => {
+test('shows user name when logged in', () => {
   useSelector.mockImplementation((callback) =>
     callback({
       userLogin: { userInfo: { name: 'Travis' } },
@@ -68,3 +69,42 @@ test.only('shows user name when logged in', () => {
 
   expect(screen.getByText(/travis/i)).toBeInTheDocument()
 })
+
+// Test section created to test the logout section
+const mockDispatch = jest.fn()
+
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn(),
+  useDispatch: jest.fn(),
+}))
+
+jest.mock('../actions/userActions', () => ({
+  logout: jest.fn(),
+}))
+
+beforeEach(() => {
+  useDispatch.mockReturnValue(mockDispatch)
+  logout.mockReturnValue({ type: 'USER_LOGOUT' })
+})
+
+afterEach(() => {
+  jest.clearAllMocks()
+})
+
+test.only('shows logout option when user is logged in', () => {
+  useSelector.mockImplementation((callback) =>
+    callback({
+      userLogin: { userInfo: { name: 'Travis' } },
+      cart: { cartItems: [] },
+    })
+  )
+
+  render(
+    <MemoryRouter>
+      <Header />
+    </MemoryRouter>
+  )
+
+  fireEvent.click(screen.getByText(/travis/i))
+
+  expect(screen.getByText(/logout/i)).toBeInTheDocument()

@@ -1023,6 +1023,11 @@ Passes by simly re-adding the login section with a no Redux present - just minim
 **Header Shows User Name When Logged In: Green**
 - Functionality added to Nav Bar.
 
+--
+
+**Header Allows the Logout Function: Red**
+- This functionality was not yet in the header code. 
+
 
 
 ------------------------
