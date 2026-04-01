@@ -37,7 +37,7 @@ test('main navigation links render', () => {
   expect(screen.getByRole('link', { name: /contact/i })).toBeInTheDocument()
 })
 
-test.only('login link renders when no user is logged in', () => {
+test('login link renders when no user is logged in', () => {
   render(
     <MemoryRouter>
       <Header />
@@ -47,12 +47,19 @@ test.only('login link renders when no user is logged in', () => {
   expect(screen.getByRole('link', { name: /login/i })).toBeInTheDocument()
 })
 
-test('cart link renders', () => {
+test('shows user name when logged in', () => {
+  useSelector.mockImplementation((callback) =>
+    callback({
+      userLogin: { userInfo: { name: 'Travis' } },
+      cart: { cartItems: [] },
+    })
+  )
+
   render(
     <MemoryRouter>
       <Header />
     </MemoryRouter>
   )
 
-  expect(screen.getByRole('link', { name: /cart/i })).toBeInTheDocument()
+  expect(screen.getByText(/travis/i)).toBeInTheDocument()
 })

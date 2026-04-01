@@ -1015,6 +1015,11 @@ Fails due to missing login section.
 **Header Login Test: Green State**
 Passes by simly re-adding the login section with a no Redux present - just minimal to pass. 
 
+**Header Shows User name When Logged In: Red**
+- Functionality does not yet exist. 
+
+
+
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
 
