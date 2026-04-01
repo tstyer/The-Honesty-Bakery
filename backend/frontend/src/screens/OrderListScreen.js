@@ -28,7 +28,9 @@ export default function OrderListScreen() {
       {loading ? (
         <div>{'Loading...'}</div>
       ) : error ? (
-        <Message variant="warning">Order request failed</Message>
+        <Message variant="warning">
+          {'Something went wrong'}
+        </Message>
       ) : (
         <Table striped bordered hover responsive className="table-sm">
           <thead>
