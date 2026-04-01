@@ -1,19 +1,91 @@
-import AboutScreen from "../screens/AboutScreen.js";
-import { render, screen } from "@testing-library/react";
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import AboutScreen from '../screens/AboutScreen'
 
-// need fake router to run full screens like AboutScreen
-import { MemoryRouter } from "react-router";
+test('about page heading renders', () => {
+  render(
+    <MemoryRouter>
+      <AboutScreen />
+    </MemoryRouter>
+  )
 
-// == no mock env needed here, only fake router ==//
+  expect(
+    screen.getByRole('heading', { name: /about.*bakehouse/i })
+  ).toBeInTheDocument()
+})
 
-// First test
+test('intro text about honest small-batch cakes renders', () => {
+  render(
+    <MemoryRouter>
+      <AboutScreen />
+    </MemoryRouter>
+  )
 
-test("screen displays title", () => {
-    
-    render(<MemoryRouter><AboutScreen /></MemoryRouter>);
+  expect(
+    screen.getByText(/small-batch cakes/i)
+  ).toBeInTheDocument()
 
-    const title = screen.getByText(/about the bakehouse/i);
+  expect(
+    screen.getByText(/honest|honestly/i)
+  ).toBeInTheDocument()
+})
 
-    expect(title).toBeInDocument;
+test('about text mentions seabrook', () => {
+  render(
+    <MemoryRouter>
+      <AboutScreen />
+    </MemoryRouter>
+  )
+
+  expect(
+    screen.getByText(/seabrook/i)
+  ).toBeInTheDocument()
+})
+
+test('bee image renders', () => {
+  render(
+    <MemoryRouter>
+      <AboutScreen />
+    </MemoryRouter>
+  )
+
+  expect(
+    screen.getByAltText(/bee/i)
+  ).toBeInTheDocument()
+})
+
+test('home button renders', () => {
+  render(
+    <MemoryRouter>
+      <AboutScreen />
+    </MemoryRouter>
+  )
+
+  expect(
+    screen.getByRole('button', { name: /home/i })
+  ).toBeInTheDocument()
+})
+
+test('home button links to homepage', () => {
+  render(
+    <MemoryRouter>
+      <AboutScreen />
+    </MemoryRouter>
+  )
+
+  const homeLink = screen.getByRole('link', { name: /home/i })
+  expect(homeLink).toHaveAttribute('href', '/')
+})
+
+test('sign image renders', () => {
+  render(
+    <MemoryRouter>
+      <AboutScreen />
+    </MemoryRouter>
+  )
+
+  expect(
+    screen.getByAltText(/sign/i)
+  ).toBeInTheDocument()
 })
