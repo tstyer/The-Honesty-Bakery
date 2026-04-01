@@ -56,9 +56,7 @@ function Header() {
             </Nav>
 
             <Nav className="header-right-nav ms-lg-auto">
-              <Nav.Link as={Link} to="/login">
-                <i className="fas fa-user" /> Login
-              </Nav.Link>
+          
 
               <Nav.Link as={Link} to="/cart" className="d-flex align-items-center">
                 <i className="fas fa-shopping-cart" /> Cart

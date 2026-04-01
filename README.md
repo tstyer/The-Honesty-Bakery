@@ -1009,6 +1009,9 @@ After adding the new head 'Home' nav button, it passed:
 
 --
 
+**Header Login Test: Red State**
+Fails due to missing login section.
+
 
 
 ------------------------

@@ -25,7 +25,7 @@ test('rating message renders', () => {
   expect(screen.getByText(/rated on google & facebook/i)).toBeInTheDocument()
 })
 
-test.only('main navigation links render', () => {
+test('main navigation links render', () => {
   render(
     <MemoryRouter>
       <Header />
@@ -37,7 +37,7 @@ test.only('main navigation links render', () => {
   expect(screen.getByRole('link', { name: /contact/i })).toBeInTheDocument()
 })
 
-test('login link renders when no user is logged in', () => {
+test.only('login link renders when no user is logged in', () => {
   render(
     <MemoryRouter>
       <Header />
