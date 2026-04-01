@@ -1023,6 +1023,8 @@ Passes by simly re-adding the login section with a no Redux present - just minim
 **Header Shows User Name When Logged In: Green**
 - Functionality added to Nav Bar.
 
+
+
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
 

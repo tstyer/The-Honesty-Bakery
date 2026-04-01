@@ -27,7 +27,6 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
           <Navbar.Collapse id="basic-navbar-nav" className="header-collapse">
-            {/* LEFT SIDE */}
             <Nav className="header-left-nav">
               <Nav.Link
                 as={NavLink}
@@ -64,10 +63,11 @@ function Header() {
               </NavDropdown>
             </Nav>
 
-            {/* RIGHT SIDE */}
             <Nav className="header-right-nav ms-lg-auto">
               {userInfo ? (
-                <span>{userInfo.name}</span>
+                <Nav.Link as={Link} to="/profile">
+                  {userInfo.name || 'User'}
+                </Nav.Link>
               ) : (
                 <Nav.Link as={Link} to="/login">
                   Login
