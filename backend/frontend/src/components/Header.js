@@ -3,6 +3,7 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { NavLink, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../actions/userActions'
+import { toast } from 'react-toastify'
 
 function Header() {
   const dispatch = useDispatch()
