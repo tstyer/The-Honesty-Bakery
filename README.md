@@ -1032,6 +1032,13 @@ Passes by simly re-adding the login section with a no Redux present - just minim
 - Test passes now I've added the logout functionality. 
 
 
+4. **About Screen Testing**
+
+For the AboutScreen.js, I completely removed entire sections, wrote tests (ran in red), and then added modifie sections to the about screen that passes the tests.
+
+**
+
+
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
 
