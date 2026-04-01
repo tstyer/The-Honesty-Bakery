@@ -13,7 +13,7 @@ describe('ContactScreen', () => {
   })
 
   // 2. User can type into inputs
-  test.only('allows user to type into form fields', () => {
+  test('allows user to type into form fields', () => {
     render(<ContactScreen />)
 
     const nameInput = screen.getByPlaceholderText(/your name/i)
@@ -27,7 +27,7 @@ describe('ContactScreen', () => {
   })
 
   // 3. Form submission triggers mailto redirect
-  test('submitting form sets window.location.href', () => {
+  test.only('submitting form sets window.location.href', () => {
     delete window.location
     window.location = { href: '' }
 
