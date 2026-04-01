@@ -39,7 +39,7 @@ test('renders email and password inputs', () => {
   expect(screen.getByLabelText(/password/i)).toBeInTheDocument()
 })
 
-test.only('renders sign in button', () => {
+test('renders sign in button', () => {
   renderWithStore({
     userLogin: {},
   })
@@ -47,7 +47,8 @@ test.only('renders sign in button', () => {
   expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument()
 })
 
-test('allows user to type into inputs', () => {
+// tests tha typing updates values
+test.only('allows user to type into inputs', () => {
   renderWithStore({
     userLogin: {},
   })
