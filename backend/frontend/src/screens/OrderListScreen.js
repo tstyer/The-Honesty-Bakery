@@ -23,24 +23,22 @@ export default function OrderListScreen() {
 
   return (
     <>
-      <h1>{'Orders'}</h1>
+      <h1>Orders</h1>
 
       {loading ? (
-        <div>{'Loading...'}</div>
+        <Loader />
       ) : error ? (
-        <Message variant="warning">
-          {'Something went wrong'}
-        </Message>
+        <Message variant="danger">{error}</Message>
       ) : (
         <Table striped bordered hover responsive className="table-sm">
           <thead>
             <tr>
-              <th>ORDER ID</th>
-              <th>CUSTOMER</th>
-              <th>ORDER DATE</th>
-              <th>AMOUNT</th>
-              <th>PAID STATUS</th>
-              <th>DELIVERY STATUS</th>
+              <th>ID</th>
+              <th>USER</th>
+              <th>DATE</th>
+              <th>TOTAL</th>
+              <th>PAID</th>
+              <th>DELIVERED</th>
               <th></th>
             </tr>
           </thead>
@@ -50,24 +48,24 @@ export default function OrderListScreen() {
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{`£${order.totalPrice}`}</td>
+                <td>£{order.totalPrice}</td>
                 <td>
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <span>Not Paid</span>
+                    <i className="fas fa-times" style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
-                    <span>Not Delivered</span>
+                    <i className="fas fa-times" style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>
-                  <Link to={`/order/${order._id}`} className="btn btn-dark btn-sm">
-                    {'Details'}
+                  <Link to={`/order/${order._id}`} className="btn btn-light btn-sm">
+                    Details
                   </Link>
                 </td>
               </tr>
