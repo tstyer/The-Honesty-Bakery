@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom'
 export default function AboutScreen() {
   return (
     <Container className="py-5">
-      <h1>About Our Bakehouse</h1>
-
       <Row className="mb-4 text-center">
         <Col>
+          <h1>About Our Bakehouse</h1>
           <p className="mt-2 lead">
             Honestly baked small-batch cakes, shared locally.
           </p>
@@ -22,13 +21,17 @@ export default function AboutScreen() {
             growing from one honesty box into something shared with the community.
           </p>
 
-          {/* second paragraph still removed on purpose */}
+          <p className="about-text">
+            Each bake is made in small batches with simple ingredients and real
+            care. Whether it is a cake for yourself, someone else, or even your
+            dog, we want it to bring a little comfort to the day.
+          </p>
 
           <div className="about-bee-wrap">
             <img
               className="about-bee"
               src="/images/bee-about.png"
-              alt="bee illustration"
+              alt="Bee illustration"
             />
           </div>
 
@@ -43,7 +46,7 @@ export default function AboutScreen() {
           <img
             className="about-image"
             src="/images/mum_shmee.jpg"
-            alt="Bakehouse board"
+            alt="Bakehouse sign"
           />
         </Col>
       </Row>

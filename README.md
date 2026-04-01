@@ -1078,6 +1078,12 @@ For the AboutScreen.js, I completely removed entire sections, wrote tests (ran i
 **About Us Home Link Test: Green**
 -- Changed path from "/about" to simply "/".
 
+
+
+
+
+
+
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
 

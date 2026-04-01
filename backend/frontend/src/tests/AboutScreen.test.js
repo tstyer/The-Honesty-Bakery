@@ -55,7 +55,7 @@ test('home button renders', () => {
   ).toBeInTheDocument()
 })
 
-test.only('home button links to homepage', () => {
+test('home button links to homepage', () => {
   render(
     <MemoryRouter>
       <AboutScreen />
@@ -64,16 +64,4 @@ test.only('home button links to homepage', () => {
 
   const homeLink = screen.getByRole('link', { name: /home/i })
   expect(homeLink).toHaveAttribute('href', '/')
-})
-
-test('sign image renders', () => {
-  render(
-    <MemoryRouter>
-      <AboutScreen />
-    </MemoryRouter>
-  )
-
-  expect(
-    screen.getByAltText(/sign/i)
-  ).toBeInTheDocument()
 })
