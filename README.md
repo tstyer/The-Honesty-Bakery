@@ -1062,6 +1062,15 @@ For the AboutScreen.js, I completely removed entire sections, wrote tests (ran i
 **About Us Bee Icon: Green**
 - Alt text added - new - "Bee illustration"
 
+--
+
+**About Us Home Button: Red**
+- Button not present. 
+
+**About Us Home Button: Green**
+- Changed from "return" to "Back Home".
+
+
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
 

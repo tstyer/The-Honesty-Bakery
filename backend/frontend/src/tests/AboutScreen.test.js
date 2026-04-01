@@ -31,7 +31,7 @@ test('intro text about honest small-batch cakes renders', () => {
   ).toBeInTheDocument()
 })
 
-test.only('bee image renders', () => {
+test('bee image renders', () => {
   render(
     <MemoryRouter>
       <AboutScreen />
@@ -43,7 +43,7 @@ test.only('bee image renders', () => {
   ).toBeInTheDocument()
 })
 
-test('home button renders', () => {
+test.only('home button renders', () => {
   render(
     <MemoryRouter>
       <AboutScreen />
