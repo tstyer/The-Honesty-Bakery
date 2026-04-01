@@ -1012,7 +1012,8 @@ After adding the new head 'Home' nav button, it passed:
 **Header Login Test: Red State**
 Fails due to missing login section.
 
-
+**Header Login Test: Green State**
+Passes by simly re-adding the login section with a no Redux present - just minimal to pass. 
 
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
