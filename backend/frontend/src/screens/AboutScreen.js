@@ -24,6 +24,7 @@ export default function AboutScreen() {
             <img
               className="about-bee"
               src="/images/bee-about.png"
+              alt='bee illustration'
             />
           </div>
 
