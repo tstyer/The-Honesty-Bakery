@@ -1040,7 +1040,7 @@ For the AboutScreen.js, I completely removed entire sections, wrote tests (ran i
 - Re writing the page means heading was not present. 
 
 **About Us Heading: Green**
-- 
+- I added the heading in, but slightly different ('About The Bakehouse' became 'About Our Bakehouse'), and the test passed. 
 
 
 ------------------------
