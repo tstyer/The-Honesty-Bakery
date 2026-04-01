@@ -30,7 +30,7 @@ test('renders Sign In heading', () => {
   expect(screen.getByText(/sign in/i)).toBeInTheDocument()
 })
 
-test.only('renders email and password inputs', () => {
+test('renders email and password inputs', () => {
   renderWithStore({
     userLogin: {},
   })
@@ -39,7 +39,7 @@ test.only('renders email and password inputs', () => {
   expect(screen.getByLabelText(/password/i)).toBeInTheDocument()
 })
 
-test('renders sign in button', () => {
+test.only('renders sign in button', () => {
   renderWithStore({
     userLogin: {},
   })
