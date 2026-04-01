@@ -1079,6 +1079,19 @@ For the AboutScreen.js, I completely removed entire sections, wrote tests (ran i
 -- Changed path from "/about" to simply "/".
 
 
+4. **Login Screen Tests**
+
+I began by removing these sections of the page:
+
+- "Sign In" heading
+- Email + Password labels
+- Button text "Sign In"
+- Inputs
+
+I then added 4 tests the LoginScreen.test.js.
+
+- Failed when they all ran (together or individually).
+
 
 
 
