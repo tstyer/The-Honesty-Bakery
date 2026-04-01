@@ -1028,6 +1028,8 @@ Passes by simly re-adding the login section with a no Redux present - just minim
 **Header Allows the Logout Function: Red**
 - This functionality was not yet in the header code. 
 
+**Header Allows the Logout Function: Red**
+- Test passes now I've added the logout functionality. 
 
 
 ------------------------

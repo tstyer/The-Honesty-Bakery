@@ -107,4 +107,5 @@ test.only('shows logout option when user is logged in', () => {
 
   fireEvent.click(screen.getByText(/travis/i))
 
-  expect(screen.getByText(/logout/i)).toBeInTheDocument()
+  expect(screen.getByText(/logout/i)).toBeInTheDocument();
+})

@@ -1,11 +1,17 @@
 import React from 'react'
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { NavLink, Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../actions/userActions'
 
 function Header() {
+  const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
   const userInfo = userLogin?.userInfo
+
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
 
   return (
     <header>
@@ -65,9 +71,14 @@ function Header() {
 
             <Nav className="header-right-nav ms-lg-auto">
               {userInfo ? (
-                <Nav.Link as={Link} to="/profile">
-                  {userInfo.name || 'User'}
-                </Nav.Link>
+                <NavDropdown title={userInfo.name || 'User'} id="username" align="end">
+                  <NavDropdown.Item as={Link} to="/profile">
+                    Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
               ) : (
                 <Nav.Link as={Link} to="/login">
                   Login
