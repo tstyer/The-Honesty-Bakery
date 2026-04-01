@@ -50,7 +50,7 @@ export default function OrderListScreen() {
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
-                <td>${order.totalPrice}</td>
+                <td>{`£${order.totalPrice}`}</td>
                 <td>
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
@@ -67,7 +67,7 @@ export default function OrderListScreen() {
                 </td>
                 <td>
                   <Link to={`/order/${order._id}`} className="btn btn-dark btn-sm">
-                    View
+                    {'Details'}
                   </Link>
                 </td>
               </tr>
