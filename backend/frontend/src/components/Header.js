@@ -15,10 +15,7 @@ function Header() {
             />
           </Navbar.Brand>
 
-          <div className="nav-rating">
-            <span className="nav-rating__stars">★★★★★</span>
-            <span className="nav-rating__text">rated on Google & Facebook</span>
-          </div>
+          
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 

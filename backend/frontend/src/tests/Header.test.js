@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import Header from '../components/Header'
 
 // 
-test.only('logo renders with correct alt text', () => {
+test('logo renders with correct alt text', () => {
   render(
     <MemoryRouter>
       <Header />
@@ -15,7 +15,7 @@ test.only('logo renders with correct alt text', () => {
   expect(logo).toBeInTheDocument()
 })
 
-test('rating message renders', () => {
+test.only('rating message renders', () => {
   render(
     <MemoryRouter>
       <Header />

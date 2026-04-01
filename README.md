@@ -992,7 +992,10 @@ Test passes after adding new alt text.
 
 --
 
+**Header Rating Section: Red State**
+This is the second test that fails due to missing rating section in the header. Noted in the commit. 
 
+**Hea
 
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
