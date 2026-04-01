@@ -10,7 +10,7 @@ function Header() {
           <Navbar.Brand as={Link} to="/">
             <img
               src="/images/logo_2.png"
-              alt="logo"
+              alt="The Honesty Bakehouse Logo"
               className="logo"
             />
           </Navbar.Brand>
