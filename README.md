@@ -1060,7 +1060,7 @@ For the AboutScreen.js, I completely removed entire sections, wrote tests (ran i
 - Test cannot identify bee icon as no alt text present. 
 
 **About Us Bee Icon: Green**
-- Alt text added - new.
+- Alt text added - new - "Bee illustration"
 
 ------------------------
 (AMEND THIS WHOLE SECTION, INCLUDING THESE POINTS:)
