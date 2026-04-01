@@ -50,7 +50,7 @@ describe('OrderListScreen', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument()
   })
 
-  test.only('renders error message', () => {
+  test('renders error message', () => {
     useSelector.mockImplementation((callback) =>
       callback({
         orderList: { loading: false, error: 'Something went wrong', orders: [] },
@@ -67,7 +67,7 @@ describe('OrderListScreen', () => {
     expect(screen.getByText(/something went wrong/i)).toBeInTheDocument()
   })
 
-  test('renders order data in the table', () => {
+  test.only('renders order data in the table', () => {
     useSelector.mockImplementation((callback) =>
       callback({
         orderList: {
