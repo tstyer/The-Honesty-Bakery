@@ -33,7 +33,7 @@ export default function AboutScreen() {
           </div>
 
           <div className="about-cta">
-            <Link to="/about" className="text-decoration-none">
+            <Link to="/" className="text-decoration-none">
               <Button variant="outline-dark">Back Home</Button>
             </Link>
           </div>
