@@ -54,7 +54,7 @@ describe('PaymentScreen', () => {
     jest.clearAllMocks()
   })
 
-  test.only('renders Payment heading and cash option for prebaked-only cart', () => {
+  test('renders Payment heading and cash option for prebaked-only cart', () => {
     useSelector.mockImplementation((selector) =>
       selector({
         cart: {
@@ -103,7 +103,7 @@ describe('PaymentScreen', () => {
     ).not.toBeInTheDocument()
   })
 
-  test('submitting cash payment dispatches actions and navigates to placeorder', () => {
+  test.only('submitting cash payment dispatches actions and navigates to placeorder', () => {
     useSelector.mockImplementation((selector) =>
       selector({
         cart: {

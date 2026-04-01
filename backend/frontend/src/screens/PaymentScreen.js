@@ -17,6 +17,7 @@ export default function PaymentScreen() {
   const cart = useSelector((state) => state.cart)
   const { cartItems, paymentMethod, paymentResult } = cart
 
+  // get user token for authenticated payment intent
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin || {}
 
@@ -35,6 +36,7 @@ export default function PaymentScreen() {
   const [errorMsg, setErrorMsg] = useState('')
   const [cardComplete, setCardComplete] = useState(false)
 
+  // Clear any previous payment success when entering this screen
   useEffect(() => {
     dispatch(setPaymentResult(null))
   }, [dispatch])
@@ -44,6 +46,7 @@ export default function PaymentScreen() {
   }, [cartItems, navigate])
 
   useEffect(() => {
+    // keep method valid if cart composition changes
     if (!allowedMethods.includes(method)) setMethod(allowedMethods[0])
   }, [allowedMethods, method])
 
@@ -51,27 +54,31 @@ export default function PaymentScreen() {
     e.preventDefault()
     setErrorMsg('')
 
+    // CASH FLOW (prebaked only)
     if (method === 'Cash') {
-      dispatch(savePaymentMethod('Collection'))
-      dispatch(setPaymentResult('reset'))
-      navigate('/shipping')
+      dispatch(savePaymentMethod('Cash'))
+      dispatch(setPaymentResult(null))
+      navigate('/placeorder')
       return
     }
 
+    // CARD FLOW (Stripe pay now)
     if (!stripe || !elements) {
-      setErrorMsg('Payment system is loading.')
+      setErrorMsg('Payments are still loading. Try again in a moment.')
       return
     }
 
+    // backend requires auth
     const accessToken = userInfo?.token || userInfo?.access
     if (!accessToken) {
-      setErrorMsg('Please sign in first.')
+      setErrorMsg('You must be logged in to pay by card.')
       return
     }
 
     try {
       setPaying(true)
 
+      // Create PaymentIntent on backend (authenticated)
       const { data } = await axios.post(
         '/api/payments/create-payment-intent/',
         {
@@ -86,10 +93,11 @@ export default function PaymentScreen() {
       )
 
       const clientSecret = data.clientSecret
+
       const cardElement = elements.getElement(CardElement)
 
       if (!cardElement) {
-        setErrorMsg('Card input unavailable.')
+        setErrorMsg('Card input is not ready yet. Try again in a moment.')
         setPaying(false)
         return
       }
@@ -99,17 +107,18 @@ export default function PaymentScreen() {
       })
 
       if (result.error) {
-        setErrorMsg(result.error.message || 'Card payment failed.')
+        setErrorMsg(result.error.message || 'Payment failed.')
         setPaying(false)
         return
       }
 
       if (result.paymentIntent?.status !== 'succeeded') {
-        setErrorMsg('Payment incomplete.')
+        setErrorMsg('Payment did not complete. Please try again.')
         setPaying(false)
         return
       }
 
+      // Save success
       dispatch(savePaymentMethod('Card'))
       dispatch(
         setPaymentResult({
@@ -131,21 +140,29 @@ export default function PaymentScreen() {
 
   return (
     <div>
-      <h1 className="text-center">{'Payment'}</h1>
+      <h1 className="text-center">Payment</h1>
+
+      {/*} 
+      {hasMadeToOrder && (
+        <Message variant="info">
+          Your cart includes made-to-order items. Card payment is required before we start baking.
+        </Message>
+      )} 
+      */}
 
       {errorMsg && <Message variant="danger">{errorMsg}</Message>}
 
       <Form onSubmit={submitHandler}>
         <Form.Group>
           <Form.Label as="legend" className="payment-text">
-            Choose Payment Type
+            Add Payment Details
           </Form.Label>
 
           <Col>
             {allowedMethods.includes('Cash') && (
               <Form.Check
                 type="radio"
-                label={'Cash on collection (prebaked items only)'}
+                label="Cash on collection (prebaked items only)"
                 id="Cash"
                 name="paymentMethod"
                 value="Cash"
@@ -157,7 +174,7 @@ export default function PaymentScreen() {
             {allowedMethods.includes('Card') && (
               <Form.Check
                 type="radio"
-                label="Pay by card now"
+                label="Card (pay now)"
                 id="Card"
                 name="paymentMethod"
                 value="Card"
@@ -170,10 +187,10 @@ export default function PaymentScreen() {
 
         {method === 'Card' && (
           <div className="my-3">
-            <Form.Label className="payment-text">Enter card info</Form.Label>
+            <Form.Label className="payment-text">Card details</Form.Label>
 
             {!stripeReady ? (
-              <Message variant="info">Card form loading...</Message>
+              <Message variant="info">Loading secure payment form…</Message>
             ) : (
               <div
                 style={{
@@ -198,7 +215,7 @@ export default function PaymentScreen() {
 
             {cardPaid && (
               <div className="mt-2">
-                <small className="payment-text">Paid successfully</small>
+                <small className="payment-text">Payment completed ✔</small>
               </div>
             )}
           </div>
@@ -215,9 +232,9 @@ export default function PaymentScreen() {
         >
           {method === 'Card'
             ? paying
-              ? 'Paying...'
-              : 'Review Order'
-            : 'Next Step'}
+              ? 'Processing…'
+              : 'Order Summary'
+            : 'Continue'}
         </Button>
       </Form>
     </div>
