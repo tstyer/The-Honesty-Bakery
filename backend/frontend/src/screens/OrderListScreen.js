@@ -23,22 +23,22 @@ export default function OrderListScreen() {
 
   return (
     <>
-      <h1>Orders</h1>
+      <h2>Customer Orders</h2>
 
       {loading ? (
-        <Loader />
+        <div>Please wait...</div>
       ) : error ? (
-        <Message variant="danger">{error}</Message>
+        <Message variant="warning">Order request failed</Message>
       ) : (
         <Table striped bordered hover responsive className="table-sm">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>USER</th>
-              <th>DATE</th>
-              <th>TOTAL</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
+              <th>ORDER ID</th>
+              <th>CUSTOMER</th>
+              <th>ORDER DATE</th>
+              <th>AMOUNT</th>
+              <th>PAID STATUS</th>
+              <th>DELIVERY STATUS</th>
               <th></th>
             </tr>
           </thead>
@@ -48,24 +48,24 @@ export default function OrderListScreen() {
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
-                <td>£{order.totalPrice}</td>
+                <td>${order.totalPrice}</td>
                 <td>
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <i className="fas fa-times" style={{ color: 'red' }}></i>
+                    <span>Not Paid</span>
                   )}
                 </td>
                 <td>
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
-                    <i className="fas fa-times" style={{ color: 'red' }}></i>
+                    <span>Not Delivered</span>
                   )}
                 </td>
                 <td>
-                  <Link to={`/order/${order._id}`} className="btn btn-light btn-sm">
-                    Details
+                  <Link to={`/order/${order._id}`} className="btn btn-dark btn-sm">
+                    View
                   </Link>
                 </td>
               </tr>

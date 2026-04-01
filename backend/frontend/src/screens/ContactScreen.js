@@ -49,7 +49,7 @@ export default function ContactScreen() {
 
   return (
     <Container className="py-4">
-      <h1>Contact Me</h1>
+      <h1 className="text-center">Contact Me</h1>
 
       <p className="text-muted text-center mb-4 lead">
         Got a question, or would like to place a custom / personlised order?
@@ -117,7 +117,7 @@ export default function ContactScreen() {
           />
         </Form.Group>
 
-        <Button type="submit" variant="outline-dark">
+        <Button type="submit" variant="outline-dark" className="add-to-cart">
           Send
         </Button>
       </Form>
