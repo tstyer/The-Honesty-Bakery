@@ -44,7 +44,7 @@ export default function LoginScreen() {
 
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="email" className="my-2">
-            <Form.Label>Email</Form.Label>
+            <Form.Label>Email Address</Form.Label>
             <Form.Control
               type="email"
               placeholder="Your email"
@@ -55,7 +55,7 @@ export default function LoginScreen() {
 
           {/* Changed label text */}
           <Form.Group controlId="password" className="my-2">
-            <Form.Label>User Password</Form.Label>
+            <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
               placeholder="Your password"
