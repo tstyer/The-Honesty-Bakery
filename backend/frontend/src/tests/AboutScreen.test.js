@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import AboutScreen from '../screens/AboutScreen'
 
-test('about page heading renders', () => {
+test.only('about page heading renders', () => {
   render(
     <MemoryRouter>
       <AboutScreen />

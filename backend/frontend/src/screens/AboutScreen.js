@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export default function AboutScreen() {
   return (
     <Container className="py-5">
-      {/* Title removed on purpose */}
+      About Our Bakehouse
       <Row className="mb-4 text-center">
         <Col></Col>
       </Row>
