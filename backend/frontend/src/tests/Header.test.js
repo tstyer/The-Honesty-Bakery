@@ -91,7 +91,7 @@ afterEach(() => {
   jest.clearAllMocks()
 })
 
-test.only('shows logout option when user is logged in', () => {
+test('shows logout option when user is logged in', () => {
   useSelector.mockImplementation((callback) =>
     callback({
       userLogin: { userInfo: { name: 'Travis' } },

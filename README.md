@@ -1112,7 +1112,6 @@ This style of testing was then carried out on the following screens:
 - ProductListScreen
 - ProductScreen
 - ProfileScreen
-
 - ReadyToBakeScreen
 
 
