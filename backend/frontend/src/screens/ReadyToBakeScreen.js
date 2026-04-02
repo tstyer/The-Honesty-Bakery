@@ -14,8 +14,7 @@ export default function ReadyToBakeScreen() {
   const { loading, error, products } = productList
 
   useEffect(() => {
-    // wrong product type on purpose
-    dispatch(listProducts('', '', 'PREBAKED'))
+    dispatch(listProducts('', '', 'READY_TO_BAKE'))
   }, [dispatch])
 
   return (
