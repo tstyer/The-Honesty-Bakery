@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import FeaturedCarousel from '../components/FeaturedCarousel'
 import Footer from '../components/Footer'
 
 import { listProducts } from '../actions/productActions'
