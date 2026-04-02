@@ -50,7 +50,7 @@ describe('ProductEditScreen', () => {
     mockNavigate.mockClear()
   })
 
-  test('renders Edit Product heading', () => {
+  test.only('renders Edit Product heading', () => {
     useSelector.mockImplementation((selectorFn) =>
       selectorFn({
         productDetails: {

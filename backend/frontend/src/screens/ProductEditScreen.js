@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from 'axios'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listProductDetails, updateProduct } from '../actions/productActions'
@@ -66,7 +65,7 @@ export default function ProductEditScreen() {
 
   return (
     <>
-      <h1>Update Item</h1>
+      <h1>Edit Product</h1>
 
       {loadingUpdate && <Loader />}
       {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
