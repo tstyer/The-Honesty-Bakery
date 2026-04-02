@@ -21,14 +21,13 @@ export default function PrebakedScreen() {
   const { cartItems } = cart
 
   useEffect(() => {
-    // ✅ FIX FOR TEST 1: correct arguments
     dispatch(listProducts('', '', 'PREBAKED'))
   }, [dispatch])
 
   const addToCartHandler = (id) => {
     const selectedQty = qtyById[id] || 1
 
-    // ❌ still wrong for now (Test 3 will fix this)
+    // still intentionally wrong for Test 3
     dispatch(addToCart(id, 1))
 
     setJustAddedId(id)
@@ -51,11 +50,9 @@ export default function PrebakedScreen() {
       </div>
 
       {loading ? (
-        // ✅ FIX FOR TEST 1: render Loader component
         <Loader />
       ) : error ? (
-        // ❌ still wrong (Test 2 will fix this)
-        <Message variant="danger">Something went wrong</Message>
+        <Message variant="danger">{error}</Message>
       ) : (
         products.map((product) => {
           const cartItem = cartItems.find((item) => item.product === product._id)
@@ -85,8 +82,8 @@ export default function PrebakedScreen() {
                   <Form.Select
                     value={qtyById[product._id] || 1}
                     onChange={(e) =>
-                      setQtyById((prev) => ({
-                        ...prev,
+                      setQtyById((currentQty) => ({
+                        ...currentQty,
                         [product._id]: Number(e.target.value),
                       }))
                     }
@@ -109,7 +106,6 @@ export default function PrebakedScreen() {
                     Add Item
                   </Button>
 
-                  {/* ❌ still wrong (Test 3 will fix text/logic) */}
                   {justAddedId === product._id && (
                     <small className="text-success">Done!</small>
                   )}

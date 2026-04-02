@@ -87,7 +87,7 @@ describe('PrebakedScreen', () => {
 
     render(
       <MemoryRouter>
-        <PrebakedScreen />
+        <PreBakedScreen />
       </MemoryRouter>
     )
 
