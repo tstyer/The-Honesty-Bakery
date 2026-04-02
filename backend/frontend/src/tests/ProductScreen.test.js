@@ -50,7 +50,7 @@ describe('ProductScreen', () => {
     jest.clearAllMocks()
   })
 
-  test.only('renders loader while product is loading', () => {
+  test('renders loader while product is loading', () => {
     renderWithState({
       productDetails: {
         loading: true,
@@ -67,7 +67,7 @@ describe('ProductScreen', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument()
   })
 
-  test('renders product details and navigates to cart with selected quantity', () => {
+  test.only('renders product details and navigates to cart with selected quantity', () => {
     renderWithState({
       productDetails: {
         loading: false,
