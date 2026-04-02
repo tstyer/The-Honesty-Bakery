@@ -4,7 +4,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 
 import { Container } from 'react-bootstrap'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -31,41 +31,32 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 function Layout({ stripeError, stripePromise }) {
-  const location = useLocation()
-  const isHome = location.pathname === '/'
-
   return (
     <div className='app-shell'>
       <Header />
 
       <main className="py-4">
-
         <Container className="container-lg">
           <Routes>
             <Route path="/" element={<HomeScreen />} />
 
-            {/* Profile route */}
             <Route path="/profile" element={<ProfileScreen />} />
             <Route path="/admin/userlist" element={<UserListScreen />} />
 
-            {/* Product routes */}
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/admin/productlist" element={<ProductListScreen />} />
             <Route path="/admin/product/:id/edit" element={<ProductEditScreen />} />
             <Route path="/prebaked" element={<PreBakedScreen category="prebaked" />} />
             <Route path="/ready-to-bake" element={<ReadyToBakeScreen category="ready-to-bake" />} />
 
-            {/* Cart routes */}
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/cart/:id" element={<CartScreen />} />
 
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
 
-            {/* Contact */}
             <Route path="/contact" element={<ContactScreen />} />
 
-            {/* Payment route */}
             <Route
               path="/payment"
               element={
@@ -81,25 +72,20 @@ function Layout({ stripeError, stripePromise }) {
               }
             />
 
-            {/* Order routes */}
             <Route path="/placeorder" element={<PlaceOrderScreen />} />
             <Route path="/order/:id" element={<OrderScreen />} />
             <Route path="/admin/orderlist" element={<OrderListScreen />} />
-          
-            {/* About route */}
+
             <Route path="/about" element={<AboutScreen />} />
 
-            {/* Error Screen: /error is used to directly access, and * is used when entered by accident */}
             <Route path="/error" element={<ErrorScreen />} />
             <Route path="*" element={<ErrorScreen />} />
-
-            {/* Toaster */}
-            <ToastContainer />
           </Routes>
         </Container>
       </main>
 
       <Footer />
+      <ToastContainer />
     </div>
   )
 }
