@@ -18,6 +18,9 @@ export default function CartScreen() {
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty))
@@ -25,7 +28,11 @@ export default function CartScreen() {
   }, [dispatch, productId, qty])
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=/payment')
+    if (userInfo) {
+      navigate('/payment')
+    } else {
+      navigate('/login?redirect=/payment')
+    }
   }
 
   console.log('cartItems:', cartItems)
