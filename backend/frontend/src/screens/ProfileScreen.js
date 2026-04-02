@@ -10,7 +10,7 @@ export default function ProfileScreen() {
   const [fullName, setFullName] = useState('')
   const [userEmail, setUserEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const [confirmPass, setConfirmPass] = useState('')
   const [message, setMessage] = useState(null)
 
   const dispatch = useDispatch()
@@ -34,7 +34,6 @@ export default function ProfileScreen() {
       dispatch({ type: USER_UPDATE_PROFILE_RESET })
       dispatch(getUserDetails())
     } else {
-      // FIX: populate fields from user
       setFullName(user.name || '')
       setUserEmail(user.email || '')
     }
@@ -43,25 +42,25 @@ export default function ProfileScreen() {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    if (password === confirmPassword) {
+    if (password !== confirmPass) {
       setMessage('Passwords do not match')
-    } else {
-      setMessage(null)
-      dispatch(
-        updateUserProfile({
-          id: user._id,
-          name: fullName,
-          email: userEmail,
-          password: '',
-        })
-      )
+      return
     }
+
+    setMessage(null)
+    dispatch(
+      updateUserProfile({
+        id: user._id,
+        name: fullName,
+        email: userEmail,
+        password: '',
+      })
+    )
   }
 
   return (
     <Row>
       <Col md={6}>
-        {/* FIX: correct heading */}
         <h2>User Profile</h2>
 
         {message && <Message variant="danger">{message}</Message>}
@@ -100,7 +99,7 @@ export default function ProfileScreen() {
               <Form.Label>New Password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Password"
+                placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -110,14 +109,14 @@ export default function ProfileScreen() {
               <Form.Label>Repeat Password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Repeat password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirm password"
+                value={confirmPass}
+                onChange={(e) => setConfirmPass(e.target.value)}
               />
             </Form.Group>
 
             <Button type="submit" variant="secondary" className="my-3">
-              Save Changes
+              Update
             </Button>
           </Form>
         )}
