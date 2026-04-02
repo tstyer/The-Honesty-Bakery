@@ -124,10 +124,10 @@ export default function PlaceOrderScreen() {
                   type='button'
                   className='btn-block cta-btn'
                   variant='outline-dark'
-                  disabled={true}
+                  disabled={!paymentMethod || !paymentIsValid}
                   onClick={placeOrderHandler}
                 >
-                  Confirm Order
+                  Place Order
                 </Button>
 
                 {!paymentMethod && (
