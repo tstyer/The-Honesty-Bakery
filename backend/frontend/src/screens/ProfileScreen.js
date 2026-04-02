@@ -34,8 +34,9 @@ export default function ProfileScreen() {
       dispatch({ type: USER_UPDATE_PROFILE_RESET })
       dispatch(getUserDetails())
     } else {
-      setFullName('')
-      setUserEmail('')
+      // FIX: populate fields from user
+      setFullName(user.name || '')
+      setUserEmail(user.email || '')
     }
   }, [dispatch, userInfo, user, success])
 
@@ -60,7 +61,8 @@ export default function ProfileScreen() {
   return (
     <Row>
       <Col md={6}>
-        <h2>Profile Settings</h2>
+        {/* FIX: correct heading */}
+        <h2>User Profile</h2>
 
         {message && <Message variant="danger">{message}</Message>}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
