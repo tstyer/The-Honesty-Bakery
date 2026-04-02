@@ -27,6 +27,9 @@ import AboutScreen from './screens/AboutScreen'
 import ContactScreen from './screens/ContactScreen'
 import ErrorScreen from './screens/ErrorScreen'
 
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 function Layout({ stripeError, stripePromise }) {
   const location = useLocation()
   const isHome = location.pathname === '/'
@@ -89,6 +92,9 @@ function Layout({ stripeError, stripePromise }) {
             {/* Error Screen: /error is used to directly access, and * is used when entered by accident */}
             <Route path="/error" element={<ErrorScreen />} />
             <Route path="*" element={<ErrorScreen />} />
+
+            {/* Toaster */}
+            <ToastContainer />
           </Routes>
         </Container>
       </main>
