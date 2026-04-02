@@ -71,7 +71,7 @@ describe('PrebakedScreen', () => {
     expect(mockDispatch).toHaveBeenCalled()
   })
 
-  test.only('renders error message when product loading fails', () => {
+  test('renders error message when product loading fails', () => {
     useSelector.mockImplementation((selectorFn) =>
       selectorFn({
         productList: {
@@ -94,7 +94,7 @@ describe('PrebakedScreen', () => {
     expect(screen.getByText(/failed to load cakes/i)).toBeInTheDocument()
   })
 
-  test('renders products and dispatches addToCart with selected quantity', () => {
+  test.only('renders products and dispatches addToCart with selected quantity', () => {
     useSelector.mockImplementation((selectorFn) =>
       selectorFn({
         productList: {
@@ -118,7 +118,7 @@ describe('PrebakedScreen', () => {
 
     render(
       <MemoryRouter>
-        <PrebakedScreen />
+        <PreBakedScreen />
       </MemoryRouter>
     )
 
