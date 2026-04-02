@@ -59,7 +59,7 @@ export default function ProductListScreen() {
       </Row>
 
       {loading ? (
-        <div>Please wait...</div>
+        <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
