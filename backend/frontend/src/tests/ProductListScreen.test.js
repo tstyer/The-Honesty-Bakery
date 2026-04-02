@@ -57,7 +57,7 @@ describe('ProductListScreen', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument()
   })
 
-  test.only('redirects non-admin user to login', () => {
+  test('redirects non-admin user to login', () => {
     renderWithState({
       productList: { loading: false, error: null, products: [] },
       productDelete: { success: false },
@@ -68,7 +68,7 @@ describe('ProductListScreen', () => {
     expect(mockNavigate).toHaveBeenCalledWith('/login')
   })
 
-  test('renders products for admin and dispatches createProduct when button is clicked', () => {
+  test.only('renders products for admin and dispatches createProduct when button is clicked', () => {
     renderWithState({
       productList: {
         loading: false,
