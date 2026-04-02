@@ -68,7 +68,7 @@ describe('ProductListScreen', () => {
     expect(mockNavigate).toHaveBeenCalledWith('/login')
   })
 
-  test.only('renders products for admin and dispatches createProduct when button is clicked', () => {
+  test('renders products for admin and dispatches createProduct when button is clicked', () => {
     renderWithState({
       productList: {
         loading: false,

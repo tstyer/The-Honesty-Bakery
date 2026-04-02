@@ -24,30 +24,24 @@ export default function ProductListScreen() {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    const isAdminUser = userInfo?.isAdmin === true
-
-    if (!isAdminUser) {
+    if (!userInfo || !userInfo.isAdmin) {
       navigate('/login')
       return
     }
 
-    if (successCreate && createdProduct?._id) {
+    if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET })
       navigate(`/admin/product/${createdProduct._id}/edit`)
-      return
+    } else {
+      // Force page 1 to avoid /api/products/?page= causing a 500
+      dispatch(listProducts(1))
     }
-
-    dispatch(listProducts(1))
-  }, [dispatch, navigate, userInfo, successDelete, successCreate, createdProduct])
+  }, [dispatch, userInfo, successDelete, successCreate, createdProduct, navigate])
 
   const deleteHandler = (id) => {
-    if (window.confirm('Delete this item?')) {
+    if (window.confirm('Are you sure?')) {
       dispatch(deleteProduct(id))
     }
-  }
-
-  const createProductHandler = () => {
-    dispatch(createProduct())
   }
 
   return (
@@ -58,12 +52,8 @@ export default function ProductListScreen() {
         </Col>
 
         <Col className="text-end">
-          {userInfo?.isAdmin && (
-            <Button
-              variant="outline-dark"
-              className="my-3 create-product cta-btn"
-              onClick={createProductHandler}
-            >
+          {userInfo && userInfo.isAdmin && (
+            <Button variant="outline-dark" className="my-3 create-product cta-btn" onClick={() => dispatch(createProduct())}>
               <i className="fas fa-plus"></i> Create Product
             </Button>
           )}
@@ -87,14 +77,14 @@ export default function ProductListScreen() {
           </thead>
 
           <tbody>
-            {products.map(({ _id, name, price, category }) => (
-              <tr key={_id}>
-                <td>{_id}</td>
-                <td>{name}</td>
-                <td>{`£${price}`}</td>
-                <td>{category}</td>
+            {products.map((product) => (
+              <tr key={product._id}>
+                <td>{product._id}</td>
+                <td>{product.name}</td>
+                <td>£{product.price}</td>
+                <td>{product.category}</td>
                 <td>
-                  <Link to={`/admin/product/${_id}/edit`}>
+                  <Link to={`/admin/product/${product._id}/edit`}>
                     <Button variant="light" className="btn-sm mx-2">
                       <i className="fas fa-edit"></i>
                     </Button>
@@ -103,7 +93,7 @@ export default function ProductListScreen() {
                   <Button
                     variant="danger"
                     className="btn-sm"
-                    onClick={() => deleteHandler(_id)}
+                    onClick={() => deleteHandler(product._id)}
                   >
                     <i className="fas fa-trash"></i>
                   </Button>
