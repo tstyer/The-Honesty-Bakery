@@ -84,7 +84,7 @@ function ProductScreen() {
         Back
       </Button>
 
-      {!loading ? (
+      {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>

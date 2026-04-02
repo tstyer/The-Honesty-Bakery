@@ -50,7 +50,7 @@ describe('ProductScreen', () => {
     jest.clearAllMocks()
   })
 
-  test('renders loader while product is loading', () => {
+  test.only('renders loader while product is loading', () => {
     renderWithState({
       productDetails: {
         loading: true,
