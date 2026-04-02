@@ -19,29 +19,29 @@ export default function PlaceOrderScreen() {
     : paymentMethod === 'Cash'
 
   const totals = useMemo(() => {
-    const itemsPrice = cartItems.reduce((sum, item) => sum + item.price * item.qty, 0)
+    const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     const totalPrice = itemsPrice
     return { itemsPrice, totalPrice }
   }, [cartItems])
 
   const placeOrderHandler = () => {
-    const fakeOrderId = Date.now().toString()
+  const fakeOrderId = Date.now().toString()
 
-    const orderData = {
-      _id: fakeOrderId,
-      orderItems: cartItems,
-      paymentMethod,
-      paymentResult,
-      itemsPrice: totals.itemsPrice,
-      totalPrice: totals.totalPrice,
-    }
-
-    dispatch({ type: CART_CLEAR_ITEMS })
-    localStorage.removeItem('cartItems')
-    navigate(`/order/${fakeOrderId}`, { state: orderData })
+  const orderData = {
+    _id: fakeOrderId,
+    orderItems: cartItems,
+    paymentMethod,
+    paymentResult,
+    itemsPrice: totals.itemsPrice,
+    totalPrice: totals.totalPrice,
   }
 
-  // implemented differently to original
+  dispatch({ type: CART_CLEAR_ITEMS })
+  localStorage.removeItem('cartItems')
+
+  navigate(`/order/${fakeOrderId}`, { state: orderData })
+}
+
   if (!cartItems || cartItems.length === 0) {
     return (
       <Message>
@@ -52,7 +52,7 @@ export default function PlaceOrderScreen() {
 
   return (
     <div>
-      <h1>Checkout Review</h1>
+      <h1>Place Order</h1>
 
       <Row>
         <Col md={8}>
@@ -132,7 +132,7 @@ export default function PlaceOrderScreen() {
 
                 {!paymentMethod && (
                   <div className='mt-2'>
-                    <small>Please choose a payment option first.</small>
+                    <small>Please select a payment method first.</small>
                   </div>
                 )}
 
