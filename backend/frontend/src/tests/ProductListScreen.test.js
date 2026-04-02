@@ -46,7 +46,7 @@ describe('ProductListScreen', () => {
     return render(<ProductListScreen />)
   }
 
-  test.only('renders loader when products are loading', () => {
+  test('renders loader when products are loading', () => {
     renderWithState({
       productList: { loading: true, error: null, products: [] },
       productDelete: { success: false },
@@ -57,7 +57,7 @@ describe('ProductListScreen', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument()
   })
 
-  test('redirects non-admin user to login', () => {
+  test.only('redirects non-admin user to login', () => {
     renderWithState({
       productList: { loading: false, error: null, products: [] },
       productDelete: { success: false },
