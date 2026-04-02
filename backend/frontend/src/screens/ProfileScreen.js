@@ -26,18 +26,21 @@ export default function ProfileScreen() {
     userUpdateProfile
 
   useEffect(() => {
-    if (!userInfo) {
-      return
-    }
+    if (!userInfo) return
 
     if (!user || !user._id || success) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET })
       dispatch(getUserDetails())
     } else {
-      setFullName(user.name || '')
-      setUserEmail(user.email || '')
+      if (fullName === '') {
+        setFullName(user.name || '')
+      }
+
+      if (userEmail === '') {
+        setUserEmail(user.email || '')
+      }
     }
-  }, [dispatch, userInfo, user, success])
+  }, [dispatch, userInfo, user, success, fullName, userEmail])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -53,7 +56,7 @@ export default function ProfileScreen() {
         id: user._id,
         name: fullName,
         email: userEmail,
-        password: '',
+        password,
       })
     )
   }
@@ -79,7 +82,7 @@ export default function ProfileScreen() {
               <Form.Label>Full Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Type your name"
+                placeholder="Enter name"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
               />
@@ -89,7 +92,7 @@ export default function ProfileScreen() {
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
-                placeholder="Type your email"
+                placeholder="Enter email"
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
               />
