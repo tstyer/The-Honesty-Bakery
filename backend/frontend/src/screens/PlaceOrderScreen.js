@@ -41,10 +41,11 @@ export default function PlaceOrderScreen() {
     navigate(`/placed/${fakeOrderId}`, { state: orderData })
   }
 
+  // implemented differently to original
   if (!cartItems || cartItems.length === 0) {
     return (
       <Message>
-        No items added yet <Link to='/'>Return Home</Link>
+        Your cart is empty <Link to='/'>Go Back</Link>
       </Message>
     )
   }

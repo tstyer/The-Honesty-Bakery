@@ -2,11 +2,10 @@ import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { configureStore } from 'redux'
+import { createStore } from 'redux'
 import PlaceOrderScreen from '../screens/PlaceOrderScreen'
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
 
-// mock navigate
 const mockNavigate = jest.fn()
 
 jest.mock('react-router-dom', () => ({
@@ -14,10 +13,8 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }))
 
-// helper render
 const renderWithStore = (state) => {
-  const store = configureStore(() => state)
-
+  const store = createStore(() => state)
   store.dispatch = jest.fn()
 
   render(
@@ -37,7 +34,7 @@ describe('PlaceOrderScreen', () => {
     Storage.prototype.removeItem = jest.fn()
   })
 
-  test('shows empty cart message when there are no cart items', () => {
+  test.only('shows empty cart message when there are no cart items', () => {
     renderWithStore({
       cart: {
         cartItems: [],
