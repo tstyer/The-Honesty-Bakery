@@ -67,7 +67,7 @@ describe('ProductScreen', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument()
   })
 
-  test.only('renders product details and navigates to cart with selected quantity', () => {
+  test('renders product details and navigates to cart with selected quantity', () => {
     renderWithState({
       productDetails: {
         loading: false,
@@ -104,7 +104,7 @@ describe('ProductScreen', () => {
     expect(mockNavigate).toHaveBeenCalledWith('/cart/123?qty=2')
   })
 
-  test('submits a review when logged in user fills out the form', () => {
+  test.only('submits a review when logged in user fills out the form', () => {
     renderWithState({
       productDetails: {
         loading: false,
