@@ -7,10 +7,10 @@ import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 
 export default function ProfileScreen() {
-  const [fullName, setFullName] = useState('')
-  const [userEmail, setUserEmail] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPass, setConfirmPass] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
 
   const dispatch = useDispatch()
@@ -26,39 +26,35 @@ export default function ProfileScreen() {
     userUpdateProfile
 
   useEffect(() => {
-    if (!userInfo) return
+    if (!userInfo) {
+      return
+    }
 
     if (!user || !user._id || success) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET })
-      dispatch(getUserDetails())
+      dispatch(getUserDetails()) 
     } else {
-      if (fullName === '') {
-        setFullName(user.name || '')
-      }
-
-      if (userEmail === '') {
-        setUserEmail(user.email || '')
-      }
+      setName(user.name || '')
+      setEmail(user.email || '')
     }
-  }, [dispatch, userInfo, user, success, fullName, userEmail])
+  }, [dispatch, userInfo, user, success])
 
   const submitHandler = (e) => {
     e.preventDefault()
 
-    if (password !== confirmPass) {
+    if (password !== confirmPassword) {
       setMessage('Passwords do not match')
-      return
+    } else {
+      setMessage(null)
+      dispatch(
+        updateUserProfile({
+          id: user._id,
+          name,
+          email,
+          password,
+        })
+      )
     }
-
-    setMessage(null)
-    dispatch(
-      updateUserProfile({
-        id: user._id,
-        name: fullName,
-        email: userEmail,
-        password,
-      })
-    )
   }
 
   return (
@@ -79,27 +75,27 @@ export default function ProfileScreen() {
         ) : (
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="name" className="my-2">
-              <Form.Label>Full Name</Form.Label>
+              <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter name"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </Form.Group>
 
             <Form.Group controlId="email" className="my-2">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Email Address</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Enter email"
-                value={userEmail}
-                onChange={(e) => setUserEmail(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
 
             <Form.Group controlId="password" className="my-2">
-              <Form.Label>New Password</Form.Label>
+              <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Enter password"
@@ -109,16 +105,16 @@ export default function ProfileScreen() {
             </Form.Group>
 
             <Form.Group controlId="confirmPassword" className="my-2">
-              <Form.Label>Repeat Password</Form.Label>
+              <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Confirm password"
-                value={confirmPass}
-                onChange={(e) => setConfirmPass(e.target.value)}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </Form.Group>
 
-            <Button type="submit" variant="secondary" className="my-3">
+            <Button type="submit" variant="primary" className="my-3">
               Update
             </Button>
           </Form>

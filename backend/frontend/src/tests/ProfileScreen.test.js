@@ -2,7 +2,6 @@ import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
 import ProfileScreen from '../screens/ProfileScreen'
 
-// mock redux
 const mockDispatch = jest.fn()
 
 jest.mock('react-redux', () => ({
@@ -10,11 +9,9 @@ jest.mock('react-redux', () => ({
   useSelector: jest.fn(),
 }))
 
-// mock child components
 jest.mock('../components/Message', () => ({ children }) => <div>{children}</div>)
 jest.mock('../components/Loader', () => () => <div>Loading...</div>)
 
-// mock actions
 jest.mock('../actions/userActions', () => ({
   getUserDetails: jest.fn(() => ({ type: 'GET_USER_DETAILS' })),
   updateUserProfile: jest.fn((data) => ({
@@ -27,32 +24,36 @@ const { useSelector } = require('react-redux')
 const { updateUserProfile } = require('../actions/userActions')
 
 describe('ProfileScreen', () => {
+  let mockState
+
   beforeEach(() => {
     mockDispatch.mockClear()
-    useSelector.mockImplementation((selector) =>
-      selector({
-        userDetails: {
-          loading: false,
-          error: null,
-          user: {
-            _id: '1',
-            name: 'Travis',
-            email: 'travis@test.com',
-          },
+    updateUserProfile.mockClear()
+
+    mockState = {
+      userDetails: {
+        loading: false,
+        error: null,
+        user: {
+          _id: '1',
+          name: 'Travis',
+          email: 'travis@test.com',
         },
-        userLogin: {
-          userInfo: {
-            _id: '1',
-            name: 'Travis',
-          },
+      },
+      userLogin: {
+        userInfo: {
+          _id: '1',
+          name: 'Travis',
         },
-        userUpdateProfile: {
-          success: false,
-          error: null,
-          loading: false,
-        },
-      })
-    )
+      },
+      userUpdateProfile: {
+        success: false,
+        error: null,
+        loading: false,
+      },
+    }
+
+    useSelector.mockImplementation((selector) => selector(mockState))
   })
 
   test('renders profile form with existing user name and email', () => {
@@ -79,7 +80,7 @@ describe('ProfileScreen', () => {
     expect(screen.getByText(/passwords do not match/i)).toBeInTheDocument()
   })
 
-  test.only('dispatches updateUserProfile when form is submitted with matching passwords', () => {
+  test('dispatches updateUserProfile when form is submitted with matching passwords', () => {
     render(<ProfileScreen />)
 
     fireEvent.change(screen.getByPlaceholderText(/enter name/i), {
