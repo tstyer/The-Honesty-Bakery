@@ -14,8 +14,53 @@ export default function ReadyToBakeScreen() {
   const { loading, error, products } = productList
 
   useEffect(() => {
-    dispatch(listProducts('', '', 'READY_TO_BAKE'))
+    const type = 'READY_TO_BAKE'
+    dispatch(listProducts('', '', type))
   }, [dispatch])
+
+  const renderContent = () => {
+    if (loading) {
+      return <Loader />
+    }
+
+    if (error) {
+      return <Message variant="danger">{error}</Message>
+    }
+
+    return (
+      <Row>
+        {products.map((product) => (
+          <Col key={product._id} xs={12} md={4} className="mb-4">
+            <div className="ready-card">
+              <div className="ready-content">
+                <div className="prebaked-image-wrap">
+                  <Link to={`/product/${product._id}`}>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="prebaked-image"
+                    />
+                  </Link>
+                </div>
+
+                <h3 className="mt-3">Cake option</h3>
+                <p className="text-muted">Description unavailable</p>
+              </div>
+
+              <Button
+                as={Link}
+                to="/contact"
+                className="contact-me"
+                variant="outline-dark"
+              >
+                Get in touch
+              </Button>
+            </div>
+          </Col>
+        ))}
+      </Row>
+    )
+  }
 
   return (
     <Container className="py-4">
@@ -33,43 +78,7 @@ export default function ReadyToBakeScreen() {
         />
       </div>
 
-      {loading ? (
-        <p>Please wait...</p>
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <Row>
-          {products.map((product) => (
-            <Col key={product._id} xs={12} md={4} className="mb-4">
-              <div className="ready-card">
-                <div className="ready-content">
-                  <div className="prebaked-image-wrap">
-                    <Link to={`/product/${product._id}`}>
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="prebaked-image"
-                      />
-                    </Link>
-                  </div>
-
-                  <h3 className="mt-3">Cake option</h3>
-                  <p className="text-muted">Description unavailable</p>
-                </div>
-
-                <Button
-                  as={Link}
-                  to="/contact"
-                  className="contact-me"
-                  variant="outline-dark"
-                >
-                  Get in touch
-                </Button>
-              </div>
-            </Col>
-          ))}
-        </Row>
-      )}
+      {renderContent()}
     </Container>
   )
 }
