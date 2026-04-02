@@ -14,62 +14,22 @@ export default function ReadyToBakeScreen() {
   const { loading, error, products } = productList
 
   useEffect(() => {
-    const type = 'READY_TO_BAKE'
-    dispatch(listProducts('', '', type))
+    // Fetch only Ready-to-bake products
+    dispatch(listProducts('', '', 'READY_TO_BAKE'))
   }, [dispatch])
 
-  const renderContent = () => {
-    if (loading) {
-      return <Loader />
-    }
-
-    if (error) {
-      return <Message variant="danger">{error}</Message>
-    }
-
-    return (
-      <Row>
-        {products.map((product) => (
-          <Col key={product._id} xs={12} md={4} className="mb-4">
-            <div className="ready-card">
-              <div className="ready-content">
-                <div className="prebaked-image-wrap">
-                  <Link to={`/product/${product._id}`}>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="prebaked-image"
-                    />
-                  </Link>
-                </div>
-
-                <h3 className="mt-3">{product.name}</h3>
-                <p className="text-muted">{product.description}</p>
-              </div>
-
-              <Button
-                as={Link}
-                to="/contact"
-                className="contact-me"
-                variant="outline-dark"
-              >
-                Contact me
-              </Button>
-            </div>
-          </Col>
-        ))}
-      </Row>
-    )
-  }
+  const contactLink =
+    'mailto:hello@honestybakery.com?subject=Ready-to-bake%20cake%20enquiry'
 
   return (
     <Container className="py-4">
       <h1 className="prebaked-title py-4">Personalised cakes</h1>
       <h3 className="prebaked-sub pb-4">
         Choose a cake kit and I’ll help you get the perfect setup. Once you've
-        got an idea, use any of the buttons below to get started!
+        got an idea, hit any of the 'contact me' buttons to get started!
       </h3>
 
+      {/* Honey pot img */}
       <div className="honey-div">
         <img
           src="/images/honey-prebaked.png"
@@ -78,7 +38,46 @@ export default function ReadyToBakeScreen() {
         />
       </div>
 
-      {renderContent()}
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <Row>
+          {products.map((product) => (
+            <Col key={product._id} xs={12} md={4} className="mb-4">
+              {/* this wrapper becomes a flex column "card" */}
+              <div className="ready-card">
+                {/* content area grows, button gets pushed down */}
+                <div className="ready-content">
+                  <div className="prebaked-image-wrap">
+                    <Link to={`/product/${product._id}`}>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="prebaked-image"
+                    />
+                    </Link>
+                    
+                  </div>
+
+                  <h3 className="mt-3">{product.name}</h3>
+                  <p className="text-muted">{product.description}</p>
+                </div>
+
+                <Button
+                  as={Link}
+                  to="/contact"
+                  className="contact-me"
+                  variant="outline-dark"
+                >
+                  Contact me
+                </Button>
+              </div>
+            </Col>
+          ))}
+        </Row>
+      )}
     </Container>
   )
 }

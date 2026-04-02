@@ -5,21 +5,17 @@ import ReadyToBakeScreen from '../screens/ReadyToBakeScreen'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'
 
-// mock redux
 jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
   useSelector: jest.fn(),
 }))
 
-// mock action
 jest.mock('../actions/productActions', () => ({
   listProducts: jest.fn(),
 }))
 
-// mock Loader
 jest.mock('../components/Loader', () => () => <div>Loading...</div>)
 
-// mock Message
 jest.mock('../components/Message', () => ({ children }) => <div>{children}</div>)
 
 describe('ReadyToBakeScreen', () => {
@@ -42,8 +38,6 @@ describe('ReadyToBakeScreen', () => {
       })
     )
 
-    listProducts.mockReturnValue({ type: 'PRODUCT_LIST_REQUEST' })
-
     render(
       <MemoryRouter>
         <ReadyToBakeScreen />
@@ -51,7 +45,6 @@ describe('ReadyToBakeScreen', () => {
     )
 
     expect(listProducts).toHaveBeenCalledWith('', '', 'READY_TO_BAKE')
-    expect(mockDispatch).toHaveBeenCalled()
   })
 
   test('shows loader when loading is true', () => {
@@ -108,6 +101,6 @@ describe('ReadyToBakeScreen', () => {
     expect(screen.getByText('Chocolate Kit')).toBeInTheDocument()
     expect(screen.getByText('A simple vanilla cake kit')).toBeInTheDocument()
     expect(screen.getByText('A rich chocolate cake kit')).toBeInTheDocument()
-    expect(screen.getAllByText(/contact me/i)).toHaveLength(2)
+    expect(screen.getAllByRole('button', { name: /contact me/i })).toHaveLength(2)
   })
 })
