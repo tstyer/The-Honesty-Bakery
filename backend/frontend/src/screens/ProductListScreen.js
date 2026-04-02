@@ -37,7 +37,7 @@ export default function ProductListScreen() {
       return
     }
 
-    dispatch(listProducts())
+    dispatch(listProducts(1))
   }, [dispatch, navigate, userInfo, successDelete, successCreate, createdProduct])
 
   const deleteHandler = (id) => {
@@ -46,21 +46,25 @@ export default function ProductListScreen() {
     }
   }
 
+  const createProductHandler = () => {
+    dispatch(createProduct())
+  }
+
   return (
     <>
       <Row className="align-items-center">
         <Col>
-          <h2>All Bakery Items</h2>
+          <h1>Products</h1>
         </Col>
 
         <Col className="text-end">
-          {userInfo && userInfo.isAdmin && (
+          {userInfo?.isAdmin && (
             <Button
-              variant="dark"
-              className="my-3"
-              onClick={() => navigate('/admin/product/new')}
+              variant="outline-dark"
+              className="my-3 create-product cta-btn"
+              onClick={createProductHandler}
             >
-              Add Item
+              <i className="fas fa-plus"></i> Create Product
             </Button>
           )}
         </Col>
@@ -83,25 +87,25 @@ export default function ProductListScreen() {
           </thead>
 
           <tbody>
-            {products.map((product) => (
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.name}</td>
-                <td>${product.price}</td>
-                <td>{product.category}</td>
+            {products.map(({ _id, name, price, category }) => (
+              <tr key={_id}>
+                <td>{_id}</td>
+                <td>{name}</td>
+                <td>{`£${price}`}</td>
+                <td>{category}</td>
                 <td>
-                  <Link to={`/admin/product/${product._id}/edit`}>
-                    <Button variant="secondary" className="btn-sm mx-2">
-                      Edit
+                  <Link to={`/admin/product/${_id}/edit`}>
+                    <Button variant="light" className="btn-sm mx-2">
+                      <i className="fas fa-edit"></i>
                     </Button>
                   </Link>
 
                   <Button
-                    variant="warning"
+                    variant="danger"
                     className="btn-sm"
-                    onClick={() => deleteHandler(product._id)}
+                    onClick={() => deleteHandler(_id)}
                   >
-                    Delete
+                    <i className="fas fa-trash"></i>
                   </Button>
                 </td>
               </tr>
