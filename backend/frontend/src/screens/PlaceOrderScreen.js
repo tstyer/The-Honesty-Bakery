@@ -88,7 +88,7 @@ export default function PlaceOrderScreen() {
                       </Col>
 
                       <Col md={4}>
-                        {item.qty} x ${item.price} = ${(item.qty * item.price).toFixed(2)}
+                        {item.qty} x £{item.price} = £{(item.qty * item.price).toFixed(2)}
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -108,14 +108,14 @@ export default function PlaceOrderScreen() {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${totals.itemsPrice.toFixed(2)}</Col>
+                  <Col>£{totals.itemsPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${totals.totalPrice.toFixed(2)}</Col>
+                  <Col>£{totals.totalPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
 

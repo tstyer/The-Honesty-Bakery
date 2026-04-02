@@ -142,14 +142,6 @@ export default function PaymentScreen() {
     <div>
       <h1 className="text-center">Payment</h1>
 
-      {/*} 
-      {hasMadeToOrder && (
-        <Message variant="info">
-          Your cart includes made-to-order items. Card payment is required before we start baking.
-        </Message>
-      )} 
-      */}
-
       {errorMsg && <Message variant="danger">{errorMsg}</Message>}
 
       <Form onSubmit={submitHandler}>

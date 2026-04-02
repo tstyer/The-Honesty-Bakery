@@ -59,7 +59,7 @@ export default function OrderScreen() {
                     <Row>
                       <Col>{item.name}</Col>
                       <Col className='text-end'>
-                        {item.qty} x ${item.price} = ${(item.qty * item.price).toFixed(2)}
+                        {item.qty} x £{item.price} = £{(item.qty * item.price).toFixed(2)}
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -95,14 +95,14 @@ export default function OrderScreen() {
               <ListGroup.Item>
                 <Row>
                   <Col className='order_confirmed_text'>Items</Col>
-                  <Col className='text-end'>${itemsPrice.toFixed(2)}</Col>
+                  <Col className='text-end'>£{itemsPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
 
               <ListGroup.Item>
                 <Row>
                   <Col className='order_confirmed_text'>Total</Col>
-                  <Col className='text-end'>${totalPrice.toFixed(2)}</Col>
+                  <Col className='text-end'>£{totalPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
 

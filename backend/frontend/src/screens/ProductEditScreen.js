@@ -57,9 +57,7 @@ export default function ProductEditScreen() {
   const uploadFileHandler = (e) => {
     const file = e.target.files?.[0]
     if (!file) return
-
-    // React-served images live in /public/images
-    // manually copy the file into frontend/public/images.
+    
     setImage(`/images/${file.name}`)
   }
 
