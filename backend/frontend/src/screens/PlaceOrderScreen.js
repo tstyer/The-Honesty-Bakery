@@ -19,8 +19,8 @@ export default function PlaceOrderScreen() {
     : paymentMethod === 'Cash'
 
   const totals = useMemo(() => {
-    const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
-    const totalPrice = itemsPrice + 5
+    const itemsPrice = cartItems.reduce((sum, item) => sum + item.price * item.qty, 0)
+    const totalPrice = itemsPrice
     return { itemsPrice, totalPrice }
   }, [cartItems])
 
@@ -36,9 +36,9 @@ export default function PlaceOrderScreen() {
       totalPrice: totals.totalPrice,
     }
 
-    localStorage.removeItem('basketItems')
-
-    navigate(`/placed/${fakeOrderId}`, { state: orderData })
+    dispatch({ type: CART_CLEAR_ITEMS })
+    localStorage.removeItem('cartItems')
+    navigate(`/order/${fakeOrderId}`, { state: orderData })
   }
 
   // implemented differently to original
@@ -70,11 +70,11 @@ export default function PlaceOrderScreen() {
             <ListGroup.Item>
               <h2>Payment Method</h2>
               <strong>Method: </strong>
-              {paymentMethod || 'None chosen'}
+              {paymentMethod || 'Not selected'}
             </ListGroup.Item>
 
             <ListGroup.Item className='place_order_text'>
-              <h2>Basket Items</h2>
+              <h2>Order Items</h2>
               <ListGroup variant='flush'>
                 {cartItems.map((item) => (
                   <ListGroup.Item key={item.product}>
@@ -102,7 +102,7 @@ export default function PlaceOrderScreen() {
           <Card className='place_order_text light_border'>
             <ListGroup variant='flush'>
               <ListGroup.Item>
-                <h2>Summary</h2>
+                <h2>Order Summary</h2>
               </ListGroup.Item>
 
               <ListGroup.Item>
