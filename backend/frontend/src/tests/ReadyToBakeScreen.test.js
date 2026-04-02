@@ -74,7 +74,7 @@ describe('ReadyToBakeScreen', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument()
   })
 
-  test.only('renders ready-to-bake products and contact buttons when data loads', () => {
+  test('renders ready-to-bake products and contact buttons when data loads', () => {
     useSelector.mockImplementation((selector) =>
       selector({
         productList: {

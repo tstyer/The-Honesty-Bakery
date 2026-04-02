@@ -43,8 +43,8 @@ export default function ReadyToBakeScreen() {
                   </Link>
                 </div>
 
-                <h3 className="mt-3">Cake option</h3>
-                <p className="text-muted">Description unavailable</p>
+                <h3 className="mt-3">{product.name}</h3>
+                <p className="text-muted">{product.description}</p>
               </div>
 
               <Button
@@ -53,7 +53,7 @@ export default function ReadyToBakeScreen() {
                 className="contact-me"
                 variant="outline-dark"
               >
-                Get in touch
+                Contact me
               </Button>
             </div>
           </Col>
@@ -67,7 +67,7 @@ export default function ReadyToBakeScreen() {
       <h1 className="prebaked-title py-4">Personalised cakes</h1>
       <h3 className="prebaked-sub pb-4">
         Choose a cake kit and I’ll help you get the perfect setup. Once you've
-        got an idea, hit any of the 'contact me' buttons to get started!
+        got an idea, use any of the buttons below to get started!
       </h3>
 
       <div className="honey-div">
