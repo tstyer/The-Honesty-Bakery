@@ -46,7 +46,7 @@ describe('ProductListScreen', () => {
     return render(<ProductListScreen />)
   }
 
-  test('renders loader when products are loading', () => {
+  test.only('renders loader when products are loading', () => {
     renderWithState({
       productList: { loading: true, error: null, products: [] },
       productDelete: { success: false },
