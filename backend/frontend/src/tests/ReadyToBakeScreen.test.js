@@ -54,7 +54,7 @@ describe('ReadyToBakeScreen', () => {
     expect(mockDispatch).toHaveBeenCalled()
   })
 
-  test.only('shows loader when loading is true', () => {
+  test('shows loader when loading is true', () => {
     useSelector.mockImplementation((selector) =>
       selector({
         productList: {
@@ -74,7 +74,7 @@ describe('ReadyToBakeScreen', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument()
   })
 
-  test('renders ready-to-bake products and contact buttons when data loads', () => {
+  test.only('renders ready-to-bake products and contact buttons when data loads', () => {
     useSelector.mockImplementation((selector) =>
       selector({
         productList: {
