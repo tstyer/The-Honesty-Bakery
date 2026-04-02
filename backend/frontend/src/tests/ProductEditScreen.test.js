@@ -74,7 +74,7 @@ describe('ProductEditScreen', () => {
     expect(screen.getByText(/edit product/i)).toBeInTheDocument()
   })
 
-  test.only('loads existing product values into the form', () => {
+  test('loads existing product values into the form', () => {
     useSelector.mockImplementation((selectorFn) =>
       selectorFn({
         productDetails: {
@@ -104,7 +104,7 @@ describe('ProductEditScreen', () => {
     expect(screen.getByDisplayValue('PREBAKED')).toBeInTheDocument()
   })
 
-  test('dispatches updateProduct with edited form data on submit', () => {
+  test.only('dispatches updateProduct with edited form data on submit', () => {
     useSelector.mockImplementation((selectorFn) =>
       selectorFn({
         productDetails: {
