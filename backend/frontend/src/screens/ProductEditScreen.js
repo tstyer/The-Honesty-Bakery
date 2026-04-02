@@ -85,53 +85,53 @@ export default function ProductEditScreen() {
       ) : (
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name" className="my-2">
-            <Form.Label>Product Name</Form.Label>
+            <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Type name"
+              placeholder="Enter name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group controlId="price" className="my-2">
-            <Form.Label>Cost</Form.Label>
+            <Form.Label>Price</Form.Label>
             <Form.Control
               type="number"
-              placeholder="Type price"
+              placeholder="Enter price"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group controlId="image" className="my-2">
-            <Form.Label>Image Path</Form.Label>
+            <Form.Label>Image</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Type image path"
+              placeholder="Enter image url"
               value={image}
               onChange={(e) => setImage(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group controlId="image-file" className="my-2">
-            <Form.Label>Select Image</Form.Label>
+            <Form.Label>Upload Image</Form.Label>
             <Form.Control type="file" onChange={uploadFileHandler} />
             {uploading && <Loader />}
           </Form.Group>
 
           <Form.Group controlId="category" className="my-2">
-            <Form.Label>Product Category</Form.Label>
+            <Form.Label>Category</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Type category"
+              placeholder="Enter category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group controlId="productType" className="my-2">
-            <Form.Label>Type</Form.Label>
+            <Form.Label>Product Type</Form.Label>
             <Form.Select
               value={productType}
               onChange={(e) => setProductType(e.target.value)}
@@ -142,28 +142,28 @@ export default function ProductEditScreen() {
           </Form.Group>
 
           <Form.Group controlId="countInStock" className="my-2">
-            <Form.Label>Quantity</Form.Label>
+            <Form.Label>Stock</Form.Label>
             <Form.Control
               type="number"
-              placeholder="Type stock"
+              placeholder="Enter stock"
               value={countInStock}
               onChange={(e) => setCountInStock(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group controlId="description" className="my-2">
-            <Form.Label>Product Description</Form.Label>
+            <Form.Label>Description</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
-              placeholder="Type description"
+              placeholder="Enter description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
 
-          <Button type="submit" variant="secondary" className="my-3">
-            Save Changes
+          <Button type="submit" variant="primary" className="my-3">
+            Update
           </Button>
         </Form>
       )}
