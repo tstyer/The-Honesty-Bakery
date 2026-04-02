@@ -25,13 +25,14 @@ export default function PrebakedScreen() {
   }, [dispatch])
 
   const addToCartHandler = (id) => {
-    const selectedQty = qtyById[id] || 1
+    const chosenQty = qtyById[id] || 1
 
-    // still intentionally wrong for Test 3
-    dispatch(addToCart(id, 1))
-
+    dispatch(addToCart(id, chosenQty))
     setJustAddedId(id)
-    setTimeout(() => setJustAddedId(null), 1500)
+
+    setTimeout(() => {
+      setJustAddedId(null)
+    }, 1500)
   }
 
   return (
@@ -82,8 +83,8 @@ export default function PrebakedScreen() {
                   <Form.Select
                     value={qtyById[product._id] || 1}
                     onChange={(e) =>
-                      setQtyById((currentQty) => ({
-                        ...currentQty,
+                      setQtyById((prevState) => ({
+                        ...prevState,
                         [product._id]: Number(e.target.value),
                       }))
                     }
@@ -103,11 +104,11 @@ export default function PrebakedScreen() {
                     disabled={qtyInCart >= 3}
                     onClick={() => addToCartHandler(product._id)}
                   >
-                    Add Item
+                    Add to Cart
                   </Button>
 
                   {justAddedId === product._id && (
-                    <small className="text-success">Done!</small>
+                    <small className="text-success">Added!</small>
                   )}
                 </div>
               </Col>
