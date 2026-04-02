@@ -47,7 +47,7 @@ describe('PlaceOrderScreen', () => {
     expect(screen.getByRole('link', { name: /go back/i })).toBeInTheDocument()
   })
 
-  test.only('enables place order button for prebaked items with cash payment', () => {
+  test('enables place order button for prebaked items with cash payment', () => {
     renderWithStore({
       cart: {
         cartItems: [
@@ -71,7 +71,7 @@ describe('PlaceOrderScreen', () => {
     expect(screen.getByText('$20.00')).toBeInTheDocument()
   })
 
-  test('dispatches clear cart and navigates when valid order is placed', () => {
+  test.only('dispatches clear cart and navigates when valid order is placed', () => {
     const store = renderWithStore({
       cart: {
         cartItems: [
