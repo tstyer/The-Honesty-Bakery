@@ -20,39 +20,38 @@ export default function PlaceOrderScreen() {
 
   const totals = useMemo(() => {
     const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
-    const totalPrice = itemsPrice
+    const totalPrice = itemsPrice + 5
     return { itemsPrice, totalPrice }
   }, [cartItems])
 
   const placeOrderHandler = () => {
-  const fakeOrderId = Date.now().toString()
+    const fakeOrderId = Date.now().toString()
 
-  const orderData = {
-    _id: fakeOrderId,
-    orderItems: cartItems,
-    paymentMethod,
-    paymentResult,
-    itemsPrice: totals.itemsPrice,
-    totalPrice: totals.totalPrice,
+    const orderData = {
+      _id: fakeOrderId,
+      orderItems: cartItems,
+      paymentMethod,
+      paymentResult,
+      itemsPrice: totals.itemsPrice,
+      totalPrice: totals.totalPrice,
+    }
+
+    localStorage.removeItem('basketItems')
+
+    navigate(`/placed/${fakeOrderId}`, { state: orderData })
   }
-
-  dispatch({ type: CART_CLEAR_ITEMS })
-  localStorage.removeItem('cartItems')
-
-  navigate(`/order/${fakeOrderId}`, { state: orderData })
-}
 
   if (!cartItems || cartItems.length === 0) {
     return (
       <Message>
-        Your cart is empty <Link to='/'>Go Back</Link>
+        No items added yet <Link to='/'>Return Home</Link>
       </Message>
     )
   }
 
   return (
     <div>
-      <h1>Place Order</h1>
+      <h1>Checkout Review</h1>
 
       <Row>
         <Col md={8}>
@@ -70,11 +69,11 @@ export default function PlaceOrderScreen() {
             <ListGroup.Item>
               <h2>Payment Method</h2>
               <strong>Method: </strong>
-              {paymentMethod || 'Not selected'}
+              {paymentMethod || 'None chosen'}
             </ListGroup.Item>
 
             <ListGroup.Item className='place_order_text'>
-              <h2>Order Items</h2>
+              <h2>Basket Items</h2>
               <ListGroup variant='flush'>
                 {cartItems.map((item) => (
                   <ListGroup.Item key={item.product}>
@@ -102,7 +101,7 @@ export default function PlaceOrderScreen() {
           <Card className='place_order_text light_border'>
             <ListGroup variant='flush'>
               <ListGroup.Item>
-                <h2>Order Summary</h2>
+                <h2>Summary</h2>
               </ListGroup.Item>
 
               <ListGroup.Item>
@@ -124,15 +123,15 @@ export default function PlaceOrderScreen() {
                   type='button'
                   className='btn-block cta-btn'
                   variant='outline-dark'
-                  disabled={!paymentMethod || !paymentIsValid}
+                  disabled={true}
                   onClick={placeOrderHandler}
                 >
-                  Place Order
+                  Confirm Order
                 </Button>
 
                 {!paymentMethod && (
                   <div className='mt-2'>
-                    <small>Please select a payment method first.</small>
+                    <small>Please choose a payment option first.</small>
                   </div>
                 )}
 
