@@ -24,22 +24,16 @@ export default function ProductListScreen() {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    if (!userInfo || !userInfo.isAdmin) {
-      navigate('/login')
-      return
-    }
-
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET })
       navigate(`/admin/product/${createdProduct._id}/edit`)
     } else {
-      // Force page 1 to avoid /api/products/?page= causing a 500
-      dispatch(listProducts(1))
+      dispatch(listProducts())
     }
   }, [dispatch, userInfo, successDelete, successCreate, createdProduct, navigate])
 
   const deleteHandler = (id) => {
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Delete this item?')) {
       dispatch(deleteProduct(id))
     }
   }
@@ -48,20 +42,24 @@ export default function ProductListScreen() {
     <>
       <Row className="align-items-center">
         <Col>
-          <h1>Products</h1>
+          <h2>All Bakery Items</h2>
         </Col>
 
         <Col className="text-end">
           {userInfo && userInfo.isAdmin && (
-            <Button variant="outline-dark" className="my-3 create-product cta-btn" onClick={() => dispatch(createProduct())}>
-              <i className="fas fa-plus"></i> Create Product
+            <Button
+              variant="dark"
+              className="my-3"
+              onClick={() => navigate('/admin/product/new')}
+            >
+              Add Item
             </Button>
           )}
         </Col>
       </Row>
 
       {loading ? (
-        <Loader />
+        <div>Please wait...</div>
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
@@ -81,21 +79,21 @@ export default function ProductListScreen() {
               <tr key={product._id}>
                 <td>{product._id}</td>
                 <td>{product.name}</td>
-                <td>£{product.price}</td>
+                <td>${product.price}</td>
                 <td>{product.category}</td>
                 <td>
                   <Link to={`/admin/product/${product._id}/edit`}>
-                    <Button variant="light" className="btn-sm mx-2">
-                      <i className="fas fa-edit"></i>
+                    <Button variant="secondary" className="btn-sm mx-2">
+                      Edit
                     </Button>
                   </Link>
 
                   <Button
-                    variant="danger"
+                    variant="warning"
                     className="btn-sm"
                     onClick={() => deleteHandler(product._id)}
                   >
-                    <i className="fas fa-trash"></i>
+                    Delete
                   </Button>
                 </td>
               </tr>
