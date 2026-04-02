@@ -46,7 +46,7 @@ describe('PrebakedScreen', () => {
     addToCart.mockReturnValue({ type: 'CART_ADD_ITEM' })
   })
 
-  test.only('renders loader and dispatches listProducts on mount', () => {
+  test('renders loader and dispatches listProducts on mount', () => {
     useSelector.mockImplementation((selectorFn) =>
       selectorFn({
         productList: {
@@ -71,7 +71,7 @@ describe('PrebakedScreen', () => {
     expect(mockDispatch).toHaveBeenCalled()
   })
 
-  test('renders error message when product loading fails', () => {
+  test.only('renders error message when product loading fails', () => {
     useSelector.mockImplementation((selectorFn) =>
       selectorFn({
         productList: {
