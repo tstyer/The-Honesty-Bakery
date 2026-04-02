@@ -14,7 +14,7 @@ function Header() {
   const cart = useSelector((state) => state.cart)
   const { cartItems = [] } = cart || {}
 
-  const totalItems = cartItems.reduce((acc, item) => acc + item.qty, 0)
+  const totalItems = cartItems.reduce((acc, item) => acc + (item.qty || 1), 0)
 
   const logoutHandler = () => {
     dispatch(logout())
@@ -95,9 +95,7 @@ function Header() {
 
               <Nav.Link as={Link} to="/cart" className="d-flex align-items-center">
                 <i className="fas fa-shopping-cart" /> Cart
-                {totalItems > 0 && (
-                  <span className="ms-1">({totalItems})</span>
-                )}
+                {totalItems > 0 && <span className="ms-1">({totalItems})</span>}
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
