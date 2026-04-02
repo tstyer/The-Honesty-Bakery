@@ -14,18 +14,16 @@ export default function ProductEditScreen() {
   const dispatch = useDispatch()
 
   const [name, setName] = useState('')
-  const [price, setPrice] = useState(0)
+  const [price, setPrice] = useState('')
   const [image, setImage] = useState('')
   const [category, setCategory] = useState('')
-  const [countInStock, setCountInStock] = useState(0)
+  const [countInStock, setCountInStock] = useState('')
   const [description, setDescription] = useState('')
   const [uploading, setUploading] = useState(false)
-
-  // productType state
-  const [productType, setProductType] = useState('PREBAKED')
+  const [productType, setProductType] = useState('READY_TO_BAKE')
 
   const productDetails = useSelector((state) => state.productDetails)
-  const { loading, error, product } = productDetails
+  const { loading, error, product = {} } = productDetails
 
   const productUpdate = useSelector((state) => state.productUpdate)
   const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } =
@@ -36,21 +34,10 @@ export default function ProductEditScreen() {
 
   useEffect(() => {
     if (successUpdate) {
-      dispatch({ type: PRODUCT_UPDATE_RESET })
       navigate('/admin/productlist')
     } else {
       if (!product.name || product._id !== productId) {
         dispatch(listProductDetails(productId))
-      } else {
-        setName(product.name)
-        setPrice(product.price)
-        setImage(product.image)
-        setCategory(product.category)
-        setCountInStock(product.countInStock)
-        setDescription(product.description)
-
-        // load productType from backend (fallback to PREBAKED)
-        setProductType(product.productType || 'PREBAKED')
       }
     }
   }, [dispatch, navigate, productId, product, successUpdate])
@@ -58,10 +45,7 @@ export default function ProductEditScreen() {
   const uploadFileHandler = (e) => {
     const file = e.target.files?.[0]
     if (!file) return
-
-    // React-served images live in /public/images
-    // manually copy the file into frontend/public/images.
-    setImage(`/images/${file.name}`)
+    setImage(`/uploads/${file.name}`)
   }
 
   const submitHandler = (e) => {
@@ -75,8 +59,6 @@ export default function ProductEditScreen() {
         category,
         countInStock,
         description,
-
-        // send productType to backend
         productType,
       })
     )
@@ -84,7 +66,7 @@ export default function ProductEditScreen() {
 
   return (
     <>
-      <h1>Edit Product</h1>
+      <h1>Update Item</h1>
 
       {loadingUpdate && <Loader />}
       {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
@@ -96,54 +78,53 @@ export default function ProductEditScreen() {
       ) : (
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name" className="my-2">
-            <Form.Label>Name</Form.Label>
+            <Form.Label>Product Name</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter name"
+              placeholder="Type name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group controlId="price" className="my-2">
-            <Form.Label>Price</Form.Label>
+            <Form.Label>Cost</Form.Label>
             <Form.Control
               type="number"
-              placeholder="Enter price"
+              placeholder="Type price"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group controlId="image" className="my-2">
-            <Form.Label>Image</Form.Label>
+            <Form.Label>Image Path</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter image url"
+              placeholder="Type image path"
               value={image}
               onChange={(e) => setImage(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group controlId="image-file" className="my-2">
-            <Form.Label>Upload Image</Form.Label>
+            <Form.Label>Select Image</Form.Label>
             <Form.Control type="file" onChange={uploadFileHandler} />
             {uploading && <Loader />}
           </Form.Group>
 
           <Form.Group controlId="category" className="my-2">
-            <Form.Label>Category</Form.Label>
+            <Form.Label>Product Category</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter category"
+              placeholder="Type category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             />
           </Form.Group>
 
-          {/* Product Type dropdown */}
           <Form.Group controlId="productType" className="my-2">
-            <Form.Label>Product Type</Form.Label>
+            <Form.Label>Type</Form.Label>
             <Form.Select
               value={productType}
               onChange={(e) => setProductType(e.target.value)}
@@ -154,28 +135,28 @@ export default function ProductEditScreen() {
           </Form.Group>
 
           <Form.Group controlId="countInStock" className="my-2">
-            <Form.Label>Stock</Form.Label>
+            <Form.Label>Quantity</Form.Label>
             <Form.Control
               type="number"
-              placeholder="Enter stock"
+              placeholder="Type stock"
               value={countInStock}
               onChange={(e) => setCountInStock(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group controlId="description" className="my-2">
-            <Form.Label>Description</Form.Label>
+            <Form.Label>Product Description</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
-              placeholder="Enter description"
+              placeholder="Type description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
 
-          <Button type="submit" variant="primary" className="my-3">
-            Update
+          <Button type="submit" variant="secondary" className="my-3">
+            Save Changes
           </Button>
         </Form>
       )}
