@@ -14,12 +14,9 @@ export default function ReadyToBakeScreen() {
   const { loading, error, products } = productList
 
   useEffect(() => {
-    // Fetch only Ready-to-bake products
-    dispatch(listProducts('', '', 'READY_TO_BAKE'))
+    // wrong product type on purpose
+    dispatch(listProducts('', '', 'PREBAKED'))
   }, [dispatch])
-
-  const contactLink =
-    'mailto:hello@honestybakery.com?subject=Ready-to-bake%20cake%20enquiry'
 
   return (
     <Container className="py-4">
@@ -29,7 +26,6 @@ export default function ReadyToBakeScreen() {
         got an idea, hit any of the 'contact me' buttons to get started!
       </h3>
 
-      {/* Honey pot img */}
       <div className="honey-div">
         <img
           src="/images/honey-prebaked.png"
@@ -39,30 +35,27 @@ export default function ReadyToBakeScreen() {
       </div>
 
       {loading ? (
-        <Loader />
+        <p>Please wait...</p>
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
         <Row>
           {products.map((product) => (
             <Col key={product._id} xs={12} md={4} className="mb-4">
-              {/* this wrapper becomes a flex column "card" */}
               <div className="ready-card">
-                {/* content area grows, button gets pushed down */}
                 <div className="ready-content">
                   <div className="prebaked-image-wrap">
                     <Link to={`/product/${product._id}`}>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="prebaked-image"
-                    />
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="prebaked-image"
+                      />
                     </Link>
-                    
                   </div>
 
-                  <h3 className="mt-3">{product.name}</h3>
-                  <p className="text-muted">{product.description}</p>
+                  <h3 className="mt-3">Cake option</h3>
+                  <p className="text-muted">Description unavailable</p>
                 </div>
 
                 <Button
@@ -71,7 +64,7 @@ export default function ReadyToBakeScreen() {
                   className="contact-me"
                   variant="outline-dark"
                 >
-                  Contact me
+                  Get in touch
                 </Button>
               </div>
             </Col>
