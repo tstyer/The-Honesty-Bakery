@@ -18,7 +18,6 @@ import {
 function ProductScreen() {
   const [qty, setQty] = useState(1)
 
-  // review form state
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
 
@@ -44,7 +43,7 @@ function ProductScreen() {
     success: successDeleteReview,
     error: errorDeleteReview,
     loading: loadingDeleteReview,
-    } = productReviewDelete
+  } = productReviewDelete
 
   useEffect(() => {
     if (successProductReview) {
@@ -60,22 +59,8 @@ function ProductScreen() {
     dispatch(listProductDetails(id))
   }, [dispatch, id, successProductReview, successDeleteReview])
 
-  // Convert any old Django-ish paths into React public /images/ paths.
-  const rawImage = product?.image || ''
-
-  const normalisedImage = rawImage
-    ? `/${rawImage}`.replace(/\/+/, '/')
-    : ''
-
-  const imageSrc =
-    normalisedImage
-      .replace(/^\/static\/images\//, '/images/')
-      .replace(/^\/media\/images\//, '/images/')
-      .replace(/^\/media\//, '/images/')
-      .replace(/^\/static\//, '/images/') || '/images/placeholder.jpg'
-
   const addToCartHandler = () => {
-    navigate(`/cart/${id}?qty=${qty}`)
+    navigate(`/basket/${id}?quantity=${qty}`)
   }
 
   const submitReviewHandler = (e) => {
@@ -96,10 +81,10 @@ function ProductScreen() {
         variant="outline-dark"
         onClick={() => navigate(-1)}
       >
-        Go Back
+        Back
       </Button>
 
-      {loading ? (
+      {!loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
@@ -110,27 +95,27 @@ function ProductScreen() {
               <Image src={product.image} alt={product.name} fluid className="product-image" />
             </Col>
 
-            <Col md={3} className='box_div'>
-              <ListGroup variant="flush" className='light_border'>
+            <Col md={3} className="box_div">
+              <ListGroup variant="flush" className="light_border">
                 <ListGroup.Item>
-                  <h3>{product.name}</h3>
+                  <h3>{product.title}</h3>
                 </ListGroup.Item>
 
                 <ListGroup.Item>
                   <Rating value={product.rating} text={`${product.numReviews} reviews`} />
                 </ListGroup.Item>
 
-                <ListGroup.Item className="product_text">Price: £{product.price}</ListGroup.Item>
+                <ListGroup.Item className="product_text">Cost: £{product.price}</ListGroup.Item>
 
                 <ListGroup.Item className="product_text">
-                  Description: {product.description}
+                  Details: {product.description}
                 </ListGroup.Item>
               </ListGroup>
             </Col>
 
-            <Col md={3} className='box_div'>
+            <Col md={3} className="box_div">
               <Card>
-                <ListGroup variant="flush" className='light_border'>
+                <ListGroup variant="flush" className="light_border">
                   <ListGroup.Item className="product_text">
                     <Row>
                       <Col>Price:</Col>
@@ -178,7 +163,7 @@ function ProductScreen() {
                       type="button"
                       disabled={product.countInStock === 0}
                     >
-                      Add To Order
+                      Add Item
                     </Button>
                   </ListGroup.Item>
                 </ListGroup>
@@ -186,7 +171,6 @@ function ProductScreen() {
             </Col>
           </Row>
 
-          {/* REVIEWS */}
           <Row className="mt-4">
             <Col md={6}>
               <h2>Reviews</h2>
@@ -215,7 +199,7 @@ function ProductScreen() {
                               variant="outline-danger"
                               size="sm"
                               onClick={() => deleteReviewHandler(review._id)}
-                              className='cta-btn'
+                              className="cta-btn"
                             >
                               Delete
                             </Button>
@@ -230,7 +214,7 @@ function ProductScreen() {
                   </ListGroup>
                 ))}
 
-              <h2 className="mt-4">Write a Review</h2>
+              <h2 className="mt-4">Leave a Review</h2>
 
               {successProductReview && <Message variant="success">Review submitted</Message>}
               {loadingProductReview && <Loader />}
@@ -239,7 +223,7 @@ function ProductScreen() {
               {userInfo ? (
                 <Form onSubmit={submitReviewHandler}>
                   <Form.Group controlId="rating" className="my-2">
-                    <Form.Label>Rating</Form.Label>
+                    <Form.Label>Score</Form.Label>
                     <Form.Control
                       as="select"
                       value={rating}
@@ -256,7 +240,7 @@ function ProductScreen() {
                   </Form.Group>
 
                   <Form.Group controlId="comment" className="my-2">
-                    <Form.Label className="product_text">Comment</Form.Label>
+                    <Form.Label className="product_text">Review</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows="3"
@@ -270,7 +254,7 @@ function ProductScreen() {
                     className="my-3 cta-btn btn-block product_text"
                     variant="outline-dark"
                   >
-                    Submit
+                    Post Review
                   </Button>
                 </Form>
               ) : (
