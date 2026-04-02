@@ -215,7 +215,7 @@ function ProductScreen() {
                   </ListGroup>
                 ))}
 
-              <h2 className="mt-4">Leave a Review</h2>
+              <h2 className="mt-4">Write a Review</h2>
 
               {successProductReview && <Message variant="success">Review submitted</Message>}
               {loadingProductReview && <Loader />}
@@ -224,7 +224,7 @@ function ProductScreen() {
               {userInfo ? (
                 <Form onSubmit={submitReviewHandler}>
                   <Form.Group controlId="rating" className="my-2">
-                    <Form.Label>Score</Form.Label>
+                    <Form.Label>Rating</Form.Label>
                     <Form.Control
                       as="select"
                       value={rating}
@@ -241,7 +241,7 @@ function ProductScreen() {
                   </Form.Group>
 
                   <Form.Group controlId="comment" className="my-2">
-                    <Form.Label className="product_text">Review</Form.Label>
+                    <Form.Label className="product_text">Comment</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows="3"
@@ -255,7 +255,7 @@ function ProductScreen() {
                     className="my-3 cta-btn btn-block product_text"
                     variant="outline-dark"
                   >
-                    Post Review
+                    Submit
                   </Button>
                 </Form>
               ) : (
