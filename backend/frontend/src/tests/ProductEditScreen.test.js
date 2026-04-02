@@ -50,7 +50,7 @@ describe('ProductEditScreen', () => {
     mockNavigate.mockClear()
   })
 
-  test.only('renders Edit Product heading', () => {
+  test('renders Edit Product heading', () => {
     useSelector.mockImplementation((selectorFn) =>
       selectorFn({
         productDetails: {
@@ -74,7 +74,7 @@ describe('ProductEditScreen', () => {
     expect(screen.getByText(/edit product/i)).toBeInTheDocument()
   })
 
-  test('loads existing product values into the form', () => {
+  test.only('loads existing product values into the form', () => {
     useSelector.mockImplementation((selectorFn) =>
       selectorFn({
         productDetails: {
