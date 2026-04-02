@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { listProducts } from '../actions/productActions'
 import { addToCart } from '../actions/cartActions'
@@ -10,54 +10,34 @@ import Message from '../components/Message'
 
 export default function PrebakedScreen() {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
-  // Stores selected qty per product id
   const [qtyById, setQtyById] = useState({})
-
-  // Tracks which product was just added
   const [justAddedId, setJustAddedId] = useState(null)
 
   const productList = useSelector((state) => state.productList)
   const { loading, error, products } = productList
 
-  // Pull cart items to enforce max 3 per product
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
 
   useEffect(() => {
-    // Only fetch Pre-baked products
-    dispatch(listProducts('', '', 'PREBAKED'))
+    dispatch(listProducts())
   }, [dispatch])
 
   const addToCartHandler = (id) => {
     const selectedQty = qtyById[id] || 1
-
-    // Find existing qty in cart for this product
-    const existingItem = cartItems.find((item) => item.product === id)
-    const existingQty = existingItem ? existingItem.qty : 0
-
-    // Clamp final qty to max 3
-    const newQty = Math.min(existingQty + selectedQty, 3)
-
-    // Add to cart without navigating away
-    dispatch(addToCart(id, newQty))
-
-    // Quick UI feedback
+    dispatch(addToCart(id, 1))
     setJustAddedId(id)
     setTimeout(() => setJustAddedId(null), 1500)
   }
 
   return (
     <Container className="py-4">
-      {/* Title */}
-      <h1 className="prebaked-title py-4">Prebaked Cakes</h1>
+      <h1 className="prebaked-title py-4">Bakery Items</h1>
       <h3 className="prebaked-sub pb-4">
-        Choose from our selection of Cakes on shelf, ready to buy. We're
-        constantly updating this, so be sure to keep checking!
+        Choose from our available cakes and treats.
       </h3>
 
-      {/* Honey pot img */}
       <div className="honey-div">
         <img
           src="/images/honey-prebaked.png"
@@ -66,33 +46,29 @@ export default function PrebakedScreen() {
         />
       </div>
 
-      {/* Content */}
       {loading ? (
-        <Loader />
+        <div>Please wait...</div>
       ) : error ? (
-        <Message variant="danger">{error}</Message>
+        <Message variant="danger">Something went wrong</Message>
       ) : (
         products.map((product) => {
-          // Check how many of this product is already in the cart
           const cartItem = cartItems.find((item) => item.product === product._id)
           const qtyInCart = cartItem ? cartItem.qty : 0
 
           return (
             <Row key={product._id} className="align-items-center mb-4 cake-card">
-              {/* Product image */}
               <Col xs={12} md={4}>
                 <div className="prebaked-image-wrap">
                   <Link to={`/product/${product._id}`}>
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="prebaked-image"
-                  />
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="prebaked-image"
+                    />
                   </Link>
                 </div>
               </Col>
 
-              {/* Product content */}
               <Col xs={12} md={8}>
                 <h3>{product.name}</h3>
                 <p className="text-muted">{product.description}</p>
@@ -100,13 +76,12 @@ export default function PrebakedScreen() {
                 <div className="d-flex align-items-center gap-3">
                   <span className="fw-bold">£{product.price}</span>
 
-                  {/* Use Form.Select for dropdown box */}
                   <Form.Select
-                    value={qtyById[product._id] || 1} /* Original value in dropdown is set to new value OR 1 */
+                    value={qtyById[product._id] || 1}
                     onChange={(e) =>
                       setQtyById((prev) => ({
                         ...prev,
-                        [product._id]: Number(e.target.value), /* e.target.value is usually a string, so convert to num. */
+                        [product._id]: Number(e.target.value),
                       }))
                     }
                     className="w-auto"
@@ -125,11 +100,11 @@ export default function PrebakedScreen() {
                     disabled={qtyInCart >= 3}
                     onClick={() => addToCartHandler(product._id)}
                   >
-                    {qtyInCart >= 5 ? 'Max Reached' : 'Add to Cart'}
+                    Add Item
                   </Button>
 
-                  {justAddedId === product._id && qtyInCart < 3 && (
-                    <small className="text-success">Added!</small>
+                  {justAddedId === product._id && (
+                    <small className="text-success">Done!</small>
                   )}
                 </div>
               </Col>

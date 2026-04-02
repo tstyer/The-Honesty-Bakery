@@ -1106,9 +1106,8 @@ This style of testing was then carried out on the following screens:
 - ContactScreen
 - OrderListScreen
 - PaymentScreen
-
-
 - PlaceOrderScreen
+
 - PreBakedScreen
 - ProductEditScreen
 - ProductListScreen
