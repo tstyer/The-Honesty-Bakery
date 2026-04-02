@@ -34,7 +34,7 @@ describe('PlaceOrderScreen', () => {
     Storage.prototype.removeItem = jest.fn()
   })
 
-  test.only('shows empty cart message when there are no cart items', () => {
+  test('shows empty cart message when there are no cart items', () => {
     renderWithStore({
       cart: {
         cartItems: [],
@@ -47,7 +47,7 @@ describe('PlaceOrderScreen', () => {
     expect(screen.getByRole('link', { name: /go back/i })).toBeInTheDocument()
   })
 
-  test('enables place order button for prebaked items with cash payment', () => {
+  test.only('enables place order button for prebaked items with cash payment', () => {
     renderWithStore({
       cart: {
         cartItems: [
