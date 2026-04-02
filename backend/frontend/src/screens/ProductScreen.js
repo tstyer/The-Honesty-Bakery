@@ -60,7 +60,8 @@ function ProductScreen() {
   }, [dispatch, id, successProductReview, successDeleteReview])
 
   const addToCartHandler = () => {
-    navigate(`/basket/${id}?quantity=${qty}`)
+    const selectedQty = Number(qty)
+    navigate(`/cart/${id}?qty=${selectedQty}`)
   }
 
   const submitReviewHandler = (e) => {
@@ -98,17 +99,17 @@ function ProductScreen() {
             <Col md={3} className="box_div">
               <ListGroup variant="flush" className="light_border">
                 <ListGroup.Item>
-                  <h3>{product.title}</h3>
+                  <h3>{product.name}</h3>
                 </ListGroup.Item>
 
                 <ListGroup.Item>
                   <Rating value={product.rating} text={`${product.numReviews} reviews`} />
                 </ListGroup.Item>
 
-                <ListGroup.Item className="product_text">Cost: £{product.price}</ListGroup.Item>
+                <ListGroup.Item className="product_text">Price: £{product.price}</ListGroup.Item>
 
                 <ListGroup.Item className="product_text">
-                  Details: {product.description}
+                  Description: {product.description}
                 </ListGroup.Item>
               </ListGroup>
             </Col>
@@ -163,7 +164,7 @@ function ProductScreen() {
                       type="button"
                       disabled={product.countInStock === 0}
                     >
-                      Add Item
+                      Add To Order
                     </Button>
                   </ListGroup.Item>
                 </ListGroup>
