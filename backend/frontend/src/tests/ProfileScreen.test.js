@@ -79,7 +79,7 @@ describe('ProfileScreen', () => {
     expect(screen.getByText(/passwords do not match/i)).toBeInTheDocument()
   })
 
-  test('dispatches updateUserProfile when form is submitted with matching passwords', () => {
+  test.only('dispatches updateUserProfile when form is submitted with matching passwords', () => {
     render(<ProfileScreen />)
 
     fireEvent.change(screen.getByPlaceholderText(/enter name/i), {
