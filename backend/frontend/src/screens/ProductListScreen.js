@@ -24,13 +24,21 @@ export default function ProductListScreen() {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    if (successCreate) {
+    const isAdminUser = userInfo?.isAdmin === true
+
+    if (!isAdminUser) {
+      navigate('/login')
+      return
+    }
+
+    if (successCreate && createdProduct?._id) {
       dispatch({ type: PRODUCT_CREATE_RESET })
       navigate(`/admin/product/${createdProduct._id}/edit`)
-    } else {
-      dispatch(listProducts())
+      return
     }
-  }, [dispatch, userInfo, successDelete, successCreate, createdProduct, navigate])
+
+    dispatch(listProducts())
+  }, [dispatch, navigate, userInfo, successDelete, successCreate, createdProduct])
 
   const deleteHandler = (id) => {
     if (window.confirm('Delete this item?')) {
