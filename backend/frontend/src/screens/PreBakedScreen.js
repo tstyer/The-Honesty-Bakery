@@ -21,12 +21,16 @@ export default function PrebakedScreen() {
   const { cartItems } = cart
 
   useEffect(() => {
-    dispatch(listProducts())
+    // ✅ FIX FOR TEST 1: correct arguments
+    dispatch(listProducts('', '', 'PREBAKED'))
   }, [dispatch])
 
   const addToCartHandler = (id) => {
     const selectedQty = qtyById[id] || 1
+
+    // ❌ still wrong for now (Test 3 will fix this)
     dispatch(addToCart(id, 1))
+
     setJustAddedId(id)
     setTimeout(() => setJustAddedId(null), 1500)
   }
@@ -47,8 +51,10 @@ export default function PrebakedScreen() {
       </div>
 
       {loading ? (
-        <div>Please wait...</div>
+        // ✅ FIX FOR TEST 1: render Loader component
+        <Loader />
       ) : error ? (
+        // ❌ still wrong (Test 2 will fix this)
         <Message variant="danger">Something went wrong</Message>
       ) : (
         products.map((product) => {
@@ -103,6 +109,7 @@ export default function PrebakedScreen() {
                     Add Item
                   </Button>
 
+                  {/* ❌ still wrong (Test 3 will fix text/logic) */}
                   {justAddedId === product._id && (
                     <small className="text-success">Done!</small>
                   )}

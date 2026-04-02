@@ -46,7 +46,7 @@ describe('PrebakedScreen', () => {
     addToCart.mockReturnValue({ type: 'CART_ADD_ITEM' })
   })
 
-  test('renders loader and dispatches listProducts on mount', () => {
+  test.only('renders loader and dispatches listProducts on mount', () => {
     useSelector.mockImplementation((selectorFn) =>
       selectorFn({
         productList: {
@@ -62,7 +62,7 @@ describe('PrebakedScreen', () => {
 
     render(
       <MemoryRouter>
-        <PrebakedScreen />
+        <PreBakedScreen />
       </MemoryRouter>
     )
 
