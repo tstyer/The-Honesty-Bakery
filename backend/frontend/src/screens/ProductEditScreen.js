@@ -13,16 +13,18 @@ export default function ProductEditScreen() {
   const dispatch = useDispatch()
 
   const [name, setName] = useState('')
-  const [price, setPrice] = useState('')
+  const [price, setPrice] = useState(0)
   const [image, setImage] = useState('')
   const [category, setCategory] = useState('')
-  const [countInStock, setCountInStock] = useState('')
+  const [countInStock, setCountInStock] = useState(0)
   const [description, setDescription] = useState('')
   const [uploading, setUploading] = useState(false)
+
+  // productType state
   const [productType, setProductType] = useState('PREBAKED')
 
   const productDetails = useSelector((state) => state.productDetails)
-  const { loading, error, product = {} } = productDetails
+  const { loading, error, product } = productDetails
 
   const productUpdate = useSelector((state) => state.productUpdate)
   const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } =
@@ -35,28 +37,34 @@ export default function ProductEditScreen() {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET })
       navigate('/admin/productlist')
-    } else if (!product.name || product._id !== productId) {
-      dispatch(listProductDetails(productId))
     } else {
-      setName(product.name || '')
-      setPrice(product.price ?? '')
-      setImage(product.image || '')
-      setCategory(product.category || '')
-      setCountInStock(product.countInStock ?? '')
-      setDescription(product.description || '')
-      setProductType(product.productType || 'PREBAKED')
+      if (!product.name || product._id !== productId) {
+        dispatch(listProductDetails(productId))
+      } else {
+        setName(product.name)
+        setPrice(product.price)
+        setImage(product.image)
+        setCategory(product.category)
+        setCountInStock(product.countInStock)
+        setDescription(product.description)
+
+        // load productType from backend (fallback to PREBAKED)
+        setProductType(product.productType || 'PREBAKED')
+      }
     }
   }, [dispatch, navigate, productId, product, successUpdate])
 
   const uploadFileHandler = (e) => {
-    const chosenFile = e.target.files?.[0]
-    if (!chosenFile) return
-    setImage(`/uploads/${chosenFile.name}`)
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    // React-served images live in /public/images
+    // manually copy the file into frontend/public/images.
+    setImage(`/images/${file.name}`)
   }
 
   const submitHandler = (e) => {
     e.preventDefault()
-
     dispatch(
       updateProduct({
         _id: productId,
@@ -66,6 +74,8 @@ export default function ProductEditScreen() {
         category,
         countInStock,
         description,
+
+        // send productType to backend
         productType,
       })
     )
@@ -130,14 +140,15 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
 
+          {/* Product Type dropdown */}
           <Form.Group controlId="productType" className="my-2">
             <Form.Label>Product Type</Form.Label>
             <Form.Select
               value={productType}
               onChange={(e) => setProductType(e.target.value)}
             >
-              <option value="PREBAKED">PREBAKED</option>
-              <option value="READY_TO_BAKE">READY_TO_BAKE</option>
+              <option value="PREBAKED">Pre-baked</option>
+              <option value="READY_TO_BAKE">Ready-to-bake</option>
             </Form.Select>
           </Form.Group>
 

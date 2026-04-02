@@ -4,7 +4,6 @@ import ProductEditScreen from '../screens/ProductEditScreen'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { listProductDetails, updateProduct } from '../actions/productActions'
-import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 
 jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
@@ -101,10 +100,10 @@ describe('ProductEditScreen', () => {
     expect(screen.getByDisplayValue('Cakes')).toBeInTheDocument()
     expect(screen.getByDisplayValue('8')).toBeInTheDocument()
     expect(screen.getByDisplayValue('Rich chocolate sponge')).toBeInTheDocument()
-    expect(screen.getByDisplayValue('PREBAKED')).toBeInTheDocument()
+    expect(screen.getByLabelText(/product type/i)).toHaveValue('PREBAKED')
   })
 
-  test.only('dispatches updateProduct with edited form data on submit', () => {
+  test('dispatches updateProduct with edited form data on submit', () => {
     useSelector.mockImplementation((selectorFn) =>
       selectorFn({
         productDetails: {
@@ -147,7 +146,7 @@ describe('ProductEditScreen', () => {
       target: { value: 'Soft vanilla sponge' },
     })
 
-    fireEvent.change(screen.getByDisplayValue('PREBAKED'), {
+    fireEvent.change(screen.getByLabelText(/product type/i), {
       target: { value: 'READY_TO_BAKE' },
     })
 
