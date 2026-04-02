@@ -19,7 +19,7 @@ export default function ProductEditScreen() {
   const [countInStock, setCountInStock] = useState('')
   const [description, setDescription] = useState('')
   const [uploading, setUploading] = useState(false)
-  const [productType, setProductType] = useState('READY_TO_BAKE')
+  const [productType, setProductType] = useState('PREBAKED')
 
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, error, product = {} } = productDetails
@@ -33,22 +33,30 @@ export default function ProductEditScreen() {
 
   useEffect(() => {
     if (successUpdate) {
+      dispatch({ type: PRODUCT_UPDATE_RESET })
       navigate('/admin/productlist')
+    } else if (!product.name || product._id !== productId) {
+      dispatch(listProductDetails(productId))
     } else {
-      if (!product.name || product._id !== productId) {
-        dispatch(listProductDetails(productId))
-      }
+      setName(product.name || '')
+      setPrice(product.price ?? '')
+      setImage(product.image || '')
+      setCategory(product.category || '')
+      setCountInStock(product.countInStock ?? '')
+      setDescription(product.description || '')
+      setProductType(product.productType || 'PREBAKED')
     }
   }, [dispatch, navigate, productId, product, successUpdate])
 
   const uploadFileHandler = (e) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-    setImage(`/uploads/${file.name}`)
+    const chosenFile = e.target.files?.[0]
+    if (!chosenFile) return
+    setImage(`/uploads/${chosenFile.name}`)
   }
 
   const submitHandler = (e) => {
     e.preventDefault()
+
     dispatch(
       updateProduct({
         _id: productId,
@@ -128,8 +136,8 @@ export default function ProductEditScreen() {
               value={productType}
               onChange={(e) => setProductType(e.target.value)}
             >
-              <option value="PREBAKED">Pre-baked</option>
-              <option value="READY_TO_BAKE">Ready-to-bake</option>
+              <option value="PREBAKED">PREBAKED</option>
+              <option value="READY_TO_BAKE">READY_TO_BAKE</option>
             </Form.Select>
           </Form.Group>
 
