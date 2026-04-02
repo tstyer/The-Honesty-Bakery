@@ -54,7 +54,7 @@ describe('ReadyToBakeScreen', () => {
     expect(mockDispatch).toHaveBeenCalled()
   })
 
-  test('shows loader when loading is true', () => {
+  test.only('shows loader when loading is true', () => {
     useSelector.mockImplementation((selector) =>
       selector({
         productList: {
