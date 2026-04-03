@@ -1,11 +1,12 @@
 import React from 'react'
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../actions/userActions'
 
 function Header() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const userLogin = useSelector((state) => state.userLogin)
   const userInfo = userLogin?.userInfo
@@ -17,6 +18,9 @@ function Header() {
 
   const logoutHandler = () => {
     dispatch(logout())
+    navigate('/', {
+      state: { successMessage: 'Logged out successfully' },
+    })
   }
 
   return (
