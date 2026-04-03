@@ -1510,6 +1510,7 @@ These are just encoded data about a user. **EXPLAIN MORE**
 ## Credits
 
 - Images: Sarah Howell
+- Placeholder Image: FreePik (https://www.freepik.com/author/catalyststuff)
 - Icons: FreeIcons
 - Font Awesome icons
 - React Documentation

@@ -51,7 +51,7 @@ export default function PrebakedScreen() {
     <Container className="py-4">
       <h1 className="prebaked-title py-4">Prebaked Cakes</h1>
       <h3 className="prebaked-sub pb-4">
-        Choose from our selection of Cakes on shelf, ready to buy. We're
+        Choose from our selection of Cakes on shelf, ready to buy. We&apos;re
         constantly updating this, so be sure to keep checking!
       </h3>
 
@@ -80,9 +80,13 @@ export default function PrebakedScreen() {
                 <div className="prebaked-image-wrap">
                   <Link to={`/product/${product._id}`}>
                     <img
-                      src={product.image}
+                      src={product.image || '/images/placeholder.jpg'}
                       alt={product.name}
                       className="prebaked-image"
+                      onError={(e) => {
+                        e.target.onerror = null
+                        e.target.src = '/images/placeholder.jpg'
+                      }}
                     />
                   </Link>
                 </div>

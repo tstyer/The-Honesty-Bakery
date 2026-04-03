@@ -59,7 +59,6 @@ function ProductScreen() {
     dispatch(listProductDetails(id))
   }, [dispatch, id, successProductReview, successDeleteReview])
 
-  // safer image handling (used now)
   const rawImage = product?.image || ''
 
   const normalisedImage = rawImage
@@ -111,6 +110,10 @@ function ProductScreen() {
                 alt={product.name}
                 fluid
                 className="product-image"
+                onError={(e) => {
+                  e.target.onerror = null
+                  e.target.src = '/images/placeholder.jpg'
+                }}
               />
             </Col>
 
@@ -199,12 +202,11 @@ function ProductScreen() {
             </Col>
           </Row>
 
-          {/* REVIEWS */}
           <Row className="mt-4">
             <Col md={6}>
               <h2>Reviews</h2>
 
-              {(!product.reviews || product.reviews.length === 0) ? (
+              {!product.reviews || product.reviews.length === 0 ? (
                 <Message variant="info" className="product_text">
                   No reviews yet
                 </Message>
@@ -226,9 +228,7 @@ function ProductScreen() {
                             <Button
                               variant="outline-danger"
                               size="sm"
-                              onClick={() =>
-                                deleteReviewHandler(review._id)
-                              }
+                              onClick={() => deleteReviewHandler(review._id)}
                               className="cta-btn"
                             >
                               Delete
