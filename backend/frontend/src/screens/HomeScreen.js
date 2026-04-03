@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Button } from 'react-bootstrap'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Loader from '../components/Loader'
@@ -11,9 +11,12 @@ import { listProducts } from '../actions/productActions'
 
 function HomeScreen({ category }) {
   const dispatch = useDispatch()
-  const { search } = useLocation()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { search } = location
 
   const pageNumber = new URLSearchParams(search).get('page') || 1
+  const successMessage = location.state?.successMessage
 
   const productList = useSelector((state) => state.productList)
   const { loading, error, products } = productList
@@ -22,8 +25,16 @@ function HomeScreen({ category }) {
     dispatch(listProducts(pageNumber, category))
   }, [dispatch, pageNumber, category])
 
+  useEffect(() => {
+    if (successMessage) {
+      navigate(location.pathname, { replace: true, state: {} })
+    }
+  }, [successMessage, navigate, location.pathname])
+
   return (
     <div>
+      {successMessage && <Message variant="success">{successMessage}</Message>}
+
       {loading ? (
         <Loader />
       ) : error ? (
