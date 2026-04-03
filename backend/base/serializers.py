@@ -9,6 +9,13 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
 
+    def validate_rating(self, value):
+        if value is None:
+            raise serializers.ValidationError('Rating is required.')
+        if value < 1 or value > 5:
+            raise serializers.ValidationError('Rating must be between 1 and 5.')
+        return value
+
 
 class ProductSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only=True)
@@ -22,11 +29,48 @@ class ProductSerializer(serializers.ModelSerializer):
         serializer = ReviewSerializer(reviews, many=True)
         return serializer.data
 
+    def validate_name(self, value):
+        if not value or not value.strip():
+            raise serializers.ValidationError('Product name is required.')
+        return value.strip()
+
+    def validate_price(self, value):
+        if value is None:
+            raise serializers.ValidationError('Price is required.')
+        if value < 0:
+            raise serializers.ValidationError('Price cannot be negative.')
+        return value
+
+    def validate_countInStock(self, value):
+        if value is None:
+            raise serializers.ValidationError('Stock count is required.')
+        if value < 0:
+            raise serializers.ValidationError('Stock count cannot be negative.')
+        return value
+
+    def validate_productType(self, value):
+        valid_types = [choice[0] for choice in Product.PRODUCT_TYPES]
+        if value not in valid_types:
+            raise serializers.ValidationError('Invalid product type.')
+        return value
+
 
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = '__all__'
+
+    def validate_qty(self, value):
+        if value is None or value <= 0:
+            raise serializers.ValidationError('Quantity must be greater than 0.')
+        return value
+
+    def validate_price(self, value):
+        if value is None:
+            raise serializers.ValidationError('Price is required.')
+        if value < 0:
+            raise serializers.ValidationError('Price cannot be negative.')
+        return value
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -61,7 +105,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['_id', 'username', 'email', 'name', 'isAdmin']
 
     def get_name(self, obj):
-        return obj.first_name
+        return obj.first_name or obj.email or obj.username
 
     def get__id(self, obj):
         return obj.id
