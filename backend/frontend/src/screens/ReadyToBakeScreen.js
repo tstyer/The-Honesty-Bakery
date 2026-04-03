@@ -1,32 +1,60 @@
-import React, { useEffect } from 'react'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, Link } from 'react-router-dom'
 
 import { listProducts } from '../actions/productActions'
+import { addToCart } from '../actions/cartActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { Link } from 'react-router-dom'
 
-export default function ReadyToBakeScreen() {
+export default function PrebakedScreen() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  // Stores selected qty per product id
+  const [qtyById, setQtyById] = useState({})
+
+  // Tracks which product was just added
+  const [justAddedId, setJustAddedId] = useState(null)
 
   const productList = useSelector((state) => state.productList)
   const { loading, error, products } = productList
 
+  // Pull cart items to enforce max 3 per product
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
+
   useEffect(() => {
-    // Fetch only Ready-to-bake products
-    dispatch(listProducts('', '', 'READY_TO_BAKE'))
+    // Only fetch Pre-baked products
+    dispatch(listProducts('', '', 'PREBAKED'))
   }, [dispatch])
 
-  const contactLink =
-    'mailto:hello@honestybakery.com?subject=Ready-to-bake%20cake%20enquiry'
+  const addToCartHandler = (id) => {
+    const selectedQty = qtyById[id] || 1
+
+    // Find existing qty in cart for this product
+    const existingItem = cartItems.find((item) => item.product === id)
+    const existingQty = existingItem ? existingItem.qty : 0
+
+    // Clamp final qty to max 3
+    const newQty = Math.min(existingQty + selectedQty, 3)
+
+    // Add to cart without navigating away
+    dispatch(addToCart(id, newQty))
+
+    // Quick UI feedback
+    setJustAddedId(id)
+    setTimeout(() => setJustAddedId(null), 1500)
+  }
 
   return (
     <Container className="py-4">
-      <h1 className="prebaked-title py-4">Personalised cakes</h1>
+      {/* Title */}
+      <h1 className="prebaked-title py-4">Prebaked Cakes</h1>
       <h3 className="prebaked-sub pb-4">
-        Choose a cake kit and I’ll help you get the perfect setup. Once you've
-        got an idea, hit any of the 'contact me' buttons to get started!
+        Choose from our selection of Cakes on shelf, ready to buy. We're
+        constantly updating this, so be sure to keep checking!
       </h3>
 
       {/* Honey pot img */}
@@ -38,45 +66,77 @@ export default function ReadyToBakeScreen() {
         />
       </div>
 
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <Row>
-          {products.map((product) => (
-            <Col key={product._id} xs={12} md={4} className="mb-4">
-              {/* this wrapper becomes a flex column "card" */}
-              <div className="ready-card">
-                {/* content area grows, button gets pushed down */}
-                <div className="ready-content">
-                  <div className="prebaked-image-wrap">
-                    <Link to={`/product/${product._id}`}>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="prebaked-image"
-                    />
-                    </Link>
-                    
-                  </div>
+      {/* Content */}
+  {loading ? (
+    <Loader />
+  ) : error ? (
+    <Message variant="danger">{error}</Message>
+  ) : products.length === 0 ? (
+    <Message>No products found</Message>
+  ) : (
+    products.map((product) => {
+      // Check how many of this product is already in the cart
+      const cartItem = cartItems.find((item) => item.product === product._id)
+      const qtyInCart = cartItem ? cartItem.qty : 0
 
-                  <h3 className="mt-3">{product.name}</h3>
-                  <p className="text-muted">{product.description}</p>
+          return (
+            <Row key={product._id} className="align-items-center mb-4 cake-card">
+              {/* Product image */}
+              <Col xs={12} md={4}>
+                <div className="prebaked-image-wrap">
+                  <Link to={`/product/${product._id}`}>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="prebaked-image"
+                  />
+                  </Link>
                 </div>
+              </Col>
 
-                <Button
-                  as={Link}
-                  to="/contact"
-                  className="contact-me"
-                  variant="outline-dark"
-                >
-                  Contact me
-                </Button>
-              </div>
-            </Col>
-          ))}
-        </Row>
+              {/* Product content */}
+              <Col xs={12} md={8}>
+                <h3>{product.name}</h3>
+                <p className="text-muted">{product.description}</p>
+
+                <div className="d-flex align-items-center gap-3">
+                  <span className="fw-bold">£{product.price}</span>
+
+                  <Form.Select
+                    value={qtyById[product._id] || 1} /* Original value in dropdown is set to new value OR 1 */
+                    onChange={(e) =>
+                      setQtyById((prev) => ({
+                        ...prev,
+                        [product._id]: Number(e.target.value), /* e.target.value is usually a string, so is convert to num. */
+                      }))
+                    }
+                    className="w-auto"
+                    disabled={qtyInCart >= 3}
+                  >
+                    {[1, 2, 3].map((x) => (
+                      <option key={x} value={x}>
+                        Qty: {x}
+                      </option>
+                    ))}
+                  </Form.Select>
+
+                  <Button
+                    className="add-to-cart"
+                    variant="outline-dark"
+                    disabled={qtyInCart >= 3}
+                    onClick={() => addToCartHandler(product._id)}
+                  >
+                    {qtyInCart >= 5 ? 'Max Reached' : 'Add to Cart'}
+                  </Button>
+
+                  {justAddedId === product._id && qtyInCart < 3 && (
+                    <small className="text-success">Added!</small>
+                  )}
+                </div>
+              </Col>
+            </Row>
+          )
+        })
       )}
     </Container>
   )
