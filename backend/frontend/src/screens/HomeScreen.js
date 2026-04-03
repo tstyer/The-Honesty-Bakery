@@ -33,6 +33,16 @@ function HomeScreen({ category }) {
     }
   }, [successMessage, navigate, location.pathname])
 
+  useEffect(() => {
+    if (bannerMessage) {
+      const timer = setTimeout(() => {
+        setBannerMessage('')
+      }, 5000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [bannerMessage])
+
   return (
     <div>
       {bannerMessage && (
