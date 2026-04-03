@@ -13,7 +13,9 @@ The Honesty Bakery is a local cake store in my town. I built this full-stack web
   - [Scope Plane](#scope-plane)
   - [Structure Plane](#structure-plane)
   - [Skeleton Plane](#skeleton-plane)
+  - [Data Schema](#database-schema)
   - [Surface Plane](#surface-plane)
+  - [Robust Code](#robust-code)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Setting Up Stripe Payments](#setting-up-stripe-payments)
@@ -425,6 +427,20 @@ A soft cream background (#fdf6ef) is used throughout the application to create a
 The primary text colour is a cocoa brown (#6B4F3F), which provides strong contrast against the cream background while reinforcing the bakery theme.
 
 Accent elements use a caramel-toned highlight (#C89B7B), which appears in navigation underlines and subtle interface details. This colour was chosen to introduce a gentle visual hierarchy without overwhelming the user interface.
+
+---
+
+### Robust Code
+
+The project is designed with robustness in mind, ensuring the application can handle invalid input, missing data, and runtime errors without crashing.
+
+On the backend, safe data access is enforced using get_object_or_404, preventing server errors when resources do not exist and returning appropriate HTTP 404 responses instead. Pagination is also handled defensively, with invalid or out-of-range page values defaulting to valid pages rather than breaking the application.
+
+Validation is centralised using Django REST Framework serializers. Product, review, and order item data are validated before being saved, ensuring that invalid values (such as negative prices, invalid ratings, or zero quantities) are rejected at the data layer. This avoids duplication of validation logic and ensures consistency across the application.
+
+On the frontend, components implement clear loading, success, and error states. API failures are handled gracefully using conditional rendering, ensuring the user is presented with meaningful feedback rather than a broken interface.
+
+Together, these patterns create a structured and fault-tolerant codebase that prioritises data integrity, user feedback, and maintainability.
 
 ---
 
