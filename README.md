@@ -1261,7 +1261,11 @@ This was the result on the first test:
 - CSS Validator
 - Lighthouse Report (Accessibility, SEO, etc.)
 
-(**INCOMPLETE SECTION - CODE VALIDATION**)
+---
+
+#### CSS Validation
+
+
 
 ---
 
