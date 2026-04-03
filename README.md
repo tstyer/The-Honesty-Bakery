@@ -189,20 +189,6 @@ The project uses Django’s built-in User model from django.contrib.auth for aut
 
 An ERD diagram is included below to show the full structure of the database and the relationships between the models.
 
-The system follows standard e-commerce architecture:
-
-Users can create and manage products (admin role).
-
-Users can leave reviews on products.
-
-Users can place orders.
-
-Orders contain multiple order items.
-
-Each order has a single shipping address.
-
-An ERD diagram is included below.
-
 The project uses Django’s built-in User model from django.contrib.auth
 
 Here is the link to my ERD, created using Lucid Chart: https://lucid.app/lucidchart/c6989dad-7bf8-4550-bf20-189bb77cfb91/edit?viewport_loc=-2010%2C-578%2C3940%2C1903%2C0_0&invitationId=inv_564427e2-7f17-413e-b4b8-1f3b7da38529
@@ -212,6 +198,18 @@ There is also a screenshot of it below:
 ![Screenshot of ERD](./backend/frontend/public/images/erd_update/erd.png)
 
 ---
+
+#### Data Modeling Approach
+
+The schema follows standard relational modelling principles:
+
+- One-to-many relationships are used where a single record can own multiple related records, such as one user creating many orders or one product receiving many reviews.
+- One-to-one relationships are used where only a single related record should exist, such as one shipping address for one order.
+- Foreign keys are used to connect related entities and enforce referential integrity.
+
+The schema avoids unnecessary duplication, while deliberately duplicating selected fields in OrderItem such as product name, price, and image so that completed orders preserve a historical snapshot even if the original product changes later.
+
+This design makes the application more realistic and fit for purpose in a real e-commerce context.
 
 **User (Django Auth Model)**
 
