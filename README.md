@@ -1265,7 +1265,7 @@ This was the result on the first test:
 
 #### CSS Validation
 
-Each example comes with an image, but I know that better evidence is a video sample of me validating in real time. For this, you can **click on the video link titled 'Video of (css file) validation'**, then select 'Raw Data' in the following screen, and you will download a small video file that shows me validating that specific CSS file. 
+Each example comes with an image, but I know that better evidence is a video sample of me validating in real time. For this, you can **click on the video link titled 'Video of (css file) validation'**, then select the link in the centre titled 'View Raw' on the following screen, and you will download a small video file that shows me validating that specific CSS file. 
 
 1. about.css
 
@@ -1334,6 +1334,10 @@ Video:
 ---
 
 #### HTML Validation
+
+1. index.html
+
+![Screenshot of index.html val](./backend/frontend/public/images/html_val/index.png)
 
 
 
@@ -1600,13 +1604,15 @@ JWTs do not store sensitive data such as passwords. Instead, they act as a secur
 10. Redux
 11. PostgresSQL
 12. AWS (Image storage)
+13. W3C - CSS + HTML Edit
+14. Flaticon.com for the icon
 
 
 ## Credits
 
 - Images: Sarah Howell
 - Placeholder Image: FreePik (https://www.freepik.com/author/catalyststuff)
-- Icons: FreeIcons
+- Icons: FreeIcons + Flaticon
 - Font Awesome icons
 - React Documentation
 - React-Bootstrap Documentation
