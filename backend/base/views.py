@@ -19,6 +19,7 @@ from .models import Order, Product, Review
 from .serializers import (
     OrderSerializer,
     ProductSerializer,
+    ReviewSerializer,
     UserSerializer,
     UserSerializerWithToken,
 )
@@ -29,10 +30,6 @@ from .serializers import (
 
 
 def to_pence(amount):
-    """
-    Convert Decimal pounds -> integer pence safely.
-    e.g. Decimal('10.00') -> 1000
-    """
     return int((Decimal(amount) * 100).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
 
 
@@ -42,17 +39,11 @@ def to_pence(amount):
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    # We will authenticate with username internally
     username_field = 'username'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        # Remove username field requirement from the request
-        # TokenObtainPairSerializer defines it by default
         self.fields.pop('username', None)
-
-        # Add email field to the request
         self.fields['email'] = serializers.EmailField(required=True)
 
     def validate(self, attrs):
@@ -70,13 +61,11 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         if not user.check_password(password):
             raise serializers.ValidationError({'detail': 'Invalid email or password'})
 
-        # Now authenticate via SimpleJWT using username + password
         data = super().validate({
             'username': user.username,
             'password': password,
         })
 
-        # add extra user info
         user_data = UserSerializerWithToken(user).data
         for k, v in user_data.items():
             data[k] = v
@@ -153,8 +142,7 @@ def loginUser(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getUserProfile(request):
-    user = request.user
-    serializer = UserSerializer(user, many=False)
+    serializer = UserSerializer(request.user, many=False)
     return Response(serializer.data)
 
 
@@ -162,28 +150,27 @@ def getUserProfile(request):
 @permission_classes([IsAuthenticated])
 def updateUserProfile(request):
     user = request.user
-    data = request.data
 
-    user.first_name = data.get('name', user.first_name)
-    user.username = data.get('email', user.username)
-    user.email = data.get('email', user.email)
+    serializer = UserSerializer(user, data=request.data, partial=True)
 
-    password = data.get('password')
-    if password:
-        user.set_password(password)
+    if serializer.is_valid():
+        serializer.save()
 
-    user.save()
+        password = request.data.get('password')
+        if password:
+            user.set_password(password)
+            user.save()
 
-    serializer = UserSerializerWithToken(user, many=False)
-    return Response(serializer.data)
+        return Response(UserSerializerWithToken(user).data)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getUsers(request):
     users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
+    return Response(UserSerializer(users, many=True).data)
 
 
 @api_view(['DELETE'])
@@ -191,15 +178,14 @@ def getUsers(request):
 def deleteUser(request, pk):
     user = get_object_or_404(User, id=pk)
     user.delete()
-    return Response('User deleted', status=status.HTTP_200_OK)
+    return Response('User deleted')
 
 
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getUserById(request, pk):
     user = get_object_or_404(User, id=pk)
-    serializer = UserSerializer(user, many=False)
-    return Response(serializer.data)
+    return Response(UserSerializer(user).data)
 
 
 @api_view(['PUT'])
@@ -207,16 +193,13 @@ def getUserById(request, pk):
 def updateUser(request, pk):
     user = get_object_or_404(User, id=pk)
 
-    data = request.data
-    user.first_name = data.get('name', user.first_name)
-    user.username = data.get('email', user.username)
-    user.email = data.get('email', user.email)
-    user.is_staff = data.get('isAdmin', user.is_staff)
+    serializer = UserSerializer(user, data=request.data, partial=True)
 
-    user.save()
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
 
-    serializer = UserSerializer(user, many=False)
-    return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 # ======================
@@ -227,41 +210,29 @@ def updateUser(request, pk):
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def createProduct(request):
-    user = request.user
+    product = Product.objects.create(user=request.user)
 
-    product = Product.objects.create(
-        user=user,
-        name='Sample Name',
-        price=0,
-        brand='Sample Brand',
-        countInStock=0,
-        category='Sample Category',
-        description='Sample Description',
-        image='/images/sample.jpg',
-    )
+    serializer = ProductSerializer(product, data=request.data, partial=True)
 
-    serializer = ProductSerializer(product, many=False)
-    return Response(serializer.data)
+    if serializer.is_valid():
+        serializer.save(user=request.user)
+        return Response(serializer.data)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
 def updateProduct(request, pk):
-    data = request.data
     product = get_object_or_404(Product, _id=pk)
 
-    product.name = data.get('name', product.name)
-    product.price = data.get('price', product.price)
-    product.brand = data.get('brand', product.brand)
-    product.countInStock = data.get('countInStock', product.countInStock)
-    product.category = data.get('category', product.category)
-    product.description = data.get('description', product.description)
-    product.image = data.get('image', product.image)
-    product.productType = data.get('productType', product.productType)
+    serializer = ProductSerializer(product, data=request.data, partial=True)
 
-    product.save()
-    serializer = ProductSerializer(product, many=False)
-    return Response(serializer.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
@@ -286,8 +257,8 @@ def getProducts(request):
         products_page = paginator.page(1)
         page = 1
     except EmptyPage:
-        products_page = paginator.page(paginator.num_pages) if paginator.num_pages > 0 else []
-        page = paginator.num_pages if paginator.num_pages > 0 else 1
+        products_page = paginator.page(paginator.num_pages) if paginator.num_pages else []
+        page = paginator.num_pages or 1
 
     serializer = ProductSerializer(products_page, many=True)
     data = serializer.data
@@ -308,8 +279,7 @@ def getProducts(request):
 @api_view(['GET'])
 def getProduct(request, pk):
     product = get_object_or_404(Product, _id=pk)
-    serializer = ProductSerializer(product, many=False)
-    data = serializer.data
+    data = ProductSerializer(product).data
 
     img = data.get('image', '')
     if img and img.startswith('/media/'):
@@ -324,14 +294,11 @@ def getProduct(request, pk):
 @parser_classes([MultiPartParser, FormParser])
 def uploadImage(request):
     file = request.FILES.get('image')
+
     if not file:
-        return Response(
-            {'detail': 'No image provided'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response({'detail': 'No image provided'}, status=400)
 
     file_name = default_storage.save(f'products/{file.name}', file)
-
     return Response({'image': default_storage.url(file_name)})
 
 
@@ -340,36 +307,29 @@ def uploadImage(request):
 def createProductReview(request, pk):
     user = request.user
     product = get_object_or_404(Product, _id=pk)
-    data = request.data
 
-    alreadyExists = product.review_set.filter(user=user).exists()
-    if alreadyExists:
-        return Response(
-            {'detail': 'Product already reviewed'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+    if product.review_set.filter(user=user).exists():
+        return Response({'detail': 'Product already reviewed'}, status=400)
 
-    rating = data.get('rating', 0)
-    if rating == 0 or rating == '0' or rating is None:
-        return Response(
-            {'detail': 'Please select a rating'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+    serializer = ReviewSerializer(data={
+        'user': user.id,
+        'product': product._id,
+        'name': user.first_name or user.username,
+        'rating': request.data.get('rating'),
+        'comment': request.data.get('comment', ''),
+    })
 
-    Review.objects.create(
-        user=user,
-        product=product,
-        name=user.first_name or user.username,
-        rating=int(rating),
-        comment=data.get('comment', ''),
-    )
+    if serializer.is_valid():
+        serializer.save()
 
-    reviews = product.review_set.all()
-    product.numReviews = reviews.count()
-    product.rating = sum([r.rating for r in reviews]) / product.numReviews
-    product.save()
+        reviews = product.review_set.all()
+        product.numReviews = reviews.count()
+        product.rating = sum([r.rating for r in reviews]) / product.numReviews
+        product.save()
 
-    return Response({'detail': 'Review added'})
+        return Response({'detail': 'Review added'})
+
+    return Response(serializer.errors, status=400)
 
 
 @api_view(['DELETE'])
@@ -377,7 +337,7 @@ def createProductReview(request, pk):
 def deleteProduct(request, pk):
     product = get_object_or_404(Product, _id=pk)
     product.delete()
-    return Response('Product deleted', status=status.HTTP_200_OK)
+    return Response('Product deleted')
 
 
 # ======================
@@ -394,19 +354,12 @@ def deleteProductReview(request, pk, review_id):
     try:
         review = Review.objects.get(_id=review_id, product=product)
     except Review.DoesNotExist:
-        return Response(
-            {'detail': 'Review not found'},
-            status=status.HTTP_404_NOT_FOUND
-        )
+        return Response({'detail': 'Review not found'}, status=404)
 
     if review.user != user and not user.is_staff:
-        return Response(
-            {'detail': 'Not authorised'},
-            status=status.HTTP_401_UNAUTHORIZED
-        )
+        return Response({'detail': 'Not authorised'}, status=401)
 
     review.delete()
-
     return Response({'detail': 'Review deleted'})
 
 
@@ -419,29 +372,27 @@ def deleteProductReview(request, pk, review_id):
 @permission_classes([IsAdminUser])
 def getOrders(request):
     orders = Order.objects.all()
-    serializer = OrderSerializer(orders, many=True)
-    return Response(serializer.data)
+    return Response(OrderSerializer(orders, many=True).data)
 
 
 # ======================
-# ROUTES (DEV)
+# ROUTES
 # ======================
 
 
 @api_view(['GET'])
 def getRoutes(request):
-    routes = [
+    return Response([
         '/api/products/',
         '/api/products/<id>/',
         '/api/users/',
         '/api/users/profile/',
         '/api/users/login/',
-    ]
-    return Response(routes)
+    ])
 
 
 # ======================
-# STRIPE PAYMENT
+# STRIPE
 # ======================
 
 
@@ -453,38 +404,24 @@ def getStripeConfig(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def createPaymentIntent(request):
-    """
-    Creates a Stripe PaymentIntent based on server-trusted product prices.
-    Expects: { cartItems: [{ product: <id>, qty: <int> }, ...] }
-    """
     if not settings.STRIPE_SECRET_KEY:
-        return Response(
-            {'detail': 'Stripe secret key not set'},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
+        return Response({'detail': 'Stripe not configured'}, status=500)
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
     cart_items = request.data.get('cartItems', [])
     if not cart_items:
-        return Response(
-            {'detail': 'Cart is empty'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response({'detail': 'Cart is empty'}, status=400)
 
     total = 0
 
     for item in cart_items:
-        product_id = item.get('product')
+        product = get_object_or_404(Product, _id=item.get('product'))
         qty = int(item.get('qty', 0))
 
-        if not product_id or qty <= 0:
-            return Response(
-                {'detail': 'Invalid cart item'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+        if qty <= 0:
+            return Response({'detail': 'Invalid quantity'}, status=400)
 
-        product = get_object_or_404(Product, _id=product_id)
         total += to_pence(product.price) * qty
 
     try:
@@ -495,9 +432,6 @@ def createPaymentIntent(request):
             metadata={'user_id': request.user.id},
         )
     except stripe.error.StripeError as e:
-        return Response(
-            {'detail': str(e)},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response({'detail': str(e)}, status=400)
 
     return Response({'clientSecret': intent['client_secret']})
