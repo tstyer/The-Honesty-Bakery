@@ -1265,7 +1265,9 @@ This was the result on the first test:
 
 #### CSS Validation
 
+1. about.css
 
+![Video of validation](./backend/frontend/public/images/css_val/about_css.mp4)
 
 ---
 
