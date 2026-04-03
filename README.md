@@ -1250,6 +1250,7 @@ This was the result on the first test:
 
 ![Screenshot of test](./backend/frontend/public/images/django_tests/products_api_test.png)
 
+---
 
 ### Validators and Tools
 
@@ -1262,7 +1263,7 @@ This was the result on the first test:
 
 (**INCOMPLETE SECTION - CODE VALIDATION**)
 
-
+---
 
 ## Using Redux
 
@@ -1270,12 +1271,13 @@ I chose to use Redux in this app, firstly to learn how it's used, but also becau
 
 Having learned the importance of Redux in front end when it comes to building larger apps, I am glad I have included it. I will continue to learn more about it in my future project, but here are some examples of how to install and use Redux:
 
+---
+
 ### Installing Redux
 
-...
+Redux was installed to manage global application state across components. The core libraries, including Redux, React Redux, and Redux Thunk, were added using npm. React Redux provides bindings to connect React components to the Redux store, while Redux Thunk enables asynchronous actions such as API requests. After installation, a central store was configured and integrated into the application using the <Provider> component, allowing state to be accessed and updated consistently throughout the app.
 
-### Using Redux
-
+---
 
 ## Installing + Using Stripe
 
@@ -1290,6 +1292,7 @@ Then, follow these steps:
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
 STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY", "")
 
+---
 
 ## Installing Font Awesome
 
@@ -1303,7 +1306,11 @@ Example: These 'i' tags were copied from the free icons section in Font Awesome.
 
 ![Screenshot of i tags](./resources/images/font_awesome/i_tags.png)
 
+---
+
 ### Bugs
+
+---
 
 #### Frontend Bugs
 
@@ -1367,6 +1374,7 @@ Once that was replaced, it worked, and I continued with the manual test of addin
 
 ![Screenshot of fixed bug](./resources/images/other_bugs/add_t0_cart/fixed.png)
 
+---
 
 #### Backend Bugs
 
@@ -1377,7 +1385,6 @@ Once that was replaced, it worked, and I continued with the manual test of addin
 After some research, I learned that this bug means that my request never reached my Django API. 
 
 --- 
-
 
 ### Setting Up Virtual Environment
 
@@ -1395,6 +1402,8 @@ Following that, you'll want to install django with "pip install django", and thi
 
 ![Screenshot of install](./resources/images/manual_tests/creatingvenv/install_django.png)
 
+---
+
 ### Creating Django Project
 
 Once installed, you will then want to create the backend project using "django-admin startproject (projectname)"
@@ -1403,6 +1412,8 @@ I called mine 'Backend', so you can see it successfuly created below ".venv" in 
 
 ![Screenshot of backend](./resources/images/manual_tests/creatingvenv/backend_created.png)
 
+---
+
 ### Creating Individual Apps
 
 Once Django is ready, it's time to start creating backend apps. Before you do this, you will need to change into the project directory. For me, this command is "cd backend" from the root directory. 
@@ -1410,6 +1421,8 @@ Once Django is ready, it's time to start creating backend apps. Before you do th
 Then, you will need to type the command "python manage.py startapp (appname)":
 
 ![Screenshot of app creation](./resources/images/manual_tests/creatingvenv/creating_apps.png)
+
+---
 
 ### Writing Your First View
 
@@ -1427,6 +1440,7 @@ Then, add a new path to the urlpatterns. This will be as shown in the below scre
 
 ![Screenshot of urls](./resources/images/manual_tests/firstview/urls_backend.png)
 
+---
 
 ### Using Django Rest Framework
 
@@ -1446,7 +1460,7 @@ Then, on the right hand side of the screen, click on 'api_view' and copy the hig
 
 Once you've added that, you will also need to import 'Response'.
 
-
+---
 
 ## Amending Backend Data
 
@@ -1460,6 +1474,8 @@ To amend your backend data, you will first need to be able to log into the Djang
 This was my view onced logged in:
 
 ![Screenshot of dashboard](./resources/images/django_admin/dash.png)
+
+---
 
 ### Making New Databases
 
@@ -1481,16 +1497,21 @@ Here, you can see the first model created in the Django Admin: Products
 
 ![Screenshot of model](./resources/images/django_admin/first_model.png)
 
+---
 
 ## Authentication
 
+---
+
 ### JSON Web Tokens
 
-(**INCOMPLETE SECTION**)
+JSON Web Tokens (JWT) are a secure way of transmitting information between the client and server. In this project, JWTs are used for user authentication.
 
-These are just encoded data about a user. **EXPLAIN MORE**
+When a user logs in, the server generates a token that contains encoded information such as the user’s ID and permissions. This token is signed to prevent tampering and is sent back to the client.
 
-(**INCOMPLETE SECTION**)
+For subsequent requests, the client includes this token in the request headers. The server then verifies the token to confirm the user’s identity without needing to store session data. This allows for stateless authentication, improving scalability and performance.
+
+JWTs do not store sensitive data such as passwords. Instead, they act as a secure proof of identity, ensuring that only authenticated users can access protected routes.
 
 ## Tech. Used
 
