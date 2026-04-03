@@ -18,7 +18,6 @@ import {
 function ProductScreen() {
   const [qty, setQty] = useState(1)
 
-  // review form state
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
 
@@ -44,7 +43,7 @@ function ProductScreen() {
     success: successDeleteReview,
     error: errorDeleteReview,
     loading: loadingDeleteReview,
-    } = productReviewDelete
+  } = productReviewDelete
 
   useEffect(() => {
     if (successProductReview) {
@@ -60,7 +59,7 @@ function ProductScreen() {
     dispatch(listProductDetails(id))
   }, [dispatch, id, successProductReview, successDeleteReview])
 
-  // Convert any old Django-ish paths into React public /images/ paths.
+  // safer image handling (used now)
   const rawImage = product?.image || ''
 
   const normalisedImage = rawImage
@@ -107,20 +106,30 @@ function ProductScreen() {
         <>
           <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid className="product-image" />
+              <Image
+                src={imageSrc}
+                alt={product.name}
+                fluid
+                className="product-image"
+              />
             </Col>
 
-            <Col md={3} className='box_div'>
-              <ListGroup variant="flush" className='light_border'>
+            <Col md={3} className="box_div">
+              <ListGroup variant="flush" className="light_border">
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
 
                 <ListGroup.Item>
-                  <Rating value={product.rating} text={`${product.numReviews} reviews`} />
+                  <Rating
+                    value={product.rating}
+                    text={`${product.numReviews} reviews`}
+                  />
                 </ListGroup.Item>
 
-                <ListGroup.Item className="product_text">Price: £{product.price}</ListGroup.Item>
+                <ListGroup.Item className="product_text">
+                  Price: £{product.price}
+                </ListGroup.Item>
 
                 <ListGroup.Item className="product_text">
                   Description: {product.description}
@@ -128,9 +137,9 @@ function ProductScreen() {
               </ListGroup>
             </Col>
 
-            <Col md={3} className='box_div'>
+            <Col md={3} className="box_div">
               <Card>
-                <ListGroup variant="flush" className='light_border'>
+                <ListGroup variant="flush" className="light_border">
                   <ListGroup.Item className="product_text">
                     <Row>
                       <Col>Price:</Col>
@@ -144,7 +153,9 @@ function ProductScreen() {
                     <Row>
                       <Col>Status:</Col>
                       <Col>
-                        {product.countInStock > 0 ? 'Ready To Bake!' : 'Out of Stock'}
+                        {product.countInStock > 0
+                          ? 'Ready To Bake!'
+                          : 'Out of Stock'}
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -157,7 +168,9 @@ function ProductScreen() {
                           <Form.Control
                             as="select"
                             value={qty}
-                            onChange={(e) => setQty(Number(e.target.value))}
+                            onChange={(e) =>
+                              setQty(Number(e.target.value))
+                            }
                           >
                             {[...Array(product.countInStock).keys()].map((x) => (
                               <option key={x + 1} value={x + 1}>
@@ -191,18 +204,17 @@ function ProductScreen() {
             <Col md={6}>
               <h2>Reviews</h2>
 
-              {product.reviews && product.reviews.length === 0 && (
+              {(!product.reviews || product.reviews.length === 0) ? (
                 <Message variant="info" className="product_text">
                   No reviews yet
                 </Message>
-              )}
-
-              {loadingDeleteReview && <Loader />}
-              {errorDeleteReview && <Message variant="danger">{errorDeleteReview}</Message>}
-
-              {product.reviews &&
+              ) : (
                 product.reviews.map((review) => (
-                  <ListGroup variant="flush" key={review._id} className="mb-3">
+                  <ListGroup
+                    variant="flush"
+                    key={review._id}
+                    className="mb-3"
+                  >
                     <ListGroup.Item>
                       <div className="d-flex justify-content-between align-items-center">
                         <strong>{review.name}</strong>
@@ -214,27 +226,41 @@ function ProductScreen() {
                             <Button
                               variant="outline-danger"
                               size="sm"
-                              onClick={() => deleteReviewHandler(review._id)}
-                              className='cta-btn'
+                              onClick={() =>
+                                deleteReviewHandler(review._id)
+                              }
+                              className="cta-btn"
                             >
                               Delete
                             </Button>
                           )}
                       </div>
                     </ListGroup.Item>
+
                     <ListGroup.Item>
                       <Rating value={review.rating} text="" />
                     </ListGroup.Item>
-                    <ListGroup.Item>{review.createdAt?.substring(0, 10)}</ListGroup.Item>
+
+                    <ListGroup.Item>
+                      {review.createdAt?.substring(0, 10)}
+                    </ListGroup.Item>
+
                     <ListGroup.Item>{review.comment}</ListGroup.Item>
                   </ListGroup>
-                ))}
+                ))
+              )}
 
               <h2 className="mt-4">Write a Review</h2>
 
-              {successProductReview && <Message variant="success">Review submitted</Message>}
+              {successProductReview && (
+                <Message variant="success">Review submitted</Message>
+              )}
               {loadingProductReview && <Loader />}
-              {errorProductReview && <Message variant="danger">{errorProductReview}</Message>}
+              {errorProductReview && (
+                <Message variant="danger">
+                  {errorProductReview}
+                </Message>
+              )}
 
               {userInfo ? (
                 <Form onSubmit={submitReviewHandler}>
@@ -243,7 +269,9 @@ function ProductScreen() {
                     <Form.Control
                       as="select"
                       value={rating}
-                      onChange={(e) => setRating(Number(e.target.value))}
+                      onChange={(e) =>
+                        setRating(Number(e.target.value))
+                      }
                       className="product_text"
                     >
                       <option value="0">Select...</option>
@@ -256,12 +284,16 @@ function ProductScreen() {
                   </Form.Group>
 
                   <Form.Group controlId="comment" className="my-2">
-                    <Form.Label className="product_text">Comment</Form.Label>
+                    <Form.Label className="product_text">
+                      Comment
+                    </Form.Label>
                     <Form.Control
                       as="textarea"
                       rows="3"
                       value={comment}
-                      onChange={(e) => setComment(e.target.value)}
+                      onChange={(e) =>
+                        setComment(e.target.value)
+                      }
                     />
                   </Form.Group>
 
