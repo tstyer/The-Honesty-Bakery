@@ -1265,9 +1265,77 @@ This was the result on the first test:
 
 #### CSS Validation
 
+Each example comes with an image, but I know that better evidence is a video sample of me validating in real time. For this, you can **click on the video link titled 'Video of (css file) validation'**, then select 'Raw Data' in the following screen, and you will download a small video file that shows me validating that specific CSS file. 
+
 1. about.css
 
+![Screenshot of validation](./backend/frontend/public/images/css_val/about_css.png)
+
+Video:
+
 ![Video of validation](./backend/frontend/public/images/css_val/about_css.mp4)
+
+2. cart.css
+
+![Screenshot of validation](./backend/frontend/public/images/css_val/cart.css.png)
+
+Video:
+
+![Video of cart css validation](./backend/frontend/public/images/css_val/cart.css_video.mp4)
+
+3. error.css
+
+![Screenshot of validation](./backend/frontend/public/images/css_val/error.css.png)
+
+Video:
+
+![Video fo error css validation](./backend/frontend/public/images/css_val/error_css.mp4)
+
+4. index.css 
+
+![Screenshot of index val](./backend/frontend/public/images/css_val/index.css.png)
+
+Video:
+
+![Video of index css validation](./backend/frontend/public/images/css_val/index.css.mp4)
+
+5. payment.css
+
+![Screenshot of validation](./backend/frontend/public/images/css_val/payment_css.png)
+
+Video:
+
+![Video of payment.css validation](./backend/frontend/public/images/css_val/payment.css.mp4)
+
+6. place_order.css
+
+![Screenshot of place_order validation](./backend/frontend/public/images/css_val/place_order.css.png)
+
+Video:
+
+![Video of place_order css validation](./backend/frontend/public/images/css_val/place_order.mp4)
+
+7. product_card.css
+
+![Screenshot of product_card css val](./backend/frontend/public/images/css_val/product_card.css.png)
+
+Video:
+
+![Video of product card css validation](./backend/frontend/public/images/css_val/product_card.mp4)
+
+8. product.css
+
+![Screenshot of product.css](./backend/frontend/public/images/css_val/product.css.png)
+
+Video:
+
+![Video of product.css validation](./backend/frontend/public/images/css_val/product.css.mp4)
+
+---
+
+#### HTML Validation
+
+
 
 ---
 
