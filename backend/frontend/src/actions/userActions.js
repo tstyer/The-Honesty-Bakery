@@ -24,6 +24,7 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
 } from '../constants/userConstants'
+import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
 
 // Helper - error messages
 const getErrorMessage = (error) =>
@@ -55,8 +56,13 @@ export const login = (email, password) => async (dispatch) => {
 // LOGOUT
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
+  localStorage.removeItem('cartItems')
+  localStorage.removeItem('paymentMethod')
+  localStorage.removeItem('paymentResult')
+
   dispatch({ type: USER_LOGOUT })
   dispatch({ type: USER_DETAILS_RESET })
+  dispatch({ type: CART_CLEAR_ITEMS })
 }
 
 // REGISTER (and auto-login like the course)
@@ -80,7 +86,7 @@ export const register = (name, email, password) => async (dispatch) => {
   }
 }
 
-// GET USER PROFILE 
+// GET USER PROFILE
 export const getUserDetails = () => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST })
@@ -105,7 +111,6 @@ export const getUserDetails = () => async (dispatch, getState) => {
     dispatch({ type: USER_DETAILS_FAIL, payload: getErrorMessage(error) })
   }
 }
-
 
 export const getUserDetailsById = (id) => async (dispatch, getState) => {
   try {
@@ -134,8 +139,6 @@ export const getUserDetailsById = (id) => async (dispatch, getState) => {
     })
   }
 }
-
-
 
 // UPDATE PROFILE
 export const updateUserProfile = (user) => async (dispatch, getState) => {
@@ -252,7 +255,6 @@ export const updateUser = (user) => async (dispatch, getState) => {
 
     dispatch({ type: USER_UPDATE_SUCCESS })
 
-    // refresh user details after update
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
   } catch (error) {
     dispatch({

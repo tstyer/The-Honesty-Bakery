@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import Footer from '../components/Footer'
 
 import { listProducts } from '../actions/productActions'
 
@@ -15,11 +14,13 @@ function HomeScreen({ category }) {
   const navigate = useNavigate()
   const { search } = location
 
+  const [bannerMessage, setBannerMessage] = useState('')
+
   const pageNumber = new URLSearchParams(search).get('page') || 1
   const successMessage = location.state?.successMessage
 
   const productList = useSelector((state) => state.productList)
-  const { loading, error, products } = productList
+  const { loading, error } = productList
 
   useEffect(() => {
     dispatch(listProducts(pageNumber, category))
@@ -27,13 +28,16 @@ function HomeScreen({ category }) {
 
   useEffect(() => {
     if (successMessage) {
+      setBannerMessage(successMessage)
       navigate(location.pathname, { replace: true, state: {} })
     }
   }, [successMessage, navigate, location.pathname])
 
   return (
     <div>
-      {successMessage && <Message variant="success">{successMessage}</Message>}
+      {bannerMessage && (
+        <Message variant="success">{bannerMessage}</Message>
+      )}
 
       {loading ? (
         <Loader />
@@ -41,7 +45,6 @@ function HomeScreen({ category }) {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          {/* Header signage */}
           <div className="home-sign">
             <img
               src="/images/toffee_swirl.jpg"
@@ -71,14 +74,12 @@ function HomeScreen({ category }) {
             />
           </div>
 
-          {/* bee */}
           <img
             src="/images/bee_2.png"
             alt="Flying bee illustration"
             className="bee-2"
           />
 
-          {/* CTA buttons */}
           <div className="d-flex flex-column flex-md-row gap-3 justify-content-center mb-4">
             <Link
               to="/prebaked"
@@ -107,7 +108,6 @@ function HomeScreen({ category }) {
             </Link>
           </div>
 
-          {/* Sub copy */}
           <div className="home-subtext">
             <h2>
               Fresh Cakes{' '}
@@ -140,7 +140,6 @@ function HomeScreen({ category }) {
         </>
       )}
 
-      {/* Bottom bee */}
       <img
         src="/images/bee_2.png"
         alt="Flying bee illustration"
