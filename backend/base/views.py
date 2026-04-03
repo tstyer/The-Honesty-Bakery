@@ -5,10 +5,10 @@ from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
-from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers, status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
@@ -109,7 +109,7 @@ def registerUser(request):
         )
 
     user = User.objects.create_user(
-        username=email,     # you’re using email as username (fine)
+        username=email,
         email=email,
         password=password,
         first_name=name,
@@ -164,9 +164,8 @@ def updateUserProfile(request):
     user = request.user
     data = request.data
 
-    # Update fields (keep it simple)
     user.first_name = data.get('name', user.first_name)
-    user.username = data.get('email', user.username)  # since you're using email as username
+    user.username = data.get('email', user.username)
     user.email = data.get('email', user.email)
 
     password = data.get('password')
@@ -190,7 +189,7 @@ def getUsers(request):
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteUser(request, pk):
-    user = User.objects.get(id=pk)
+    user = get_object_or_404(User, id=pk)
     user.delete()
     return Response('User deleted', status=status.HTTP_200_OK)
 
@@ -198,7 +197,7 @@ def deleteUser(request, pk):
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getUserById(request, pk):
-    user = User.objects.get(id=pk)
+    user = get_object_or_404(User, id=pk)
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
 
@@ -206,7 +205,7 @@ def getUserById(request, pk):
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
 def updateUser(request, pk):
-    user = User.objects.get(id=pk)
+    user = get_object_or_404(User, id=pk)
 
     data = request.data
     user.first_name = data.get('name', user.first_name)
@@ -249,7 +248,7 @@ def createProduct(request):
 @permission_classes([IsAdminUser])
 def updateProduct(request, pk):
     data = request.data
-    product = Product.objects.get(_id=pk)
+    product = get_object_or_404(Product, _id=pk)
 
     product.name = data.get('name', product.name)
     product.price = data.get('price', product.price)
@@ -267,34 +266,32 @@ def updateProduct(request, pk):
 
 @api_view(['GET'])
 def getProducts(request):
-    page = request.query_params.get('page') or 1
-    page = int(page)
+    page = request.query_params.get('page', 1)
     category = request.query_params.get('category')
     product_type = request.query_params.get('type')
 
     products = Product.objects.all()
 
-    # Filter by category if provided
     if category:
         products = products.filter(category=category)
 
-    # Filter by productType if provided
     if product_type:
         products = products.filter(productType=product_type)
 
-    paginator = Paginator(products, 12)  # 12 products per page
+    paginator = Paginator(products, 12)
 
-    if not page:
+    try:
+        products_page = paginator.page(page)
+    except PageNotAnInteger:
+        products_page = paginator.page(1)
         page = 1
+    except EmptyPage:
+        products_page = paginator.page(paginator.num_pages) if paginator.num_pages > 0 else []
+        page = paginator.num_pages if paginator.num_pages > 0 else 1
 
-    page = int(page)
-
-    products = paginator.page(page)
-
-    serializer = ProductSerializer(products, many=True)
+    serializer = ProductSerializer(products_page, many=True)
     data = serializer.data
 
-    # --- NORMALISE IMAGE PATHS ---
     for p in data:
         img = p.get('image', '')
         if img and img.startswith('/media/'):
@@ -303,18 +300,17 @@ def getProducts(request):
 
     return Response({
         'products': data,
-        'page': page,
+        'page': int(page),
         'pages': paginator.num_pages,
     })
 
 
 @api_view(['GET'])
 def getProduct(request, pk):
-    product = Product.objects.get(_id=pk)
+    product = get_object_or_404(Product, _id=pk)
     serializer = ProductSerializer(product, many=False)
     data = serializer.data
 
-    # --- NORMALISE IMAGE PATH ---
     img = data.get('image', '')
     if img and img.startswith('/media/'):
         filename = img.split('/')[-1]
@@ -325,12 +321,14 @@ def getProduct(request, pk):
 
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
+@parser_classes([MultiPartParser, FormParser])
 def uploadImage(request):
-    parser_classes = (MultiPartParser, FormParser)
-
     file = request.FILES.get('image')
     if not file:
-        return Response({'detail': 'No image provided'}, status=400)
+        return Response(
+            {'detail': 'No image provided'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
     file_name = default_storage.save(f'products/{file.name}', file)
 
@@ -341,20 +339,23 @@ def uploadImage(request):
 @permission_classes([IsAuthenticated])
 def createProductReview(request, pk):
     user = request.user
-    product = Product.objects.get(_id=pk)
+    product = get_object_or_404(Product, _id=pk)
     data = request.data
 
-    # 1) Prevent duplicate reviews by same user
     alreadyExists = product.review_set.filter(user=user).exists()
     if alreadyExists:
-        return Response({'detail': 'Product already reviewed'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {'detail': 'Product already reviewed'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
-    # 2) Basic validation
     rating = data.get('rating', 0)
     if rating == 0 or rating == '0' or rating is None:
-        return Response({'detail': 'Please select a rating'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {'detail': 'Please select a rating'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
-    # 3) Create review
     Review.objects.create(
         user=user,
         product=product,
@@ -363,7 +364,6 @@ def createProductReview(request, pk):
         comment=data.get('comment', ''),
     )
 
-    # 4) Update product rating stats
     reviews = product.review_set.all()
     product.numReviews = reviews.count()
     product.rating = sum([r.rating for r in reviews]) / product.numReviews
@@ -375,30 +375,35 @@ def createProductReview(request, pk):
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteProduct(request, pk):
-    product = Product.objects.get(_id=pk)
+    product = get_object_or_404(Product, _id=pk)
     product.delete()
     return Response('Product deleted', status=status.HTTP_200_OK)
 
 
 # ======================
-# Reviews
+# REVIEWS
 # ======================
+
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def deleteProductReview(request, pk, review_id):
-
     user = request.user
-    product = Product.objects.get(_id=pk)
+    product = get_object_or_404(Product, _id=pk)
 
     try:
         review = Review.objects.get(_id=review_id, product=product)
     except Review.DoesNotExist:
-        return Response({'detail': 'Review not found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response(
+            {'detail': 'Review not found'},
+            status=status.HTTP_404_NOT_FOUND
+        )
 
-    # allow admin OR owner
     if review.user != user and not user.is_staff:
-        return Response({'detail': 'Not authorised'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(
+            {'detail': 'Not authorised'},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
 
     review.delete()
 
@@ -406,7 +411,7 @@ def deleteProductReview(request, pk, review_id):
 
 
 # ======================
-# Orders
+# ORDERS
 # ======================
 
 
@@ -462,7 +467,10 @@ def createPaymentIntent(request):
 
     cart_items = request.data.get('cartItems', [])
     if not cart_items:
-        return Response({'detail': 'Cart is empty'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {'detail': 'Cart is empty'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
     total = 0
 
@@ -471,7 +479,10 @@ def createPaymentIntent(request):
         qty = int(item.get('qty', 0))
 
         if not product_id or qty <= 0:
-            return Response({'detail': 'Invalid cart item'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {'detail': 'Invalid cart item'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         product = get_object_or_404(Product, _id=product_id)
         total += to_pence(product.price) * qty
@@ -484,6 +495,9 @@ def createPaymentIntent(request):
             metadata={'user_id': request.user.id},
         )
     except stripe.error.StripeError as e:
-        return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {'detail': str(e)},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
     return Response({'clientSecret': intent['client_secret']})
