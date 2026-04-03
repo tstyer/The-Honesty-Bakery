@@ -15,6 +15,7 @@ function HomeScreen({ category }) {
   const { search } = location
 
   const [bannerMessage, setBannerMessage] = useState('')
+  const [isFading, setIsFading] = useState(false)
 
   const pageNumber = new URLSearchParams(search).get('page') || 1
   const successMessage = location.state?.successMessage
@@ -29,24 +30,35 @@ function HomeScreen({ category }) {
   useEffect(() => {
     if (successMessage) {
       setBannerMessage(successMessage)
+      setIsFading(false)
       navigate(location.pathname, { replace: true, state: {} })
     }
   }, [successMessage, navigate, location.pathname])
 
   useEffect(() => {
     if (bannerMessage) {
-      const timer = setTimeout(() => {
-        setBannerMessage('')
-      }, 5000)
+      const fadeTimer = setTimeout(() => {
+        setIsFading(true)
+      }, 1000)
 
-      return () => clearTimeout(timer)
+      const removeTimer = setTimeout(() => {
+        setBannerMessage('')
+        setIsFading(false)
+      }, 4000)
+
+      return () => {
+        clearTimeout(fadeTimer)
+        clearTimeout(removeTimer)
+      }
     }
   }, [bannerMessage])
 
   return (
     <div>
       {bannerMessage && (
-        <Message variant="success">{bannerMessage}</Message>
+        <div className={`fade-banner ${isFading ? 'fade-out' : ''}`}>
+          <Message variant="success">{bannerMessage}</Message>
+        </div>
       )}
 
       {loading ? (

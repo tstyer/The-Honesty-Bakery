@@ -337,6 +337,19 @@ body,
 }
 
 /* =========================
+   login/out banner
+========================= */
+
+.fade-banner {
+  opacity: 1;
+  transition: opacity 3s ease;
+}
+
+.fade-banner.fade-out {
+  opacity: 0;
+}
+
+/* =========================
    Image hero
 ========================= */
 
