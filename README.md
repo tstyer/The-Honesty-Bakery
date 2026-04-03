@@ -171,7 +171,23 @@ The navigation model prioritises ease of movement and minimal friction. A persis
 
 ### Database Schema
 
-I used a relational database structur around products, users, orders and reviews. The schema is implemented using Django ORM models and relationships.
+#### Schema Rationale
+
+This project uses a relational database design because the application manages several connected entities that must remain consistent across the system, including users, products, reviews, orders, order items, and shipping addresses. A relational structure is the most appropriate choice for an e-commerce platform because it allows these entities to be linked through primary and foreign keys, while maintaining data integrity and reducing unnecessary duplication.
+
+The schema was designed around the main real-world user stories of the application:
+
+- customers can browse products
+- authenticated users can place orders
+- authenticated users can leave reviews on products
+- admin users can create, update and delete products
+- each order must preserve a record of the items purchased, pricing, and delivery details at the time of checkout
+
+The data model supports these stories by separating concerns into related models rather than storing everything in a single table. This improves maintainability, scalability, and clarity in both the backend and frontend.
+
+The project uses Django’s built-in User model from django.contrib.auth for authentication and account management. This was chosen because it provides secure, established authentication functionality and integrates cleanly with Django REST API patterns used in the project.
+
+An ERD diagram is included below to show the full structure of the database and the relationships between the models.
 
 The system follows standard e-commerce architecture:
 
@@ -194,7 +210,6 @@ Here is the link to my ERD, created using Lucid Chart: https://lucid.app/lucidch
 There is also a screenshot of it below:
 
 ![Screenshot of ERD](./backend/frontend/public/images/erd_update/erd.png)
-
 
 ---
 
@@ -1113,8 +1128,6 @@ This style of testing was then carried out on the following screens:
 - ProductScreen
 - ProfileScreen
 - ReadyToBakeScreen
-
-
 
 
 1. **Hompage Tests**
