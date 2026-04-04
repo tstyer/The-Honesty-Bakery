@@ -1339,7 +1339,45 @@ Video:
 
 ![Screenshot of index.html val](./backend/frontend/public/images/html_val/index.png)
 
+2. home page
 
+![Screenshot of homepage val](./backend/frontend/public/images/html_val/home_page.png)
+
+3. about page
+
+![Screenshot of about page](./backend/frontend/public/images/html_val/about_page.png)
+
+4. contact page 
+
+![Screenshot of contact page](./backend/frontend/public/images/html_val/contact_page.png)
+
+5. cart page
+
+![Screenshot of cart page](./backend/frontend/public/images/html_val/cart_page.png)
+
+6. card details page
+
+![Screenshot of card details page](./backend/frontend/public/images/html_val/card_details_page.png)
+
+7. order summary page
+
+![Screenshot of order summary page](./backend/frontend/public/images/html_val/order_summary_page.png)
+
+8. order confirmed page 
+
+![Screenshot of page](./backend/frontend/public/images/html_val/order_confirmed_page.png)
+
+9. personalised cakes
+
+![Screenshot of personalised page](./backend/frontend/public/images/html_val/personlised_page.png)
+
+10. prebaked cakes
+
+![Screenshot of prebaked page](./backend/frontend/public/images/html_val/prebaked_page.png)
+
+11. login page
+
+![Screenshot of login page](./backend/frontend/public/images/html_val/login_page.png)
 
 ---
 

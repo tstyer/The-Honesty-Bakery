@@ -27,9 +27,6 @@ import AboutScreen from './screens/AboutScreen'
 import ContactScreen from './screens/ContactScreen'
 import ErrorScreen from './screens/ErrorScreen'
 
-{/*import { ToastContainer } from 'react-toastify'*/}
-{/*import 'react-toastify/dist/ReactToastify.css'*/}
-
 function Layout({ stripeError, stripePromise }) {
   return (
     <div className='app-shell'>
@@ -85,7 +82,6 @@ function Layout({ stripeError, stripePromise }) {
       </main>
 
       <Footer />
-      {/*<ToastContainer />*/}
     </div>
   )
 }
