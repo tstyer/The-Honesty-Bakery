@@ -2,23 +2,23 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# Create your models here.
+# my models :)
 
 
 class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=200, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
+    name = models.CharField(max_length=200, null=False, blank=False)
+    description = models.TextField(null=False, blank=False)
     # image cannot be used without pillow library installed
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=False, blank=False)
     brand = models.CharField(max_length=200, null=True, blank=True)
     category = models.CharField(max_length=200, null=True, blank=True)
     rating = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     numReviews = models.IntegerField(null=True, blank=True, default=0)
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    countInStock = models.IntegerField(null=True, blank=True, default=0)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)
+    countInStock = models.IntegerField(null=False, blank=False, default=0)
 
-    # ProductType lets you decide which screen it appears on.
+    # ProductType used to decide which screen it appears on.
     PRODUCT_TYPES = (
         ("PREBAKED", "Pre-baked"),
         ("READY_TO_BAKE", "Ready-to-bake"),

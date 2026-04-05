@@ -503,11 +503,47 @@ From there, you will need to add the following "os.path..." to your 'DIRS' in th
 
 Here, I will just give an overview of the syntax I used, explaining it in my terms to class as evidence of my understanding of the language. 
 
+1. Using Django's ORM
 
+I enjoyed writing the django models with it's object relational mapper, as it was easy to grasp and very logical. 
+
+Here is an example of how I used it to write my Product model:
+
+![Screenshot of product model](./backend/frontend/public/images/django_models_readme/product_model.png)
+
+As always, I define the model name with 'class Product(models.Model)' - models.Model fetches the 'Model' function from the model object. 
+
+Each row in this table will be one product. 
+
+For example:
+
+**"user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)"**: each user is assigned to a product. User will be one of the headings in the product row. 
+
+For this, you select the ForeignKey method from the models object and use that to create the key for the specific user. The ForeignKey will be the User key. And the same foreign key can be present in many products, because one user can have many products. 
+
+'on_delete=models.SET_NULL' just means to set the field to null if the user gets deleted. 
+
+And 'null=True' just means that the database is allowed to store no value if the user gets deleted. So it can be blank. 
+
+Another example:
+
+**"name = models.CharField(max_length=200, null=False, blank=False)"**: use the Charfield method from models to create a name field. 
+
+null=False means this can be blank, and blank=False means forms are not allowed to leave this empty, as every product does need a name. 
+
+This same logic was applied to create the reast of the headings in this product model, such as numReviews, productRating, description, countInStock, etc. 
+
+![Screenshot of row headings](./backend/frontend/public/images/django_models_readme/product_model_row_headings.png)
+
+### My Understanding Of The Product Model
+
+The Product model is the core of the data structure in this application. I wrote it to define how each products data is stored, which page (prebaked or personalised), relating to which user it is assigned to, how many there are, pricing, cetegorisation, etc. It is written this way to easily manage it in the backend and the frontend can easily retrieve and display it via an API call. 
+
+Having worked through backend using Django, it has made me shift from only wanting to work frontend to instead be a fullstack MERN engineer as I enjoy writing code for both.
 
 ---
 
-## Deployment
+## Deploying The App
 
 Explain how your project is deployed and how someone can clone and run it locally. Expand on this:
 1. Clone this repository
