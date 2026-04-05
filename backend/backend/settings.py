@@ -126,6 +126,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
 
@@ -272,3 +273,29 @@ AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", "eu-west-2")
 AWS_DEFAULT_ACL = None
 
 AWS_LOCATION = ""
+
+# --- Content Security Policy (for Stripe) ---
+
+CSP_DEFAULT_SRC = ("'self'",)
+
+CSP_SCRIPT_SRC = (
+    "'self'",
+    "https://js.stripe.com",
+    "'unsafe-inline'",  # required for Stripe
+)
+
+CSP_STYLE_SRC = (
+    "'self'",
+    "'unsafe-inline'",
+)
+
+CSP_FRAME_SRC = (
+    "'self'",
+    "https://js.stripe.com",
+    "https://hooks.stripe.com",
+)
+
+CSP_CONNECT_SRC = (
+    "'self'",
+    "https://api.stripe.com",
+)
