@@ -1758,6 +1758,14 @@ The current Lighthouse performance score is an area for improvement. As this pro
 
 #### CSS Validation
 
+**IMPORTANT:** When validating the deployed stylesheet via URI (e.g. the compiled main.e933d2b8.css file, or https://the-honesty-bakery-29256f22a3f7.herokuapp.com/static/css/main.e933d2b8.css), a large number of errors are reported. This is because the deployed CSS is a compiled production bundle, which includes third-party libraries such as Bootstrap and React-Bootstrap, in addition to custom styles.
+
+As a result, URI validation analyses minified and vendor CSS, which produces errors that are not user-authored and are outside the scope of this project.
+
+To accurately validate the CSS written for this project, all custom CSS files (from my VS code e.g. index.css, product.css, etc.) were validated individually using the “Direct Input” method in the W3C CSS Validator. These files were confirmed to contain no syntax errors.
+
+---
+
 Each example comes with an image, but I know that better evidence is a video sample of me validating in real time. For this, you can **click on the video link titled 'Video of (css file) validation'**, then select the link in the centre titled 'View Raw' on the following screen, and you will download a small video file that shows me validating that specific CSS file. 
 
 1. about.css
