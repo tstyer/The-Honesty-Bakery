@@ -65,6 +65,7 @@ The small business I created this for had general and specific goals:
 - As a customer, I want to easily find the social media links.
 - As a customer, I want to be able to leave feedback.  
 
+---
 
 ### Scope Plane
 
@@ -84,6 +85,8 @@ The small business I created this for had general and specific goals:
 - Product Reviews. 
 - Visual Hover Effects.
 - Order History.
+- An email sent to users upon registering. 
+- **Improving the performance**: noted below in Lighthouse testing.
 
 **Future Work On This Project: ESSENTIAL**
 
@@ -95,6 +98,8 @@ The small business I created this for had general and specific goals:
 - Styled Toasters to notify users when they log in and out - UX/UI.
 - More products and a clearer explanation as to what cakes users can buy - UX.
 - Clearer explanation of how to purchase cakes (pick-up only) - UX.
+- An email sent to users upon registering - UX.
+- **Improving the performance**: noted below in Lighthouse testing.
 
 **Features not Included & Why?**
 
@@ -690,7 +695,50 @@ Once the errors and warnings were taken care of, I then scanned my js files agai
 
 ### User Stories Testing
 
-List your user stories and describe how each was met in the final project.
+Each user story was tested by simulating real interactions and verifying expected outcomes.
+
+---
+
+#### Developer Goals
+
+| User Story | Test Performed | Expected Outcome | Result |
+|-----------|---------------|------------------|--------|
+| As the developer, I want to use React.JS to create components and screens for the website | Navigated through all pages (Home, Product, Cart, Checkout) and verified component rendering | All components render correctly with no errors or blank screens | Pass |
+| As a developer, I want to use PostgreSQL to manage the business database | Created, updated, and deleted products via admin and API | Data persists correctly and updates reflect on frontend | Pass |
+| As a developer, I want to demonstrate my ability to write clean code | Ran ESLint and reviewed component structure | No critical errors, consistent structure and readable code | Pass |
+
+---
+
+#### Business Goals
+
+| User Story | Test Performed | Expected Outcome | Result |
+|-----------|---------------|------------------|--------|
+| As the business owner, I want to easily navigate my website as a customer would | Clicked through all pages and navigation links | All pages accessible within 1–2 clicks, no dead ends | Pass |
+| As the business owner, I want to easily create new products for display | Added and edited products via Django admin | Products appear correctly on frontend | Pass |
+| As the business owner, I want to easily sign in and out | Tested login/logout with valid and invalid credentials | Authentication works correctly and protects routes | Pass |
+| As the business owner, I want a secure and efficient checkout process | Completed full checkout flow using Stripe test mode | Payment succeeds and order is stored in database | Pass |
+| As the business owner, I want the branding and messaging to be consistent | Reviewed all pages for colours, typography, and tone | Consistent branding across all pages | Pass |
+
+---
+
+#### Customer Goals
+
+| User Story | Test Performed | Expected Outcome | Result |
+|-----------|---------------|------------------|--------|
+| As a customer, I want to be able to easily order 1 or more items | Added multiple items to cart and updated quantities | Cart updates correctly and totals calculate accurately | Pass |
+| As a customer, I want easily read product descriptions | Reviewed product pages for clarity and formatting | Descriptions are readable and well-structured | Pass |
+| As a customer, I want to know what the business offers on page 1 | Viewed homepage as a new user | Key products and categories are immediately visible | Pass |
+| As a customer, I want clear call-to-actions on relevant pages | Interacted with buttons such as “Add to Cart” and “Checkout” | CTAs are visible, clear, and functional | Pass |
+| As a customer, I want to easily contact the owner | Located and tested contact options | Contact information is easy to find and usable | Pass |
+| As a customer, I want intuitive navigation and checkout | Navigated site and completed checkout process | Smooth flow with no confusion or broken steps | Pass |
+| As a customer, I want to easily find the social media links | Clicked all social media links | Links open correctly in new tabs | Pass |
+| As a customer, I want to be able to leave feedback | Submitted a product review | Review is successfully saved and displayed | Pass |
+
+---
+
+#### Final Notes
+
+Testing was carried out across multiple browsers and included hard refreshes and extension-disabled sessions to ensure accuracy. All core user flows were validated end-to-end.
 
 ### Manual Testing
 
