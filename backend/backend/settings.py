@@ -287,6 +287,7 @@ CONTENT_SECURITY_POLICY = {
             SELF,
             "https://js.stripe.com",
             "https://*.js.stripe.com",
+            "https://m.stripe.network",
             "'unsafe-inline'",
         ],
 
@@ -294,6 +295,7 @@ CONTENT_SECURITY_POLICY = {
             SELF,
             "'unsafe-inline'",
             "https://fonts.googleapis.com",
+            "https://cdnjs.cloudflare.com",
         ],
 
         "img-src": [
@@ -305,8 +307,9 @@ CONTENT_SECURITY_POLICY = {
 
         "font-src": [
             SELF,
-            "https://fonts.gstatic.com",
             "data:",
+            "https://fonts.gstatic.com",
+            "https://cdnjs.cloudflare.com",
         ],
 
         "frame-src": [
