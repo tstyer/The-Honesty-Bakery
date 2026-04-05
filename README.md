@@ -1462,7 +1462,7 @@ After re-adding the footer, this time with aria-labels and using 'ClassName' ins
 
 This failed due to the socials component missing in the file. 
 
-1[Screenshot of fail](./backend/frontend/public/images/jest_tests/tdd/footer/facebook_link_fail.png)
+![Screenshot of fail](./backend/frontend/public/images/jest_tests/tdd/footer/facebook_link_fail.png)
 
 After adding the new footer, the Facebook link test passed:
 
