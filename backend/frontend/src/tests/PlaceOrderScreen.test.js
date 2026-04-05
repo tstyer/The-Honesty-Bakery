@@ -17,7 +17,7 @@ const renderWithStore = (state) => {
   const store = createStore(() => state)
   store.dispatch = jest.fn()
 
-  render(
+  const view = render(
     <Provider store={store}>
       <MemoryRouter>
         <PlaceOrderScreen />
@@ -25,7 +25,7 @@ const renderWithStore = (state) => {
     </Provider>
   )
 
-  return store
+  return { store, ...view }
 }
 
 describe('PlaceOrderScreen', () => {
@@ -72,7 +72,7 @@ describe('PlaceOrderScreen', () => {
   })
 
   test.only('dispatches clear cart and navigates when valid order is placed', () => {
-    const store = renderWithStore({
+    const { store } = renderWithStore({
       cart: {
         cartItems: [
           {

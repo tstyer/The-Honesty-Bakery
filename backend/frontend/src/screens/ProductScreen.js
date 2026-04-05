@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Loader from '../components/Loader'
@@ -41,8 +41,6 @@ function ProductScreen() {
   const productReviewDelete = useSelector((state) => state.productReviewDelete || {})
   const {
     success: successDeleteReview,
-    error: errorDeleteReview,
-    loading: loadingDeleteReview,
   } = productReviewDelete
 
   useEffect(() => {

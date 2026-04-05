@@ -6,8 +6,6 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 // must import user events if testing when the user does something 
 import userEvent from '@testing-library/user-event';
 
-import Footer from "../components/Footer.js";
-
 // First Test
 test("Page Title Loads", () => {
     // I first render the screen I want to use in the test

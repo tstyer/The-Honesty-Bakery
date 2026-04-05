@@ -4,6 +4,8 @@ import '@testing-library/jest-dom'
 /* Render puts components into a fake DOM so I can test what appears on screen */
 import { render, screen } from '@testing-library/react'
 
+import HomeScreen from '../screens/HomeScreen'
+
 /* 
   First, I need to mock the Redux environment, because tests do not use
   the real Redux store or <Provider>.
@@ -55,7 +57,6 @@ jest.mock('react-router-dom', () => ({
   HomeScreen must be imported AFTER the mocks,
   so it uses the mocked Redux and Router hooks.
 */
-import HomeScreen from '../screens/HomeScreen'
 
 beforeEach(() => {
   mockUseSelector.mockReset()

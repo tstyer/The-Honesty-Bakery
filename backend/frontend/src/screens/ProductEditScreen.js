@@ -18,7 +18,7 @@ export default function ProductEditScreen() {
   const [category, setCategory] = useState('')
   const [countInStock, setCountInStock] = useState(0)
   const [description, setDescription] = useState('')
-  const [uploading, setUploading] = useState(false)
+  const [uploading] = useState(false)
 
   // productType state
   const [productType, setProductType] = useState('PREBAKED')
@@ -29,9 +29,6 @@ export default function ProductEditScreen() {
   const productUpdate = useSelector((state) => state.productUpdate)
   const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } =
     productUpdate
-
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
 
   useEffect(() => {
     if (successUpdate) {

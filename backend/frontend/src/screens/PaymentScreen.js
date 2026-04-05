@@ -26,7 +26,9 @@ export default function PaymentScreen() {
     [cartItems]
   )
 
-  const allowedMethods = hasMadeToOrder ? ['Card'] : ['Cash']
+  const allowedMethods = useMemo(() => {
+    return hasMadeToOrder ? ['Card'] : ['Cash']
+  }, [hasMadeToOrder])
 
   const [method, setMethod] = useState(
     allowedMethods.includes(paymentMethod) ? paymentMethod : allowedMethods[0]
@@ -217,10 +219,7 @@ export default function PaymentScreen() {
           type="submit"
           className="my-3 cta-btn"
           variant="outline-dark"
-          disabled={
-            paying ||
-            (method === 'Card' && (!stripeReady || !cardComplete))
-          }
+          disabled={paying || (method === 'Card' && (!stripeReady || !cardComplete))}
         >
           {method === 'Card'
             ? paying

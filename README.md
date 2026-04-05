@@ -655,6 +655,8 @@ Now, when you upload images on the honesty bakehouse website, they should be hos
 
 ## Testing
 
+### ESLint
+
 Throughout the production, I used ESLint to scan my javascript. It scanned for inconsistencies, bugs and helped me avoid messy code.
 
 **Installing**
@@ -674,6 +676,17 @@ I was given prompts, and chose the onces that best fit my project, since I am us
 
 Once you have installed ESLint, it's essential to put 'node_modules' in the .gitignore. Otherwise, the next time you commit, you will end up trying to push thousands of files which will cause a crash. 
 
+**Scanning files**
+
+To scan javascript files, I started with the whole project using 'npx eslint backend/frontend/src/. as this is where my javascript files are. 
+
+![Screenshot of errors](./backend/frontend/public/images/es_lint/errors.png)
+
+The errors were me importing screens or modules too low into the file and unused modules being imported. The warnings were improperly written alt text and correcting names assigned to vairables. 
+
+Once the errors and warnings were taken care of, I then scanned my js files again to produce not output - meaning there are no errors or warning. 
+
+---
 
 ### User Stories Testing
 

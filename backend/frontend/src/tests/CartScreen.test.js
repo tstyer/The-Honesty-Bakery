@@ -7,7 +7,6 @@ import '@testing-library/jest-dom'
 // Memory router is a fake router needed for some unit tests
 import { MemoryRouter } from "react-router";
 import CartScreen from "../screens/CartScreen"
-import Message from "../components/Message";
 
 //== Mock env ==//
 

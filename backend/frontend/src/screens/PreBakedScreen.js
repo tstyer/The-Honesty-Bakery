@@ -58,7 +58,7 @@ export default function PrebakedScreen() {
       <div className="honey-div">
         <img
           src="/images/honey-prebaked.png"
-          alt="Picture of cartoon honey pot"
+          alt="Cartoon honey pot"
           className="honey-pot-prebaked"
         />
       </div>
