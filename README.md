@@ -501,9 +501,9 @@ From there, you will need to add the following "os.path..." to your 'DIRS' in th
 
 ### Understanding Django Syntax
 
-Here, I will just give an overview of the syntax I used, explaining it in my terms to class as evidence of my understanding of the language. 
+Here, I will just give an overview of the syntax I used by referencing the Product Model, explaining it in my terms to use as evidence of my understanding of the language. 
 
-1. Using Django's ORM
+**The Product Model**
 
 I enjoyed writing the django models with it's object relational mapper, as it was easy to grasp and very logical. 
 
@@ -540,6 +540,37 @@ This same logic was applied to create the reast of the headings in this product 
 The Product model is the core of the data structure in this application. I wrote it to define how each products data is stored, which page (prebaked or personalised), relating to which user it is assigned to, how many there are, pricing, cetegorisation, etc. It is written this way to easily manage it in the backend and the frontend can easily retrieve and display it via an API call. 
 
 Having worked through backend using Django, it has made me shift from only wanting to work frontend to instead be a fullstack MERN engineer as I enjoy writing code for both.
+
+A nuance I learned: If your field needs to provide a value (null=false), then you MUST provide a default value. I initially write the price field like this: "price = models.DecimalField(max_digits=10, decimal_places=2)", but I couldn't migrate because I was saying that it needs a value without providing a default. 
+
+### After Building The Model
+
+Once a model is built, you then need to save and run migrations. I think it is best practice to test locally to see that what you have done works as intended. Once it works, then you can push to github and deploy on heroku. 
+
+**To Run Migrations**
+
+In the directory where manage.py lives, type this in the terminal:
+
+'Python manage.py makemigrations'
+
+You will then see migration files just made which explains the changes made. It is basically another chance to make changes or go back if it isn't what you want.
+
+New file appears under migrations:
+
+![Screenshot of file](./backend/frontend/public/images/django_models_readme/makemigrations.png)
+
+Once you're happy, then run 'python manage.py migrate' in the same terminal. 
+
+![Screenshot of migrate](./backend/frontend/public/images/django_models_readme/migrate.png)
+
+At this point, everything is local because I haven't pushed to Heroku. It is here that is best to run locally and see everything is working fine:
+
+'python manage.py runserver'
+
+Once you test the website and note that everything is as it should be, then you can deploy to heroku. 
+
+First: push to github
+Second: manually deploy on Heroku.
 
 ---
 
