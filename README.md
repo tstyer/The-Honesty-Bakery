@@ -672,6 +672,8 @@ I was given prompts, and chose the onces that best fit my project, since I am us
 - not using typescript
 - running in the browser - no node.js for this project
 
+Once you have installed ESLint, it's essential to put 'node_modules' in the .gitignore. Otherwise, the next time you commit, you will end up trying to push thousands of files which will cause a crash. 
+
 
 ### User Stories Testing
 
