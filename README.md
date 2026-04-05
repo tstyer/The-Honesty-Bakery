@@ -802,6 +802,7 @@ You should then see the green (.venv) appear at the beginning of the commond pro
 
 ![Screenshot of installation](./backend/frontend/public/images/python_images/pip_install_pep8.png)
 
+
 #### Testing with PEP8
 
 PEP8 is the official Python style guide. To test that the project follows PEP8 standards, the `pycodestyle` tool was used.
@@ -950,7 +951,6 @@ From there, I modified the function to take the subject line from the fiction da
 This then passed, as the subject line was empty - false. 
 
 ![Screenshot of green state](./backend/frontend/public/images/pytest/second_test/green_state.png)
-
 
 #### Third pytest (fourth test down in test_services)
 
@@ -1254,6 +1254,8 @@ This style of testing was then carried out on the following screens:
 - ReadyToBakeScreen
 
 
+### Unit Testing - Post Code Development
+
 1. **Hompage Tests**
 
 #### Hompage Headers
@@ -1337,8 +1339,7 @@ Fix: Adding 'MemoryRouter' to wrap the rederred screen:
 
 ![Screenshot of test pass](./backend/frontend/public/images/jest_tests/about_screen/about_title_pass.png)
 
-
-
+---
 
 ### Django Tests
 
@@ -1356,6 +1357,7 @@ This was the result on the first test:
 
 ![Screenshot of result](./backend/frontend/public/images/django_tests/urls_test_pass.png)
 
+
 2. Testing Product List endpoint Returns 200
 
 ![Screenshot of test](./backend/frontend/public/images/django_tests/products_api_test.png)
@@ -1364,12 +1366,38 @@ This was the result on the first test:
 
 ### Validators and Tools
 
-(**INCOMPLETE SECTION - CODE VALIDATION**)
+#### Lighthouse
 
+Performance Improvements (Planned)
+The current Lighthouse performance score is recognised as an area for improvement. As this project is intended to be developed into a production-ready site for a real customer, performance optimisation will be prioritised in future iterations. Planned improvements include optimising and compressing images, implementing lazy loading for media, reducing unused JavaScript and CSS, enabling code splitting, and improving caching strategies through Django and CDN configuration (e.g. AWS S3 and CloudFront). Additional steps such as minimising render-blocking resources and refining API calls will ensure faster load times and a smoother user experience across devices.
 
-- HTML Validator
-- CSS Validator
-- Lighthouse Report (Accessibility, SEO, etc.)
+1. Homepage
+
+![Screenshot of homepage](./backend/frontend/public/images/lighthouse/homepage.png)
+
+2. About
+
+![Screenshot of about](./backend/frontend/public/images/lighthouse/about.png)
+
+3. Contact
+
+![Screenshot of contact](./backend/frontend/public/images/lighthouse/contact.png)
+
+4. Personalised Cakes
+
+![Screenshot of perosonlised](./backend/frontend/public/images/lighthouse/personlised.png)
+
+5. Prebaked Cakes
+
+![Screenshot of prebaked](./backend/frontend/public/images/lighthouse/prebaked.png)
+
+6. Cart Screen
+
+![Screenshot of cart](./backend/frontend/public/images/lighthouse/cart.png)
+
+7. Place Order
+
+![Screenshot of place order](./backend/frontend/public/images/lighthouse/place_order.png)
 
 ---
 
