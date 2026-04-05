@@ -1,6 +1,9 @@
 {
   "name": "honesty-bakery-root",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "heroku-postbuild": "cd backend/frontend && npm ci && npm run build"
   },
@@ -16,3 +19,4 @@
     "globals": "^17.4.0"
   }
 }
+
