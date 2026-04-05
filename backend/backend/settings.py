@@ -18,6 +18,8 @@ if os.path.exists("env.py"):
 
 from pathlib import Path
 
+from csp.constants import SELF
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_ROOT = BASE_DIR.parent
@@ -56,7 +58,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
-    'storages'
+    'storages',
+    'csp',
 ]
 
 REST_FRAMEWORK = {
@@ -274,28 +277,39 @@ AWS_DEFAULT_ACL = None
 
 AWS_LOCATION = ""
 
-# --- Content Security Policy (for Stripe) ---
+# Content Security Policy (for Stripe) *
 
-CSP_DEFAULT_SRC = ("'self'",)
+CONTENT_SECURITY_POLICY = {
+    "DIRECTIVES": {
+        "default-src": [SELF],
+        "script-src": [SELF, "https://js.stripe.com", "'unsafe-inline'"],
+        "style-src": [SELF, "'unsafe-inline'"],
+        "frame-src": [SELF, "https://js.stripe.com", "https://hooks.stripe.com"],
+        "connect-src": [
+            SELF,
+            "https://api.stripe.com",
+            "https://js.stripe.com",
+            "https://m.stripe.network",
+        ],
+    },
+}
 
-CSP_SCRIPT_SRC = (
-    "'self'",
-    "https://js.stripe.com",
-    "'unsafe-inline'",  # required for Stripe
-)
+INSTALLED_APPS = [
+    # ...
+    "csp",
+]
 
-CSP_STYLE_SRC = (
-    "'self'",
-    "'unsafe-inline'",
-)
+MIDDLEWARE = [
+    # ...
+    "csp.middleware.CSPMiddleware",
+]
 
-CSP_FRAME_SRC = (
-    "'self'",
-    "https://js.stripe.com",
-    "https://hooks.stripe.com",
-)
-
-CSP_CONNECT_SRC = (
-    "'self'",
-    "https://api.stripe.com",
-)
+CONTENT_SECURITY_POLICY = {
+    "DIRECTIVES": {
+        "default-src": [SELF],
+        "script-src": [SELF, "https://js.stripe.com", "'unsafe-inline'"],
+        "style-src": [SELF, "'unsafe-inline'"],
+        "frame-src": [SELF, "https://js.stripe.com", "https://hooks.stripe.com"],
+        "connect-src": [SELF, "https://api.stripe.com", "https://js.stripe.com", "https://m.stripe.network"],
+    },
+}
