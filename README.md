@@ -2,7 +2,7 @@
 
 ![Screenshot of Website Home](./backend/frontend/public/images/readme_cover.png)
 
-The Honesty Bakery is a local cake store in my town. I built this full-stack website for them, using React, Redux, Tailwind, Django, PostgresSQL, and some Vanilla JS. The branding and tone is consistent, and it caters to all audiences who pass the physical shop or website. There are limited pages, but it offers an intuitive layout. 
+The Honesty Bakery is a local cake store in my town. I built this full-stack website for them, using React, Redux, Tailwind, Django, PostgreSQL, and some Vanilla JS. The branding and tone are consistent, and it caters to all audiences who pass the physical shop or website. There are limited pages, but it offers an intuitive layout. 
 
 --- 
 
@@ -13,20 +13,43 @@ The Honesty Bakery is a local cake store in my town. I built this full-stack web
   - [Scope Plane](#scope-plane)
   - [Structure Plane](#structure-plane)
   - [Skeleton Plane](#skeleton-plane)
-  - [Data Schema](#database-schema)
+  - [Database Schema](#database-schema)
   - [Surface Plane](#surface-plane)
   - [Robust Code](#robust-code)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
 - [Setting Up Stripe Payments](#setting-up-stripe-payments)
-- [Merging Django With React](#merging-django--react)
-- [Deployment](#deployment)
-- [AWS - Adding Images](#adding-images-to-aws)
+- [Merging Django & React](#merging-django--react)
+  - [How To Merge Them](#how-to-merge-them)
+  - [Understanding Django Syntax](#understanding-django-syntax)
+  - [My Understanding Of The Product Model](#my-understanding-of-the-product-model)
+  - [After Building The Model](#after-building-the-model)
+- [Deploying The App](#deploying-the-app)
+- [Adding Images to AWS](#adding-images-to-aws)
 - [Testing](#testing)
+  - [ESLint](#eslint)
   - [User Stories Testing](#user-stories-testing)
   - [Manual Testing](#manual-testing)
+  - [Python Testing](#python-testing)
+  - [PyTest](#pytest)
+  - [Jest Tests: TDD (before code was written) and Unit Tests After](#jest-tests-tdd-before-code-was-written-and-unit-tests-after)
+  - [Unit Testing - Post Code Development](#unit-testing---post-code-development)
+  - [Django Tests](#django-tests)
   - [Validators and Tools](#validators-and-tools)
+    - [Lighthouse](#lighthouse)
+    - [CSS Validation](#css-validation)
+    - [HTML Validation](#html-validation)
   - [Bugs](#bugs)
+    - [Frontend Bugs](#frontend-bugs)
+    - [Backend Bugs](#backend-bugs)
+- [Setting Up Virtual Environment](#setting-up-virtual-environment)
+- [Creating Django Project](#creating-django-project)
+- [Creating Individual Apps](#creating-individual-apps)
+- [Writing Your First View](#writing-your-first-view)
+- [Using Django Rest Framework](#using-django-rest-framework)
+- [Amending Backend Data](#amending-backend-data)
+  - [Making New Databases](#making-new-databases)
+- [Authentication](#authentication)
+  - [JSON Web Tokens](#json-web-tokens)
+- [Tech. Used](#tech-used)
 - [Credits](#credits)
 - [Acknowledgements](#acknowledgements)
 
@@ -38,10 +61,10 @@ The Honesty Bakery is a local cake store in my town. I built this full-stack web
 
 1. Developer Goals
 
-My overall goal was to develop an intuitive website for a local business that adhered to brand tone. To acheive this, I created these suer stories for myself:
+My overall goal was to develop an intuitive website for a local business that adhered to brand tone. To achieve this, I created these user stories for myself:
 
 - As the developer, I want to use React.JS to create components and screens for the website. 
-- As a developer, I want to use PostgresSQL to manage the business database. 
+- As a developer, I want to use PostgreSQL to manage the business database. 
 - As a developer, I want to demonstrate my ability to write clean code to showcase my skills. 
 
 2. Business Goals
@@ -57,10 +80,10 @@ The small business I created this for had general and specific goals:
 3. Customer Goals
 
 - As a customer, I want to be able to easily order 1 or more items. 
-- As a customer, I want easily read product descriptions. 
+- As a customer, I want to easily read product descriptions. 
 - As a customer, I want to know what the business offers on page 1. 
 - As a customer, I want clear call-to-actions on relevant pages. 
-- As a customers, I want to easily contact the owner. 
+- As a customer, I want to easily contact the owner. 
 - As a customer, I want intuitive navigation and checkout. 
 - As a customer, I want to easily find the social media links.
 - As a customer, I want to be able to leave feedback.  
@@ -86,7 +109,7 @@ The small business I created this for had general and specific goals:
 - Visual Hover Effects.
 - Order History.
 - An email sent to users upon registering. 
-- **Improving the performance**: noted below in Lighthouse testing.
+- **Improving performance**: noted below in Lighthouse testing.
 
 **Future Work On This Project: ESSENTIAL**
 
@@ -94,21 +117,20 @@ The small business I created this for had general and specific goals:
 - Clean/cut down CSS code and use fewer classes (readability and cleanliness).
 - Styling of the review box isn't ideal - lines look messy. - UI fix.
 - Include 'Go Back' buttons at any point in the payment process - UX fix.
-- Clean folder/structure layout - readbility.
+- Clean folder/structure layout - readability.
 - Styled Toasters to notify users when they log in and out - UX/UI.
 - More products and a clearer explanation as to what cakes users can buy - UX.
 - Clearer explanation of how to purchase cakes (pick-up only) - UX.
 - An email sent to users upon registering - UX.
-- **Improving the performance**: noted below in Lighthouse testing.
+- **Improving performance**: noted below in Lighthouse testing.
 
 **Features not Included & Why?**
 
-- Wishlist - User's can already purchase without saving.
+- Wishlist - Users can already purchase without saving.
 - Extra Floating Graphics - Too cluttered and not worth the extra coding. 
 - Order Tracking - There won't be future delivery.
 - Advanced product filtering - There is only a small product catalogue. 
-- Blog - not nessecery for this project.
-
+- Blog - not necessary for this project.
 
 ### Structure Plane
 
@@ -175,7 +197,6 @@ The navigation model prioritises ease of movement and minimal friction. A persis
 
 ![Screenshot of About page](./backend/frontend/public/images/about_wireframe_mobile.png)
 
-
 ### Database Schema
 
 #### Schema Rationale
@@ -196,7 +217,7 @@ The project uses Django’s built-in User model from django.contrib.auth for aut
 
 An ERD diagram is included below to show the full structure of the database and the relationships between the models.
 
-The project uses Django’s built-in User model from django.contrib.auth
+The project uses Django’s built-in User model from django.contrib.auth.
 
 Here is the link to my ERD, created using Lucid Chart: https://lucid.app/lucidchart/c6989dad-7bf8-4550-bf20-189bb77cfb91/edit?viewport_loc=-2010%2C-578%2C3940%2C1903%2C0_0&invitationId=inv_564427e2-7f17-413e-b4b8-1f3b7da38529
 
@@ -242,7 +263,6 @@ date_joined – DateTimeField
 
 last_login – DateTimeField
 
-
 Relationships:
 
 One User can create many Products.
@@ -250,7 +270,6 @@ One User can create many Products.
 One User can write many Reviews.
 
 One User can have many Orders.
-
 
 **Product**
 
@@ -286,13 +305,11 @@ isPrebaked – BooleanField
 
 createdAt – DateTimeField (auto_now_add=True)
 
-
 Relationships:
 
 One Product can have many Reviews.
 
 One Product can appear in many OrderItems.
-
 
 **Review**
 
@@ -312,13 +329,11 @@ rating – IntegerField (default=0)
 
 comment – TextField
 
-
 Relationships:
 
 Many Reviews belong to one Product.
 
 Many Reviews belong to one User.
-
 
 **Order**
 
@@ -348,7 +363,6 @@ deliveredAt – DateTimeField
 
 createdAt – DateTimeField (auto_now_add=True)
 
-
 Relationships:
 
 One User can have many Orders.
@@ -356,7 +370,6 @@ One User can have many Orders.
 One Order contains many OrderItems.
 
 One Order has one ShippingAddress.
-
 
 **OrderItem**
 
@@ -378,13 +391,11 @@ price – DecimalField(10,2)
 
 image – CharField(200)
 
-
 Relationships:
 
 Many OrderItems belong to one Order.
 
 Many OrderItems reference one Product.
-
 
 **ShippingAddress**
 
@@ -406,11 +417,9 @@ country – CharField(200)
 
 shippingPrice – DecimalField(10,2)
 
-
 Relationship:
 
 One ShippingAddress is associated with exactly one Order.
-
 
 ### Surface Plane
 
@@ -451,15 +460,15 @@ Together, these patterns create a structured and fault-tolerant codebase that pr
 
 ## Setting Up Stripe Payments
 
-To obtain the stripe API keys in order to communicate with the eCommerce store, you need to log into stripe, or create an account. From there, ensure to check the 'Test Mode' icon, to turn it on. 
+To obtain the Stripe API keys in order to communicate with the eCommerce store, you need to log into Stripe, or create an account. From there, ensure you check the 'Test Mode' icon to turn it on. 
 
 Then, you should clearly see a section on that current screen titled 'For developers' which will have the PK_test key and the SK_test key, ready to copy. 
 
-NOTE: Never paste these keys into your settings, views, or anywhere that - when pushing - exposes them to github. 
+NOTE: Never paste these keys into your settings, views, or anywhere that, when pushing, exposes them to GitHub. 
 
 Your keys must be in your env.py file, and that env.py file must be properly stated in the .gitignore file. 
 
-Then, in your urls.py, you need import TemplateView: 
+Then, in your urls.py, you need to import TemplateView: 
 
 from django.views.generic import TemplateView
 
@@ -467,7 +476,7 @@ From there, you need to add a route which points to the index.html file in the b
 
 The route is: path('', TemplateView.as_view(template_name='index.html')) - put this in the url patterns.
 
-This index.html file is now where the react app lives, and it will update everytime you run 'npm run build' after every new change you make. 
+This index.html file is now where the React app lives, and it will update every time you run 'npm run build' after every new change you make. 
 
 Finally, in your STATICFILES_DIRS, within settings, you need to let it know that you also have static files in your frontend/build that you created. 
 
@@ -475,10 +484,9 @@ So, add this line:
 
 BASE_DIR / 'frontend/build/static'
 
-
 **Successful Payment**
 
-Once you have successfuly made a payment on your site (only in test mode), you will see this update on your home dashboard which shows a new payment made today:
+Once you have successfully made a payment on your site (only in test mode), you will see this update on your home dashboard which shows a new payment made today:
 
 ![Screenshot of payment](./backend/frontend/public/images/stripe/payment_success.png)
 
@@ -492,13 +500,13 @@ Although combining Django and React in one project structure is not the most sta
 
 To do this, ensure everything is saved, pushed, and all servers are closed, and terminals are shut. 
 
-Then, open your folders, and move the frontend (react) into the backend (Django).
+Then, open your folders, and move the frontend (React) into the backend (Django).
 
 Then, open a terminal and change directory to the frontend: "cd backend" + "cd frontend" - takes you to the new location of your frontend folder. 
 
 In here, type "npm run build"
 
-"Run build" is something you would need to continue to run everytime you make changes to the website. 
+"Run build" is something you would need to continue to run every time you make changes to the website. 
 
 From there, you will need to add the following "os.path..." to your 'DIRS' in the Templates section of settings:
 
@@ -510,7 +518,7 @@ Here, I will just give an overview of the syntax I used by referencing the Produ
 
 **The Product Model**
 
-I enjoyed writing the django models with it's object relational mapper, as it was easy to grasp and very logical. 
+I enjoyed writing the Django models with its object relational mapper, as it was easy to grasp and very logical. 
 
 Here is an example of how I used it to write my Product model:
 
@@ -532,25 +540,25 @@ And 'null=True' just means that the database is allowed to store no value if the
 
 Another example:
 
-**"name = models.CharField(max_length=200, null=False, blank=False)"**: use the Charfield method from models to create a name field. 
+**"name = models.CharField(max_length=200, null=False, blank=False)"**: use the CharField method from models to create a name field. 
 
 null=False means this can be blank, and blank=False means forms are not allowed to leave this empty, as every product does need a name. 
 
-This same logic was applied to create the reast of the headings in this product model, such as numReviews, productRating, description, countInStock, etc. 
+This same logic was applied to create the rest of the headings in this product model, such as numReviews, productRating, description, countInStock, etc. 
 
 ![Screenshot of row headings](./backend/frontend/public/images/django_models_readme/product_model_row_headings.png)
 
 ### My Understanding Of The Product Model
 
-The Product model is the core of the data structure in this application. I wrote it to define how each products data is stored, which page (prebaked or personalised), relating to which user it is assigned to, how many there are, pricing, cetegorisation, etc. It is written this way to easily manage it in the backend and the frontend can easily retrieve and display it via an API call. 
+The Product model is the core of the data structure in this application. I wrote it to define how each product's data is stored, which page (prebaked or personalised), which user it is assigned to, how many there are, pricing, categorisation, etc. It is written this way to easily manage it in the backend and the frontend can easily retrieve and display it via an API call. 
 
 Having worked through backend using Django, it has made me shift from only wanting to work frontend to instead be a fullstack MERN engineer as I enjoy writing code for both.
 
-A nuance I learned: If your field needs to provide a value (null=false), then you MUST provide a default value. I initially write the price field like this: "price = models.DecimalField(max_digits=10, decimal_places=2)", but I couldn't migrate because I was saying that it needs a value without providing a default. 
+A nuance I learned: If your field needs to provide a value (null=false), then you MUST provide a default value. I initially wrote the price field like this: "price = models.DecimalField(max_digits=10, decimal_places=2)", but I couldn't migrate because I was saying that it needs a value without providing a default. 
 
 ### After Building The Model
 
-Once a model is built, you then need to save and run migrations. I think it is best practice to test locally to see that what you have done works as intended. Once it works, then you can push to github and deploy on heroku. 
+Once a model is built, you then need to save and run migrations. I think it is best practice to test locally to see that what you have done works as intended. Once it works, then you can push to GitHub and deploy on Heroku. 
 
 **To Run Migrations**
 
@@ -568,24 +576,258 @@ Once you're happy, then run 'python manage.py migrate' in the same terminal.
 
 ![Screenshot of migrate](./backend/frontend/public/images/django_models_readme/migrate.png)
 
-At this point, everything is local because I haven't pushed to Heroku. It is here that is best to run locally and see everything is working fine:
+At this point, everything is local because I haven't pushed to Heroku. It is here that it is best to run locally and see everything is working fine:
 
 'python manage.py runserver'
 
-Once you test the website and note that everything is as it should be, then you can deploy to heroku. 
+Once you test the website and note that everything is as it should be, then you can deploy to Heroku. 
 
-First: push to github
+First: push to GitHub
 Second: manually deploy on Heroku.
 
 ---
 
 ## Deploying The App
 
-Explain how your project is deployed and how someone can clone and run it locally. Expand on this:
-1. Clone this repository
-2. Open in VS Code
-3. Install dependencies
-4. Run application
+## Deploying The App
+
+This project is deployed using **GitHub** and **Heroku**. I used GitHub to store and manage the code, and Heroku to host the live application online. Below are the steps to clone, set up, and run the project locally, followed by the steps I used to deploy it.
+
+Link to live site: [Deployed Site](https://the-honesty-bakery-29256f22a3f7.herokuapp.com/)
+
+---
+
+### Cloning the Repository
+
+If you want to create a copy of this project on your own machine, you first need to clone the repository.
+
+1. Go to the repository on GitHub.
+2. Click the green **Code** button.
+3. Copy the repository URL.
+4. Open your terminal and type:
+
+```bash
+git clone <repository-url>
+```
+
+This will download the project files to your computer.
+
+---
+
+### Running the Project Locally
+
+Once the project has been cloned, open it in your chosen code editor, such as VS Code.
+
+#### 1. Open the cloned project folder in VS Code.
+
+#### 2. Set up the backend virtual environment
+
+First, navigate to the backend folder in the terminal:
+
+```bash
+cd backend
+```
+
+Then create a virtual environment:
+
+```bash
+python -m venv .venv
+```
+
+Activate the virtual environment:
+
+```bash
+.venv/Scripts/activate
+```
+
+Once activated, you should see the virtual environment name appear on the left-hand side of the terminal.
+
+#### 3. Install backend dependencies
+
+Install the required Python packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+#### 4. Add environment variables
+
+Create an `env.py` file and add your secret environment variables, such as:
+
+- `SECRET_KEY`
+- `STRIPE_SECRET_KEY`
+- `STRIPE_PUBLISHABLE_KEY`
+- AWS keys if using S3 (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME, AWS_S3_REGION_NAME)
+
+Each of these will be written like this: os.environ.setdefault("AWS_ACCESS_KEY_ID", "..."). That foes for the Stripe keys and other keys. This is because the settings will point to this file when reading the keys.
+
+This file must be included in `.gitignore` so that it is not pushed to GitHub.
+
+#### 5. Run migrations
+
+Before running the project, you need to apply migrations:
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+#### 6. Run the backend server
+
+Start the Django development server:
+
+```bash
+python manage.py runserver
+```
+
+---
+
+### Running the Frontend
+
+To run the React frontend in development mode, open another terminal and navigate to the frontend folder:
+
+```bash
+cd backend/frontend
+```
+
+Install the frontend dependencies:
+
+```bash
+npm install
+```
+
+Then start the React development server:
+
+```bash
+npm start
+```
+
+---
+
+### Creating the Production Build
+
+When preparing the project for deployment, the React frontend must be built into static files that Django can serve.
+
+From inside the frontend folder, run:
+
+```bash
+npm run build
+```
+
+This creates the production-ready frontend build inside the `build` folder.
+
+Django then serves this built React app through the `index.html` file using `TemplateView`.
+
+---
+
+### Deploying to Heroku
+
+Once I had tested the project locally and pushed my final changes to GitHub, I deployed it to Heroku.
+
+#### 1. Push the code to GitHub
+
+After making changes locally, I saved the project, committed the changes, and pushed them to GitHub.
+
+Example commands:
+
+```bash
+git add .
+git commit -m "Add final deployment changes"
+git push
+```
+
+#### 2. Create a Heroku app
+
+Why: This creates your online server.
+
+I logged into Heroku and created a new app from the dashboard.
+
+Set the region to the closest position to you: this is likely a European setting.
+
+Steps:
+
+On your Heroku Dashboard, click 'New'.
+Click 'Create New App.'
+Enter your app name, and then choose the nearest region.
+Click 'create app.'
+Add Heroku Postgres
+Why: PostgreSQL is the production database for this Django project.
+
+Steps:
+
+Go to Heroku → Resources → Add-ons
+Search for Heroku Postgres
+Add the free plan
+Heroku automatically creates:
+DATABASE_URL — connection string for Django
+
+Set Environment Variables (Config Vars)
+Why: These keep secret keys and API credentials out of your code (security best practice).
+
+Go to:
+
+Heroku → Settings → Reveal Config Vars
+
+Set your Config Vars as displayed here:
+
+#### 3. Connect Heroku to GitHub
+
+Inside Heroku:
+
+1. I opened the **Deploy** tab.
+2. I selected **GitHub** as the deployment method.
+3. I connected my GitHub account.
+4. I searched for my repository and connected it.
+
+This allowed Heroku to pull the latest version of the project directly from GitHub.
+
+#### 4. Add Config Vars
+
+In the **Settings** tab on Heroku, I added the required config vars, including:
+
+- `SECRET_KEY`
+- `STRIPE_SECRET_KEY`
+- `STRIPE_PUBLISHABLE_KEY`
+- AWS keys if using S3
+- DEBUG (1 local, 0 production)
+- GOOGLE_SHEET_ID
+- DISABLE_COLLECTSTATIC – set to 1 during early development if collectstatic fails. For production, this should be removed so static files are collected.
+
+These are important because secret values should never be written directly into the codebase.
+
+#### 5. Add buildpacks if needed
+
+Because this project uses both Django and React, Heroku may need both:
+
+- Python buildpack
+- Node.js buildpack
+
+This ensures Heroku can install both the Python and JavaScript dependencies correctly.
+
+#### 6. Deploy the app
+
+Once GitHub was connected and the config vars were added, I deployed the app through Heroku.
+
+I could either:
+
+- use **Manual Deploy**
+- or enable **Automatic Deploys** so Heroku redeploys every time I push to GitHub
+
+However, I always chose to manualy deploy.
+
+#### 7. Open the live app
+
+After deployment finished successfully, I clicked **Open App** in Heroku to view the live site.
+
+---
+
+### Important Notes
+
+- I made sure to test the project locally before pushing changes to GitHub.
+- After making frontend changes, I needed to run `npm run build` again so Django would serve the latest React build.
+- Secret keys were stored in `env.py` locally and in Heroku config vars in production.
+- These secret values were never committed to GitHub.
+- If static files or styling appeared incorrect after deployment, a hard refresh was sometimes needed to clear cached files.
 
 Link to live site: [Deployed Site](https://the-honesty-bakery-29256f22a3f7.herokuapp.com/)
 
@@ -594,7 +836,7 @@ Link to live site: [Deployed Site](https://the-honesty-bakery-29256f22a3f7.herok
 ## Adding Images to AWS
 
 For this project, I decided to store images in the scalable S3 service by AWS. I did this because this service is designed for durability. 
-In the even that the website catches a lot of traffic, then AWS can handle the influx, whereas self-hosting images could cause the website to freeze
+In the event that the website catches a lot of traffic, then AWS can handle the influx, whereas self-hosting images could cause the website to freeze
 or crash.
 
 Storing images in AWS also separates static resources from the application server. This stops the backend from needing to use up resources to host them.
@@ -607,12 +849,12 @@ The process to set this up:
 4. On the next page, choose 'Create a bucket'. 
 5. Name your bucket something relevant. 
 
-6. Afterwhich, you will need to untick the box which says 'turn off all public access'. The reason for this, is because you need the public to 
+6. Afterward, you will need to untick the box which says 'turn off all public access'. The reason for this is because you need the public to 
    see your images. Just ensure you never store any private information in the bucket.
 
 ![Screenshot of example](./backend/frontend/public/images/aws/turn_off_allpublicaccess.png)
 
-7. After that, scroll to bottom and click 'create bucket'. 
+7. After that, scroll to the bottom and click 'create bucket'. 
 
 8. Next, navigate back to your bucket by clicking on its name, click 'upload' and you should be taken to another screen. In that screen, click 
 'add files'. Here, you will be able to upload a folder or the images - I selected all the images for upload. 
@@ -636,25 +878,25 @@ Which can be found here: https://django-storages.readthedocs.io/en/latest/backen
 
 Then, add 'storages' to your list of installed apps.
 
-11. Type 'IAM' into the AWS search bas, and click on it.
+11. Type 'IAM' into the AWS search bar, and click on it.
 
-Click 'users' on the left panel. then 'create user' on the right.
+Click 'users' on the left panel, then 'create user' on the right.
 
-Clcik on 'attach policies directly'. Type s3, then click 'Amazons3FullAccess'.
+Click on 'attach policies directly'. Type s3, then click 'AmazonS3FullAccess'.
 
-12. Once that is setup, go back to your new user you created by clicking their name. 
+12. Once that is set up, go back to your new user you created by clicking their name. 
 
 - On this dashboard, you should see an option to 'create access key'. So click that, and when I did, I was taken to this page:
 
 ![Screenshot of aws section](./backend/frontend/public/images/aws/aws_access_key_create.png)
 
-The reason I choose "Running outside AWS" is because the website is hosted on Heroku. 
+The reason I chose "Running outside AWS" is because the website is hosted on Heroku. 
 
 Ensure all of your keys are placed in the env.py file, and that this specific file is listed in 'gitignore'. 
 
 After that, place your user access key and secret key in the 'config vars' section of Heroku. 
 
-Now, when you upload images on the honesty bakehouse website, they should be hosted directly on AWS. 
+Now, when you upload images on the Honesty Bakehouse website, they should be hosted directly on AWS. 
 
 ---
 
@@ -662,34 +904,34 @@ Now, when you upload images on the honesty bakehouse website, they should be hos
 
 ### ESLint
 
-Throughout the production, I used ESLint to scan my javascript. It scanned for inconsistencies, bugs and helped me avoid messy code.
+Throughout production, I used ESLint to scan my JavaScript. It scanned for inconsistencies, bugs, and helped me avoid messy code.
 
 **Installing**
 
-In the project route, I typed 'npm install eslint --save-dev'
+In the project root, I typed 'npm install eslint --save-dev'
 
 **Initialise**
 
 To initialise, I typed 'npx eslint --init'
 
-I was given prompts, and chose the onces that best fit my project, since I am using React:
+I was given prompts, and chose the ones that best fit my project, since I am using React:
 
-- Chose to test javascript
-- chose js modules (import and export)
-- not using typescript
-- running in the browser - no node.js for this project
+- Chose to test JavaScript
+- chose JS modules (import and export)
+- not using TypeScript
+- running in the browser - no Node.js for this project
 
 Once you have installed ESLint, it's essential to put 'node_modules' in the .gitignore. Otherwise, the next time you commit, you will end up trying to push thousands of files which will cause a crash. 
 
 **Scanning files**
 
-To scan javascript files, I started with the whole project using 'npx eslint backend/frontend/src/. as this is where my javascript files are. 
+To scan JavaScript files, I started with the whole project using 'npx eslint backend/frontend/src/.' as this is where my JavaScript files are. 
 
 ![Screenshot of errors](./backend/frontend/public/images/es_lint/errors.png)
 
-The errors were me importing screens or modules too low into the file and unused modules being imported. The warnings were improperly written alt text and correcting names assigned to vairables. 
+The errors were me importing screens or modules too low into the file and unused modules being imported. The warnings were improperly written alt text and correcting names assigned to variables. 
 
-Once the errors and warnings were taken care of, I then scanned my js files again to produce not output - meaning there are no errors or warning. 
+Once the errors and warnings were taken care of, I then scanned my JS files again to produce no output - meaning there are no errors or warnings. 
 
 ---
 
@@ -726,7 +968,7 @@ Each user story was tested by simulating real interactions and verifying expecte
 | User Story | Test Performed | Expected Outcome | Result |
 |-----------|---------------|------------------|--------|
 | As a customer, I want to be able to easily order 1 or more items | Added multiple items to cart and updated quantities | Cart updates correctly and totals calculate accurately | Pass |
-| As a customer, I want easily read product descriptions | Reviewed product pages for clarity and formatting | Descriptions are readable and well-structured | Pass |
+| As a customer, I want to easily read product descriptions | Reviewed product pages for clarity and formatting | Descriptions are readable and well-structured | Pass |
 | As a customer, I want to know what the business offers on page 1 | Viewed homepage as a new user | Key products and categories are immediately visible | Pass |
 | As a customer, I want clear call-to-actions on relevant pages | Interacted with buttons such as “Add to Cart” and “Checkout” | CTAs are visible, clear, and functional | Pass |
 | As a customer, I want to easily contact the owner | Located and tested contact options | Contact information is easy to find and usable | Pass |
@@ -742,9 +984,9 @@ Testing was carried out across multiple browsers and included hard refreshes and
 
 ### Manual Testing
 
-1. One of the first manual tests carried out was to click on one of the products displayed on the homescreen to see if the productScreen.js renders properly. For this to be successful, it needs to take you to a new page (not open a new one), show the 3 collumns (image, price, and details). 
+1. One of the first manual tests carried out was to click on one of the products displayed on the homescreen to see if the productScreen.js renders properly. For this to be successful, it needs to take you to a new page (not open a new one), show the 3 columns (image, price, and details). 
 
-I first Clicked on the 'Birthday Cake':
+I first clicked on the 'Birthday Cake':
 
 ![Sreenshot of birthday cake on homescreen](./resources/images/manual_tests/testing_product_screen/clicking_on-product.png)
 
@@ -754,7 +996,7 @@ As you can see, it rendered successfully (excluding image fail).
 
 ![Screenshot of code](./resources/images/manual_tests/testing_product_screen/in_stock/screenshot_of_code.png)
 
-After saving and refreshing the live server (npm start - since it's react), the product screen showed 'Ready to Bake!' since I had set the stock to be greater than zero. 
+After saving and refreshing the live server (npm start - since it's React), the product screen showed 'Ready to Bake!' since I had set the stock to be greater than zero. 
 
 Status:
 ![Screenshot of status](./resources/images/manual_tests/testing_product_screen/in_stock/status.png)
@@ -776,7 +1018,7 @@ Cart page:
 
 This all worked fine, however, I decided this wasn't best for the user experience. My plans moving forward were to create a notification that pops up for 5 seconds, showing that the item is added to the cart, but they stay on the same screen (unless the user clicks on the cart icon to go to the cart screen). 
 
-This would make for a better experience, because the user wouldn't then have to keep clicking out of the cart screen if they wish to purcahse more products.
+This would make for a better experience, because the user wouldn't then have to keep clicking out of the cart screen if they wish to purchase more products.
 
 #### Login Testing
 
@@ -810,9 +1052,7 @@ Change user_name = 'email' in views.py. After that, it worked:
 
 ![Screenshot of order placed](./resources/images/manual_tests/login_to_checkout/order_placed.png)
 
-
 Here's a list of following manual tests I carried out:
-
 
 | Test ID | Feature | Test Description | Steps | Expected Result | Actual Result | Status |
 |--------|--------|-----------------|------|----------------|---------------|--------|
@@ -833,11 +1073,9 @@ Here's a list of following manual tests I carried out:
 | MT15 | Deployment Test | Test deployed app | Open deployed site on different browser | App works consistently | Works across browsers | Pass |
 | MT16 | Console Error Investigation | Investigate blank console error | Open DevTools → Console | No critical errors affecting functionality | Blank error present but non-breaking (likely AVG interference) | **Known Issue** |
 
-
-
 ### Python Testing
 
-All Python code in this project follows the PEP 8 style guide. The use of PEP8 allowed me to keep my Python code consistent and readable. To add PEP8, you need ensure you are operating within your virtual environment:
+All Python code in this project follows the PEP 8 style guide. The use of PEP8 allowed me to keep my Python code consistent and readable. To add PEP8, you need to ensure you are operating within your virtual environment:
 
 To add PEP8 to your project, it's essential you are operating within a virtual environment. 
 
@@ -861,7 +1099,7 @@ If you do not see that, you will need to be within the project root/or where you
 
 - ".venv/Scripts/Activate"
 
-You should then see the green (.venv) appear at the beginning of the commond prompt line. 
+You should then see the green (.venv) appear at the beginning of the command prompt line. 
 
 6. Once you are within your virtual environment, then you can add PEP8 by searching for it in the extensions or via the terminal:
 
@@ -925,15 +1163,15 @@ This result shows that my lines of code were simply longer than recommended, but
 
 ### PyTest
 
-PyTests is a TDD tool I used to test my pure python, so I wouldn't need to import unittest in the test file that I would do when testing views or models. 
+PyTest is a TDD tool I used to test my pure Python, so I wouldn't need to import unittest in the test file that I would use when testing views or models. 
 
-I used PyTest to rest the functions in the services file. 
+I used PyTest to test the functions in the services file. 
 
 1. First, I installed PyTest with this command:
 
 ![Screenshot of installation](./backend/frontend/public/images/pytest/install.png)
 
-(Type pip3 install pytest for mac or Linux)
+(Type pip3 install pytest for Mac or Linux)
 
 2. I then installed PyTest Mock:
 
@@ -984,13 +1222,13 @@ The services file was in a directory above the test file (base).
 
 #### First pytest
 
-I then ran pytest base/tests/test_services.py and recieved the following fail:
+I then ran pytest base/tests/test_services.py and received the following fail:
 
 ![Screenshot of red state](./backend/frontend/public/images/pytest/first_test/red_state.png)
 
-It entered the red state because the ValueError did not raise. This is correct, as this test is specifically looking to see if the ValueErorr raises when the user does not enter their email. 
+It entered the red state because the ValueError did not raise. This is correct, as this test is specifically looking to see if the ValueError raises when the user does not enter their email. 
 
-To fix this, I adjusted the function so it would account for the missing email by raising and error when it finds that the email field is blank. 
+To fix this, I adjusted the function so it would account for the missing email by raising an error when it finds that the email field is blank. 
 
 To do this, you can check for all falsey values with the code "If not email: raise ValueError("Please provide an email")" - that is what I specifically used.
 
@@ -1008,7 +1246,7 @@ The commit "Add first pytest run to readme" should say "Red State: first pytest 
 
 **Red State**
 
-My second test was based on raising an error if the subject line was left empty. I wrote the test, but it was in the redstate as I had not yet updated the function:
+My second test was based on raising an error if the subject line was left empty. I wrote the test, but it was in the red state as I had not yet updated the function:
 
 ![Screenshot fo red state](./backend/frontend/public/images/pytest/second_test/red_state.png)
 
@@ -1058,10 +1296,9 @@ In terms of development approach, some behaviours were written using a test-firs
 
 #### JavaScript / React TDD
 
-I began by writing tests before any code for each of the following screens, funcions, and components. 
+I began by writing tests before any code for each of the following screens, functions, and components. 
 
-To begin, you can see my Test code in ErrorScreen.test.js before ErrorScreen.js existed.
-
+To begin, you can see my test code in ErrorScreen.test.js before ErrorScreen.js existed.
 
 1. **Error Page**
 
@@ -1079,7 +1316,7 @@ This was also true for the other tests I created before ErrorPage.js existed.
 
 **Page Title: Amendment**
 
-This was a minimul test, so they only thing I needed to do to satisfy it was to add a H1 and content in it:
+This was a minimal test, so the only thing I needed to do to satisfy it was to add a H1 and content in it:
 
 ![Screenshot of code](./backend/frontend/public/images/jest_tests/tdd/error_screen/title_for_error_screen.png)
 
@@ -1089,11 +1326,9 @@ Then, when I ran this test (only), it entered the green state.
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/page_title_loads_pass.png)
 
-I then added "oops!" to the beginning of the H1 to see it it still passed, and it did:
+I then added "oops!" to the beginning of the H1 to see if it still passed, and it did:
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/page_title_loads_pass_second.png)
-
-
 
 **Back Home Button Display: Red State**
 
@@ -1105,28 +1340,25 @@ I then entered the basic syntax for the 'Go Back Home' button, and the test pass
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/back_home_btn_pass.png)
 
-
-
 **Go Back Button Functionality: Red State**
 
 Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. 
 
 This test was written to prove that the URL changes when you click the 'Back Home' button. 
 
-It is also a test with an async function in it  because I need to use 'await'. This it because I need to wait for the 'back home' to be clicked to render the expected result. 
+It is also a test with an async function in it because I need to use 'await'. This is because I need to wait for the 'Back Home' to be clicked to render the expected result. 
 
 ![Screenshot of fail](./backend/frontend/public/images/jest_tests/tdd/error_screen/go_back_url_test.png)
 
-This is just an image of the test which shows the use os async, await and my comments:
+This is just an image of the test which shows the use of async, await and my comments:
 
 ![Screenshot of test](./backend/frontend/public/images/jest_tests/tdd/error_screen/image_of_back_home_button_test.png)
 
-Note: After adding the basic syntax for the button, I needed to change 'href=' to 'To="/"', then test passed:
+Note: After adding the basic syntax for the button, I needed to change 'href=' to 'To="/"', then the test passed:
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/test_rendering_home_pass.png)
 
 You can see it states "... back home renders home screen" in the image above. 
-
 
 **Simple Message Displays: Red State**
 
@@ -1138,7 +1370,6 @@ After adding a simple message, this test passed:
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/simple_message_green_state.png)
 
-
 **HREF/TO link in Back Home button shows as '/': Red State**
 
 Since the ErrorPage was non-existent, the test failed because of the imported file ErrorPage. 
@@ -1148,15 +1379,13 @@ Following creation of the 'Back Home' button, this test passed, given I used the
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/error_screen/back_home_destination_pass.png)
 
-
-**The following tests are done by initially removing code from the pade that is being tested. Then, I will write the test, run it (Red), re-enter the code (modified - unlike original), run the test again (Green), and proceed to the next.** This method is done to try and attain a complete TDD for React which, as mentioned before, should have been implemented at the start. 
-
+**The following tests are done by initially removing code from the page that is being tested. Then, I will write the test, run it (Red), re-enter the code (modified - unlike original), run the test again (Green), and proceed to the next.** This method is done to try and attain a complete TDD for React which, as mentioned before, should have been implemented at the start. 
 
 2. **Footer Component Tests**
 
 **Footer Socials Text: Red State**
 
-For this component, I removed the entire social block. You can see it failed because there was no socials within it - completely removed for TDD:
+For this component, I removed the entire social block. You can see it failed because there were no socials within it - completely removed for TDD:
 
 ![Screenshot of fail](./backend/frontend/public/images/jest_tests/tdd/footer/failed_socials_removed.png)
 
@@ -1166,19 +1395,17 @@ After re-adding the footer, this time with aria-labels and using 'ClassName' ins
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/footer/footer_socials_pass.png)
 
-
 **Footer Facebook Link: Red State**
 
 This failed due to the socials component missing in the file. 
 
 1[Screenshot of fail](./backend/frontend/public/images/jest_tests/tdd/footer/facebook_link_fail.png)
 
-After adding the new footer, the facebook link test passed:
+After adding the new footer, the Facebook link test passed:
 
 **Footer Facebook Link: Green State**
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/footer/facebook_link_pass.png)
-
 
 **Instagram Link: Red State**
 
@@ -1186,21 +1413,20 @@ This failed due to the socials component missing in the file.
 
 ![Screenshot of fail](./backend/frontend/public/images/jest_tests/tdd/footer/instagram_link_fail.png)
 
-The same is true for the Instagram link: once the modifed footer was added, the test passed, as seen in the commits. 
-
+The same is true for the Instagram link: once the modified footer was added, the test passed, as seen in the commits. 
 
 3. **Header Component Test**
 
 As I did with the footer, I removed a large section of the header. This was the Redux/Router behaviour. 
 
-I ran 5 tests with the header, each test was run on it's own using '.only' and they began in the red state, until I slightly amended the heading, ensuring that it is different to the original, and then each test passed. 
+I ran 5 tests with the header, each test was run on its own using '.only' and they began in the red state, until I slightly amended the heading, ensuring that it is different to the original, and then each test passed. 
 
 The Red and Green states of the tests are evident in the commits, and the header component is also different to the original, capturing a TDD phase.
 
 --
 
 **Alt Text Test: Red State**
-Test dails due to only having "logo" in the Alt text. 
+Test fails due to only having "logo" in the alt text. 
 
 **Alt Text Test: Green State**
 Test passes after adding new alt text. 
@@ -1210,7 +1436,7 @@ Test passes after adding new alt text.
 --
 
 **Header Rating Section: Red State**
-This is the second test that fails due to missing rating section in the header. Noted in the commit. 
+This is the second test that fails due to a missing rating section in the header. Noted in the commit. 
 
 **Header Rating Section: Green State**
 This second test now passes after adding the new, **amended**, rating section to the header. 
@@ -1218,19 +1444,19 @@ This second test now passes after adding the new, **amended**, rating section to
 --
 
 **Header Home Nav Link: Red State**
-Fails due to a missing nav component - home. 
+Fails due to a missing nav component - Home. 
 
 **Header Home Nav Link: Green State**
-After adding the new head 'Home' nav button, it passed:
+After adding the new header 'Home' nav button, it passed:
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/tdd/header/alt_txt_pass.png)
 
 --
 
 **Header Login Test: Red State**
-Fails due to missing login section.
+Fails due to a missing login section.
 
 **Header Login Test: Green State**
-Passes by simly re-adding the login section with a no Redux present - just minimal to pass. 
+Passes by simply re-adding the login section with no Redux present - just minimal to pass. 
 
 --
 
@@ -1248,17 +1474,16 @@ Passes by simly re-adding the login section with a no Redux present - just minim
 **Header Allows the Logout Function: Red**
 - Test passes now I've added the logout functionality. 
 
-
 4. **About Screen Testing**
 
-For the AboutScreen.js, I completely removed entire sections, wrote tests (ran in red), and then added modifie sections to the about screen that passes the tests.
+For the AboutScreen.js, I completely removed entire sections, wrote tests (ran in red), and then added modified sections to the about screen that passes the tests.
 
 *NOTE: I added all the tests at once, then tested them individually with 'only'. 
 
 --
 
 **About Us Heading: Red**
-- Re writing the page means heading was not present. 
+- Rewriting the page means the heading was not present. 
 
 **About Us Heading: Green**
 - I added the heading in, but slightly different ('About The Bakehouse' became 'About Our Bakehouse'), and the test passed. 
@@ -1295,7 +1520,6 @@ For the AboutScreen.js, I completely removed entire sections, wrote tests (ran i
 **About Us Home Link Test: Green**
 -- Changed path from "/about" to simply "/".
 
-
 4. **Login Screen Tests**
 
 I began by removing these sections of the page:
@@ -1305,7 +1529,7 @@ I began by removing these sections of the page:
 - Button text "Sign In"
 - Inputs
 
-I then added 4 tests the LoginScreen.test.js.
+I then added 4 tests to the LoginScreen.test.js.
 
 - Failed when they all ran (together or individually).
 - Each section of the LoginScreen.js was updated individually, with new components to satisfy TDD and pass tests.
@@ -1327,11 +1551,11 @@ This style of testing was then carried out on the following screens:
 
 ### Unit Testing - Post Code Development
 
-1. **Hompage Tests**
+1. **Homepage Tests**
 
-#### Hompage Headers
+#### Homepage Headers
 
-First, I ran simple Jest tests to seeif ym React and Javascript was written well, even though the code already renders the result I want. 
+First, I ran simple Jest tests to see if my React and JavaScript were written well, even though the code already renders the result I want. 
 
 I used mock.jest in a separate test file to mock the DOM and react-redux environment. 
 
@@ -1341,16 +1565,15 @@ Here, you can see the reason for failure of the first test:
 
 It says react-router-dom is not found, even though it is installed correctly. 
 
-One of the reasons this test didn't run properly, was because I realised I needed to define my mocks before I import the homescreen. 
+One of the reasons this test didn't run properly was because I realised I needed to define my mocks before I import the HomeScreen. 
 
-Secondly, I had to remove the "import test from "node:test";" from the top as it it not Jest. I deleted it and relid on Jests built-in function (test...).
+Secondly, I had to remove the "import test from "node:test";" from the top as it is not Jest. I deleted it and relied on Jest's built-in function (test...).
 
-After that, I had to ensure the Mocks were created first before the imports. This is because if HomeScreen loads before my imports, it will have tried to load Axios and crashed. 
+After that, I had to ensure the mocks were created first before the imports. This is because if HomeScreen loads before my imports, it will have tried to load Axios and crashed. 
 
 After making those changes, the first test passed:
 
 ![Screenshot of home heading](./backend/frontend/public/images/jest_tests/home_heading_pass.png)
-
 
 #### "<Loading >" Component Renders
 
@@ -1364,12 +1587,11 @@ First fail:
 
 ![Screenshot of fail](./backend/frontend/public/images/jest_tests/load_component_fail.png)
 
-To ge this to pass, I had to create two separate returns for the 'useSelector'.
+To get this to pass, I had to create two separate returns for the 'useSelector'.
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/load_component_pass.png)
 
-NEW TESTS: Following resubmission failure to create a full TDD environment. I hope this new tests show my ability to create a TDD env. 
-
+NEW TESTS: Following resubmission failure to create a full TDD environment. I hope these new tests show my ability to create a TDD env. 
 
 2. **CartScreen.js Tests**
 
@@ -1379,13 +1601,13 @@ NEW TESTS: Following resubmission failure to create a full TDD environment. I ho
 
 ![Screenshot of fail](./backend/frontend/public/images/jest_tests/cart_screeen/h1_failed.png)
 
-Then, after adding mocks of the react actions, redux and hooks, and also changing 'getAllByText' to 'getByText', so it doesn't return an array, it passed:
+Then, after adding mocks of the React actions, Redux and hooks, and also changing 'getAllByText' to 'getByText', so it doesn't return an array, it passed:
 
 ![Screenshot of pass](./backend/frontend/public/images/jest_tests/cart_screeen/h1_pass.png)
 
 #### Second Test: Img & Alt Text Renders Correctly
 
-This second text was to see if the image and alt text renders correctly. After writing the test, it failed because the alt text (for testing) was not present in the Redux Mock. 
+This second test was to see if the image and alt text render correctly. After writing the test, it failed because the alt text (for testing) was not present in the Redux mock. 
 
 ![Screenshot of fail](./backend/frontend/public/images/jest_tests/cart_screeen/img_alt_fail.png)
 
@@ -1395,18 +1617,17 @@ After adding the alt text to the Redux mock environment by including an object i
 
 **NOTE:** To only run a single test in this file, I appended ".only" after "test" for this test. I then removed it and appended "only" to the following tests. 
 
-
 3. **AboutScreen.js Tests**
 
 #### Testing Title Loads
 
-This is the same as the test I did on the CartScreen, however, I do not need to mock Redux or Actions here as they aren't included on this page. 
+This is the same as the test I did on the CartScreen, however, I do not need to mock Redux or actions here as they aren't included on this page. 
 
 You can see the initial failure of the test, which was to successfully see the heading is in the document:
 
 ![Screenshot of failure](./backend/frontend/public/images/jest_tests/about_screen/display_title_fail.png)
 
-Fix: Adding 'MemoryRouter' to wrap the rederred screen:
+Fix: Adding 'MemoryRouter' to wrap the rendered screen:
 
 ![Screenshot of test pass](./backend/frontend/public/images/jest_tests/about_screen/about_title_pass.png)
 
@@ -1440,7 +1661,7 @@ This was the result on the first test:
 
 **Performance Improvements (Planned)**
 
-The current Lighthouse performance score is as an area for improvement. As this project is intended to be developed into a production-ready site for a real customer, performance optimisation will be prioritised in future iterations. Planned improvements include optimising and compressing images, implementing lazy loading for media, reducing unused JavaScript and CSS, enabling code splitting, and improving caching strategies through Django and CDN configuration (e.g. AWS S3 and CloudFront). Additional steps such as minimising render-blocking resources and refining API calls will ensure faster load times and a smoother user experience across devices.
+The current Lighthouse performance score is an area for improvement. As this project is intended to be developed into a production-ready site for a real customer, performance optimisation will be prioritised in future iterations. Planned improvements include optimising and compressing images, implementing lazy loading for media, reducing unused JavaScript and CSS, enabling code splitting, and improving caching strategies through Django and CDN configuration (e.g. AWS S3 and CloudFront). Additional steps such as minimising render-blocking resources and refining API calls will ensure faster load times and a smoother user experience across devices.
 
 1. Homepage
 
@@ -1592,9 +1813,9 @@ Video:
 
 ## Using Redux
 
-I chose to use Redux in this app, firstly to learn how it's used, but also because I would end up having many pages that would require a global state. This global state is share in the Redux store and passed down to other pages. 
+I chose to use Redux in this app, firstly to learn how it's used, but also because I would end up having many pages that would require a global state. This global state is shared in the Redux store and passed down to other pages. 
 
-Having learned the importance of Redux in front end when it comes to building larger apps, I am glad I have included it. I will continue to learn more about it in my future project, but here are some examples of how to install and use Redux:
+Having learned the importance of Redux in frontend when it comes to building larger apps, I am glad I have included it. I will continue to learn more about it in my future project, but here are some examples of how to install and use Redux:
 
 ---
 
@@ -1625,7 +1846,7 @@ When building a site with React, the simplest way to install and use Font Awesom
 
 1. From the root, type 'npm install @fontawesome/fontawesome-free'.
 2. Then, to use icons, you simply start by creating an icon (<i></i>) section. 
-3. Within the opening tag, you type in the 'className' of the icon you want to display. Or, you can somply copy the html from the font awesome website.
+3. Within the opening tag, you type in the 'className' of the icon you want to display. Or, you can simply copy the HTML from the Font Awesome website.
 
 Example: These 'i' tags were copied from the free icons section in Font Awesome.
 
@@ -1643,7 +1864,7 @@ Example: These 'i' tags were copied from the free icons section in Font Awesome.
 
 ![Screenshot of bug](/resources/images/product_display-bug.png)
 
-The above image shows a classic bug caused by using Javascript Style comments within a JSX sextion. To remove this problem, I simply put curly braces around the Javascript style comments within thye JSX section, and it was resolved. 
+The above image shows a classic bug caused by using JavaScript style comments within a JSX section. To remove this problem, I simply put curly braces around the JavaScript style comments within the JSX section, and it was resolved. 
 
 Here it is fixed:
 
@@ -1657,7 +1878,7 @@ The error is clear - 'Product' is not recognised. So, to solve this, I did some 
 
 ![Screenshot of error](/resources/images/product_screen_bug1_error_found.png)
 
-So I changed it to as lower-case p, and it worked:
+So I changed it to a lower-case p, and it worked:
 
 ![Bug Resolved](/resources/images/product_screen_bug_resolved.png)
 
@@ -1679,7 +1900,7 @@ This bug was the result of my images not displaying on the home screen.
 
 ![Screenshot of error](./resources/images/other_bugs/status_500_homescreen.png)
 
-The solution to this was found by the errors notes in the console:
+The solution to this was found by the error notes in the console:
 
 ![Screenshot of console](./resources/images/other_bugs/console_500_bug.png)
 
@@ -1725,7 +1946,7 @@ Although the console error could not be directly expanded, this process demonstr
 
 ### Setting Up Virtual Environment
 
-Before you begin any work on the backend, it's best to set up your virutal environment. To do this, type the command "pip install virtualenv" into your terminal. Once installed, you are ready to activate the virtual environment. 
+Before you begin any work on the backend, it's best to set up your virtual environment. To do this, type the command "pip install virtualenv" into your terminal. Once installed, you are ready to activate the virtual environment. 
 
 The screenshot below shows how this is done in the terminal:
 
@@ -1735,7 +1956,7 @@ Then, once activated, you will see ".venv" at the far left of your terminal:
 
 ![Screenshot of .venv](./resources/images/manual_tests/creatingvenv/once_activated.png)
 
-Following that, you'll want to install django with "pip install django", and this will install the latest version:
+Following that, you'll want to install Django with "pip install django", and this will install the latest version:
 
 ![Screenshot of install](./resources/images/manual_tests/creatingvenv/install_django.png)
 
@@ -1745,7 +1966,7 @@ Following that, you'll want to install django with "pip install django", and thi
 
 Once installed, you will then want to create the backend project using "django-admin startproject (projectname)"
 
-I called mine 'Backend', so you can see it successfuly created below ".venv" in this screenshot:
+I called mine 'Backend', so you can see it successfully created below ".venv" in this screenshot:
 
 ![Screenshot of backend](./resources/images/manual_tests/creatingvenv/backend_created.png)
 
@@ -1763,13 +1984,13 @@ Then, you will need to type the command "python manage.py startapp (appname)":
 
 ### Writing Your First View
 
-When it comes to ensuring the backend project is connected to your backend app, you need to test that using a basic view and url pattern. I did this by first writing a view called getRoutes and returning 'Hello World.' 
+When it comes to ensuring the backend project is connected to your backend app, you need to test that using a basic view and URL pattern. I did this by first writing a view called getRoutes and returning 'Hello World.' 
 
-Once that view is written, I then created a urls.py folder in the only app I have ('base'), and then importing that view I just created. 
+Once that view is written, I then created a urls.py folder in the only app I have ('base'), and then imported that view I just created. 
 
-I created the url pattern which states that when hitting the homescreen (''), I render the view getRoutes, and I gave it the name "get-routes". 
+I created the URL pattern which states that when hitting the homescreen (''), I render the view getRoutes, and I gave it the name "get-routes". 
 
-However, this wouldn't work just yet; I needed to connect the urls I created in the app to the main urls.py file in the backend project (called 'backend').
+However, this wouldn't work just yet; I needed to connect the URLs I created in the app to the main urls.py file in the backend project (called 'backend').
 
 To do this, first add 'include' to the list of imports from django.urls. 
 
@@ -1781,11 +2002,11 @@ Then, add a new path to the urlpatterns. This will be as shown in the below scre
 
 ### Using Django Rest Framework
 
-The reason I decided to do this was because the Django Rest Framework will make my api's more powerfull. 
+The reason I decided to do this was because the Django Rest Framework will make my APIs more powerful. 
 
 To install it, type this into your terminal: "pip install djangorestframework".
 
-Once that is successfull, add 'rest_framework' to your installed apps section in settings.py. 
+Once that is successful, add 'rest_framework' to your installed apps section in settings.py. 
 
 From there, you will need to head over to https://www.django-rest-framework.org/, and click on views, under the 'api' section:
 
@@ -1806,9 +2027,9 @@ To amend your backend data, you will first need to be able to log into the Djang
 1. In your terminal, ensure you are in the directory that holds manage.py. For me, it is the backend directory. 
 2. Create your super user with "python manage.py createsuperuser", and then follow the instructions to set a user name, email and password.
 3. Run the server: "python manage.py runserver".
-4. From here, append the url with "/admin/" and you will be redirected to the Django Admin login dashboard. Enter your super user name and password to log in. 
+4. From here, append the URL with "/admin/" and you will be redirected to the Django Admin login dashboard. Enter your super user name and password to log in. 
 
-This was my view onced logged in:
+This was my view once logged in:
 
 ![Screenshot of dashboard](./resources/images/django_admin/dash.png)
 
@@ -1816,11 +2037,11 @@ This was my view onced logged in:
 
 ### Making New Databases
 
-When you log into the backend, you shouldn't see any databases there yet. The first thing that needs to be done, is to create a data model in models.py, within the app. 
+When you log into the backend, you shouldn't see any databases there yet. The first thing that needs to be done is to create a data model in models.py, within the app. 
 
 The first one I created was the product model.
 
-Once it was fully coded, I ran migrations, then registered the new model in admin.py, which then sends the model to the django server.
+Once it was fully coded, I ran migrations, then registered the new model in admin.py, which then sends the model to the Django server.
 
 To run migrations, simply: "python manage.py makemigrations"
 
@@ -1854,18 +2075,17 @@ JWTs do not store sensitive data such as passwords. Instead, they act as a secur
 
 1. HTML5
 2. CSS3
-3. ReactBoostrap, found (https://react-bootstrap.netlify.app/)[here].
+3. ReactBootstrap, found (https://react-bootstrap.netlify.app/)[here].
 5. React.js
 6. JavaScript
 7. Django
 8. Django Rest Framework
 9. LucidChart
 10. Redux
-11. PostgresSQL
+11. PostgreSQL
 12. AWS (Image storage)
 13. W3C - CSS + HTML Edit
 14. Flaticon.com for the icon
-
 
 ## Credits
 
@@ -1885,7 +2105,6 @@ JWTs do not store sensitive data such as passwords. Instead, they act as a secur
 
 ## Acknowledgements
 
-I would like to thank my tutor, Len Johnson, for his guidance throughout the development of this project. His feedback helped shape both the technical implementation and the overall structure of the application. I would also like to acknowledge the Code Institute community for help which provided valuable learning resources during development.
+I would like to thank my tutor, Len Johnson, for his guidance throughout the development of this project. His feedback helped shape both the technical implementation and the overall structure of the application. I would also like to acknowledge the Code Institute community for help, which provided valuable learning resources during development.
 
 ---
-
