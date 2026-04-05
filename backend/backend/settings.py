@@ -282,13 +282,45 @@ AWS_LOCATION = ""
 CONTENT_SECURITY_POLICY = {
     "DIRECTIVES": {
         "default-src": [SELF],
-        "script-src": [SELF, "https://js.stripe.com", "'unsafe-inline'"],
-        "style-src": [SELF, "'unsafe-inline'"],
-        "frame-src": [SELF, "https://js.stripe.com", "https://hooks.stripe.com"],
+
+        "script-src": [
+            SELF,
+            "https://js.stripe.com",
+            "https://*.js.stripe.com",
+            "'unsafe-inline'",
+        ],
+
+        "style-src": [
+            SELF,
+            "'unsafe-inline'",
+            "https://fonts.googleapis.com",
+        ],
+
+        "img-src": [
+            SELF,
+            "data:",
+            "https://*.stripe.com",
+            "https://honesty-bakehouse-images.s3.eu-north-1.amazonaws.com",
+        ],
+
+        "font-src": [
+            SELF,
+            "https://fonts.gstatic.com",
+            "data:",
+        ],
+
+        "frame-src": [
+            SELF,
+            "https://js.stripe.com",
+            "https://*.js.stripe.com",
+            "https://hooks.stripe.com",
+        ],
+
         "connect-src": [
             SELF,
             "https://api.stripe.com",
             "https://js.stripe.com",
+            "https://*.js.stripe.com",
             "https://m.stripe.network",
         ],
     },
