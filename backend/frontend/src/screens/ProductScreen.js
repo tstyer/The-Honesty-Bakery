@@ -57,18 +57,7 @@ function ProductScreen() {
     dispatch(listProductDetails(id))
   }, [dispatch, id, successProductReview, successDeleteReview])
 
-  const rawImage = product?.image || ''
-
-  const normalisedImage = rawImage
-    ? `/${rawImage}`.replace(/\/+/, '/')
-    : ''
-
-  const imageSrc =
-    normalisedImage
-      .replace(/^\/static\/images\//, '/images/')
-      .replace(/^\/media\/images\//, '/images/')
-      .replace(/^\/media\//, '/images/')
-      .replace(/^\/static\//, '/images/') || '/images/placeholder.jpg'
+  const imageSrc = product?.image ? product.image : '/images/placeholder.jpg'
 
   const addToCartHandler = () => {
     navigate(`/cart/${id}?qty=${qty}`)
