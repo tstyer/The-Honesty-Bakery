@@ -655,6 +655,24 @@ Now, when you upload images on the honesty bakehouse website, they should be hos
 
 ## Testing
 
+Throughout the production, I used ESLint to scan my javascript. It scanned for inconsistencies, bugs and helped me avoid messy code.
+
+**Installing**
+
+In the project route, I typed 'npm install eslint --save-dev'
+
+**Initialise**
+
+To initialise, I typed 'npx eslint --init'
+
+I was given prompts, and chose the onces that best fit my project, since I am using React:
+
+- Chose to test javascript
+- chose js modules (import and export)
+- not using typescript
+- running in the browser - no node.js for this project
+
+
 ### User Stories Testing
 
 List your user stories and describe how each was met in the final project.
