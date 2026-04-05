@@ -7,15 +7,15 @@ from django.contrib.auth.models import User
 
 class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=200, default="untitled product")
+    description = models.TextField(null=True, blank=True)
     # image cannot be used without pillow library installed
-    image = models.ImageField(blank=True)
-    brand = models.CharField(max_length=200, blank=True)
-    category = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(null=True, blank=True)
+    brand = models.CharField(max_length=200, null=True, blank=True)
+    category = models.CharField(max_length=200, null=True, blank=True)
     rating = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     numReviews = models.IntegerField(default=0)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     countInStock = models.IntegerField(default=0)
 
     # ProductType used to decide which screen it appears on.
