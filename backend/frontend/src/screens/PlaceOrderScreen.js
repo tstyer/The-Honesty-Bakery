@@ -12,11 +12,7 @@ export default function PlaceOrderScreen() {
   const { cartItems, paymentMethod, paymentResult } = cart
 
   const cardPaid = paymentResult?.status === 'succeeded'
-  const hasMadeToOrder = cartItems.some((item) => item.isPrebaked === false)
-
-  const paymentIsValid = hasMadeToOrder
-    ? paymentMethod === 'Card' && cardPaid
-    : paymentMethod === 'Cash'
+  const paymentIsValid = paymentMethod === 'Card' && cardPaid
 
   const totals = useMemo(() => {
     const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
@@ -25,27 +21,27 @@ export default function PlaceOrderScreen() {
   }, [cartItems])
 
   const placeOrderHandler = () => {
-  const fakeOrderId = Date.now().toString()
+    const fakeOrderId = Date.now().toString()
 
-  const orderData = {
-    _id: fakeOrderId,
-    orderItems: cartItems,
-    paymentMethod,
-    paymentResult,
-    itemsPrice: totals.itemsPrice,
-    totalPrice: totals.totalPrice,
+    const orderData = {
+      _id: fakeOrderId,
+      orderItems: cartItems,
+      paymentMethod,
+      paymentResult,
+      itemsPrice: totals.itemsPrice,
+      totalPrice: totals.totalPrice,
+    }
+
+    dispatch({ type: CART_CLEAR_ITEMS })
+    localStorage.removeItem('cartItems')
+
+    navigate(`/order/${fakeOrderId}`, { state: orderData })
   }
-
-  dispatch({ type: CART_CLEAR_ITEMS })
-  localStorage.removeItem('cartItems')
-
-  navigate(`/order/${fakeOrderId}`, { state: orderData })
-}
 
   if (!cartItems || cartItems.length === 0) {
     return (
       <Message>
-        Your cart is empty <Link to='/'>Go Back</Link>
+        Your cart is empty <Link to="/">Go Back</Link>
       </Message>
     )
   }
@@ -56,8 +52,8 @@ export default function PlaceOrderScreen() {
 
       <Row>
         <Col md={8}>
-          <ListGroup variant='flush' className='light_border'>
-            <ListGroup.Item className='place_order_text'>
+          <ListGroup variant="flush" className="light_border">
+            <ListGroup.Item className="place_order_text">
               <h2>Collection</h2>
               <p>
                 <strong>Pickup only.</strong> You’ll collect your cakes from our location.
@@ -73,12 +69,12 @@ export default function PlaceOrderScreen() {
               {paymentMethod || 'Not selected'}
             </ListGroup.Item>
 
-            <ListGroup.Item className='place_order_text'>
+            <ListGroup.Item className="place_order_text">
               <h2>Order Items</h2>
-              <ListGroup variant='flush'>
+              <ListGroup variant="flush">
                 {cartItems.map((item) => (
                   <ListGroup.Item key={item.product}>
-                    <Row className='align-items-center'>
+                    <Row className="align-items-center">
                       <Col md={2}>
                         <Image src={item.image} alt={item.name} fluid rounded />
                       </Col>
@@ -99,8 +95,8 @@ export default function PlaceOrderScreen() {
         </Col>
 
         <Col md={4}>
-          <Card className='place_order_text light_border'>
-            <ListGroup variant='flush'>
+          <Card className="place_order_text light_border">
+            <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2>Order Summary</h2>
               </ListGroup.Item>
@@ -119,32 +115,26 @@ export default function PlaceOrderScreen() {
                 </Row>
               </ListGroup.Item>
 
-              <ListGroup.Item className='place_order_text'>
+              <ListGroup.Item className="place_order_text">
                 <Button
-                  type='button'
-                  className='btn-block cta-btn'
-                  variant='outline-dark'
-                  disabled={!paymentMethod || !paymentIsValid}
+                  type="button"
+                  className="btn-block cta-btn"
+                  variant="outline-dark"
+                  disabled={!paymentIsValid}
                   onClick={placeOrderHandler}
                 >
                   Place Order
                 </Button>
 
                 {!paymentMethod && (
-                  <div className='mt-2'>
-                    <small>Please select a payment method first.</small>
+                  <div className="mt-2">
+                    <small>Please complete card payment first.</small>
                   </div>
                 )}
 
-                {hasMadeToOrder && paymentMethod === 'Card' && !cardPaid && (
-                  <div className='mt-2'>
+                {paymentMethod === 'Card' && !cardPaid && (
+                  <div className="mt-2">
                     <small>Card payment must be completed before placing the order.</small>
-                  </div>
-                )}
-
-                {!hasMadeToOrder && paymentMethod && paymentMethod !== 'Cash' && (
-                  <div className='mt-2'>
-                    <small>Cash on collection is available for prebaked items only.</small>
                   </div>
                 )}
               </ListGroup.Item>
