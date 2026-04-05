@@ -294,22 +294,3 @@ CONTENT_SECURITY_POLICY = {
     },
 }
 
-INSTALLED_APPS = [
-    # ...
-    "csp",
-]
-
-MIDDLEWARE = [
-    # ...
-    "csp.middleware.CSPMiddleware",
-]
-
-CONTENT_SECURITY_POLICY = {
-    "DIRECTIVES": {
-        "default-src": [SELF],
-        "script-src": [SELF, "https://js.stripe.com", "'unsafe-inline'"],
-        "style-src": [SELF, "'unsafe-inline'"],
-        "frame-src": [SELF, "https://js.stripe.com", "https://hooks.stripe.com"],
-        "connect-src": [SELF, "https://api.stripe.com", "https://js.stripe.com", "https://m.stripe.network"],
-    },
-}
