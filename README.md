@@ -481,6 +481,10 @@ Once you have successfuly made a payment on your site (only in test mode), you w
 
 ## Merging Django & React
 
+Although combining Django and React in one project structure is not the most standard production setup, I chose this approach for clear learning and portfolio reasons. The course required Django, so it was essential that I demonstrated an understanding of Django for the backend, including APIs, models, authentication, and business logic. At the same time, I am working toward becoming a full stack developer with strong React skills, so I also wanted to build the frontend in React to show that I can create a modern, component-based user interface. Merging the two allowed me to meet the course requirements while also aligning the project with my long-term career path. It gave me hands-on experience in connecting a Django backend to a React frontend, managing API communication between the two, and understanding how frontend and backend technologies work together in a full stack application.
+
+### How To Merge Them
+
 To do this, ensure everything is saved, pushed, and all servers are closed, and terminals are shut. 
 
 Then, open your folders, and move the frontend (react) into the backend (Django).
@@ -494,6 +498,12 @@ In here, type "npm run build"
 From there, you will need to add the following "os.path..." to your 'DIRS' in the Templates section of settings:
 
 ![Screenshot of above](./backend/frontend/public/images/merging_front_back/settings_path.png)
+
+### Understanding Django Syntax
+
+Here, I will just give an overview of the syntax I used, explaining it in my terms to class as evidence of my understanding of the language. 
+
+
 
 ---
 
