@@ -2005,6 +2005,10 @@ After some research, I learned that this bug means that my request never reached
 
 During deployment testing, I encountered a persistent blank error in the browser console. The issue appeared under the “other” category in DevTools, but the error itself could not be expanded, making it difficult to identify the exact source.
 
+You can see the error here, displayed by an <other> tag that, whe clicked on, doesn't show any message and there is no further points to click on and go further:
+
+![Screenshot of error](./backend/frontend/public/images/blank_console_error%20(2).png)
+
 To investigate, I followed a structured debugging approach. I first checked the browser Network tab for failed requests (e.g. missing JavaScript, CSS, images, or API calls) and confirmed that no critical resources were failing to load. I then tested the application in a private/incognito window, which reduced the number of errors and helped isolate potential environmental causes such as cached files or browser extensions.
 
 After rebuilding the frontend and redeploying, I compared behaviour across sessions and noticed that performing a hard refresh would temporarily remove the error. This pointed towards caching or client-side interference rather than a consistent issue in the application code.
