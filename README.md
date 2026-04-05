@@ -49,6 +49,7 @@ The Honesty Bakery is a local cake store in my town. I built this full-stack web
   - [Making New Databases](#making-new-databases)
 - [Authentication](#authentication)
   - [JSON Web Tokens](#json-web-tokens)
+- [Future Considerations](#future-considerations)
 - [Tech. Used](#tech-used)
 - [Credits](#credits)
 - [Acknowledgements](#acknowledgements)
@@ -2132,6 +2133,59 @@ When a user logs in, the server generates a token that contains encoded informat
 For subsequent requests, the client includes this token in the request headers. The server then verifies the token to confirm the user’s identity without needing to store session data. This allows for stateless authentication, improving scalability and performance.
 
 JWTs do not store sensitive data such as passwords. Instead, they act as a secure proof of identity, ensuring that only authenticated users can access protected routes.
+
+---
+
+## Future Considerations
+
+**Product Reviews**  
+My reason for adding this in the future is to provide social proof and build trust for new customers, while also giving useful feedback to the business about products.
+
+**Visual Hover Effects**  
+I plan to include this because it improves interactivity and helps guide user attention, making the interface feel more responsive and engaging.
+
+**Order History**  
+The reason for implementing this is to allow users to track past purchases, improving usability and aligning with standard e-commerce expectations.
+
+**Email Confirmation on Registration**  
+My reason for adding this feature is to confirm successful account creation and increase user trust, as this is a widely expected feature in modern applications.
+
+**Performance Improvements**  
+This will be addressed in the future because optimising performance will reduce load times and improve the experience for users on all devices, especially mobile.
+
+---
+
+**Search Functionality in Navigation**  
+My reason for adding this in the future is to allow users to quickly find products, which becomes increasingly important as the product range grows.
+
+**Refactoring CSS**  
+I plan to refine this area because reducing and cleaning CSS will improve readability, maintainability, and overall code quality.
+
+**Improving Review Section UI**  
+The reason for improving this is to enhance visual clarity and create a more professional appearance.
+
+**Consistent “Go Back” Navigation**  
+My reason for adding this is to reduce friction and prevent users from feeling stuck in the payment process.
+
+**Improving Project Structure**  
+This will be improved because a cleaner folder structure makes the codebase easier to navigate and maintain as the project grows.
+
+**Styled Toast Notifications**  
+I intend to add this feature because providing visual feedback for actions such as login and logout improves communication with the user.
+
+**Expanding Product Range**  
+My reason for expanding this is to help users better understand what is available and encourage engagement.
+
+**Clarifying Purchase Process (Pick-Up Only)**  
+The reason for improving this is to reduce confusion and set accurate expectations for customers.
+
+**Email Confirmation on Registration**  
+I will include this because reinforcing account creation with an email improves trust and confirms user details.
+
+**Performance Improvements**  
+My reason for continuing to improve performance is to ensure the application remains fast, responsive, and suitable for real-world use.
+
+---
 
 ## Tech. Used
 
