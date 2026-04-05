@@ -694,11 +694,6 @@ List your user stories and describe how each was met in the final project.
 
 ### Manual Testing
 
-- Navigation
-- Responsiveness
-- Browser compatibility
-- Forms and interactivity
-
 1. One of the first manual tests carried out was to click on one of the products displayed on the homescreen to see if the productScreen.js renders properly. For this to be successful, it needs to take you to a new page (not open a new one), show the 3 collumns (image, price, and details). 
 
 I first Clicked on the 'Birthday Cake':
@@ -735,7 +730,6 @@ This all worked fine, however, I decided this wasn't best for the user experienc
 
 This would make for a better experience, because the user wouldn't then have to keep clicking out of the cart screen if they wish to purcahse more products.
 
-
 #### Login Testing
 
 I attempted to log in after successfully registering a user (**include this above**), and I was met with an error 400 response. 
@@ -754,7 +748,6 @@ Change user_name = 'email' in views.py. After that, it worked:
 
 ![Second fixed screenshot](./resources/images/other_bugs/log_in/fixed_2.png)
 
-
 #### Login to Checkout Testing
 
 1. I first successfully logged in:
@@ -768,6 +761,30 @@ Change user_name = 'email' in views.py. After that, it worked:
 3. I then clicked on checkout:
 
 ![Screenshot of order placed](./resources/images/manual_tests/login_to_checkout/order_placed.png)
+
+
+Here's a list of following manual tests I carried out:
+
+
+| Test ID | Feature | Test Description | Steps | Expected Result | Actual Result | Status |
+|--------|--------|-----------------|------|----------------|---------------|--------|
+| MT1 | Homepage Load | Ensure homepage loads correctly | Navigate to deployed URL | Page loads with products displayed | Homepage loads correctly | Pass |
+| MT2 | Navigation | Test navigation links | Click navbar links (Home, Cart, Login) | User is taken to correct pages | Navigation works correctly | Pass |
+| MT3 | Product List | Display products | Open homepage / category pages | Products appear with correct details | Products render correctly | Pass |
+| MT4 | Product Filter | Filter by category/type | Select category/type (e.g. PREBAKED) | Only relevant products shown | Filtering works correctly | Pass |
+| MT5 | Product Details | View single product | Click a product | Product detail page loads | Product details display correctly | Pass |
+| MT6 | Add to Cart | Add product to cart | Select quantity and click add to cart | Product appears in cart | Product added successfully | Pass |
+| MT7 | Cart Quantity Limit | Enforce max quantity | Try adding more than allowed quantity | Quantity is restricted | Limit enforced correctly | Pass |
+| MT8 | Remove from Cart | Remove item | Click remove button in cart | Item removed from cart | Item removed correctly | Pass |
+| MT9 | User Login | Test login functionality | Enter valid login details | User logs in and is redirected | Login successful | Pass |
+| MT10 | Invalid Login | Handle incorrect login | Enter incorrect credentials | Error message displayed | Error shown correctly | Pass |
+| MT11 | User Registration | Register new user | Complete registration form | Account created and user logged in | Registration successful | Pass |
+| MT12 | Checkout Process | Complete checkout | Add item → proceed to checkout | Order created successfully | Checkout works correctly | Pass |
+| MT13 | Stripe Payment | Process payment | Enter Stripe test card details | Payment successful | Payment processed correctly | Pass |
+| MT14 | Image Loading | Ensure images load | View product images | Images display correctly | Images load correctly | Pass |
+| MT15 | Deployment Test | Test deployed app | Open deployed site on different browser | App works consistently | Works across browsers | Pass |
+| MT16 | Console Error Investigation | Investigate blank console error | Open DevTools → Console | No critical errors affecting functionality | Blank error present but non-breaking (likely AVG interference) | **Known Issue** |
+
 
 
 ### Python Testing
@@ -802,6 +819,7 @@ You should then see the green (.venv) appear at the beginning of the commond pro
 
 ![Screenshot of installation](./backend/frontend/public/images/python_images/pip_install_pep8.png)
 
+---
 
 #### Testing with PEP8
 
@@ -855,6 +873,7 @@ This result shows that my lines of code were simply longer than recommended, but
 
 ![Screenshot of backend urls](./backend/frontend/public/images/python_images/backend_urls.png)
 
+---
 
 ### PyTest
 
@@ -884,6 +903,7 @@ Before writing any of the tests, I first learned that it's important to structur
 
 Assigning will be assigning data. Acting will be using it. Asserting will then test if the output is true or false.
 
+---
 
 #### Running The Pytests (TDD)
 
@@ -984,7 +1004,9 @@ The testing carried out used a combination of unit and integration testing throu
 
 In terms of development approach, some behaviours were written using a test-first method. This included things like rendering headings, displaying messages, and handling simple user interactions. The tests were written first, intentionally failing (red state), and then the code was developed or adjusted until the tests passed (green state). This ensured that the code was always written to satisfy clear, defined behaviour, rather than adding functionality without validation.
 
-**IMPORTANT:** I have only done a proper TDD environment for the error page. This is because, mistakenly, I hadn't written unit tests during the beginning of production for the rest fo the app to create a true TDD. Thus, I have not benefited from fully building a project in a TDD environment. However, This is something I have now learned from and I have been writing new unit tests for React for a lot of the components in this project. They begin in the red state and follow through to green state with amendments on the code and tests, knowing that the code needs to satisfy the test in order to be used. **The only page where true TDD is carried out is the error page, where tests were written before any code. This is to show that, although I should have done this from the beginning, it is an aspect of development I have still learned, practiced and will endevour to produce a TDD properly in my future projects.**
+**IMPORTANT:** I have only done a proper TDD environment for the error page, and for the rest of the Screens.js I had removed components fully, wrote tests for them, failed the tests, and then rewrote the components in a completely unique structure and/or syntax. This is because, mistakenly, I hadn't written unit tests during the beginning of production for the rest of the app. This is something I have now learned from and I have been writing new unit tests for React for a lot of the components in this project. They begin in the red state and follow through to green state with amendments on the code and tests, knowing that the code needs to satisfy the test in order to be used. 
+
+---
 
 #### JavaScript / React TDD
 
@@ -1253,6 +1275,7 @@ This style of testing was then carried out on the following screens:
 - ProfileScreen
 - ReadyToBakeScreen
 
+---
 
 ### Unit Testing - Post Code Development
 
@@ -1357,7 +1380,6 @@ This was the result on the first test:
 
 ![Screenshot of result](./backend/frontend/public/images/django_tests/urls_test_pass.png)
 
-
 2. Testing Product List endpoint Returns 200
 
 ![Screenshot of test](./backend/frontend/public/images/django_tests/products_api_test.png)
@@ -1368,8 +1390,9 @@ This was the result on the first test:
 
 #### Lighthouse
 
-Performance Improvements (Planned)
-The current Lighthouse performance score is recognised as an area for improvement. As this project is intended to be developed into a production-ready site for a real customer, performance optimisation will be prioritised in future iterations. Planned improvements include optimising and compressing images, implementing lazy loading for media, reducing unused JavaScript and CSS, enabling code splitting, and improving caching strategies through Django and CDN configuration (e.g. AWS S3 and CloudFront). Additional steps such as minimising render-blocking resources and refining API calls will ensure faster load times and a smoother user experience across devices.
+**Performance Improvements (Planned)**
+
+The current Lighthouse performance score is as an area for improvement. As this project is intended to be developed into a production-ready site for a real customer, performance optimisation will be prioritised in future iterations. Planned improvements include optimising and compressing images, implementing lazy loading for media, reducing unused JavaScript and CSS, enabling code splitting, and improving caching strategies through Django and CDN configuration (e.g. AWS S3 and CloudFront). Additional steps such as minimising render-blocking resources and refining API calls will ensure faster load times and a smoother user experience across devices.
 
 1. Homepage
 
@@ -1637,6 +1660,18 @@ Once that was replaced, it worked, and I continued with the manual test of addin
 ![Screenshot of Axios bug](./resources/images/axios/axios_error.png)
 
 After some research, I learned that this bug means that my request never reached my Django API. 
+
+2. Blank Console Error
+
+During deployment testing, I encountered a persistent blank error in the browser console. The issue appeared under the “other” category in DevTools, but the error itself could not be expanded, making it difficult to identify the exact source.
+
+To investigate, I followed a structured debugging approach. I first checked the browser Network tab for failed requests (e.g. missing JavaScript, CSS, images, or API calls) and confirmed that no critical resources were failing to load. I then tested the application in a private/incognito window, which reduced the number of errors and helped isolate potential environmental causes such as cached files or browser extensions.
+
+After rebuilding the frontend and redeploying, I compared behaviour across sessions and noticed that performing a hard refresh would temporarily remove the error. This pointed towards caching or client-side interference rather than a consistent issue in the application code.
+
+Further investigation suggested that the error was likely caused by the AVG browser extension (web shield / anti-tracking features), which can inject or block scripts and interfere with page validation and console output. After disabling or whitelisting the site within AVG, the issue was reduced or resolved, confirming it was not a fault in the application itself.
+
+Although the console error could not be directly expanded, this process demonstrated the importance of isolating variables when debugging, including checking browser extensions, cache behaviour, third-party integrations, and network activity. It also reinforced the need to validate applications in a clean environment to ensure accurate results.
 
 --- 
 
