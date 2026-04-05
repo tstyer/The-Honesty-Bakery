@@ -496,21 +496,85 @@ Once you have successfully made a payment on your site (only in test mode), you 
 
 Although combining Django and React in one project structure is not the most standard production setup, I chose this approach for clear learning and portfolio reasons. The course required Django, so it was essential that I demonstrated an understanding of Django for the backend, including APIs, models, authentication, and business logic. At the same time, I am working toward becoming a full stack developer with strong React skills, so I also wanted to build the frontend in React to show that I can create a modern, component-based user interface. Merging the two allowed me to meet the course requirements while also aligning the project with my long-term career path. It gave me hands-on experience in connecting a Django backend to a React frontend, managing API communication between the two, and understanding how frontend and backend technologies work together in a full stack application.
 
+---
+
 ### How To Merge Them
 
-To do this, ensure everything is saved, pushed, and all servers are closed, and terminals are shut. 
+To merge Django and React into one project, the goal is to allow Django to serve the React frontend as static files in production.
 
-Then, open your folders, and move the frontend (React) into the backend (Django).
+First, ensure everything is saved, pushed, and all servers and terminals are closed.
 
-Then, open a terminal and change directory to the frontend: "cd backend" + "cd frontend" - takes you to the new location of your frontend folder. 
+Then, move your frontend (React) folder inside your backend (Django) project.
 
-In here, type "npm run build"
+Next, open a terminal and navigate to the frontend:
 
-"Run build" is something you would need to continue to run every time you make changes to the website. 
+```bash
+cd backend/frontend
+```
 
-From there, you will need to add the following "os.path..." to your 'DIRS' in the Templates section of settings:
+From here, run:
 
-![Screenshot of above](./backend/frontend/public/images/merging_front_back/settings_path.png)
+```bash
+npm run build
+```
+
+This creates a production-ready version of your React app inside a `build` folder.
+
+This build contains static files (HTML, CSS, JavaScript) that Django can serve.
+
+---
+
+### Connecting React to Django
+
+To allow Django to render the React app, you need to update your settings.
+
+In `settings.py`, add the React build path to your templates:
+
+```python
+'DIRS': [os.path.join(BASE_DIR, 'frontend/build')],
+```
+
+This tells Django where to find the `index.html` file.
+
+Next, update your `urls.py` to serve the React app:
+
+```python
+from django.views.generic import TemplateView
+
+path('', TemplateView.as_view(template_name='index.html')),
+```
+
+This means Django will return the React app for the root URL.
+
+---
+
+### Static Files
+
+You also need to tell Django where the React static files are located.
+
+In `settings.py`, add:
+
+```python
+STATICFILES_DIRS = [
+    BASE_DIR / 'frontend/build/static',
+]
+```
+
+This ensures Django can correctly serve the CSS, JavaScript, and images from React.
+
+---
+
+### Important Note
+
+Every time you make changes to the React frontend, you must run:
+
+```bash
+npm run build
+```
+
+This updates the build files that Django serves.
+
+---
 
 ### Understanding Django Syntax
 
@@ -586,8 +650,6 @@ First: push to GitHub
 Second: manually deploy on Heroku.
 
 ---
-
-## Deploying The App
 
 ## Deploying The App
 
