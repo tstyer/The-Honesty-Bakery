@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { Form, Button, Col } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -15,23 +15,10 @@ export default function PaymentScreen() {
   const elements = useElements()
 
   const cart = useSelector((state) => state.cart)
-  const { cartItems, paymentMethod, paymentResult } = cart
+  const { cartItems, paymentResult } = cart
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin || {}
-
-  const hasReadyToBake = useMemo(
-    () => cartItems?.some((item) => item.productType === 'READY_TO_BAKE'),
-    [cartItems]
-  )
-
-  const allowedMethods = useMemo(() => {
-    return hasReadyToBake ? ['Card'] : ['Cash']
-  }, [hasReadyToBake])
-
-  const [method, setMethod] = useState(
-    allowedMethods.includes(paymentMethod) ? paymentMethod : allowedMethods[0]
-  )
 
   const [paying, setPaying] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -42,23 +29,14 @@ export default function PaymentScreen() {
   }, [dispatch])
 
   useEffect(() => {
-    if (!cartItems || cartItems.length === 0) navigate('/cart')
+    if (!cartItems || cartItems.length === 0) {
+      navigate('/cart')
+    }
   }, [cartItems, navigate])
-
-  useEffect(() => {
-    if (!allowedMethods.includes(method)) setMethod(allowedMethods[0])
-  }, [allowedMethods, method])
 
   const submitHandler = async (e) => {
     e.preventDefault()
     setErrorMsg('')
-
-    if (method === 'Cash') {
-      dispatch(savePaymentMethod('Cash'))
-      dispatch(setPaymentResult(null))
-      navigate('/placeorder')
-      return
-    }
 
     if (!stripe || !elements) {
       setErrorMsg('Payments are still loading. Try again in a moment.')
@@ -77,7 +55,10 @@ export default function PaymentScreen() {
       const { data } = await axios.post(
         '/api/payments/create-payment-intent/',
         {
-          cartItems: cartItems.map((i) => ({ product: i.product, qty: i.qty })),
+          cartItems: cartItems.map((item) => ({
+            product: item.product,
+            qty: item.qty,
+          })),
         },
         {
           headers: {
@@ -97,7 +78,9 @@ export default function PaymentScreen() {
       }
 
       const result = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: { card: cardElement },
+        payment_method: {
+          card: cardElement,
+        },
       })
 
       if (result.error) {
@@ -142,81 +125,49 @@ export default function PaymentScreen() {
           <Form.Label as="legend" className="payment-text">
             Add Payment Details
           </Form.Label>
-
-          <Col>
-            {allowedMethods.includes('Cash') && (
-              <Form.Check
-                type="radio"
-                label="Cash on collection (prebaked items only)"
-                id="Cash"
-                name="paymentMethod"
-                value="Cash"
-                checked={method === 'Cash'}
-                onChange={(e) => setMethod(e.target.value)}
-              />
-            )}
-
-            {allowedMethods.includes('Card') && (
-              <Form.Check
-                type="radio"
-                label="Card (pay now)"
-                id="Card"
-                name="paymentMethod"
-                value="Card"
-                checked={method === 'Card'}
-                onChange={(e) => setMethod(e.target.value)}
-              />
-            )}
-          </Col>
         </Form.Group>
 
-        {method === 'Card' && (
-          <div className="my-3">
-            <Form.Label className="payment-text">Card details</Form.Label>
+        <div className="my-3">
+          <Form.Label className="payment-text">Card details</Form.Label>
 
-            {!stripeReady ? (
-              <Message variant="info">Loading secure payment form…</Message>
-            ) : (
-              <div
-                style={{
-                  padding: '12px',
-                  border: '1px solid #ddd',
-                  borderRadius: 6,
+          {!stripeReady ? (
+            <Message variant="info">Loading secure payment form…</Message>
+          ) : (
+            <div
+              style={{
+                padding: '12px',
+                border: '1px solid #ddd',
+                borderRadius: 6,
+              }}
+            >
+              <CardElement
+                onChange={(e) => {
+                  setCardComplete(e.complete)
+
+                  if (e.error) {
+                    setErrorMsg(e.error.message)
+                  } else {
+                    setErrorMsg('')
+                  }
                 }}
-              >
-                <CardElement
-                  onChange={(e) => {
-                    setCardComplete(e.complete)
+              />
+            </div>
+          )}
 
-                    if (e.error) {
-                      setErrorMsg(e.error.message)
-                    } else {
-                      setErrorMsg('')
-                    }
-                  }}
-                />
-              </div>
-            )}
-
-            {cardPaid && (
-              <div className="mt-2">
-                <small className="payment-text">Payment completed ✔</small>
-              </div>
-            )}
-          </div>
-        )}
+          {cardPaid && (
+            <div className="mt-2">
+              <small className="payment-text">Payment completed ✔</small>
+            </div>
+          )}
+        </div>
 
         <Button
           type="submit"
           className="my-3 cta-btn"
           variant="outline-dark"
-          disabled={paying || (method === 'Card' && (!stripeReady || !cardComplete))}
+          disabled={paying || !stripeReady || !cardComplete}
         >
-          {method === 'Card'
-            ? paying
-              ? 'Processing…'
-              : 'Order Summary'
-            : 'Continue'}
+          {paying ? 'Processing…' : 'Continue'}
         </Button>
       </Form>
     </div>
