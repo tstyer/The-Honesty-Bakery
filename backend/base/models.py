@@ -7,16 +7,16 @@ from django.contrib.auth.models import User
 
 class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=200, null=False, blank=False)
-    description = models.TextField(null=False, blank=False)
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
     # image cannot be used without pillow library installed
-    image = models.ImageField(null=False, blank=False)
-    brand = models.CharField(max_length=200, null=True, blank=True)
-    category = models.CharField(max_length=200, null=True, blank=True)
-    rating = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
-    numReviews = models.IntegerField(null=True, blank=True, default=0)
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)
-    countInStock = models.IntegerField(null=False, blank=False, default=0)
+    image = models.ImageField(blank=True)
+    brand = models.CharField(max_length=200, blank=True)
+    category = models.CharField(max_length=200, blank=True)
+    rating = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    numReviews = models.IntegerField(default=0)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    countInStock = models.IntegerField(default=0)
 
     # ProductType used to decide which screen it appears on.
     PRODUCT_TYPES = (
@@ -28,8 +28,6 @@ class Product(models.Model):
         choices=PRODUCT_TYPES,
         default="PREBAKED",
     )
-
-    isPrebaked = models.BooleanField(default=False)
 
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
