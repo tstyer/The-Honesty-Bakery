@@ -2005,6 +2005,20 @@ Further investigation suggested that the error was likely caused by the AVG brow
 
 Although the console error could not be directly expanded, this process demonstrated the importance of isolating variables when debugging, including checking browser extensions, cache behaviour, third-party integrations, and network activity. It also reinforced the need to validate applications in a clean environment to ensure accurate results.
 
+3. Stripe CSP Warning (Non-blocking)
+
+**Stripe CSP Console Warning (Non-blocking)**
+
+During deployment testing, a console warning related to Stripe and Content Security Policy (CSP) appeared on initial page load. I spent several hours attempting to resolve this by testing different approaches, including adjusting CSP settings, rebuilding the frontend, redeploying the application, clearing cache, performing hard refreshes, and testing across different browsers and incognito sessions.
+
+![Screenshot of error](./backend/frontend/public/images/stripe/csp.png)
+
+I also used browser DevTools to inspect the Network and Console tabs, ensuring there were no failed requests (such as 400 or 500 errors) and confirming that all core functionality, including Stripe payments, was working as expected.
+
+The warning consistently disappeared after refresh and did not impact application behaviour. Based on this investigation, the issue was identified as a non-blocking warning likely caused by third-party Stripe scripts or browser extensions rather than a fault in the application code.
+
+As the application functions correctly and no user-facing issues occur, this has been documented rather than treated as a critical bug.
+
 --- 
 
 ### Setting Up Virtual Environment
