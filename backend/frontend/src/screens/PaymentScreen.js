@@ -17,18 +17,17 @@ export default function PaymentScreen() {
   const cart = useSelector((state) => state.cart)
   const { cartItems, paymentMethod, paymentResult } = cart
 
-  // get user token for authenticated payment intent
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin || {}
 
-  const hasMadeToOrder = useMemo(
-    () => cartItems?.some((item) => item.isPrebaked === false),
+  const hasReadyToBake = useMemo(
+    () => cartItems?.some((item) => item.productType === 'READY_TO_BAKE'),
     [cartItems]
   )
 
   const allowedMethods = useMemo(() => {
-    return hasMadeToOrder ? ['Card'] : ['Cash']
-  }, [hasMadeToOrder])
+    return hasReadyToBake ? ['Card'] : ['Cash']
+  }, [hasReadyToBake])
 
   const [method, setMethod] = useState(
     allowedMethods.includes(paymentMethod) ? paymentMethod : allowedMethods[0]
@@ -38,7 +37,6 @@ export default function PaymentScreen() {
   const [errorMsg, setErrorMsg] = useState('')
   const [cardComplete, setCardComplete] = useState(false)
 
-  // Clear any previous payment success when entering this screen
   useEffect(() => {
     dispatch(setPaymentResult(null))
   }, [dispatch])
@@ -48,7 +46,6 @@ export default function PaymentScreen() {
   }, [cartItems, navigate])
 
   useEffect(() => {
-    // keep method valid if cart composition changes
     if (!allowedMethods.includes(method)) setMethod(allowedMethods[0])
   }, [allowedMethods, method])
 
@@ -56,7 +53,6 @@ export default function PaymentScreen() {
     e.preventDefault()
     setErrorMsg('')
 
-    // CASH FLOW (prebaked only)
     if (method === 'Cash') {
       dispatch(savePaymentMethod('Cash'))
       dispatch(setPaymentResult(null))
@@ -64,13 +60,11 @@ export default function PaymentScreen() {
       return
     }
 
-    // CARD FLOW (Stripe pay now)
     if (!stripe || !elements) {
       setErrorMsg('Payments are still loading. Try again in a moment.')
       return
     }
 
-    // backend requires auth
     const accessToken = userInfo?.token || userInfo?.access
     if (!accessToken) {
       setErrorMsg('You must be logged in to pay by card.')
@@ -80,7 +74,6 @@ export default function PaymentScreen() {
     try {
       setPaying(true)
 
-      // Create PaymentIntent on backend (authenticated)
       const { data } = await axios.post(
         '/api/payments/create-payment-intent/',
         {
@@ -95,7 +88,6 @@ export default function PaymentScreen() {
       )
 
       const clientSecret = data.clientSecret
-
       const cardElement = elements.getElement(CardElement)
 
       if (!cardElement) {
@@ -120,7 +112,6 @@ export default function PaymentScreen() {
         return
       }
 
-      // Save success
       dispatch(savePaymentMethod('Card'))
       dispatch(
         setPaymentResult({
