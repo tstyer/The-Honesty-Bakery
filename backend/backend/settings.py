@@ -329,3 +329,13 @@ CONTENT_SECURITY_POLICY = {
     },
 }
 
+CONTENT_SECURITY_POLICY_REPORT_ONLY = False
+
+CSP_SCRIPT_SRC = (
+    "'self'",
+    "https://js.stripe.com",
+    "https://*.js.stripe.com",
+    "https://m.stripe.network",
+    "'unsafe-inline'",
+)
+
